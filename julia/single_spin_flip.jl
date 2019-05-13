@@ -42,16 +42,6 @@ struct SingleSpinFlipUpdater
     end
 end
 
-
-
-function test(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingModel, spins::Array{Int})
-    dE::Float64 = 0
-    for ispin in 1:model.num_spins
-        dE += 1.0
-    end
-    return dE
-end
-
 function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingModel, spins::Array{Int})
     dE::Float64 = 0
     for ispin in 1:model.num_spins
@@ -73,9 +63,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingMo
             spins[ispin] = -1
         end
 
-        dE_tmp = - eff_h * (spins[ispin] - si_old)
-        dE += dE_tmp
-        E = compute_energy(model, spins)
+        dE += - eff_h * (spins[ispin] - si_old)
     end
     return dE
 end
