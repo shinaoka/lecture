@@ -6,7 +6,9 @@ function solve()
     num_spins = 100
     J = 1.0
     beta = 100.0
-    num_sweeps = 10
+    num_sweeps = 1000
+    num_thermalization_sweeps = 100
+    meas_interval = 10
 
     # Create model with nearest neighbor J
     Jij = Array{Tuple{SpinIndex,SpinIndex,Float64}}(undef, num_spins-1)
@@ -25,11 +27,14 @@ function solve()
     # Perform num_sweeps sweeps
     spins = ones(Int, num_spins)
     energy = compute_energy(model, spins)
-    println(energy)
+    println("Initial energy: ", energy)
     for sweep in 1:num_sweeps
         energy += one_sweep(updater, beta, model, spins)
+        if sweep > num_thermalization_sweeps && mod(sweep, meas_interval) == 0
+            # Implement measurement!
+        end
     end
-    println(energy, "?=", compute_energy(model, spins))
+    println("Final energy: ", energy, "?=", compute_energy(model, spins))
 end
 
 solve()
