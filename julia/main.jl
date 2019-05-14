@@ -8,21 +8,21 @@ function solve()
     beta = 100.0
     num_sweeps = 10
 
+    # Create model with nearest neighbor J
     Jij = Array{Tuple{SpinIndex,SpinIndex,Float64}}(undef, num_spins-1)
-
-    # Nearest neighbor J
     for ispin = 1:(num_spins-1)
         Jij[ispin] = (ispin, ispin+1, J)
     end
-    
     model = IsingModel(num_spins, Jij)
+
+    # Create single-spin flip updater
+    updater = SingleSpinFlipUpdater(model)
     
-    # Create random number generator
+    # Init random number generator
     seed = 1234
     Random.seed!(seed)
     
-    updater = SingleSpinFlipUpdater(model)
-    
+    # Perform num_sweeps sweeps
     spins = ones(Int, num_spins)
     energy = compute_energy(model, spins)
     println(energy)
