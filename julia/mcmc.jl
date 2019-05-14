@@ -63,6 +63,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingMo
             spins[ispin] = -1
         end
 
+        # Compute energy change
         dE += - eff_h * (spins[ispin] - si_old)
     end
     return dE

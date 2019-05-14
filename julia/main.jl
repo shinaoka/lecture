@@ -1,6 +1,6 @@
 using Random
 
-include("single_spin_flip.jl")
+include("mcmc.jl")
 
 function solve()
     num_spins = 100
@@ -26,7 +26,7 @@ function solve()
     spins = ones(Int, num_spins)
     energy = compute_energy(model, spins)
     println(energy)
-    for sweep in 1:10
+    for sweep in 1:num_sweeps
         energy += one_sweep(updater, beta, model, spins)
     end
     println(energy, "?=", compute_energy(model, spins))
