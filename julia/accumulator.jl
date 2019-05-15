@@ -1,9 +1,12 @@
 struct Accumulator
     count::Dict{String,UInt64}
     data::Dict{String,Any}
+    function Accumulator()
+        new(Dict{String,UInt64}(), Dict{String,Any}())
+    end
 end
 
-function measure(acc:Accumulator, String::name, data)
+function add(acc::Accumulator, name::String, data)
     if !haskey(acc.count, name)
         acc.count[name] = 1
         acc.data[name] = copy(data)
@@ -13,7 +16,6 @@ function measure(acc:Accumulator, String::name, data)
     end
 end
 
-function mean(acc:Accumulator, String::name)
+function mean(acc::Accumulator, name::String) 
     return acc.data[name]/acc.count[name]
 end
-
