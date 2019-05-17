@@ -6,7 +6,7 @@ struct Accumulator
     end
 end
 
-function add(acc::Accumulator, name::String, data)
+function add!(acc::Accumulator, name::String, data)
     if !haskey(acc.count, name)
         acc.count[name] = 1
         acc.data[name] = copy(data)
@@ -16,6 +16,6 @@ function add(acc::Accumulator, name::String, data)
     end
 end
 
-function mean(acc::Accumulator, name::String) 
+function mean(acc::Accumulator, name::String)
     return acc.data[name]/acc.count[name]
 end

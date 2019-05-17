@@ -42,7 +42,7 @@ struct SingleSpinFlipUpdater
     end
 end
 
-function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingModel, spins::Array{Int})
+function one_sweep!(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingModel, spins::Array{Int})
     dE::Float64 = 0
     for ispin in 1:model.num_spins
         si_old = spins[ispin]
