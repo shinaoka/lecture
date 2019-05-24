@@ -1,12 +1,14 @@
 SpinIndex = Int
 
+IsingSpin = Int8
+
 struct IsingModel
     # List of non-zero entries of Jij
     num_spins::Int
     Jij::Array{Tuple{SpinIndex,SpinIndex,Float64}}
 end
 
-function compute_energy(model::IsingModel, spins::Array{Int})
+function compute_energy(model::IsingModel, spins::AbstractArray{IsingSpin})
     return -sum([intr[3] * spins[intr[1]] * spins[intr[2]] for intr in model.Jij])
 end
 
@@ -42,11 +44,10 @@ struct SingleSpinFlipUpdater
     end
 end
 
-function one_sweep!(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingModel, spins::Array{Int})
+function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingModel, spins::AbstractArray{IsingSpin})
     dE::Float64 = 0
     for ispin in 1:model.num_spins
         si_old = spins[ispin]
-
         # Compute effective field from the rest of spins
         eff_h::Float64 = 0.0
         for ic in 1:updater.coord_num[ispin]
@@ -66,5 +67,6 @@ function one_sweep!(updater::SingleSpinFlipUpdater, beta::Float64, model::IsingM
         # Compute energy change
         dE += - eff_h * (spins[ispin] - si_old)
     end
+
     return dE
 end

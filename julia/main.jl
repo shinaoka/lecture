@@ -1,6 +1,8 @@
 using Random
 using ConfParser
 using ArgParse
+using MPI
+using Test
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -11,12 +13,29 @@ function read_temps(temperature_file::String)
     num_temps = 0
     open(temperature_file) do file
         num_temps = parse(Int64, readline(file))
-        for ln in eachline(file)
-            temp = parse(Float64, ln)
+        for l in 1:num_temps
+            temp = parse(Float64, readline(file))
             push!(temps, temp)
         end
     end
+
+    # Check if temperatures are in ascending order or descending order
+    if !all(temps[1:num_temps-1] .< temps[2:num_temps]) && !all(temps[1:num_temps-1] .> temps[2:num_temps])
+        error("Temperatures must be given either in ascending order or in descending order!")
+    end
+
     return temps
+end
+
+function distribute_temps(rank, num_temps, num_proc)
+    num_temps_local = fill(trunc(Int, num_temps/num_proc), (num_proc,))
+    left_over = mod(num_temps, num_proc)
+    num_temps_local[1:left_over] .+= 1
+    @test sum(num_temps_local) == num_temps
+    start_idx = sum(num_temps_local[1:rank]) + 1
+    end_idx = start_idx + num_temps_local[rank+1] - 1
+
+    return start_idx, end_idx
 end
 
 # Read non-zero elements in the right-upper triangle part of Jij
@@ -41,12 +60,23 @@ function read_Jij(Jij_file::String, num_spins)
     return Jij
 end
 
+function mean_gather(acc::Accumulator, name::String, comm)
+    results_local = mean(acc, name)
+    return MPI.Gather(results_local, 0, comm)
+end
+
 function solve(input_file::String)
     if !isfile(input_file)
         error("$input_file does not exists!")
     end
     conf = ConfParse(input_file)
     parse_conf!(conf)
+
+    # Initialize MPI environment
+    MPI.Init()
+    comm = MPI.COMM_WORLD
+    rank = MPI.Comm_rank(comm)
+    num_proc = MPI.Comm_size(comm)
 
     num_spins = parse(Int64, retrieve(conf, "model", "num_spins"))
     Jij_file = retrieve(conf, "model", "Jij")
@@ -60,7 +90,14 @@ function solve(input_file::String)
     # Read a list of temperatures
     temps = read_temps(temperature_file)
     num_temps = length(temps)
-    println("numb of temperatures = ", num_temps)
+    if rank == 0
+       println("num of temperatures = ", num_temps)
+    end
+
+    # Decide which temperatures are computed on this process
+    start_idx, end_idx = distribute_temps(rank, num_temps, num_proc)
+    num_temps_local = end_idx - start_idx + 1
+    #println("debug $start_idx $end_idx")
 
     # Read non-zero elements in the right-upper triangle part of Jij
     Jij = read_Jij(Jij_file, num_spins)
@@ -70,26 +107,38 @@ function solve(input_file::String)
     updater = SingleSpinFlipUpdater(model)
 
     # Init random number generator
-    Random.seed!(seed)
+    Random.seed!(seed + rank)
 
     # Create accumulator
     acc = Accumulator()
 
-    # Perform num_sweeps sweeps
-    for it in 1:num_temps
-        println("T ", temps[it])
-        spins = ones(Int, num_spins)
-        energy = compute_energy(model, spins)
-        for sweep in 1:num_sweeps
-            energy += one_sweep!(updater, 1/temps[it], model, spins)
-            if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
-                add!(acc, "E", energy)
-                add!(acc, "E2", energy^2)
-            end
+    # Init spins
+    spins = ones(Int8, num_spins, num_temps_local)
+    energy = [compute_energy(model, spins[:, it]) for it in 1:num_temps_local]
+
+    # Perform MC
+    for sweep in 1:num_sweeps
+        # Single spin flips
+        for it in 1:num_temps_local
+            energy[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, view(spins, :, it))
         end
-        println("<E> ", mean(acc, "E"))
-        println("<E^2> ", mean(acc, "E2"))
+        energy = [compute_energy(model, view(spins, :, it)) for it in 1:num_temps_local]
+
+        # Measurement
+        if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
+            add!(acc, "E", energy)
+            add!(acc, "E2", energy.^2)
+        end
     end
+
+    # Output results
+    E = mean_gather(acc, "E", comm)
+    E2 = mean_gather(acc, "E2", comm)
+    if rank == 0
+        println("<E> ", E)
+        println("<E^2> ", E2)
+    end
+
 end
 
 
