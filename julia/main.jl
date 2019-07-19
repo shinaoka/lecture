@@ -63,8 +63,11 @@ function read_Jij(Jij_file::String, num_spins)
 end
 
 function mean_gather(acc::Accumulator, name::String, comm)
+    #counts = Cint(MPI.Allgather(acc.num_temps, comm))
+    counts = convert(Array{Cint}, MPI.Allgather(acc.num_temps, comm))
     results_local = mean(acc, name)
-    return MPI.Gather(results_local, 0, comm)
+    #return MPI.Gather(results_local, 0, comm)
+    return MPI.Gatherv(results_local, counts, 0, comm)
 end
 
 function solve(input_file::String, comm)
@@ -89,6 +92,9 @@ function solve(input_file::String, comm)
     # Read a list of temperatures
     temps = read_temps(temperature_file)
     num_temps = length(temps)
+    if num_temps < num_proc
+        error("Number of processes > num_temps")
+    end
     if rank == 0
        println("num of temperatures = ", num_temps)
     end
@@ -108,7 +114,7 @@ function solve(input_file::String, comm)
     Random.seed!(seed + rank)
 
     # Create accumulator
-    acc = Accumulator()
+    acc = Accumulator(num_temps_local)
 
     # Init spins
     spins_local = [ones(Int8, num_spins) for it in 1:num_temps_local]
@@ -119,6 +125,9 @@ function solve(input_file::String, comm)
 
     # Perform MC
     for sweep in 1:num_sweeps
+        #if rank == 0
+            #println(sweep)
+        #end
         # Single spin flips
         for it in 1:num_temps_local
             energy_local[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])

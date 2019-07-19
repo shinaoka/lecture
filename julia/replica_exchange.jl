@@ -1,7 +1,6 @@
 using MPI
 
 struct ReplicaExchange
-    #num_temps::UInt64
     temps::Array{Float64}
     num_attemps::Array{UInt64}
     num_accepted::Array{UInt64}
@@ -106,11 +105,12 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
 end
 
 function print_stat(rex::ReplicaExchange)
-    println("Statistics of replica exchange Monte Carlo")
+    rank = MPI.Comm_rank(comm)
     num_attemps = MPI.Gather(rex.num_attemps, 0, comm)
     num_accepted = MPI.Gather(rex.num_accepted, 0, comm)
     if MPI.Comm_rank(comm) == 0
-        for it in 1:length(num_attemps)-1
+        println("Statistics of replica exchange Monte Carlo")
+        for it in 1:length(rex.temps)-1
             println("itemp ", it, " <=> ", it+1, " acceptance_rate= ", num_accepted[it]/num_attemps[it])
         end
     end

@@ -2,7 +2,7 @@ from __future__ import print_function
 import numpy
 
 nspins = 1000
-num_temp = 31
+num_temp = 24
 min_T = 0.5
 max_T = 1.5
 J = 1.0
