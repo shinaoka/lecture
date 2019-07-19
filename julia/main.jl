@@ -6,6 +6,7 @@ using Test
 
 include("mcmc.jl")
 include("accumulator.jl")
+include("replica_exchange.jl")
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
@@ -27,6 +28,7 @@ function read_temps(temperature_file::String)
     return temps
 end
 
+# Distribute temperature over MPI processes
 function distribute_temps(rank, num_temps, num_proc)
     num_temps_local = fill(trunc(Int, num_temps/num_proc), (num_proc,))
     left_over = mod(num_temps, num_proc)
@@ -65,16 +67,13 @@ function mean_gather(acc::Accumulator, name::String, comm)
     return MPI.Gather(results_local, 0, comm)
 end
 
-function solve(input_file::String)
+function solve(input_file::String, comm)
     if !isfile(input_file)
         error("$input_file does not exists!")
     end
     conf = ConfParse(input_file)
     parse_conf!(conf)
 
-    # Initialize MPI environment
-    MPI.Init()
-    comm = MPI.COMM_WORLD
     rank = MPI.Comm_rank(comm)
     num_proc = MPI.Comm_size(comm)
 
@@ -97,7 +96,6 @@ function solve(input_file::String)
     # Decide which temperatures are computed on this process
     start_idx, end_idx = distribute_temps(rank, num_temps, num_proc)
     num_temps_local = end_idx - start_idx + 1
-    #println("debug $start_idx $end_idx")
 
     # Read non-zero elements in the right-upper triangle part of Jij
     Jij = read_Jij(Jij_file, num_spins)
@@ -113,21 +111,27 @@ function solve(input_file::String)
     acc = Accumulator()
 
     # Init spins
-    spins = ones(Int8, num_spins, num_temps_local)
-    energy = [compute_energy(model, spins[:, it]) for it in 1:num_temps_local]
+    spins_local = [ones(Int8, num_spins) for it in 1:num_temps_local]
+    energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
+
+    # Replica exchange
+    rex = ReplicaExchange(temps, start_idx, end_idx)
 
     # Perform MC
     for sweep in 1:num_sweeps
         # Single spin flips
         for it in 1:num_temps_local
-            energy[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, view(spins, :, it))
+            energy_local[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
         end
-        energy = [compute_energy(model, view(spins, :, it)) for it in 1:num_temps_local]
+        energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
+
+        # Replica exchange
+        perform!(rex, spins_local, energy_local, comm)
 
         # Measurement
         if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
-            add!(acc, "E", energy)
-            add!(acc, "E2", energy.^2)
+            add!(acc, "E", energy_local)
+            add!(acc, "E2", energy_local.^2)
         end
     end
 
@@ -137,10 +141,16 @@ function solve(input_file::String)
     if rank == 0
         println("<E> ", E)
         println("<E^2> ", E2)
+        for i in 1:num_temps
+            println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
+        end
     end
 
-end
+    # Stat of Replica Exchange MC
+    println("")
+    print_stat(rex)
 
+end
 
 s = ArgParseSettings()
 @add_arg_table s begin
@@ -149,5 +159,9 @@ s = ArgParseSettings()
         required = true
 end
 args = parse_args(ARGS, s)
-println(args)
-solve(args["input"])
+
+# Initialize MPI environment
+MPI.Init()
+comm = MPI.COMM_WORLD
+
+solve(args["input"], comm)
