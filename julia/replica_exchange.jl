@@ -54,30 +54,31 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
         else
             target_rank = rank + (-1)^iex
         end
+        @assert abs(target_rank - rank) == 1
 
         if target_rank < 0 || target_rank >= num_proc
             continue
         end
 
-        my_config_idx = target_rank > rank ? num_temps_local : 1
+        my_idx = target_rank > rank ? num_temps_local : 1
 
         # Send config from even-number process to odd-number process
         to_be_updated = false
         if mod(rank, 2) == 0
             (ene_target, _) = MPI.recv(target_rank, 1000, comm)
             (temp_target, _) = MPI.recv(target_rank, 1001, comm)
-            prob = exp((1/temp_target-1/rex.temps[my_config_idx])*(ene_target - energy_local[my_config_idx]))
+            prob = exp((1/temp_target-1/temps_local[my_idx])*(ene_target - energy_local[my_idx]))
             to_be_updated = prob > rand()
             MPI.send(to_be_updated, target_rank, 1002, comm)
         else
-            MPI.send(energy_local[my_config_idx], target_rank, 1000, comm)
-            MPI.send(temps_local[my_config_idx], target_rank, 1001, comm)
+            MPI.send(energy_local[my_idx], target_rank, 1000, comm)
+            MPI.send(temps_local[my_idx], target_rank, 1001, comm)
             (to_be_updated, _) = MPI.recv(target_rank, 1002, comm)
         end
 
         if rank < target_rank
-            rex.num_attemps[my_config_idx] += 1
-            rex.num_accepted[my_config_idx] += to_be_updated ? 1 : 0
+            rex.num_attemps[my_idx] += 1
+            rex.num_accepted[my_idx] += to_be_updated ? 1 : 0
         end
 
         if !to_be_updated
@@ -88,17 +89,17 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
         if mod(rank, 2) == 0
             (new_config, _) = MPI.recv(target_rank, 2000, comm)
             (new_ene, _) = MPI.recv(target_rank, 2001, comm)
-            MPI.send(config_local[my_config_idx], target_rank, 2002, comm)
-            MPI.send(energy_local[my_config_idx], target_rank, 2003, comm)
-            config_local[my_config_idx] = new_config
-            energy_local[my_config_idx] = new_ene
+            MPI.send(config_local[my_idx], target_rank, 2002, comm)
+            MPI.send(energy_local[my_idx], target_rank, 2003, comm)
+            config_local[my_idx] = new_config
+            energy_local[my_idx] = new_ene
         else
-            MPI.send(config_local[my_config_idx], target_rank, 2000, comm)
-            MPI.send(energy_local[my_config_idx], target_rank, 2001, comm)
+            MPI.send(config_local[my_idx], target_rank, 2000, comm)
+            MPI.send(energy_local[my_idx], target_rank, 2001, comm)
             (new_config, _) = MPI.recv(target_rank, 2002, comm)
             (new_ene, _) = MPI.recv(target_rank, 2003, comm)
-            config_local[my_config_idx] = new_config
-            energy_local[my_config_idx] = new_ene
+            config_local[my_idx] = new_config
+            energy_local[my_idx] = new_ene
         end
 
     end
@@ -109,6 +110,7 @@ function print_stat(rex::ReplicaExchange)
     num_attemps = MPI.Gather(rex.num_attemps, 0, comm)
     num_accepted = MPI.Gather(rex.num_accepted, 0, comm)
     if MPI.Comm_rank(comm) == 0
+        println("")
         println("Statistics of replica exchange Monte Carlo")
         for it in 1:length(rex.temps)-1
             println("itemp ", it, " <=> ", it+1, " acceptance_rate= ", num_accepted[it]/num_attemps[it])

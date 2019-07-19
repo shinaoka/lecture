@@ -137,6 +137,10 @@ function solve(input_file::String, comm)
         # Replica exchange
         perform!(rex, spins_local, energy_local, comm)
 
+        for it in 1:num_temps_local
+            @assert abs(energy_local[it] - compute_energy(model, spins_local[it])) < 1e-5
+        end
+
         # Measurement
         if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
             add!(acc, "E", energy_local)
@@ -156,7 +160,6 @@ function solve(input_file::String, comm)
     end
 
     # Stat of Replica Exchange MC
-    println("")
     print_stat(rex)
 
 end
