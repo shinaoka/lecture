@@ -3,6 +3,7 @@ using ConfParser
 using ArgParse
 using MPI
 using Test
+using EllipsisNotation
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -63,12 +64,45 @@ function read_Jij(Jij_file::String, num_spins)
 end
 
 function mean_gather(acc::Accumulator, name::String, comm)
-    #counts = Cint(MPI.Allgather(acc.num_temps, comm))
     counts = convert(Array{Cint}, MPI.Allgather(acc.num_temps, comm))
     results_local = mean(acc, name)
-    #return MPI.Gather(results_local, 0, comm)
     return MPI.Gatherv(results_local, counts, 0, comm)
 end
+
+function mean_gather_array(acc::Accumulator, name::String, comm)
+    rank = MPI.Comm_rank(comm)
+    num_proc = MPI.Comm_size(comm)
+
+    results_local = mean(acc, name)
+    num_temps_local = length(results_local)
+    num_temps = MPI.Allreduce(num_temps_local, MPI.SUM, comm)
+    data_size = size(results_local[1])
+    data_type = typeof(results_local[1])
+
+    for r in results_local
+        @test size(r) == data_size
+        @test typeof(r) == data_type
+    end
+
+    # Flatten data
+    data_local_flatten = collect(Iterators.flatten(results_local))
+
+    counts = convert(Array{Cint}, MPI.Allgather(length(data_local_flatten), comm))
+    data_flatten = MPI.Gatherv(data_local_flatten, counts, 0, comm)
+    if rank > 0
+        return
+    end
+
+    right_dim = (num_temps,)
+    data = reshape(data_flatten,  (data_size..., right_dim...))
+
+    result = Array{data_type}(undef, num_temps)
+    for it in 1:num_temps
+        result[it] = data[.., it]
+    end
+    return result
+end
+
 
 function solve(input_file::String, comm)
     if !isfile(input_file)
@@ -145,13 +179,25 @@ function solve(input_file::String, comm)
         if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
+
+            ss= Array{Array{ComplexF64}}(undef, num_temps_local)
+            num_q = 2
+            for it in 1:num_temps_local
+                ss[it] = (it + 100*rank) * ones(Float64, num_q)
+            end
+            add!(acc, "ss", ss)
         end
     end
 
     # Output results
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
+    ss = mean_gather_array(acc, "ss", comm)
+
     if rank == 0
+        for it in 1:num_temps
+            println(it, " ", ss[it])
+        end
         println("<E> ", E)
         println("<E^2> ", E2)
         for i in 1:num_temps
