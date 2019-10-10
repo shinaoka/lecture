@@ -117,10 +117,18 @@ function solve(input_file::String, comm)
     rex = ReplicaExchange(temps, start_idx, end_idx)
 
     # Perform MC
+    last_output_time = time_ns()
+    if rank == 0
+        println("Starting simulation...")
+    end
     for sweep in 1:num_sweeps
-        #if rank == 0
-            #println(sweep)
-        #end
+        # Output roughtly every 10 sececonds
+        if rank == 0 && time_ns() - last_output_time > 1e+10
+            println("Done $sweep sweeps")
+            last_output_time = time_ns()
+            flush(stdout)
+        end
+
         # Single spin flips
         for it in 1:num_temps_local
             energy_local[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
