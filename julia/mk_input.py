@@ -3,8 +3,8 @@ import numpy
 
 nspins = 1000
 num_temp = 24
-min_T = 0.5
-max_T = 1.5
+min_T = 0.01
+max_T = 0.1
 J = 1.0
 
 with open('Jij.txt', 'w') as f:

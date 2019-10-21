@@ -100,7 +100,7 @@ function solve(input_file::String, comm)
     Jij = read_Jij(Jij_file, num_spins)
 
     # Create single-spin flip updater
-    model = IsingModel(num_spins, Jij)
+    model = JModel(num_spins, Jij)
     updater = SingleSpinFlipUpdater(model)
 
     # Init random number generator
@@ -110,7 +110,7 @@ function solve(input_file::String, comm)
     acc = Accumulator(num_temps_local)
 
     # Init spins
-    spins_local = [ones(Int8, num_spins) for it in 1:num_temps_local]
+    spins_local = [fill((1.,0.,0.),num_spins) for it in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
 
     # Replica exchange
@@ -189,4 +189,4 @@ args = parse_args(ARGS, s)
 MPI.Init()
 comm = MPI.COMM_WORLD
 
-solve(args["input"], comm)
+@time solve(args["input"], comm)
