@@ -3,8 +3,8 @@ using StaticArrays
 
 SpinIndex = Int
 
-IsingSpin = Int8
-HeisenbergSpin = Tuple{Float64,Float64,Float64}
+const IsingSpin = Int8
+const HeisenbergSpin = Tuple{Float64,Float64,Float64}
 
 struct JModel
     # List of non-zero entries of Jij
