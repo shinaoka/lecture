@@ -72,7 +72,7 @@ function nn_coupling(d::Int64, L::Int64,temp_d::Dict{Any,Any})
 end
 
 # swap site index for input rigth upper Jij.
-function swapindex!(array)
+function swapindex(array)
 
     temp = []
     for itr in 1:length(array)
@@ -92,4 +92,4 @@ input_temperatures(num_temps,min_T,max_T)
 
 modL_index   = storemodL_index(d,L)
 nn_couplings = nn_coupling(d, L, modL_index)
-input_Jij(swapindex!(nn_couplings), J)
+input_Jij(swapindex(nn_couplings), J)
