@@ -110,7 +110,7 @@ function solve(input_file::String, comm)
     acc = Accumulator(num_temps_local)
 
     # Init spins
-    spins_local = [fill((1.,0.,0.),num_spins) for it in 1:num_temps_local]
+    spins_local  = [fill((1.,0.,0.),num_spins) for it in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
 
     # Replica exchange
