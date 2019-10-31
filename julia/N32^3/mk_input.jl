@@ -1,6 +1,6 @@
 #parameters for Jij
 const d = 3
-L = 16
+L = 32
 num_spins = L^d
 const J = 1.0
 

@@ -202,10 +202,10 @@ function solve(input_file::String, comm)
             println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
         end
 
-        open("g.dat", "w") do fp
+        open("N8^3.dat", "w") do fp
             for i in 1:num_temps
                 g = (3 - (M4[i]/(M2[i]^2))) / 2
-                println(fp, temps[i], " ", g)
+                println(fp, 1/temps[i], " ", g)
             end
         end
     end

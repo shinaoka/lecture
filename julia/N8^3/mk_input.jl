@@ -1,12 +1,12 @@
 #parameters for Jij
 const d = 3
-L = 3
+L = 8
 num_spins = L^d
 const J = 1.0
 
 #parameters for temepratures.
 num_temps = 24
-min_T = 0.1
+min_T = 1.4
 max_T = 1.5
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
