@@ -19,7 +19,7 @@ end
 function compute_energy(model::JModel, spins::AbstractArray{HeisenbergSpin})
     return -sum([intr[3] * dot(spins[intr[1]], spins[intr[2]]) for intr in model.Jij])
 end
-function suggest_unifo()
+function propose_unifo()
    work = MVector(0.0, 0.0)
    i = 0
    s = 0.0
@@ -99,7 +99,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
     dE::Float64 = 0
     for ispin in 1:model.num_spins
         si_old = spins[ispin]
-        si_new = suggest_unifo()
+        si_new = propose_unifo()
         substract  = si_new .- si_old
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
