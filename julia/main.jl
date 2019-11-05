@@ -191,7 +191,7 @@ function solve(input_file::String, comm)
            #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
         end
 
-        # How long does it take to execute one sweep or replica exchange, measuremnt.
+        # How long does it take to execute one sweep or replica exchange, measuremnt?
         add!(acc, "CPUtime", elpsCPUtime)         
     end
 

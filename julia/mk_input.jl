@@ -5,7 +5,7 @@ num_spins = L^d
 const J = 1.0
 
 #parameters for temepratures.
-num_temps = 12
+num_temps = 24
 min_T = 1.0
 max_T = 1.5
 
