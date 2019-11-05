@@ -20,6 +20,7 @@ end
 function compute_energy(model::JModel, spins::AbstractArray{HeisenbergSpin})
     return -sum([intr[3] * dot(spins[intr[1]], spins[intr[2]]) for intr in model.Jij])
 end
+
 function propose_unifo()
    work = MVector(0.0, 0.0)
    i = 0
@@ -37,6 +38,7 @@ function propose_unifo()
    return 2*work[1]*sqrt_tmp, 2*work[2]*sqrt_tmp, 1-(2*s)
 
 end
+
 struct SingleSpinFlipUpdater
     num_spins::Int
     coord_num::Array{Int}
@@ -127,6 +129,3 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
 
     return dE
 end
-
-
-
