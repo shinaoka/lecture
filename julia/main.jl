@@ -259,4 +259,4 @@ comm = MPI.COMM_WORLD
 
 @time solve(args["input"], comm)
 # Second run
-@time solve(args["input"], comm)
+#@time solve(args["input"], comm)
