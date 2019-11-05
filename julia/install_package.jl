@@ -6,3 +6,5 @@ Pkg.add("EllipsisNotation")
 Pkg.add("BenchmarkTools")
 Pkg.add("LinearAlgebra")
 Pkg.add("StaticArrays")
+Pkg.add("CPUTime")
+

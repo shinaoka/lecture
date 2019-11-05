@@ -1,5 +1,6 @@
 using LinearAlgebra
 using StaticArrays
+using CPUTime
 
 SpinIndex = Int
 
@@ -98,6 +99,7 @@ end
 function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
     dE::Float64 = 0
     for ispin in 1:model.num_spins
+
         si_old = spins[ispin]
         si_new = propose_unifo()
         substract  = si_new .- si_old
@@ -107,7 +109,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
             c = updater.connection[ic, ispin]
             eff_h = eff_h .+ (c[2] .* spins[c[1]]) # sum J_ij * s_j
         end
-        
+         
         # Flip spin
         ratio_weight = exp(-beta*(-dot(substract, eff_h)))
         prob_update = min(1, ratio_weight)
@@ -119,7 +121,9 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         
         # Compute energy change
         dE += - dot(eff_h, spins[ispin] .- si_old)
+        
     end
+
 
     return dE
 end
