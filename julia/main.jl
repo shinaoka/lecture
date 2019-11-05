@@ -7,7 +7,7 @@ using CPUTime
 
 include("mcmc.jl")
 include("accumulator.jl")
-include("cp_replica_exchange.jl")
+include("replica_exchange.jl")
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
@@ -107,6 +107,7 @@ function solve(input_file::String, comm)
     num_sweeps = parse(Int64, retrieve(conf, "simulation", "num_sweeps"))
     num_therm_sweeps = parse(Int64, retrieve(conf, "simulation", "num_therm_sweeps"))
     meas_interval = parse(Int64, retrieve(conf, "simulation", "meas_interval"))
+    ex_interval = parse(Int64, retrieve(conf, "simulation", "ex_interval"))
     seed = parse(Int64, retrieve(conf, "simulation", "seed"))
 
     # Read a list of temperatures
@@ -136,6 +137,9 @@ function solve(input_file::String, comm)
     # Create accumulator
     acc = Accumulator(num_temps_local)
 
+    # Create accumulator for collecting stat for every process
+    acc_proc = Accumulator(1)
+
     # Init spins
     spins_local  = [fill((1.,0.,0.),num_spins) for it in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
@@ -156,26 +160,33 @@ function solve(input_file::String, comm)
             flush(stdout)
         end
 
-        elpsCPUtime = Array{Array{Float64}}(undef, num_temps_local)
+        elpsCPUtime = []
  
         # Single spin flips
+        ts_start = CPUtime_us()
         for it in 1:num_temps_local
-            ts_start = CPUtime_us()
             energy_local[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
-            ts_end = CPUtime_us()
-            println("one_sweep", " ",ts_end - ts_start)
-            elpsCPUtime[it] = [ts_end - ts_start]
         end
-        energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
+        #println("one_sweep", " ",ts_end - ts_start)
+        push!(elpsCPUtime, CPUtime_us() - ts_start)
+
+        # Check if energy is correct
+        if mod(sweep, 100) == 0
+            energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
+            for it in 1:num_temps_local
+                @assert abs(energy_local[it] - compute_energy(model, spins_local[it])) < 1e-5
+            end
+        end
         
         # Replica exchange
-        perform!(rex, spins_local, energy_local, comm, elpsCPUtime)
-
-        for it in 1:num_temps_local
-            @assert abs(energy_local[it] - compute_energy(model, spins_local[it])) < 1e-5
+        ts_start = CPUtime_us()
+        if mod(sweep, ex_interval) == 0
+            perform!(rex, spins_local, energy_local, comm)
         end
+        push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # Measurement
+        ts_start = CPUtime_us()
         if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
@@ -190,9 +201,12 @@ function solve(input_file::String, comm)
            #Define function compute_magnetization independently on solve. 
            #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
         end
+        push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # How long does it take to execute one sweep or replica exchange, measuremnt?
-        add!(acc, "CPUtime", elpsCPUtime)         
+        if sweep > num_therm_sweeps
+            add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
+        end
     end
 
     # Output results
@@ -201,7 +215,7 @@ function solve(input_file::String, comm)
     ss = mean_gather_array(acc, "ss", comm)
     #M2 = mean_gather(acc, "M2", comm)
     #M4 = mean_gather(acc, "M4", comm)
-    CPUtime = mean_gather_array(acc, "CPUtime", comm)
+    CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
 
     if rank == 0
         for it in 1:num_temps
@@ -220,7 +234,10 @@ function solve(input_file::String, comm)
             end
         end
         """  
-        println("<CPUtime> ", CPUtime)
+        println("<CPUtime> ")
+        for (i, t) in enumerate(CPUtime)
+            println(" rank=", i-1, " : $t")
+        end
     end
 
     # Stat of Replica Exchange MC
@@ -240,4 +257,6 @@ args = parse_args(ARGS, s)
 MPI.Init()
 comm = MPI.COMM_WORLD
 
+@time solve(args["input"], comm)
+# Second run
 @time solve(args["input"], comm)

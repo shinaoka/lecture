@@ -1,5 +1,4 @@
 using MPI
-using CPUTime
 
 struct ReplicaExchange
     temps::Array{Float64}
@@ -19,7 +18,7 @@ function swap_temps(a, i, j)
     a[i], a[j] = a[j], a[i]
 end
 
-function perform!(rex::ReplicaExchange, config_local, energy_local, comm, elps::Array{Array{Float64,N} where N,1}) 
+function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
     rank = MPI.Comm_rank(comm)
     num_proc = MPI.Comm_size(comm)
     start_idx = rex.start_idx
@@ -30,8 +29,6 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm, elps::
 
     # Intra process
     for it in 1:num_temps_local-1
-        t_start = CPUtime_us()
-
         rex.num_attemps[it] += 1
         dbeta = 1/temps_local[it+1] - 1/temps_local[it]
         dE = energy_local[it+1] - energy_local[it]
@@ -40,13 +37,7 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm, elps::
             swap_temps(config_local, it, it+1)
             rex.num_accepted[it] += 1
         end
-        
-        t_end = CPUtime_us()
-        println("rex", " ",t_end - t_start)
-        push!(elps[it], t_end - t_start)
     end
-
-    push!(elps[num_temps_local], 0.)
 
     if num_proc == 1
         return
