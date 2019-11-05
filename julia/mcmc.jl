@@ -100,17 +100,21 @@ end
 
 function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
     dE::Float64 = 0
-    for ispin in 1:model.num_spins
 
+    for ispin in 1:model.num_spins
+        #t1 = time_ns()
         si_old = spins[ispin]
         si_new = propose_unifo()
         substract  = si_new .- si_old
+        #t2 = time_ns()
+
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
         for ic in 1:updater.coord_num[ispin]
             c = updater.connection[ic, ispin]
             eff_h = eff_h .+ (c[2] .* spins[c[1]]) # sum J_ij * s_j
         end
+        #t3 = time_ns()
          
         # Flip spin
         ratio_weight = exp(-beta*(-dot(substract, eff_h)))
@@ -120,9 +124,12 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         else
             spins[ispin] = si_old
         end
+        #t4 = time_ns()
         
         # Compute energy change
         dE += - dot(eff_h, spins[ispin] .- si_old)
+        #t5 = time_ns()
+        #println(t2-t1, " ", t3-t2, " ", t4-t3, " ", t5-t4)
         
     end
 
