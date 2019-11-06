@@ -9,7 +9,7 @@ brew install openmpi
 julia install_package.jl
 
 # Generate input files
-python mk_input.py
+julia mk_input.jl
 
 # Run Monte Carlo simulations (with 2 CPU cores in this case)
 mpirun -np 2 julia main.jl 1d.ini
