@@ -199,7 +199,7 @@ function solve(input_file::String, comm)
             add!(acc, "ss", ss)
    
            #Define function compute_magnetization independently on solve. 
-           #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
+           compute_magnetization(acc, num_spins, spins_local, num_temps_local)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
@@ -213,8 +213,8 @@ function solve(input_file::String, comm)
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
     ss = mean_gather_array(acc, "ss", comm)
-    #M2 = mean_gather(acc, "M2", comm)
-    #M4 = mean_gather(acc, "M4", comm)
+    M2 = mean_gather(acc, "M2", comm)
+    M4 = mean_gather(acc, "M4", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
 
     if rank == 0
