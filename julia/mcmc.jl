@@ -127,6 +127,9 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
 
         t4 = time_ns()
         
+        # Over relaxation.
+        spins[ispin] = (2*dot(eff_h, spins[ispin])/(norm(eff_h)^2)) .* eff_h .- spins[ispin]
+                
         println("benchmark: ", t2-t1, " ", t3-t2, " ", t4-t3)
     end
 
