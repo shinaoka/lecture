@@ -102,11 +102,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
     dE::Float64 = 0
 
     for ispin in 1:model.num_spins
-        #t1 = time_ns()
-        si_old = spins[ispin]
-        si_new = propose_unifo()
-        substract  = si_new .- si_old
-        #t2 = time_ns()
+        t1 = time_ns()
 
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
@@ -114,25 +110,25 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
             c = updater.connection[ic, ispin]
             eff_h = eff_h .+ (c[2] .* spins[c[1]]) # sum J_ij * s_j
         end
-        #t3 = time_ns()
+
+        t2 = time_ns()
+
+        # Propose a new spin state
+        si_new = propose_unifo()
+
+        t3 = time_ns()
          
         # Flip spin
-        ratio_weight = exp(-beta*(-dot(substract, eff_h)))
-        prob_update = min(1, ratio_weight)
-        if rand() < prob_update
+        dE_prop = -dot(si_new .- spins[ispin], eff_h)
+        if rand() < exp(-beta*dE_prop)
             spins[ispin] = si_new
-        else
-            spins[ispin] = si_old
+            dE += dE_prop
         end
-        #t4 = time_ns()
-        
-        # Compute energy change
-        dE += - dot(eff_h, spins[ispin] .- si_old)
-        #t5 = time_ns()
-        #println(t2-t1, " ", t3-t2, " ", t4-t3, " ", t5-t4)
-        
-    end
 
+        t4 = time_ns()
+        
+        println("benchmark: ", t2-t1, " ", t3-t2, " ", t4-t3)
+    end
 
     return dE
 end
