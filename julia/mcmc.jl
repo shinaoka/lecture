@@ -102,7 +102,6 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
     dE::Float64 = 0
 
     for ispin in 1:model.num_spins
-        t1 = time_ns()
 
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
@@ -111,12 +110,10 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
             eff_h = eff_h .+ (c[2] .* spins[c[1]]) # sum J_ij * s_j
         end
 
-        t2 = time_ns()
 
         # Propose a new spin state
         si_new = propose_unifo()
 
-        t3 = time_ns()
          
         # Flip spin
         dE_prop = -dot(si_new .- spins[ispin], eff_h)
@@ -125,12 +122,10 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
             dE += dE_prop
         end
 
-        t4 = time_ns()
         
         # Over relaxation.
         spins[ispin] = (2*dot(eff_h, spins[ispin])/(norm(eff_h)^2)) .* eff_h .- spins[ispin]
                 
-        println("benchmark: ", t2-t1, " ", t3-t2, " ", t4-t3)
     end
 
     return dE
