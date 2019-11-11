@@ -7,7 +7,7 @@ const Jy= 1.0
 const Jz= 1.0
 
 #parameters for temepratures.
-num_temps = 24
+num_temps = 48
 min_T = 1.4
 max_T = 1.5
 
@@ -27,7 +27,7 @@ function input_Jij(couplings::Array{Any,1}, Jx::Float64, Jy::Float64, Jz::Float6
     open("Jij.txt", "w") do fp
       println(fp, length(couplings))
       for pair in couplings
-          println(fp,pair[1]," ",pair[2]," ",Jx," ",Jy," "," ", Jz)
+          println(fp,pair[1]," ",pair[2]," ",Jx," ",Jy," ", Jz)
       end
     end
 end

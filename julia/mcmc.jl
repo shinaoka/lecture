@@ -65,7 +65,6 @@ struct SingleSpinFlipUpdater
         for i_pair = 1:num_Jij
             i, j = Jij[i_pair][1:2]
             push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
-            push!(temp_energy, temp)
             push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
         end
         max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
