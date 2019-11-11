@@ -6,9 +6,9 @@ include("mcmc.jl")
 
 # 1D chain
 num_spins = 10000
-Jij = Array{Tuple{SpinIndex,SpinIndex,Float64}}(undef, 0)
+Jij = Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64}}(undef, 0)
 for ispin = 1:num_spins-1
-    push!(Jij, (ispin, ispin+1, 1.0))
+    push!(Jij, (ispin, ispin+1, 1.0, 1.0, 1.0))
 end
 
 # Create single-spin flip updater

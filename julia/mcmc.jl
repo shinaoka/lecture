@@ -69,7 +69,7 @@ struct SingleSpinFlipUpdater
         end
         max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
-        connection = Array{Tuple{SpinIndex,Float64}}(undef, max_coord_num, num_spins)
+        connection = Array{Tuple{SpinIndex,Float64,Float64,Float64}}(undef, max_coord_num, num_spins)
         coord_num = Array{Int}(undef, num_spins)
         for ispin = 1:num_spins
             coord_num[ispin] = length(connection_tmp[ispin])
