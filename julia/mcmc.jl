@@ -10,7 +10,7 @@ const HeisenbergSpin = Tuple{Float64,Float64,Float64}
 struct JModel
     # List of non-zero entries of Jij
     num_spins::Int
-    Jij::Array{Tuple{SpinIndex,SpinIndex,Float64}}
+    Jij::Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64}}
 end
 
 function compute_energy(model::JModel, spins::AbstractArray{IsingSpin})
@@ -18,7 +18,16 @@ function compute_energy(model::JModel, spins::AbstractArray{IsingSpin})
 end
 
 function compute_energy(model::JModel, spins::AbstractArray{HeisenbergSpin})
-    return -sum([intr[3] * dot(spins[intr[1]], spins[intr[2]]) for intr in model.Jij])
+
+    energy = 0.0
+
+    for intr in model.Jij
+        for j in 1:3
+            energy += intr[j+2] * spins[intr[1]][j] * spins[intr[2]][j]
+        end
+    end
+    
+    return energy
 end
 
 function propose_unifo()
@@ -42,7 +51,7 @@ end
 struct SingleSpinFlipUpdater
     num_spins::Int
     coord_num::Array{Int}
-    connection::Array{Tuple{SpinIndex,Float64}}
+    connection::Array{Tuple{SpinIndex,Float64,Float64,Float64}}
 
     function SingleSpinFlipUpdater(model::JModel)
         num_spins = model.num_spins
@@ -51,12 +60,13 @@ struct SingleSpinFlipUpdater
         coord_num = zeros(Int, num_spins)
 
         # Figure out which spins each spin is connected to
-        connection_tmp = [Set{Tuple{SpinIndex,Float64}}() for _ in 1:num_spins]
+        connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64}}() for _ in 1:num_spins]
         num_Jij = size(Jij, 1)
         for i_pair = 1:num_Jij
             i, j = Jij[i_pair][1:2]
-            push!(connection_tmp[i], (j, Jij[i_pair][3]))
-            push!(connection_tmp[j], (i, Jij[i_pair][3]))
+            push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
+            push!(temp_energy, temp)
+            push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
         end
         max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
@@ -107,7 +117,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
         for ic in 1:updater.coord_num[ispin]
             c = updater.connection[ic, ispin]
-            eff_h = eff_h .+ (c[2] .* spins[c[1]]) # sum J_ij * s_j
+            eff_h = eff_h .+ (c[2]*spins[c[1]][1], c[3]*spins[c[1]][2], c[4]*spins[c[1]][3])
         end
 
 

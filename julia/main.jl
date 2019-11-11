@@ -43,21 +43,23 @@ end
 
 # Read non-zero elements in the right-upper triangle part of Jij
 function read_Jij(Jij_file::String, num_spins)
-    Jij = Array{Tuple{SpinIndex,SpinIndex,Float64}}(undef, 0)
+    Jij = Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64}}(undef, 0)
     open(Jij_file, "r" ) do fp
         num_Jij_elems = parse(Int64, readline(fp))
         for i in 1:num_Jij_elems
             str = split(readline(fp))
             i = parse(SpinIndex, str[1])
             j = parse(SpinIndex, str[2])
-            val = parse(Float64, str[3])
+            val_x = parse(Float64, str[3])
+            val_y = parse(Float64, str[4])
+            val_z = parse(Float64, str[5])
             if i >= j
                 error("Only right-upper triangle part must be given.")
             end
             if i > num_spins || i < 0  || j > num_spins || j < 0
                 error("i or j is out of the range [1, num_spins].")
             end
-            push!(Jij, (i, j, val))
+            push!(Jij, (i, j, val_x, val_y, val_z))
         end
     end
     return Jij

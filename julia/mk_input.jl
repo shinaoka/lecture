@@ -1,8 +1,10 @@
 #parameters for Jij
 const d = 3
-L = 8
+L = 10
 num_spins = L^d
-const J = 1.0
+const Jx= 1.0
+const Jy= 1.0
+const Jz= 1.0
 
 #parameters for temepratures.
 num_temps = 24
@@ -20,12 +22,12 @@ function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
      end
 end
 
-function input_Jij(couplings::Array{Any,1}, J::Float64)
+function input_Jij(couplings::Array{Any,1}, Jx::Float64, Jy::Float64, Jz::Float64)
     
     open("Jij.txt", "w") do fp
       println(fp, length(couplings))
       for pair in couplings
-          println(fp,pair[1]," ",pair[2]," ",J)
+          println(fp,pair[1]," ",pair[2]," ",Jx," ",Jy," "," ", Jz)
       end
     end
 end
@@ -92,4 +94,4 @@ input_temperatures(num_temps,min_T,max_T)
 
 modL_index   = storemodL_index(d,L)
 nn_couplings = nn_coupling(d, L, modL_index)
-input_Jij(swapindex(nn_couplings), J)
+input_Jij(swapindex(nn_couplings), Jx,Jy,Jz)
