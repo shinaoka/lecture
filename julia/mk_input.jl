@@ -8,8 +8,8 @@ const Jz= 1.0
 
 #parameters for temepratures.
 num_temps = 48
-min_T = 1.4
-max_T = 1.5
+min_T = 0.001
+max_T = 0.005
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     

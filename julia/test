@@ -2786,3 +2786,783 @@ in expression starting at /home/kakizawa/lecture/julia/main.jl:262
  [16] exec_options(::Base.JLOptions) at ./client.jl:267
  [17] _start() at ./client.jl:436
 in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5678: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 11 19:30:39 2019
+Results reported at Mon Nov 11 19:31:02 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 3d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    382.32 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: ERROR: LoadError: LoadError: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: ERROR: LoadError: ERROR: LoadError: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: 
+Stacktrace:MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+ [1] 
+Stacktrace:ERROR: 
+ [1] LoadError: convert(convert::(::Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275 (repeats 2 times)
+ [3] setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275 (repeats 2 times)
+ [3] setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+Stacktrace:MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+Stacktrace:
+ [1] MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+ [1] 
+ [1] MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+ [1] MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] 
+ [1] 
+Stacktrace:MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+Stacktrace:MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+Stacktrace:
+Stacktrace:
+Stacktrace:convert
+ [1] MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+ [1] MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...
+ [1] 
+ [1] 
+ [1] 
+Stacktrace:
+Stacktrace:convertconvertconvert
+Stacktrace:
+Stacktrace:
+Stacktrace:convert(
+ [1] 
+ [1] convert
+Stacktrace:
+Stacktrace:::
+
+ [1]  [1] 
+ [1] convertconvert
+Stacktrace:(
+
+ [1]  [1] (((::
+ [1] ::convert::::(convertconvert(convertconvert::(::::MethodError: Cannot `convert` an object of type Tuple{Float64,Float64} to an object of type Tuple{}
+Closest candidates are:
+  convert(::Type{Tuple{}}, ::Tuple{Any,Vararg{Any,N} where N}) at essentials.jl:271
+  convert(::Type{Tuple{}}, !Matched::Tuple{}) at essentials.jl:270
+  convert(::Type{Tuple{}}, !Matched::CartesianIndices{0,R} where R<:Tuple{}) at multidimensional.jl:280
+  ...Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275(convertconvert( (repeats convertconvert::convert2 times)
+ [3] (((::setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:2752}, ::Array{Tuple{Int64,Float64,Float64,Float64},1Type}, ::{UnitRange{Int64}Tuple{}}, ::, ::Tuple{Int64Float64,Float64}) at ./essentials.jl:271)
+ [2]  at ./multidimensional.jl:689convert
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] (::SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76Type
+ [11] solve(::{String, ::MPITuple{Float64}}, ::.Comm) at Tuple/home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::{Module, ::String) at Type{./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Tuple{Float64Base.JLOptions) at }}, ::./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Tuple{,Float64,Float64}) at ./essentials.jl:271Float64
+ [2] convert(::,TypeFloat64}) at ./essentials.jl:275{::Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275::::Type{Tuple{}}, ::convertconvertTuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275convert (repeats  (repeats  (repeats 
+Stacktrace:2 (repeats  times)
+ [3] Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{2 times)Float64
+ [3] ,Float64,Float64}) at 2./essentials.jl:275 times)
+ [3] setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined](
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::(IndexLinear, ::Array{Tuple{Int64,Float64},2 times)
+ [3] setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at setindex! at ./array.jl:769 [inlined]
+./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7]  [4] macro expansion at _unsafe_setindex!./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::(::IndexLinear, ::IndexLinear, Array{::Tuple{Int64,Array{Float64},Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64Type{setindex! at ./array.jl:769 [inlined]
+},1}, ::UnitRange{Int64}, ::TupleInt64) at ./abstractarray.jl:1020{}}, 
+ [10] :: [4] Tuple{SingleSpinFlipUpdater(::macro expansion at ./multidimensional.jl:701Float64 [inlined]
+ [5] macro expansion at JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] ./cartesian.jl:64 [inlined]
+ [6] macro expansionsolve(:: at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::String, ::,MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at IndexLinear, ./boot.jl:326 [inlined]
+ [14] include_relative::2}(::, ::Array{Module, ::String) at ./loading.jl:1038
+TupleArray{ [15] include(::Module, {::String) at ./sysimg.jl:29
+ [16] Int64,Float64}exec_options(::,Tuple{Int64,Float64,Float64,Float64},1}Base.JLOptions) at ./client.jl:267
+ [17] , ::_start() at ./client.jl:436UnitRange{Int64}
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]2}, 
+ [9] setindex!::(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64Array{,Float64,Float64,Float64},1}, ::UnitRange{Int64}, Tuple{Int64,Float64,::Int64) at ./abstractarray.jl:1020Float64,Float64},
+ [10] 1}, ::Float64(UnitRange{Int64}, SingleSpinFlipUpdater(::Int64) at ::./multidimensional.jl:689
+ [8] JModel) at _setindex! at ./multidimensional.jl:684 [inlined]
+/home/kakizawa/lecture/julia/mcmc.jl:76
+ [11]  [9] (solve(::setindex!(::Array{Tuple{Int64,String, Float64},2}, ::::Array{Tuple{Int64,Float64MPI.Comm,Float64,Float64},) at /home/kakizawa/lecture/julia/main.jl:1341}, ::UnitRange
+ [12] top-level scope at util.jl:156{Int64}, ::Int64
+ [13] include at ) at ./abstractarray.jl:1020./boot.jl:326 [inlined]
+ [14] 
+ [10] include_relative(::}Module, ::String) at ./loading.jl:1038SingleSpinFlipUpdater(::
+ [15] include(::Module, ::String) at JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76./sysimg.jl:29
+ [16] exec_options
+ [11] solve(::(::BaseString, ::) at ./essentials.jl:271.
+ [2] MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134convert(::
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Type{JLOptionsModule, Tuple{Float64::String) at }}, ::./loading.jl:1038
+ [15] include(::Module, ::String) at Tuple{Float64,./sysimg.jl:29
+ [16] exec_optionsFloat64,Float64})Type(:: at ./essentials.jl:275{) at ./client.jl:267Base
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Tuple{}}, ::.Tuple{JLOptionsFloat64,Float64}) at ./essentials.jl:271
+) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275(2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,::Float64},2}::, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, :: (repeats MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+::::2 times)
+ [3] :: (repeats  (repeats setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},2}, ::(Array{Tuple{Int64,Float64,Float64(,Float642 times)}
+ [3] ,1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, 2:: times)Array
+ [3] {Tuple
+{Int64 [1] ,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at setindex! at ./array.jl:769 [inlined]./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64setindex!}, at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},(Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert2}, ::(::Array{TupleType{Int64,Float64,Float64,Float64},1}, ::{UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdaterTuple{Float64}}, ::(Tuple{Float64,Float64,Float64}) at ./essentials.jl:275::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm)2}::, :: at Array/home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::{Module::, ::String) at Tuple{Int64,Float64,./loading.jl:1038
+ [15] includeFloat64,Float64},(::Module, ::1}, ::String) at ./sysimg.jl:29
+ [16] exec_options(::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689Base.JLOptions) at 
+ [8] _setindex!./client.jl:267
+ [17]  at ./multidimensional.jl:684 [inlined]
+ [9] _start() at ./client.jl:436setindex!(::
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type::{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275 (repeats Type{Tuple{}}, ::Tuple{Float64,Float64}Type{)Type at ./essentials.jl:271
+{Tuple{}}, :: [2] Tupleconvert(::Tuple{}}, ::{Type{Tuple{TupleFloat64,Float64}) at ./essentials.jl:271Float64,Float64}) at 
+ [2] ./essentials.jl:271convert(::
+ [2] convert(::Type{Type{Tuple{Float64}}, ::Tuple{Float64}}, ::Tuple{Float64}}Tuple{Float64,, ::Float64,Float64}) at ./essentials.jl:275Tuple{Float64,Float64,Float64}) at ./essentials.jl:275{Float64,Float64,Float64}) at ./essentials.jl:2752 times)
+ [3]  (repeats setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},2 times)
+ [3] 2}, ::Array{Tuple{Int64,Float64, (repeats Float64,Float64},1}, :: (repeats UnitRange{Int64},  (repeats ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Commsetindex!) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(:: at Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::./array.jl:769Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+ [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},2 times)
+ [3] 2 times)
+ [3] 2 times)
+ [3] 2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] includesetindex! at ./array.jl:769 [inlined]
+ [4]  at ./boot.jl:326 [inlined]macro expansion
+ [14] include_relative(:: at Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::./multidimensional.jl:701Base [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!setindex! at .JLOptions) at ./client.jl:267
+./array.jl:769 [inlined] [17] _start(
+ [4] ) at ./client.jl:436macro expansion at ./multidimensional.jl:701
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+ [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::(::setindex! at ./array.jl:769 [inlined]IndexLinear, 
+ [4] macro expansion:: at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]Array{
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] Tuple{_unsafe_setindex!(::Int64,IndexLinear, IndexLinear, ::::Float64},ArrayArray{Tuple{{Tuple{Int64Int64,Float64},,Float64},2}, ::Array2}, ::{ArrayTuple{2}, ::{Tuple{Int64,Float64,Float64,Float64},1}Array{, ::Int64Tuple{Int64UnitRange{Int64},Float64,Float64,, ::Int64)Float64},1} at ./multidimensional.jl:689, ::
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::UnitRange{Int64}, ::Array{Tuple{Int64) at Int64,Float64},./multidimensional.jl:689
+2}, :: [8] _setindex! at ./multidimensional.jl:684Array{Tuple{Int64 [inlined]
+ [9] ,Float64,Float64,Float64},1setindex!(::Array{Tuple}, ::UnitRange{{Int64,Float64Int64}, ::},2}, Int64) at ./abstractarray.jl:1020::Array{Tuple
+ [10] {Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::SingleSpinFlipUpdater(Int64) at ./abstractarray.jl:1020::
+ [10] ,JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::SingleSpinFlipUpdater(::Float64String, ::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solveMPI.Comm(::) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326String, :: [inlined]
+ [14] include_relative(::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+Module, ::String [12] top-level scope at util.jl:156
+) at ./loading.jl:1038 [13] include at ./boot.jl:326
+ [15] include [inlined]
+ [14] (::Module, include_relative(::::String) at ./sysimg.jl:29
+ [16] exec_options(::Module, ::String) at ./loading.jl:1038
+ [15] Base.JLOptions) at include(::Module./client.jl:267
+ [17] , ::String) at _start()./sysimg.jl:29
+ [16]  at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+exec_options(::,Float64,Float64}Base,1}, ::.UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] JLOptions)SingleSpinFlipUpdater(:: at JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::./client.jl:267String, ::MPI.
+Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(:: [17] Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::_startBase.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Type{Type{Tuple{}}Tuple{}}, ::, Tuple::{Tuple{Float64Float64,Float64}) at ./essentials.jl:271
+ [2] ,convertFloat64}) at ./essentials.jl:271
+(:: [2] Typeconvert(::{Type{Tuple{Float64}}, ::Tuple{Tuple{Float64}}, ::Float64Tuple{Float64,Float64,Float64}) at ./essentials.jl:275,Float64,Float64}) at ./essentials.jl:275Type{Type{Tuple{}}, ::Tuple{Tuple{}}Float64, ::,TupleFloat64}) at ./essentials.jl:271{
+ [2] Float64,Float64}) at ./essentials.jl:271
+convert(:: [2] Typeconvert(::{Type{Tuple{Float64}}, ::TupleTuple{Float64}}, ::{Tuple{Float64,Float64,Float64}) at ./essentials.jl:275Float64,Float64,Float64}) at ./essentials.jl:275Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275 (repeats  (repeats  (repeats  (repeats 22 times)
+ times)
+ [3]  [3]  (repeats setindex!setindex! at  at ./array.jl:769 [inlined]
+./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(:: [4] macro expansion at ./multidimensional.jl:701 [inlined]IndexLinear
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::, ::IndexLinear, ::Array{2Array{Tuple times)
+ [3] Tuple{{Int64,Float64},2 times)
+Int64 [3] ,Float64},TypeType{{Tuple{}Tuple{}}, ::}Tuple{Float64,, Float64}) at ./essentials.jl:271
+:: [2] Tuple{convertFloat64,Float64}) at ./essentials.jl:271
+(:: [2] Type{convertTuple{Float64}}, ::(Tuple{Float64,Float64,Float64}) at ./essentials.jl:275::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:2752}, ::2}Array{, Tuple{::Int64,Float64,Float64,Float64},1}, ::UnitRange{Array{Int64}, ::Int64Tuple) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] {Int64SingleSpinFlipUpdater(::,JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::Float64String, ::,MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Float64Module, ::String) at ./loading.jl:1038
+ [15] include(::Module,Float64},1}, ::, ::String)UnitRange at ./sysimg.jl:29
+ [16] exec_options(::{BaseInt64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] setindex! at ./array.jl:7692 [inlined] times)
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]SingleSpinFlipUpdater(::
+ [5] macro expansion
+ [3]  at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at JModel)./multidimensional.jl:696 [inlined]
+ [7]  at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve_unsafe_setindex!(setindex! at (::::./array.jl:769 [inlined].JLOptions) at String, ::
+./client.jl:267
+ [17] _start() at ./client.jl:436MPI.Comm)
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+ at /home/kakizawa/lecture/julia/main.jl:134
+ [12] IndexLinear, ::top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] Array{include_relative(::Tuple{Module [4] macro expansion at ./multidimensional.jl:701Int64,Float64} [inlined]
+ [5] ,macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::, ::StringIndexLinear, ::)Array{ at ./loading.jl:1038
+Tuple [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::{Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Int64,Float64},Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{2}, ::Float64Array}{}Tuple{Int64,Float64,Float64,Float64},1}, ::, UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] ::SingleSpinFlipUpdaterTuple(::{JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::2}, String, ::::MPI.Float64Comm) at /home/kakizawa/lecture/julia/main.jl:134Array{
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] Tuple{Int64,include_relative(::Float64,Float64,Float64},1}, ::Module, ::String) at ./loading.jl:1038
+ [15] include(UnitRange{Int64}, ::Int64::Module, ::String) at ./multidimensional.jl:689) at ./sysimg.jl:29
+ [16] 
+ [8] _setindex! at ./multidimensional.jl:684exec_options(:: [inlined]
+ [9] setindex!(::Array{Tuple{Int64Base.JLOptions) at ,Float64},2}./client.jl:267
+ [17] _start, ::Array{Tuple{() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262Int64,Float64,Float64,
+Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] ,Float64SingleSpinFlipUpdater(::setindex!,Float64}) at ./essentials.jl:275JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(:: at ./array.jl:769 [inlined]String
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::, ::IndexLinear, MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::BaseArray{.Tuple{JLOptionsInt64,Float64},) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at  (repeats ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, :: (repeats MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+2 times)
+ [3] 2 times)
+ [3]  (repeats setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::IndexLinear, Array{::Tuple{Int64,Array{Float64Tuple{}Int64,Float64},,2 times)
+ [3] 2}2, ::}Array{, ::Tuple{Array{Int64Tuple{,Int64,Float64,Float64,Float64},1}, ::Float64UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] ,Float64SingleSpinFlipUpdater(::,JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::Float64String, ::}MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::,Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::1Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::setindex!String, :: at MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::./array.jl:769Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(:: [inlined]Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},convert2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+(::Type{Tuple{}}, ::Tuple{Float64,Float64}) at ./essentials.jl:271
+ [2] convert(::Type{Tuple{Float64}}, ::Tuple{Float64,Float64,Float64}) at ./essentials.jl:275 (repeats 2 times)
+ [3] setindex! at ./array.jl:769 [inlined]
+ [4] macro expansion at ./multidimensional.jl:701 [inlined]
+ [5] macro expansion at ./cartesian.jl:64 [inlined]
+ [6] macro expansion at ./multidimensional.jl:696 [inlined]
+ [7] _unsafe_setindex!(::IndexLinear, ::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./multidimensional.jl:689
+ [8] _setindex! at ./multidimensional.jl:684 [inlined]
+ [9] setindex!(::Array{Tuple{Int64,Float64},2}, ::Array{Tuple{Int64,Float64,Float64,Float64},1}, ::UnitRange{Int64}, ::Int64) at ./abstractarray.jl:1020
+ [10] SingleSpinFlipUpdater(::JModel) at /home/kakizawa/lecture/julia/mcmc.jl:76
+ [11] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:134
+ [12] top-level scope at util.jl:156
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:262
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5679: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 11 19:36:19 2019
+Results reported at Mon Nov 11 19:36:47 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 3d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    496.52 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5680: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 12 11:15:16 2019
+Results reported at Tue Nov 12 11:15:45 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 3d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    520.78 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5681: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 12 11:21:26 2019
+Results reported at Tue Nov 12 11:21:55 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 3d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    530.78 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5682: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 12 11:26:07 2019
+Results reported at Tue Nov 12 11:26:33 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 3d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    520.06 sec.
+
+The output (if any) follows:
+

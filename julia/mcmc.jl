@@ -27,7 +27,7 @@ function compute_energy(model::JModel, spins::AbstractArray{HeisenbergSpin})
         end
     end
     
-    return energy
+    return -energy
 end
 
 function propose_unifo()
