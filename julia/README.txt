@@ -12,4 +12,4 @@ julia install_package.jl
 julia mk_input.jl
 
 # Run Monte Carlo simulations (with 2 CPU cores in this case)
-mpirun -np 2 julia main.jl 1d.ini
+mpirun -np 2 julia main.jl 2d.ini
