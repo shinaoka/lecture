@@ -27,7 +27,7 @@ function mk_kagome(L::Int64)
 end
 
 # make function plotting x-y spin on any lattice.
-function plot_spin(lattice::Array{Tuple{Float64,Float64}}, spins::AbstractArray{HeisenbergSpin})
+function plot_spin_direction(lattice::Array{Tuple{Float64,Float64}}, spins::AbstractArray{HeisenbergSpin})
     
     lattice_x = [lattice[i][1] for i in 1:length(lattice)]
     lattice_y = [lattice[i][2] for i in 1:length(lattice)]
@@ -40,5 +40,6 @@ function plot_spin(lattice::Array{Tuple{Float64,Float64}}, spins::AbstractArray{
     savefig("SpinOnKagome")
 end
 
-test = [((cos(pi/2 + (i-1)*2pi/3), sin(pi/2 + (i-1)*2pi/3),0.)./3) for i in 1:3*L^2] 
-plot_spin(mk_kagome(L), test)
+# test code.
+#test = [((cos(pi/2 + (i-1)*2pi/3), sin(pi/2 + (i-1)*2pi/3),0.)./3) for i in 1:3*L^2] 
+#plot_spin_direction(mk_kagome(L), test)
