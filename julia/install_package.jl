@@ -7,4 +7,6 @@ Pkg.add("BenchmarkTools")
 Pkg.add("LinearAlgebra")
 Pkg.add("StaticArrays")
 Pkg.add("CPUTime")
+Pkg.add("Plots")
+
 
