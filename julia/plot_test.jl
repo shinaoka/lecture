@@ -1,5 +1,5 @@
 using Plots
-
+Plots.gr()
 L = 1
 
 # make array having kagome's lattice point.
@@ -14,7 +14,7 @@ function mk_kagome(L::Int64)
         A = (i-1).* a1 .+ (j-1).*a2
         B = A .+ a1./2
         C = A .+ a2./2
-        temp[index] = A
+        temp[index]   = A
         temp[index+1] = B
         temp[index+2] = C
         index += 3
@@ -24,4 +24,8 @@ function mk_kagome(L::Int64)
 end
 lattice = mk_kagome(L)
 println(lattice)
+
 plot(lattice, seriestype =:scatter,title="Kagome")
+
+savefig("plot_test")
+
