@@ -26,14 +26,14 @@ function mk_kagome(L::Int64)
 end
 
 # make function plotting x-y spin on any lattice.
-function plot_spin_direction(lattice::Array{Tuple{Float64,Float64}},spins_x::Array{Float64,1},spins_y::Array{Float64,1},num_temps::Int64)
+function plot_spin_direction(lattice::Array{Tuple{Float64,Float64}},spins_x::Array{Float64,1},spins_y::Array{Float64,1},num_spins)
     
     lattice_x = [lattice[i][1] for i in 1:length(lattice)]
     lattice_y = [lattice[i][2] for i in 1:length(lattice)]
     
-    temp_sx = zeros(num_temps)
-    temp_sy = zeros(num_temps)
-    for it in 1:num_temps
+    temp_sx = zeros(num_spins)
+    temp_sy = zeros(num_spins)
+    for it in 1:num_spins
         temp_norm = norm((spins_x[it],spins_y[it]))
         temp_sx[it] = spins_x[it] / temp_norm    
         temp_sy[it] = spins_y[it] / temp_norm    

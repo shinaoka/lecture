@@ -273,7 +273,7 @@ function solve(input_file::String, comm)
         for it in 1:num_temps
             if it % 12 == 0
                 L = Int(sqrt(num_spins/3))
-                plot_spin_direction(mk_kagome(L),sx[it],sy[it])
+                plot_spin_direction(mk_kagome(L),sx[it],sy[it],num_spins)
                 savefig("SpinsOnKagome$(it)")
             end
         end       

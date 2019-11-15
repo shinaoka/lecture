@@ -5493,3 +5493,274 @@ Did you start 'gksqt'?
 
 GKS: Open failed in routine OPEN_WS
 GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5712: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 15 22:26:40 2019
+Results reported at Fri Nov 15 22:27:21 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    757.89 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: MethodError: no method matching plot_spin_direction(::Array{Tuple{Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1})
+Closest candidates are:
+  plot_spin_direction(::Array{Tuple{Float64,Float64},N} where N, ::Array{Float64,1}, ::Array{Float64,1}, !Matched::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:31
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:276
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:300
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5713: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 15 22:58:00 2019
+Results reported at Fri Nov 15 22:58:59 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1231.05 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: BoundsError: attempt to access 12-element Array{Float64,1} at index [13]
+Stacktrace:
+ [1] getindex at ./array.jl:729 [inlined]
+ [2] plot_spin_direction(::Array{Tuple{Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:37
+ [3] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:276
+ [4] top-level scope at util.jl:156
+ [5] include at ./boot.jl:326 [inlined]
+ [6] include_relative(::Module, ::String) at ./loading.jl:1038
+ [7] include(::Module, ::String) at ./sysimg.jl:29
+ [8] exec_options(::Base.JLOptions) at ./client.jl:267
+ [9] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:300
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5715: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 15 23:13:51 2019
+Results reported at Fri Nov 15 23:14:50 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1236.07 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: UndefVarError: num_spins not defined
+Stacktrace:
+ [1] plot_spin_direction(::Array{Tuple{Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}) at /home/kakizawa/lecture/julia/plot_result.jl:34
+ [2] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:276
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:300
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5716: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 15 23:20:21 2019
+Results reported at Fri Nov 15 23:21:46 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1849.73 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5717: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 15 23:34:51 2019
+Results reported at Fri Nov 15 23:36:17 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1858.87 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS

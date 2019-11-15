@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 #parameters for Jij
-L = 2
+L = 4
 const Jx= 1.0
 const Jy= 1.0
 const Jz= 1.0
