@@ -2,14 +2,13 @@
 using Plots
 Plots.gr()
 
-L = 2
-const HeisenbergSpin = Tuple{Float64,Float64,Float64}
+#L = 2
 
 # make array having kagome's lattice point.
 function mk_kagome(L::Int64)
     
     a1 = (2.,0.)
-    a2 = (2*cos(π/3),2*sin(π/3))
+    a2 = (2*cos(pi/3),2*sin(pi/3))
     
     index = 1
     temp = fill((0.,0.),3*L^2)
@@ -27,19 +26,28 @@ function mk_kagome(L::Int64)
 end
 
 # make function plotting x-y spin on any lattice.
-function plot_spin_direction(lattice::Array{Tuple{Float64,Float64}}, spins::AbstractArray{HeisenbergSpin})
+function plot_spin_direction(lattice::Array{Tuple{Float64,Float64}},spins_x::Array{Float64,1},spins_y::Array{Float64,1},num_temps::Int64)
     
     lattice_x = [lattice[i][1] for i in 1:length(lattice)]
     lattice_y = [lattice[i][2] for i in 1:length(lattice)]
     
-    spins_x   = [spins[i][1] for i in 1:length(spins)]
-    spins_y   = [spins[i][2] for i in 1:length(spins)]
-    
-    quiver(lattice_x,lattice_y, quiver=(spins_x,spins_y),title="spins' direction",framestyle=:box)
-    
-    savefig("SpinOnKagome")
+    temp_sx = zeros(num_temps)
+    temp_sy = zeros(num_temps)
+    for it in 1:num_temps
+        temp_norm = norm((spins_x[it],spins_y[it]))
+        temp_sx[it] = spins_x[it] / temp_norm    
+        temp_sy[it] = spins_y[it] / temp_norm    
+    end
+
+    quiver(lattice_x,lattice_y, quiver=(temp_sx,temp_sy),title="spins' direction",framestyle=:box)
+
 end
 
+"""
 # test code.
-#test = [((cos(pi/2 + (i-1)*2pi/3), sin(pi/2 + (i-1)*2pi/3),0.)./3) for i in 1:3*L^2] 
-#plot_spin_direction(mk_kagome(L), test)
+test = [((cos(pi/2 + (i-1)*2pi/3), sin(pi/2 + (i-1)*2pi/3),0.)./3) for i in 1:3*L^2] 
+test_x = [test[i][1] for i in 1:length(test)]
+test_y = [test[i][2] for i in 1:length(test)]
+
+plot_spin_direction(mk_kagome(L),test_x,test_y,1)
+"""

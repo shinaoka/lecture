@@ -1,15 +1,15 @@
 using LinearAlgebra
 
 #parameters for Jij
-L = 16
+L = 2
 const Jx= 1.0
 const Jy= 1.0
 const Jz= 1.0
 
 #parameters for temepratures.
 num_temps = 48
-min_T = 0.001
-max_T = 0.005
+min_T = 0.1
+max_T = 1.5
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     
@@ -21,6 +21,9 @@ function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
        end
      end
 end
+
+# Output temperatures.
+input_temperatures(num_temps,min_T,max_T)
 
 function input_Jij(couplings::Array{Any,1}, Jx::Float64, Jy::Float64, Jz::Float64)
     

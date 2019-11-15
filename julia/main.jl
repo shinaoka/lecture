@@ -8,6 +8,7 @@ using CPUTime
 include("mcmc.jl")
 include("accumulator.jl")
 include("replica_exchange.jl")
+include("plot_result.jl")
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
@@ -74,7 +75,7 @@ function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Array{Ar
 
     for i in 1:num_temps
       temp_mx = 0.0    
-      temp_my = 0.0    
+     temp_my = 0.0    
       temp_mz = 0.0    
       for j in 1:num_spins
         temp_mx += spins[i][j][1]
@@ -90,6 +91,27 @@ function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Array{Ar
     add!(acc, "M2", m2)
     add!(acc, "M4", m2.^2)
         
+end
+
+function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+    
+    spins_x = [[spins[i][j][1] for j in 1:num_spins] for i in 1:num_temps]
+    spins_y = [[spins[i][j][2] for j in 1:num_spins] for i in 1:num_temps]
+    spins_z = [[spins[i][j][3] for j in 1:num_spins] for i in 1:num_temps]
+    """    
+    @assert begin
+        for it in 1:num_temps
+            for spin in 1:num_spins
+                temp = spins_x[it][spins]^2 + spins_y[it][spins]^2 + spins_z[it][spins]^2
+                abs(1-temp) < 1e-2
+            end
+        end
+    end         
+    """ 
+    add!(acc, "sx", spins_x) 
+    add!(acc, "sy", spins_y)
+    add!(acc, "sz", spins_z)
+    
 end
 
 function solve(input_file::String, comm)
@@ -200,8 +222,8 @@ function solve(input_file::String, comm)
             end
             add!(acc, "ss", ss)
    
-           #Define function compute_magnetization independently on solve. 
-           compute_magnetization(acc, num_spins, spins_local, num_temps_local)
+            compute_magnetization(acc, num_spins, spins_local, num_temps_local)
+
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
@@ -209,7 +231,10 @@ function solve(input_file::String, comm)
         if sweep > num_therm_sweeps
             add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
         end
-    end
+    end        
+    
+    latest_spin_direction(acc,spins_local,num_spins,num_temps_local)
+
 
     # Output results
     E = mean_gather(acc, "E", comm)
@@ -218,6 +243,9 @@ function solve(input_file::String, comm)
     M2 = mean_gather(acc, "M2", comm)
     M4 = mean_gather(acc, "M4", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+    sx = mean_gather_array(acc, "sx", comm)
+    sy = mean_gather_array(acc, "sy", comm)
+    sz = mean_gather_array(acc, "sz", comm)
 
     if rank == 0
         for it in 1:num_temps
@@ -240,6 +268,16 @@ function solve(input_file::String, comm)
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
         end
+
+        # plot latest spin direction on x-y plane.
+        for it in 1:num_temps
+            if it % 12 == 0
+                L = Int(sqrt(num_spins/3))
+                plot_spin_direction(mk_kagome(L),sx[it],sy[it])
+                savefig("SpinsOnKagome$(it)")
+            end
+        end       
+
     end
 
     # Stat of Replica Exchange MC
