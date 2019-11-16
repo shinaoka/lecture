@@ -268,7 +268,7 @@ function solve(input_file::String, comm)
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
         end
-        """
+        
         # plot latest spin direction on x-y plane.
         for it in 1:num_temps
             if it % 12 == 0
