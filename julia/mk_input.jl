@@ -18,14 +18,14 @@ len2 = 2*sin(pi/3)
 
 # parameter for Interaction.
 SSInteraction = Type3dVector
-J_1stnn  = (1.,1.,1.)
+J_1stnn  = (-1.,-1.,-2.)
 J_2ndnn  = (0.,0.,0.)
 J_intlay = (1.,1.,1.)
 
 #parameters for temepratures.
-num_temps = 48
+num_temps = 96
 min_T = 0.01
-max_T = 0.1
+max_T = 0.05
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     
@@ -101,16 +101,20 @@ function mk_interaction(L::Int64,num_stack::Int64,a1::Type3dVector,a2::Type3dVec
                 distance = compute_distance(L,num_stack,crystal[key1],crystal[key2],a1,a2,a3)
                 z1 = crystal[key1][3]
                 z2 = crystal[key2][3]
+
                 # make x-y plane interaction.
                 if z1 == z2
                     
                     # make 1st nearest neighbor interaction.
                     if abs(len1-distance) < 1e-10
                         push!(interaction, (key1,key2,J1[1],J1[2],J1[3]))
-                        
-                    # make 1st nearest neighbor interaction.    
+                       
+                    """ 
+                    # make 2nd nearest neighbor interaction.    
                     elseif abs(len2-distance) < 1e-10 
                         push!(interaction, (key1,key2,J2[1],J2[2],J2[3]))
+                    """
+
                     end     
                     
                 # make inter layer interaction.
