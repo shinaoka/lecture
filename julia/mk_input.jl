@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 2
+L = 16
 l = 1.
 num_stack = 1
 num_spins = (3*L^2)*num_stack
@@ -19,13 +19,13 @@ len2 = 2*sin(pi/3)
 # parameter for Interaction.
 SSInteraction = Type3dVector
 J_1stnn  = (1.,1.,1.)
-J_2ndnn  = (1.,1.,1.)
+J_2ndnn  = (0.,0.,0.)
 J_intlay = (1.,1.,1.)
 
 #parameters for temepratures.
 num_temps = 48
-min_T = 0.1
-max_T = 1.5
+min_T = 0.01
+max_T = 0.1
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     
@@ -142,4 +142,5 @@ function input_Jij(interaction::Array{Any,1})
 end
 
 # output Jij
+println("num_spins: ",num_spins)
 input_Jij(mk_interaction(L,num_stack,lat_vec1,lat_vec2,lat_vec3,J_1stnn,J_2ndnn,J_intlay,len1,len2))
