@@ -5764,3 +5764,295 @@ Did you start 'gksqt'?
 
 GKS: Open failed in routine OPEN_WS
 GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5718: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Nov 16 15:15:56 2019
+Results reported at Sat Nov 16 15:16:15 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    246.19 sec.
+
+The output (if any) follows:
+
+ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: ERROR: LoadError: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: syntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntax
+Stacktrace:syntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntax
+Stacktrace:
+ [1] 
+Stacktrace:syntax: incomplete: invalid string syntax
+Stacktrace:
+Stacktrace:
+Stacktrace:
+ [1] syntax: incomplete: invalid string syntax
+ [1] 
+ [1] 
+ [1] 
+ [1] syntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntax
+Stacktrace:syntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntax
+Stacktrace:syntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntax
+ [1] syntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntaxsyntax: incomplete: invalid string syntax
+Stacktrace:
+Stacktrace:syntax: incomplete: invalid string syntax
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [2] 
+Stacktrace:syntax: incomplete: invalid string syntax
+Stacktrace:
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [2] 
+
+ [1]  [1] include_relative(
+Stacktrace:
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [2] 
+Stacktrace:::include at ./boot.jl:326 [inlined]
+ [2] includeinclude at ./boot.jl:326 [inlined]
+ at ./boot.jl:326 [inlined]
+ [2]  [2] 
+ [1] 
+ [1] 
+ [1] 
+Stacktrace:include_relative(
+ [1] 
+ [1] 
+ [1] include_relative
+ [1] (
+ [1] ::
+ [1] 
+ [1] 
+ [1] include_relative(include_relative(include_relative(::include at ./boot.jl:326 [inlined]
+ [2] ::::::
+ [1] Module, ::include at ./boot.jl:326 [inlined]
+ [2] String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+include_relative(include at include./boot.jl:326 [inlined]
+ [2]  at ./boot.jl:326 [inlined]
+ [2] ::include at ./boot.jl:326 [inlined]
+ [2] Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+include at ./boot.jl:326 [inlined]
+ [2] include_relative(include at ./boot.jl:326 [inlined]
+ [2] Module, ::include at ./boot.jl:326 [inlined]
+ [2] String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+::Module, Module, ::::Module, ::include_relative(include_relative(include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] String) at ./loading.jl:1038String) at ./loading.jl:1038
+ [3] include(::Module, 
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+::String) at ./sysimg.jl:29
+ [4] exec_options(:: [4] exec_options(::include at ./boot.jl:326 [inlined]
+ [2] String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267Base.JLOptions) at ./client.jl:267
+ [5] _start() at 
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+include_relative(include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] ::::syntax: incomplete: invalid string syntaxinclude at ./boot.jl:326 [inlined]
+ [2] ::include_relative(include_relative(include_relative(include at ./boot.jl:326 [inlined]
+ [2] ::::include_relative(include_relative(include_relative(::include_relative(include_relative(Module, ::include_relative(include_relative(::::::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+include_relative(::::::::
+Stacktrace:::include_relative(Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+
+ [1] Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Module, ::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::Module, ::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::Module, ::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+include at ./boot.jl:326 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:117
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5719: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Nov 16 15:28:26 2019
+Results reported at Sat Nov 16 15:30:07 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   2238.59 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:10.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS

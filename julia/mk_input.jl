@@ -1,10 +1,26 @@
 using LinearAlgebra
 
-#parameters for Jij
-L = 4
-const Jx= 1.0
-const Jy= 1.0
-const Jz= 1.0
+# prameters for system.
+L = 2
+l = 1.
+num_stack = 1
+num_spins = (3*L^2)*num_stack
+
+# lattice vectors
+Type3dVector = Tuple{Float64,Float64,Float64}
+lat_vec1 = l .* (2.,0.,0.)
+lat_vec2 = l .* (2*cos(pi/3),2*sin(pi/3),0.)
+lat_vec3 = l .* (0.,0.,1.)
+
+# length betweeen 1st&2nd nearest neightbor sites.
+len1 = 2*cos(pi/3)
+len2 = 2*sin(pi/3)
+
+# parameter for Interaction.
+SSInteraction = Type3dVector
+J_1stnn  = (1.,1.,1.)
+J_2ndnn  = (1.,1.,1.)
+J_intlay = (1.,1.,1.)
 
 #parameters for temepratures.
 num_temps = 48
@@ -37,61 +53,93 @@ end
 
 # some following functions generate input_Jij's argument array of tuple.
 
-# make dictionary has as keys kagome' site index corresponding to coordination.
-function mk_kagome(L::Int64)
-    
-    a1 = (2.,0.)
-    a2 = (2*cos(pi/3),2*sin(pi/3))
-    
+
+#make stacked structure for any given lattice vector.
+function mk_stacked_structure(L::Int64,num_stack::Int64,a1::Type3dVector,a2::Type3dVector,a3::Type3dVector)
     index = 1
     temp = Dict()
-    for (i,j) in Iterators.product(1:L,1:L)
-        A = (i-1).* a1 .+ (j-1).*a2
-        B = A .+ a1./2
-        C = A .+ a2./2
-        get!(temp,index  ,A)
-        get!(temp,index+1,B)
-        get!(temp,index+2,C)
-        index += 3
+    for layer in 1:num_stack
+        for (i,j) in Iterators.product(1:L,1:L)
+            A = (i-1).* a1 .+ (j-1).*a2 .+ (layer-1).*a3
+            B = A .+ a1./2
+            C = A .+ a2./2
+            get!(temp,index  ,A)
+            get!(temp,index+1,B)
+            get!(temp,index+2,C)
+            index += 3
+        end
     end
     return temp
 end
 
-function compute_distance(L::Int64,p1::Tuple{Float64,Float64},p2::Tuple{Float64,Float64})
-    
-    # base lattice vector 
-    a1 = (2.,0.)
-    a2 = (2*cos(pi/3),2*sin(pi/3))
-    
+function compute_distance(L::Int64,n::Int64,p1::Type3dVector,p2::Type3dVector,a1::Type3dVector,a2::Type3dVector,a3::Type3dVector)
+
     temp = []
-    for (i,j) in Iterators.product(1:3, 1:3)
+    for (i,j,k) in Iterators.product(1:3,1:3,1:3)
         tempi = L*(i-2)
         tempj = L*(j-2)
-    
-        lattice_vec = tempi.*a1 .+ tempj.*a2
+        tempk = n*(k-2)
+
+        lattice_vec = tempi.*a1 .+ tempj.*a2 .+ tempk.*a3
         cp_point = p2 .+ lattice_vec
         push!(temp, norm(p1.-cp_point))
     end
 
     return minimum(temp)
+    
 end
 
-function mk_coupling(L::Int64)
-    nn_coupling = []
-    kagome = mk_kagome(L)
+function mk_interaction(L::Int64,num_stack::Int64,a1::Type3dVector,a2::Type3dVector,a3::Type3dVector,J1::SSInteraction,J2::SSInteraction,J3::SSInteraction,len1::Float64,len2::Float64)
+    interaction = []
+    crystal = mk_stacked_structure(L,num_stack,a1,a2,a3)
     
-    for key1 in keys(kagome)
-        for key2 in keys(kagome)
-            
-            distance = compute_distance(L,kagome[key1],kagome[key2])
-            
-            if key1 < key2 && abs(1-distance) < 1e-5
-                push!(nn_coupling, (key1,key2))
+    
+    for key1 in keys(crystal)
+        for key2 in keys(crystal)
+            if key1 < key2
+                
+                distance = compute_distance(L,num_stack,crystal[key1],crystal[key2],a1,a2,a3)
+                z1 = crystal[key1][3]
+                z2 = crystal[key2][3]
+                # make x-y plane interaction.
+                if z1 == z2
+                    
+                    # make 1st nearest neighbor interaction.
+                    if abs(len1-distance) < 1e-10
+                        push!(interaction, (key1,key2,J1[1],J1[2],J1[3]))
+                        
+                    # make 1st nearest neighbor interaction.    
+                    elseif abs(len2-distance) < 1e-10 
+                        push!(interaction, (key1,key2,J2[1],J2[2],J2[3]))
+                    end     
+                    
+                # make inter layer interaction.
+                else
+                    if abs(len1-distance) < 1e-10
+                        push!(interaction, (key1,key2,J3[1],J3[2],J3[3]))
+                    end
+                    
+                end
             end
         end
     end
-    return sort!(nn_coupling)
+    
+    return sort!(interaction)
+end
+
+function input_Jij(interaction::Array{Any,1})
+
+    open("Jij.txt", "w") do fp
+        
+      println(fp,length(interaction))
+        
+      for intr in interaction
+          println(fp,intr[1]," ",intr[2]," ",intr[3]," ",intr[4]," ", intr[5])
+      end
+        
+    end
+    
 end
 
 # output Jij
-input_Jij(mk_coupling(L),Jx,Jy,Jz)
+input_Jij(mk_interaction(L,num_stack,lat_vec1,lat_vec2,lat_vec3,J_1stnn,J_2ndnn,J_intlay,len1,len2))
