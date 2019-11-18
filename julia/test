@@ -6056,3 +6056,956 @@ Did you start 'gksqt'?
 
 GKS: Open failed in routine OPEN_WS
 GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5720: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 18 14:55:40 2019
+Results reported at Mon Nov 18 14:57:18 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1992.77 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+ERROR: LoadError: UndefVarError: temp not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:276
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:306
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5721: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 18 15:03:10 2019
+Results reported at Mon Nov 18 15:04:44 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1965.27 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+ERROR: LoadError: UndefVarError: it not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:278
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:306
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5722: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 18 15:10:00 2019
+Results reported at Mon Nov 18 15:11:37 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   2034.12 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+ERROR: LoadError: UndefVarError: it not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:278
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:306
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5723: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 18 15:16:30 2019
+Results reported at Mon Nov 18 15:17:58 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1920.13 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5724: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 18 15:25:01 2019
+Results reported at Mon Nov 18 15:26:28 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   1902.47 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5725: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 18 15:33:01 2019
+Results reported at Mon Nov 18 15:34:34 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   2039.31 sec.
+
+The output (if any) follows:
+
+gksqt: cannot connect to X server sakura01.local:11.0
+connect: Connection refused
+GKS: can't connect to GKS socket application
+Did you start 'gksqt'?
+
+GKS: Open failed in routine OPEN_WS
+GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
