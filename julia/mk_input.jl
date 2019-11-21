@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 16
+L = 6
 l = 1.
 num_stack = 1
 num_spins = (3*L^2)*num_stack
@@ -24,8 +24,8 @@ J_intlay = (1.,1.,1.)
 
 #parameters for temepratures.
 num_temps = 96
-min_T = 0.01
-max_T = 0.05
+min_T = 0.0001
+max_T = 0.0002
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     
@@ -41,18 +41,8 @@ end
 # Output temperatures.
 input_temperatures(num_temps,min_T,max_T)
 
-function input_Jij(couplings::Array{Any,1}, Jx::Float64, Jy::Float64, Jz::Float64)
-    
-    open("Jij.txt", "w") do fp
-      println(fp, length(couplings))
-      for pair in couplings
-          println(fp,pair[1]," ",pair[2]," ",Jx," ",Jy," ", Jz)
-      end
-    end
-end
 
 # some following functions generate input_Jij's argument array of tuple.
-
 
 #make stacked structure for any given lattice vector.
 function mk_stacked_structure(L::Int64,num_stack::Int64,a1::Type3dVector,a2::Type3dVector,a3::Type3dVector)

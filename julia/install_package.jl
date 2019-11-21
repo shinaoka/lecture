@@ -8,7 +8,7 @@ Pkg.add("LinearAlgebra")
 Pkg.add("StaticArrays")
 Pkg.add("CPUTime")
 Pkg.add("Plots")
-ENV["GRDIR"]=""
 Pkg.add("GR")
+Pkg.add("PyPlot")
 
 

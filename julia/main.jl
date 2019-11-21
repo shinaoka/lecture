@@ -271,8 +271,8 @@ function solve(input_file::String, comm)
         
         # plot latest spin direction on x-y plane.
         L = Int(sqrt(num_spins/3))
-        kagome = mk_stacked_structure(L,num_stack,lat_vec1,lat_vec2,lat_vec3)
-        plot_spin_direction(kagome,sx[1],sy[1],num_spins)
+        kagome = mk_stacked_structure(L,num_stack,lat_vec1,lat_vec2,lat_vec3,num_spins)
+        plot_spin_direction(kagome,sz[1],sx[1],num_spins)
         savefig("$(num_spins)_$(temps[1])")
 
     end
