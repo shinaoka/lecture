@@ -1,18 +1,23 @@
 using LinearAlgebra
+using HDF5
 using PyPlot
 
 # prameters for system.
-L = 4
-l = 1.
 num_stack = 1
-num_spins = (3*L^2)*num_stack
+num_spins = h5open("12_0.1.h5","r") do fp
+                read(fp,"num_spins")
+end   
 
+L = Int(sqrt(num_spins/3))
 
 # lattice vectors
 Type3dVector = Tuple{Float64,Float64,Float64}
+l = 1.
 lat_vec1 = l .* (2.,0.,0.)
 lat_vec2 = l .* (2*cos(pi/3),2*sin(pi/3),0.)
 lat_vec3 = l .* (0.,0.,1.)
+
+
 
 function mk_stacked_structure(L::Int64,num_stack::Int64,a1::Type3dVector,a2::Type3dVector,a3::Type3dVector,num_spins::Int64)
     index = 1
@@ -61,17 +66,27 @@ function plot_spin_direction(lattice::Array{Tuple{Float64,Float64,Float64},1},sp
     
 end
 
+# pull latest spin data from .h5 file.
+sx = h5open("12_0.1.h5","r") do fp
+         read(fp,"sx")
+end
 
+sy = h5open("12_0.1.h5","r") do fp
+         read(fp,"sy")
+end
 
-# test code.
-test = [((cos(pi/2 + (i-1)*2pi/3), sin(pi/2 + (i-1)*2pi/3),0.)./3) for i in 1:num_spins] 
-test_x = [test[i][1] for i in 1:length(test)]
-test_y = [test[i][2] for i in 1:length(test)]
+sz = h5open("12_0.1.h5","r") do fp
+         read(fp,"sz")
+end
 
-plot_spin_direction(mk_stacked_structure(L,num_stack,lat_vec1,lat_vec2,lat_vec3,num_spins),test_x,test_y,num_spins)
-savefig("test.png")
+"""
+println("sx: ",sx)
+println("sy: ",sy)
+println("sz: ",sz)
+"""
 
-
+plot_spin_direction(mk_stacked_structure(L,num_stack,lat_vec1,lat_vec2,lat_vec3,num_spins),sx,sy,num_spins)
+savefig("12_0.1.png")
 
 
 

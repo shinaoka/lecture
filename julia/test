@@ -7934,3 +7934,1678 @@ Did you start 'gksqt'?
 
 GKS: Open failed in routine OPEN_WS
 GKS: GKS not in proper state. GKS must be either in the state WSOP or WSAC in routine ACTIVATE_WS
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5739: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 12:01:16 2019
+Results reported at Fri Nov 22 12:02:00 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    869.40 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+
+Stacktrace:
+ [1] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] __pycall!(::PyCall.PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyCall.PyObject, ::PyCall.PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyCall.PyObject, ::PyCall.PyObject, ::NTuple{4,Array{Float64,1}}, ::Int64, ::PyCall.PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyCall.PyObject, ::PyCall.PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyCall.PyObject, ::Type{PyCall.PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] (::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(PyCall.pycall), ::PyCall.PyObject, ::Type{PyCall.PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:275
+ [13] top-level scope at util.jl:156
+ [14] include at ./boot.jl:326 [inlined]
+ [15] include_relative(::Module, ::String) at ./loading.jl:1038
+ [16] include(::Module, ::String) at ./sysimg.jl:29
+ [17] exec_options(::Base.JLOptions) at ./client.jl:267
+ [18] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:297
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5740: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 12:15:46 2019
+Results reported at Fri Nov 22 12:16:12 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    412.98 sec.
+
+The output (if any) follows:
+
+ERROR: ERROR: ERROR: ERROR: LoadError: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: LoadError: ERROR: ERROR: LoadError: ERROR: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: ERROR: ERROR: LoadError: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+ERROR: PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+
+Stacktrace:
+Stacktrace:PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+LoadError: LoadError: 
+Stacktrace:
+ [1] 
+Stacktrace:
+ [1] 
+Stacktrace:
+ [1] PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+
+ [1] 
+Stacktrace:
+ [1] 
+ [1] 
+Stacktrace:PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] 
+ [1] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] __pycall!(
+Stacktrace:pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] __pycall!(::PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+__pycall!(
+ [1] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] ::
+Stacktrace:__pycall!(PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+::__pycall!(::
+ [1] PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+::PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+__pycall!(
+Stacktrace:PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+::PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+
+Stacktrace:PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+
+Stacktrace:
+ [1] PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::__pycall!PyObject(, ::
+Stacktrace:Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::NTuple{
+Stacktrace:
+
+ [1]  [1] PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+4
+Stacktrace:PyObject, ::Ptr{
+Stacktrace:PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::,Array{
+Stacktrace:Float64NTuple{,::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] 4
+Stacktrace:,ArrayPyObject{, ::Float64Ptr{,
+PyCall.PyObject_struct}, ::PyObject [1] , ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::
+Stacktrace:
+Stacktrace:NTuple{1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{
+ [1] 
+Stacktrace:PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::4
+ [1] ,Array{Float64,
+ [1] 
+ [1] NTuple{1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{4NTuple{,Array{Float64,
+ [1] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64
+ [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4]  [1] 
+ [1] 1}}4, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,ArrayPyObject{, Float64,1}}, ::::Base.Iterators.Ptr{PairsPyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::{Symbol,Symbol,Tuple{Symbol},NamedTuple{
+ [1] ,Array{Float64,__pycall!
+Stacktrace:(1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(NTuple{(4::,Array{Float64,1}}, ::Int64, 
+::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall! [1] (::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(__pycall!pyerr_check at (/home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::(:::pivot,),Tuple{Symbol}}(}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuplepyerr_check{Symbol},NamedTuple{(: at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84pyerr_check [inlined]
+ [4]  at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+pivot,),Tuple{Symbol}}}, :: [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]Function, ::
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::NTuple{:pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.4Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::,Array{Float64,1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] __pycall!_pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::(Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{:pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] pivot(,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]pyerr_check
+ [4]  at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] :pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::__pycall!(__pycall!(:Vararg{Array{Float64,pivot1},,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::pyerr_checkpyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ at  [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] Vararg{Array{Float64,PyObject, ::1},Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] ::::__pycall!(Vararg{Array{PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+Float64,1},:NTuple{__pycall!((pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::__pycall!(4__pycall!(N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] Vararg{Array__pycall!{Float64,1},(,Array{Float64,N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] ::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::PyObjectBase.Iterators., ::Pairs{PtrSymbol,Symbol,{Tuple{Symbol},NamedTuple{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] Vararg{Array{Float64,1},::__pycall!(__pycall!(N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] ::__pycall!::(__pycall!((::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::(::getfield(PyCall, Symbol("#kw##pycall")))Type({PyAny}, ::::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:::pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.IteratorsNTuple{.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+N} where  [17] N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative((::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:::Module, ::String) at pivot,./loading.jl:1038),Tuple{Symbol}}, ::typeof(
+ [20] include(pycall), ::::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivotModule, ::,String) at ),Tuple./sysimg.jl:29{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple
+{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]4
+ [14] include_relative(::Module, ::String) at ::./loading.jl:1038
+Vararg [15] include(::Module{Array{, ::StringFloat64,1) at ./sysimg.jl:29},
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+ [21] exec_options(::::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+:,Array{Float64,pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,SymbolN,Tuple{Symbol},NamedTuple{(:} where N):: at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86pivot,),
+Tuple{Symbol}}}, :: [8] Function, ::PyObject, ::Type{PyAny}
+Stacktrace:, ::Array{Float64,1}, ::::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{PyObject, ::Ptr{PyCall.PyObject_struct}(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(, :pivot,),Tuple{Symbol}}, ::::PyObject, ::PyObject)typeof( at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::__pycall!Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:(pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{(Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038N
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+ [8] NTuple{
+ [1] PyObject, PyObject::, ::PtrPtr{{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+_pycall!(::PyObject, ::PyObject, :: [5] _pycall!(::PyObject, ::::PyObject, ::4,Array{Float64,Vararg{Array{Float64,1},(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::1Vararg}}, ::{ArrayInt64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29{
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Float64,1Base.Iterators.Pairs{}Symbol,Symbol,,Tuple{Symbol},NNamedTuple{} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scopeNTuple{ at none:0
+ [18] include at ./boot.jl:326NTuple{ [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+PyObject(, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::44,,Array{Array{Float64Float64,,PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::11}}, ::}}Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+, :: [6] _pycall!Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29(::
+PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, :: [6] _pycall!Base.Iterators(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1:}}, ::.Pairs{Base.Iterators.Pairs{SymbolSymbol,Symbol,,Tuple{Symbol},NamedTuple{Symbol,Tuple{Symbol},NamedTuple{pivot,),Tuple{SymbolPyObjectPyObject, }::, ::}})Ptr{Ptr{ at PyCall.PyObject_structPyCall.PyObject_struct}, ::PyObject, }, ::PyObject, ::PyObject) at ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44/home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+/home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [5] _pycall!(
+ [7] ::PyObject, ::PyObject#pycall#110(::, ::Base.Iterators [5] _pycall!(::PyObject, ::PyObject, ::.Pairs{NSymbol,Symbol,Tuple{Symbol},NamedTuple{(:} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+pivot,),Tuple{Symbol}}}, :: [8] Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, NTuple{::NTuple{4PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::NTuple{NTuple{,Array{Float64,4(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+NTuple{PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{,Array{Float64,PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::44(1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{4,,Array{Float64,Array{Float64,NTuple{:NTuple{,Array{Float64,1}}, ::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{SymbolBase.Iterators.Pairs{Symbol,Symbol,Symbol,Tuple{,Tuple{Symbol},Symbol},NamedTuple{NamedTuple{pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{NTuple{44NTuple{Vararg{Array{Float64,1},,Array{Float64,,Array{Float64,41}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::4Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{((,Array{Float64,,Array{Float64,1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] :NTuple{(pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] (4,Array{Float64,((1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{((::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Type{PyAny}, ::Array{Float64,1}, ::((N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] ((Vararg{Array{Float64,1},:__pycall!(pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267:
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(::pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, :::pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},Vararg{Array{Float64,1},(::N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] ::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] Vararg{Array{Float64,1},Vararg{Array{Float64,1},Vararg{Array{Float64,1},Vararg{Array{Float64,1},:(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,SymbolSymbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{ at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at , ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] Vararg{Array{Float64,1},Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] (::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] (::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N}
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] (::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] Vararg{Array{Float64,1},PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] 
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+NTuple{4N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] ,Array{Float64,1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{PyError ($(Expr(:escape, :(ccall(#= /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44 =# @pysym(:PyObject_Call), PyPtr, (PyPtr, PyPtr, PyPtr), o, pyargsptr, kw))))) <class '_tkinter.TclError'>
+TclError('couldn\'t connect to display "sakura01.local:11.0"',)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 3419, in quiver
+    ax = gca()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/home/tool/materiapps/python/python-gcc-2.7.11-1/lib/python2.7/lib-tk/Tkinter.py", line 1814, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+(::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+(
+Stacktrace:
+ [1] :pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] (::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:60 [inlined]
+ [2] pyerr_check at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:64 [inlined]
+ [3] macro expansion at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/exception.jl:84 [inlined]
+ [4] __pycall!(::PyObject, ::Ptr{PyCall.PyObject_struct}, ::PyObject, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:44
+ [5] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Int64, ::PyObject) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:29
+ [6] _pycall!(::PyObject, ::PyObject, ::NTuple{4,Array{Float64,1}}, ::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:11
+ [7] #pycall#110(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyCall/ttONZ/src/pyfncall.jl:86
+ [8] (::getfield(PyCall, Symbol("#kw##pycall")))(::NamedTuple{(:pivot,),Tuple{Symbol}}, ::typeof(pycall), ::PyObject, ::Type{PyAny}, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at ./none:0
+ [9] #quiver#91(::Base.Iterators.Pairs{Symbol,Symbol,Tuple{Symbol},NamedTuple{(:pivot,),Tuple{Symbol}}}, ::Function, ::Array{Float64,1}, ::Vararg{Array{Float64,1},N} where N) at /home/kakizawa/.julia/packages/PyPlot/4wzW1/src/PyPlot.jl:177
+ [10] #quiver at ./none:0 [inlined]
+ [11] plot_spin_direction(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Int64) at /home/kakizawa/lecture/julia/plot_result.jl:50
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] include(::String) at ./client.jl:403
+ [17] top-level scope at none:0
+ [18] include at ./boot.jl:326 [inlined]
+ [19] include_relative(::Module, ::String) at ./loading.jl:1038
+ [20] include(::Module, ::String) at ./sysimg.jl:29
+ [21] exec_options(::Base.JLOptions) at ./client.jl:267
+ [22] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/plot_result.jl:71
+in expression starting at /home/kakizawa/lecture/julia/main.jl:13
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5741: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 12:43:56 2019
+Results reported at Fri Nov 22 12:44:34 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    593.74 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: UndefVarError: w not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:272
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:298
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5742: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 12:46:16 2019
+Results reported at Fri Nov 22 12:46:43 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    531.89 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: UndefVarError: w not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:272
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:298
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5743: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 12:53:56 2019
+Results reported at Fri Nov 22 12:54:27 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    543.97 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: UndefVarError: w not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:272
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] exec_options(::Base.JLOptions) at ./client.jl:267
+ [7] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:298
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5744: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 12:57:26 2019
+Results reported at Fri Nov 22 12:57:51 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    489.60 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5745: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 15:21:56 2019
+Results reported at Fri Nov 22 15:22:18 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    310.05 sec.
+
+The output (if any) follows:
+
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for Blosc [a74b3585-a348-5f62-a45c-50e91977d574]
+│   exception = ArgumentError: Invalid checksum in cache file /home/kakizawa/.julia/compiled/v1.1/Blosc/UZMg8.ji.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for Blosc [a74b3585-a348-5f62-a45c-50e91977d574]
+│   exception = ArgumentError: Invalid checksum in cache file /home/kakizawa/.julia/compiled/v1.1/Blosc/UZMg8.ji.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Required dependency Blosc [a74b3585-a348-5f62-a45c-50e91977d574] failed to load from a cache file.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Required dependency Blosc [a74b3585-a348-5f62-a45c-50e91977d574] failed to load from a cache file.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = ArgumentError: Invalid checksum in cache file /home/kakizawa/.julia/compiled/v1.1/HDF5/L7Dga.ji.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = ArgumentError: Invalid checksum in cache file /home/kakizawa/.julia/compiled/v1.1/HDF5/L7Dga.ji.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected Blosc.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected Blosc.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = ArgumentError: Invalid checksum in cache file /home/kakizawa/.julia/compiled/v1.1/HDF5/L7Dga.ji.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected Blosc.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected Blosc.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Required dependency Blosc [a74b3585-a348-5f62-a45c-50e91977d574] failed to load from a cache file.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected DelimitedFiles.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected DelimitedFiles.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected DelimitedFiles.
+└ @ Base loading.jl:969
+┌ Warning: The call to compilecache failed to create a usable precompiled cache file for HDF5 [f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f]
+│   exception = Invalid input in module list: expected DelimitedFiles.
+└ @ Base loading.jl:969
+ERROR: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: LoadError: ERROR: ERROR: LoadError: LoadError: ERROR: LoadError: syntax: invalid interpolation syntax: "$$"
+Stacktrace:syntax: invalid interpolation syntax: "$$"
+ [1] 
+Stacktrace:syntax: invalid interpolation syntax: "$$"
+ [1] syntax: invalid interpolation syntax: "$$"
+Stacktrace:syntax: invalid interpolation syntax: "$$"syntax: invalid interpolation syntax: "$$"include at ./boot.jl:326 [inlined]
+ [2] 
+ [1] syntax: invalid interpolation syntax: "$$"
+Stacktrace:include_relative(
+Stacktrace:
+Stacktrace:::
+ [1] include at ./boot.jl:326 [inlined]
+ [2] 
+ [1] 
+Stacktrace:
+ [1] syntax: invalid interpolation syntax: "$$"syntax: invalid interpolation syntax: "$$"
+ [1] include_relative(::include at ./boot.jl:326 [inlined]
+ [2] 
+Stacktrace:Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::syntax: invalid interpolation syntax: "$$"Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+
+Stacktrace:
+ [1] include_relative(include at ./boot.jl:326 [inlined]
+ [2] 
+ [1] ::include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] 
+Stacktrace:Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include at ./boot.jl:326 [inlined]
+ [2] include_relative(
+ [1] ::include_relative(include_relative(::::include_relative(Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+::include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include_relative(Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+::include_relative(Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include at ./boot.jl:326 [inlined]
+ [2] ::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+ERROR: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: ERROR: LoadError: LoadError: ERROR: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: ERROR: syntax: invalid interpolation syntax: "$$"LoadError: LoadError: 
+Stacktrace:
+ [1] ERROR: LoadError: include at ./boot.jl:326 [inlined]
+ [2] include_relative(::syntax: invalid interpolation syntax: "$$"Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+
+Stacktrace:syntax: invalid interpolation syntax: "$$"
+ [1] 
+Stacktrace:
+ [1] syntax: invalid interpolation syntax: "$$"syntax: invalid interpolation syntax: "$$"
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [2] syntax: invalid interpolation syntax: "$$"
+ [1] ERROR: include_relative(
+Stacktrace:::include at ./boot.jl:326 [inlined]
+ [2] LoadError: 
+ [1] 
+Stacktrace:include_relative(
+ [1] syntax: invalid interpolation syntax: "$$"::include at ./boot.jl:326 [inlined]
+ [2] syntax: invalid interpolation syntax: "$$"Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+
+Stacktrace:syntax: invalid interpolation syntax: "$$"syntax: invalid interpolation syntax: "$$"include_relative(
+ [1] ::include at ./boot.jl:326 [inlined]
+ [2] 
+Stacktrace:Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+
+Stacktrace:
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [2] 
+ [1] include_relative(
+ [1] ::
+ [1] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include at ./boot.jl:326 [inlined]
+ [2] syntax: invalid interpolation syntax: "$$"syntax: invalid interpolation syntax: "$$"Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include at ./boot.jl:326 [inlined]
+ [2] include_relative(::include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+
+Stacktrace:include_relative(
+Stacktrace:::include_relative(include_relative(
+ [1] ::::
+ [1] Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+syntax: invalid interpolation syntax: "$$"Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include at ./boot.jl:326 [inlined]
+ [2] include at ./boot.jl:326 [inlined]
+ [2] 
+Stacktrace:include_relative(::
+ [1] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include at ./boot.jl:326 [inlined]
+ [2] Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+syntax: invalid interpolation syntax: "$$"
+Stacktrace:
+ [1] include at ./boot.jl:326 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] exec_options(::Base.JLOptions) at ./client.jl:267
+ [5] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:273
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5746: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 15:26:16 2019
+Results reported at Fri Nov 22 15:26:43 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    524.73 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5747: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 15:49:37 2019
+Results reported at Fri Nov 22 15:50:07 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    536.26 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5748: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 15:55:07 2019
+Results reported at Fri Nov 22 15:55:34 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    537.30 sec.
+
+The output (if any) follows:
+

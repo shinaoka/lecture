@@ -4,11 +4,11 @@ using ArgParse
 using MPI
 using Test
 using CPUTime
+using HDF5
 
 include("mcmc.jl")
 include("accumulator.jl")
 include("replica_exchange.jl")
-include("plot_result.jl")
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
@@ -268,12 +268,16 @@ function solve(input_file::String, comm)
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
         end
-        
+         
         # plot latest spin direction on x-y plane.
-        L = Int(sqrt(num_spins/3))
-        kagome = mk_stacked_structure(L,num_stack,lat_vec1,lat_vec2,lat_vec3,num_spins)
-        plot_spin_direction(kagome,sz[1],sx[1],num_spins)
-        savefig("$(num_spins)_$(temps[1])")
+        h5open("$(num_spins)_$(temps[1]).h5","w") do fp
+            write(fp,"temp"     ,temps[1])
+            write(fp,"num_spins",num_spins)
+            write(fp,"sx"       ,sx[1])
+            write(fp,"sy"       ,sy[1])
+            write(fp,"sz"       ,sz[1])
+        end
+
 
     end
 
