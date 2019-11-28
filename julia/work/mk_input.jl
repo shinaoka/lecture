@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 8
+L = 4
 l = 1.
 num_stack = 1
 num_spins = (3*L^2)*num_stack
@@ -23,9 +23,9 @@ J_2ndnn  = (0.,0.,0.)
 J_intlay = (1.,1.,1.)
 
 #parameters for temepratures.
-num_temps = 96
+num_temps = 1
 min_T = 0.01
-max_T = 0.2
+max_T = 0.01
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     

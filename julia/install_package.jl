@@ -12,5 +12,6 @@ Pkg.add("GR")
 Pkg.add("PyPlot")
 Pkg.add("PyCall")
 Pkg.add("HDF5")
+Pkg.add("Test")
 
 

@@ -9609,3 +9609,1489 @@ Resource usage summary:
 
 The output (if any) follows:
 
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5749: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 17:30:28 2019
+Results reported at Fri Nov 22 17:31:10 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    885.62 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5750: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 17:56:28 2019
+Results reported at Fri Nov 22 17:57:13 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    894.84 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5751: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 18:11:28 2019
+Results reported at Fri Nov 22 18:15:22 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5387.00 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5752: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri Nov 22 18:22:38 2019
+Results reported at Fri Nov 22 18:57:13 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :  49629.82 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5753: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 12:05:05 2019
+Results reported at Mon Nov 25 12:05:46 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    887.65 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5754: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 12:18:05 2019
+Results reported at Mon Nov 25 12:18:46 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    802.12 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5755: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 12:27:05 2019
+Results reported at Mon Nov 25 12:27:46 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    797.33 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: BoundsError
+Stacktrace:
+ [1] getindex(::Int64, ::Int64) at ./number.jl:78
+ [2] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:273
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:305
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5756: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 12:30:55 2019
+Results reported at Mon Nov 25 12:31:33 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    800.04 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: BoundsError
+Stacktrace:
+ [1] getindex(::Int64, ::Int64) at ./number.jl:78
+ [2] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:273
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:305
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5757: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 12:34:15 2019
+Results reported at Mon Nov 25 12:34:53 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    770.77 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5758: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 13:25:56 2019
+Results reported at Mon Nov 25 13:26:37 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    782.88 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5759: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 14:18:47 2019
+Results reported at Mon Nov 25 14:19:32 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    895.41 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5760: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 14:29:47 2019
+Results reported at Mon Nov 25 14:33:40 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5419.86 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5761: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 15:22:38 2019
+Results reported at Mon Nov 25 15:23:08 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    549.93 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5762: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:03:18 2019
+Results reported at Mon Nov 25 16:03:51 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    563.57 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5763: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:07:28 2019
+Results reported at Mon Nov 25 16:07:58 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    556.60 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5764: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:12:38 2019
+Results reported at Mon Nov 25 16:13:12 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    557.34 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5765: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:24:38 2019
+Results reported at Mon Nov 25 16:25:11 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    558.49 sec.
+
+The output (if any) follows:
+
+ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: KeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not found
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:
+
+ [1]  [1] 
+
+ [1]  [1] 
+Stacktrace:
+ [1] 
+
+ [1]  [1] 
+ [1] KeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundKeyError: key "Mz2" not foundgetindex at ./dict.jl:478 [inlined]getindex at ./dict.jl:478 [inlined]
+
+ [2]  [2] 
+Stacktrace:
+Stacktrace:getindexgetindex at ./dict.jl:478 [inlined]
+ [2]  at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] 
+Stacktrace:getindex at ./dict.jl:478 [inlined]
+ [2] 
+Stacktrace:getindex at ./dict.jl:478 [inlined]
+ [2] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:mean(
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] 
+Stacktrace:mean(
+ [1] 
+Stacktrace:
+Stacktrace:meanmean(
+ [1] (getindexmean at ./dict.jl:478 [inlined](
+ [2] mean(
+ [1] mean(::::
+ [1] ::::
+ [1] 
+ [1] ::
+ [1] 
+ [1] 
+ [1] ::::
+ [1] 
+ [1] 
+ [1] mean(::Accumulatorgetindex, :: at String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gatherAccumulator./dict.jl:478 [inlined], ::
+ [2] (::StringAccumulator, ::String, ::)MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(:: at Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::/home/kakizawa/lecture/julia/accumulator.jl:25Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] Accumulator, ::AccumulatorString, ::) at String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+/home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, :: [3] MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::mean_gatherModule, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::(Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+::Accumulator, Accumulator::String, , ::::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, String) at /home/kakizawa/lecture/julia/accumulator.jl:25::String)
+ at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(:: [3] Basemean_gather(::Accumulator, ::String, ::.MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::JLOptionsModule, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::)Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+ at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::getindex at ./dict.jl:478 [inlined]String
+ [2] , ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Modulegetindex at ./dict.jl:478 [inlined], 
+ [2] ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::getindexModule, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(:: at Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] getindex at ./dict.jl:478 [inlined]
+ [2] mean(mean(mean(getindex at ./dict.jl:478 [inlined]
+ [2] mean(mean(::mean(::mean(::mean(::mean(mean(::mean(mean(::Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at mean(/home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+:: [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267mean
+ [10] (_start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+::::mean(::::mean(::::::::::Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] Accumulatorexec_options(::, ::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at Accumulatorutil.jl:156
+ [6] , include at ./boot.jl:326 [inlined]
+ [7] include_relative(::::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptionsString) at /home/kakizawa/lecture/julia/accumulator.jl:25)
+ [3]  at ./client.jl:267mean_gather
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions)Accumulator,  at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] Accumulator, ::include at ./boot.jl:326String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [inlined]
+ [7] include_relative(:: [3] Modulemean_gather(::Accumulator, ::String, ::, MPI.::Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::StringModule, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::)Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+ at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(Accumulator::, String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::::Module, ::StringString) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] )mean_gather at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::(::Accumulator, Base::String, ::.JLOptionsMPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::)Module at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.CommAccumulator, ):: at /home/kakizawa/lecture/julia/accumulator.jl:30
+String [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::) at Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::/home/kakizawa/lecture/julia/accumulator.jl:25Base.
+ [3] mean_gather(::Accumulator, ::String, ::JLOptions)MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(:: at Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::./client.jl:267Base
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scopeAccumulator, :: at util.jl:156
+String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(:: [3] Modulemean_gather(::Accumulator, ::String, ::, MPI::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::.Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+Accumulator [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions, ) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Accumulator, ::String) at /home/kakizawa/lecture/julia/accumulator.jl:25
+ [3] mean_gather(::Accumulator, ::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/accumulator.jl:30
+ [4] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:245
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:313
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5766: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:27:28 2019
+Results reported at Mon Nov 25 16:27:56 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    566.10 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5767: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:33:38 2019
+Results reported at Mon Nov 25 16:34:08 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    539.77 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5768: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:51:18 2019
+Results reported at Mon Nov 25 16:51:48 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    548.70 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5769: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 16:55:28 2019
+Results reported at Mon Nov 25 16:59:29 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5643.28 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5770: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 17:14:29 2019
+Results reported at Mon Nov 25 17:18:29 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5585.70 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5771: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 17:24:49 2019
+Results reported at Mon Nov 25 17:28:45 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5484.91 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5772: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 17:54:59 2019
+Results reported at Mon Nov 25 17:58:50 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5324.68 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5773: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 18:14:00 2019
+Results reported at Mon Nov 25 18:17:58 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5538.55 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5774: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 18:24:59 2019
+Results reported at Mon Nov 25 18:29:07 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5672.90 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5775: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 18:37:09 2019
+Results reported at Mon Nov 25 18:41:08 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5544.68 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5776: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Nov 25 18:45:19 2019
+Results reported at Mon Nov 25 18:49:09 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   5411.73 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5777: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 26 11:58:17 2019
+Results reported at Tue Nov 26 12:01:26 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4353.85 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5778: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 26 12:05:27 2019
+Results reported at Tue Nov 26 12:08:36 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4386.83 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5779: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 26 12:18:17 2019
+Results reported at Tue Nov 26 12:27:11 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :  12639.65 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 5780: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Tue Nov 26 12:37:08 2019
+Results reported at Tue Nov 26 12:46:16 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia ~/lecture/julia/main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :  12967.89 sec.
+
+The output (if any) follows:
+

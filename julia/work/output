@@ -1,0 +1,17 @@
+Wed Nov 27 20:04:49 JST 2019
+num of temperatures = 1
+Starting simulation...
+Before Accumulatink
+Mz2: [1.32481]
+mz2: [0.000575004]
+1 Complex{Float64}[1.0+0.0im, 1.0+0.0im]
+<E> [-5.02827]
+<E^2> [25.2835]
+0.01  0.0
+After accumulating
+Mz2: [1.32481]
+M2: [15.801]
+
+Statistics of replica exchange Monte Carlo
+  6.539873 seconds (16.51 M allocations: 833.171 MiB, 6.07% gc time)
+Wed Nov 27 20:05:04 JST 2019

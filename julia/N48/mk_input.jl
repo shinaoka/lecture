@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 8
+L = 4
 l = 1.
 num_stack = 1
 num_spins = (3*L^2)*num_stack
