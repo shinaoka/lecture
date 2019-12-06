@@ -85,14 +85,16 @@ function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Array{Ar
       mx[i] = temp_mx
       my[i] = temp_my
       mz[i] = temp_mz
-      m2[i] = float(mx[i]^2 + my[i]^2 + mz[i]^2)
+      m2[i] = float(mx[i]^2 + my[i]^2+ mz[i]^2)
     end
     
-        
-    add!(acc, "Mz2", mz.^2)
-    add!(acc, "M2", m2)
-    add!(acc, "M4", m2.^2)
-        
+    add!(acc, "Mx2",mx.^2)    
+    add!(acc, "My2",my.^2)    
+    add!(acc, "Mz2",mz.^2)
+    #add!(acc, "M2", m2)
+    #add!(acc, "M4", m2.^2)
+   
+ 
 end
 
 function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
@@ -115,6 +117,37 @@ function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64
     add!(acc, "sz", spins_z)
     
 end
+
+function order_parameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+    M1 = zeros(num_temps)
+    M2 = zeros(num_temps)
+    M3 = zeros(num_temps)
+    
+    for temp in 1:num_temps
+        m1 = (0.,0.,0.)
+        m2 = (0.,0.,0.)
+        m3 = (0.,0.,0.)
+        
+        for spin in 1:num_spins    
+            if     mod(spin-1,3) == 0
+                m1 = m1 .+ spins[temp][spin]
+                M1[temp] = dot(m1,m1)
+            elseif mod(spin-1,3) == 1
+                m2 = m2 .+ spins[temp][spin]
+                M2[temp] = dot(m2,m2)
+            elseif mod(spin-1,3) == 2
+                m3 = m3 .+ spins[temp][spin]
+                M3[temp] = dot(m3,m3) 
+            end
+            
+        end
+    end
+    
+    add!(acc,"M1",M1)
+    add!(acc,"M2",M2)
+    add!(acc,"M3",M3)
+end
+
 
 function solve(input_file::String, comm)
     if !isfile(input_file)
@@ -167,7 +200,7 @@ function solve(input_file::String, comm)
     acc_proc = Accumulator(1)
 
     # Init spins
-    spins_local  = [fill((1.,0.,0.),num_spins) for it in 1:num_temps_local]
+    spins_local  = [fill((0.,0.,1.),num_spins) for it in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
 
     # Replica exchange
@@ -190,6 +223,7 @@ function solve(input_file::String, comm)
  
         # Single spin flips
         ts_start = CPUtime_us()
+        
         for it in 1:num_temps_local
             energy_local[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
         end
@@ -213,7 +247,7 @@ function solve(input_file::String, comm)
 
         # Measurement
         ts_start = CPUtime_us()
-        if sweep > num_therm_sweeps && mod(sweep, meas_interval) == 0
+        if sweep >= num_therm_sweeps && mod(sweep, meas_interval) == 0
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
 
@@ -225,13 +259,14 @@ function solve(input_file::String, comm)
             add!(acc, "ss", ss)
    
             compute_magnetization(acc, num_spins, spins_local, num_temps_local)
+            order_parameter(acc,spins_local,num_spins,num_temps_local)
 
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # How long does it take to execute one sweep or replica exchange, measuremnt?
         if sweep > num_therm_sweeps
-            add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
+            #add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
         end
     end        
     
@@ -243,13 +278,16 @@ function solve(input_file::String, comm)
     E2 = mean_gather(acc, "E2", comm)
     ss = mean_gather_array(acc, "ss", comm)
     Mz2 = mean_gather(acc, "Mz2", comm)
-    M2 = mean_gather(acc, "M2", comm)
-    M4 = mean_gather(acc, "M4", comm)
-    CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+    #M2 = mean_gather(acc, "M2", comm)
+    #M4 = mean_gather(acc, "M4", comm)
+    #CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
     sx = mean_gather_array(acc, "sx", comm)
     sy = mean_gather_array(acc, "sy", comm)
     sz = mean_gather_array(acc, "sz", comm)
-
+    M1 = mean_gather_array(acc, "M1", comm)
+    M2 = mean_gather_array(acc, "M2", comm)
+    M3 = mean_gather_array(acc, "M3", comm)
+   
     if rank == 0
         for it in 1:num_temps
             println(it, " ", ss[it])
@@ -266,33 +304,30 @@ function solve(input_file::String, comm)
                 println(fp, temps[i], " ", g)
             end
         end
-        """  
+          
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)
-            println(" rank=", i-1, " : $t")
+            println(" rank=", i-1, " : ")
         end
-        
-        for spin in 1:num_spins
-            println("site$(spin): ", sx[1][spin]," ", sy[1][spin]," ", sz[1][spin]) 
-        end
-
-        # plot latest spin direction on x-y plane.
-        h5open("spin_config.h5","w") do fp
-            write(fp,"temp"     ,temps[1])
+        """ 
+            
+        println("Mz2: ", Mz2)
+        #println("M2: ",M2) 
+        h5open("N48.h5","w") do fp
             write(fp,"num_spins",num_spins)
-            write(fp,"sx"       ,sx[1])
-            write(fp,"sy"       ,sy[1])
-            write(fp,"sz"       ,sz[1])
-        end
-        
-        temp_Mz2 = M2./2
-        println("M2: ", M2)
-        println("temp_Mz2 = M2./2: ", temp_Mz2)
-        h5open("phys_quant.h5","w") do fp
-            write(fp,"num_spins",num_spins)
-            write(fp, "temps", temps)
-            write(fp,"Mz2", Mz2)
-            #write(fp,"temp_Mz2",temp_Mz2)
+            write(fp,"temps"    ,temps    )
+            write(fp,"Mz2"      ,Mz2      )
+            write(fp,"E"        ,E        )
+            write(fp,"E2"       ,E2       )
+            #write(fp,"M1"       ,M1       ) 
+            #write(fp,"M2"       ,M2       ) 
+            #write(fp,"M3"       ,M3       ) 
+            grp = g_create(fp,"spin_config")            
+            grp["num_spins"] = num_spins
+            grp["temp"] = temps[1]
+            grp["sx"] = sx[1]            
+            grp["sy"] = sy[1]            
+            grp["sz"] = sz[1]            
         end
 
     end
