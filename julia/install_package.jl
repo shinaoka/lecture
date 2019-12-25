@@ -14,5 +14,6 @@ Pkg.add("PyCall")
 Pkg.add("HDF5")
 Pkg.add("Test")
 Pkg.add("LaTeXStrings")
+Pkg.add("FFTW")
 
 
