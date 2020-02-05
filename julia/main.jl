@@ -147,11 +147,14 @@ function octopolar_orderparameter(acc::Accumulator,spins::Array{Array{Tuple{Floa
     
     op = zeros(num_temps)
     
-    for it in 1:num_temps
+    for temp in 1:num_temps
         
-        for (i,j) in Iterators.product(1:num_spins,1:num_spins)
-            op[it] += dot(spins[it][i],spins[it][j])^3 - (3/5)*dot(spins[it][i],spins[it][j])
+        total_vec = (0.,0.,0.)
+        for i in 1:num_spins
+            total_vec = total_vec .+ spins[temp][i]
         end
+
+        op[temp] = dot(total_vec,total_vec)^3 - (3/5)dot(total_vec,total_vec) 
     end
 
     add!(acc,"op",op)    
