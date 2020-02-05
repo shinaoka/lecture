@@ -23,8 +23,8 @@ J_2ndnn  = (0.,0.,0.)
 J_intlay = (1.,1.,1.)
 
 #parameters for temepratures.
-num_temps = 96
-min_T = 0.01
+num_temps = 1
+min_T = 0.2
 max_T = 0.2
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
