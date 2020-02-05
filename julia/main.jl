@@ -120,7 +120,7 @@ end
 
 function order_parameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
    
-    M2_AF = zeros(num_spins) 
+    M2_AF = zeros(num_temps) 
 
     for temp in 1:num_temps
         gp1 = spins[temp][1:3:num_spins] 
