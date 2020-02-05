@@ -118,7 +118,7 @@ function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64
     
 end
 
-function order_parameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
    
     M2_AF = zeros(num_temps) 
 
@@ -140,10 +140,10 @@ function order_parameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float
         M2_AF[temp] = dot(total_vec1,total_vec1) + dot(total_vec2,total_vec2) + dot(total_vec3,total_vec3) 
     end
     
-    add!(acc,"M2_AF",M2_AF)
+    return M2_AF
 end
 
-function octopolar_orderparameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+function octopolar_orderparameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
     
     op = zeros(num_temps)
     
@@ -156,8 +156,8 @@ function octopolar_orderparameter(acc::Accumulator,spins::Array{Array{Tuple{Floa
 
         op[temp] = dot(total_vec,total_vec)^3 - (3/5)dot(total_vec,total_vec) 
     end
-
-    add!(acc,"op",op)    
+    
+    return op
 end
 
 function solve(input_file::String, comm)
@@ -270,8 +270,8 @@ function solve(input_file::String, comm)
             add!(acc, "ss", ss)
    
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
-            order_parameter(acc,spins_local,num_spins,num_temps_local)
-            octopolar_orderparameter(acc,spins_local,num_spins,num_temps_local)
+            add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local))
+            add!(acc,"op",octopolar_orderparameter(spins_local,num_spins,num_temps_local))
   
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
