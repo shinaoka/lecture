@@ -120,20 +120,24 @@ end
 
 function order_parameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
    
-    M2_AF = zeros(num_temps)
-   
+    M2_AF = zeros(num_spins) 
+
     for temp in 1:num_temps
         gp1 = spins[temp][1:3:num_spins] 
         gp2 = spins[temp][2:3:num_spins] 
         gp3 = spins[temp][3:3:num_spins] 
+     
+        total_vec1 = (0.,0.,0.)
+        total_vec2 = (0.,0.,0.)
+        total_vec3 = (0.,0.,0.)
 
-        
-        for (i,j) in Iterators.product(1:Int(num_spins/3),1:Int(num_spins/3))
-  
-            M2_AF[temp] += dot(gp1[i],gp1[j]) + dot(gp2[i],gp2[j]) + dot(gp3[i],gp3[j])
-
+        for i in 1:Int(num_spins/3)
+            total_vec1 = total_vec1 .+ gp1[i] 
+            total_vec2 = total_vec2 .+ gp2[i] 
+            total_vec3 = total_vec3 .+ gp3[i] 
         end
-        
+
+        M2_AF[temp] = dot(total_vec1,total_vec1) + dot(total_vec2,total_vec2) + dot(total_vec3,total_vec3) 
     end
     
     add!(acc,"M2_AF",M2_AF)
