@@ -119,35 +119,39 @@ function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64
 end
 
 function order_parameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
-    M1 = zeros(num_temps)
-    M2 = zeros(num_temps)
-    M3 = zeros(num_temps)
-    
+   
+    M2_AF = zeros(num_temps)
+   
     for temp in 1:num_temps
-        m1 = (0.,0.,0.)
-        m2 = (0.,0.,0.)
-        m3 = (0.,0.,0.)
+        gp1 = spins[temp][1:3:num_spins] 
+        gp2 = spins[temp][2:3:num_spins] 
+        gp3 = spins[temp][3:3:num_spins] 
+
         
-        for spin in 1:num_spins    
-            if     mod(spin-1,3) == 0
-                m1 = m1 .+ spins[temp][spin]
-                M1[temp] = dot(m1,m1)
-            elseif mod(spin-1,3) == 1
-                m2 = m2 .+ spins[temp][spin]
-                M2[temp] = dot(m2,m2)
-            elseif mod(spin-1,3) == 2
-                m3 = m3 .+ spins[temp][spin]
-                M3[temp] = dot(m3,m3) 
-            end
-            
+        for (i,j) in Iterators.product(1:Int(num_spins/3),1:Int(num_spins/3))
+  
+            M2_AF[temp] += dot(gp1[i],gp1[j]) + dot(gp2[i],gp2[j]) + dot(gp3[i],gp3[j])
+
         end
+        
     end
     
-    add!(acc,"M1",M1)
-    add!(acc,"M2",M2)
-    add!(acc,"M3",M3)
+    add!(acc,"M2_AF",M2_AF)
 end
 
+function octopolar_orderparameter(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+    
+    op = zeros(num_temps)
+    
+    for it in 1:num_temps
+        
+        for (i,j) in Iterators.product(1:num_spins,1:num_spins)
+            op[it] += dot(spins[it][i],spins[it][j])^3 - (3/5)*dot(spins[it][i],spins[it][j])
+        end
+    end
+
+    add!(acc,"op",op)    
+end
 
 function solve(input_file::String, comm)
     if !isfile(input_file)
@@ -258,15 +262,16 @@ function solve(input_file::String, comm)
             end
             add!(acc, "ss", ss)
    
-            compute_magnetization(acc, num_spins, spins_local, num_temps_local)
+            #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
             order_parameter(acc,spins_local,num_spins,num_temps_local)
-
+            octopolar_orderparameter(acc,spins_local,num_spins,num_temps_local)
+  
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # How long does it take to execute one sweep or replica exchange, measuremnt?
         if sweep > num_therm_sweeps
-            #add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
+            add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
         end
     end        
     
@@ -277,17 +282,18 @@ function solve(input_file::String, comm)
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
     ss = mean_gather_array(acc, "ss", comm)
-    Mz2 = mean_gather(acc, "Mz2", comm)
+    #Mz2 = mean_gather(acc, "Mz2", comm)
     #M2 = mean_gather(acc, "M2", comm)
     #M4 = mean_gather(acc, "M4", comm)
-    #CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
-    sx = mean_gather_array(acc, "sx", comm)
-    sy = mean_gather_array(acc, "sy", comm)
-    sz = mean_gather_array(acc, "sz", comm)
-    M1 = mean_gather_array(acc, "M1", comm)
-    M2 = mean_gather_array(acc, "M2", comm)
-    M3 = mean_gather_array(acc, "M3", comm)
-   
+    CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+    #sx = mean_gather_array(acc, "sx", comm)
+    #sy = mean_gather_array(acc, "sy", comm)
+    #sz = mean_gather_array(acc, "sz", comm)
+    #M1 = mean_gather_array(acc, "M1", comm)
+    #M2 = mean_gather_array(acc, "M2", comm)
+    #M3 = mean_gather_array(acc, "M3", comm)
+    op = mean_gather(acc, "op", comm)
+    M2_AF = mean_gather(acc,"M2_AF",comm)
     if rank == 0
         for it in 1:num_temps
             println(it, " ", ss[it])
@@ -297,6 +303,8 @@ function solve(input_file::String, comm)
         for i in 1:num_temps
             println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
         end
+
+        println("octopolar: ",op/num_spins^2)
         """
         open("g.dat", "w") do fp
             for i in 1:num_temps
@@ -304,30 +312,33 @@ function solve(input_file::String, comm)
                 println(fp, temps[i], " ", g)
             end
         end
-          
+        """  
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)
-            println(" rank=", i-1, " : ")
+            println(" rank=", i-1, " : $t")
         end
-        """ 
-            
-        println("Mz2: ", Mz2)
-        #println("M2: ",M2) 
-        h5open("N48.h5","w") do fp
+        
+        println("M2_AF: ",M2_AF)    
+        h5open("L12.h5","w") do fp
             write(fp,"num_spins",num_spins)
             write(fp,"temps"    ,temps    )
-            write(fp,"Mz2"      ,Mz2      )
             write(fp,"E"        ,E        )
             write(fp,"E2"       ,E2       )
-            #write(fp,"M1"       ,M1       ) 
-            #write(fp,"M2"       ,M2       ) 
-            #write(fp,"M3"       ,M3       ) 
+            write(fp,"op"       ,op      )
+            write(fp,"M2_AF"       ,M2_AF      )
+             
+            """
+            write(fp,"M1"       ,M1       ) 
+            write(fp,"M2"       ,M2       ) 
+            write(fp,"M3"       ,M3       ) 
+            write(fp,"op"       ,op/(num_spins^2))
             grp = g_create(fp,"spin_config")            
             grp["num_spins"] = num_spins
             grp["temp"] = temps[1]
             grp["sx"] = sx[1]            
             grp["sy"] = sy[1]            
             grp["sz"] = sz[1]            
+            """
         end
 
     end
