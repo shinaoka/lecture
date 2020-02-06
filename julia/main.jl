@@ -148,15 +148,20 @@ function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1}
         gp3 = spins[temp][3:3:num_spins] 
         
 
-        within_unit_cell = (0.,0.,0.)
+        temp_vec1 = (0.,0.,0.)
+        temp_vec2 = (0.,0.,0.)
+        temp_vec3 = (0.,0.,0.)
 
         for i in 1:Int(num_spins/3)
 
             phase_iqr = -im*dot(q,unit_cell[i])
-            within_unit_cell = within_unit_cell .+ (gp1[i] .+ gp2[i] .+ gp3[i]) .* exp(phase_iqr) 
+   
+            temp_vec1 = temp_vec1 .+ gp1[i] .* exp(phase_iqr) 
+            temp_vec2 = temp_vec2 .+ gp2[i] .* exp(phase_iqr) 
+            temp_vec3 = temp_vec3 .+ gp2[i] .* exp(phase_iqr) 
         end
 
-        M2_AF[temp] = norm(within_unit_cell)^2
+        M2_AF[temp] = norm(temp_vec1)^2 + norm(temp_vec2)^2 + norm(temp_vec3)^2
     end
     
     return M2_AF
@@ -165,7 +170,7 @@ end
 function octopolar_orderparameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
     
     op = zeros(num_temps)
-    
+     
     for temp in 1:num_temps
         
         total_vec = (0.,0.,0.)
@@ -173,7 +178,7 @@ function octopolar_orderparameter(spins::Array{Array{Tuple{Float64,Float64,Float
             total_vec = total_vec .+ spins[temp][i]
         end
 
-        op[temp] = dot(total_vec,total_vec)^3 - (3/5)dot(total_vec,total_vec) 
+        op[temp] = norm(total_vec)^6 - (3/5)*norm(total_vec)^2
     end
     
     return op
@@ -345,6 +350,8 @@ function solve(input_file::String, comm)
         end
         
         println("M2_AF: ",M2_AF)    
+        println("octopolar: ",6*op/(num_spins^2))    
+
         h5open("L12.h5","w") do fp
             write(fp,"num_spins",num_spins)
             write(fp,"temps"    ,temps    )
