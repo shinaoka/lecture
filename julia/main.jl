@@ -118,26 +118,45 @@ function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64
     
 end
 
-function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
-   
+function make_kagome(num_spins)
+    a1 = 2 .* (1.,0.)
+    a2 = 2 .* (cos(pi/3),sin(pi/3))
+
+    L = Int(sqrt(num_spins/3))
+    unit_cell_position = fill((0.,0.),L^2)
+    index = 1
+
+    # complexity O(L^2~N)
+    for (i,j) in Iterators.product(1:L,1:L)
+
+        unit_cell_position[index] = (i-1) .* a1 .+ (j-1) .* a2 
+        index += 1
+    end 
+    
+    return unit_cell_position
+end
+
+function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64,q::Tuple{Float64,Float64})
+    
+    unit_cell = make_kagome(num_spins) 
+
     M2_AF = zeros(num_temps) 
 
     for temp in 1:num_temps
         gp1 = spins[temp][1:3:num_spins] 
         gp2 = spins[temp][2:3:num_spins] 
         gp3 = spins[temp][3:3:num_spins] 
-     
-        total_vec1 = (0.,0.,0.)
-        total_vec2 = (0.,0.,0.)
-        total_vec3 = (0.,0.,0.)
+        
+
+        within_unit_cell = (0.,0.,0.)
 
         for i in 1:Int(num_spins/3)
-            total_vec1 = total_vec1 .+ gp1[i] 
-            total_vec2 = total_vec2 .+ gp2[i] 
-            total_vec3 = total_vec3 .+ gp3[i] 
+
+            phase_iqr = -im*dot(q,unit_cell[i])
+            within_unit_cell = within_unit_cell .+ (gp1[i] .+ gp2[i] .+ gp3[i]) .* exp(phase_iqr) 
         end
 
-        M2_AF[temp] = dot(total_vec1,total_vec1) + dot(total_vec2,total_vec2) + dot(total_vec3,total_vec3) 
+        M2_AF[temp] = norm(within_unit_cell)^2
     end
     
     return M2_AF
@@ -270,7 +289,7 @@ function solve(input_file::String, comm)
             add!(acc, "ss", ss)
    
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
-            add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local))
+            add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.)))
             add!(acc,"op",octopolar_orderparameter(spins_local,num_spins,num_temps_local))
   
         end
