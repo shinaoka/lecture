@@ -17,6 +17,6 @@ spins = [fill((1.,0.,0.),num_spins) for i in 1:num_temps]
 #println("unit_trinagle: ",make_kagome(num_spins))
 
 #test for computing physical quantities.
-@test make_kagome(num_spins) == [(0.,0.)]
-@test order_parameter(spins,num_spins,num_temps,(0.,0.)) == [9.0]
-@test octopolar_orderparameter(spins,num_spins,num_temps) == [729-(3/5)*9]
+@test isapprox(make_kagome(num_spins)[1][1],0.) && isapprox(make_kagome(num_spins)[1][2],0.)
+@test isapprox(order_parameter(spins,num_spins,num_temps,(0.,0.)),[3.0])
+@test isapprox(octopolar_orderparameter(spins,num_spins,num_temps), [729-(3/5)*9])
