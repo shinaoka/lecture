@@ -1,16 +1,18 @@
-Thu Feb  6 13:25:01 JST 2020
+Sat Feb  8 15:40:36 JST 2020
 num of temperatures = 1
 Starting simulation...
 1 Complex{Float64}[1.0+0.0im, 1.0+0.0im]
 <E> [26.2569]
 <E^2> [689.425]
 0.2  0.0
-octopolar: [1011.95]
+octopolar: [0.00150209]
 <CPUtime> 
- rank=0 : [97985.0, 402939.0, 227965.0]
-M2_AF: [334.134]
+ rank=0 : [116982.0, 405939.0, 251961.0]
+M2_AF: [316.443]
+octopolar: [0.00901256]
 
 Statistics of replica exchange Monte Carlo
-  6.892288 seconds (18.40 M allocations: 931.009 MiB, 5.57% gc time)
+  6.956520 seconds (18.64 M allocations: 941.628 MiB, 5.54% gc time)
 unit test results
-Thu Feb  6 13:25:16 JST 2020
+spins: Array{Tuple{Float64,Float64,Float64},1}[[(1.0, 0.0, 0.0)]]
+Sat Feb  8 15:40:52 JST 2020

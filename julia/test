@@ -12533,3 +12533,617 @@ Resource usage summary:
 
 The output (if any) follows:
 
+Sender: LSF System <lavaadmin@sakura02.local>
+Subject: Job 6743: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura02.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu Feb  6 22:22:28 2020
+Results reported at Thu Feb  6 22:22:54 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.56 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:21
+Sender: LSF System <lavaadmin@sakura02.local>
+Subject: Job 6744: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura02.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu Feb  6 22:27:18 2020
+Results reported at Thu Feb  6 22:27:37 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.14 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura02.local>
+Subject: Job 6745: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura02.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu Feb  6 22:31:28 2020
+Results reported at Thu Feb  6 22:31:48 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.36 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:20
+Sender: LSF System <lavaadmin@sakura02.local>
+Subject: Job 6746: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura02.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu Feb  6 22:33:18 2020
+Results reported at Thu Feb  6 22:33:37 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.13 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6770: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 14:47:26 2020
+Results reported at Sat Feb  8 14:47:39 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      4.08 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: LoadError: syntax: incomplete: "function" at /home/kakizawa/lecture/julia/main.jl:171 requires end
+Stacktrace:
+ [1] include at ./boot.jl:326 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] include(::String) at ./client.jl:403
+ [5] top-level scope at none:0
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:171
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:2
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6771: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 14:51:16 2020
+Results reported at Sat Feb  8 14:51:39 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.92 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:23
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6772: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 14:55:36 2020
+Results reported at Sat Feb  8 14:55:59 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.67 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:23
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6773: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 14:57:26 2020
+Results reported at Sat Feb  8 14:57:47 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.09 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:23
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6774: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:02:16 2020
+Results reported at Sat Feb  8 15:02:36 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.20 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:23
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6775: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:05:46 2020
+Results reported at Sat Feb  8 15:06:07 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.27 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:22
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6776: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:07:36 2020
+Results reported at Sat Feb  8 15:07:56 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.09 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:23
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6777: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:10:26 2020
+Results reported at Sat Feb  8 15:10:47 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.50 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:24
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6778: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:13:56 2020
+Results reported at Sat Feb  8 15:14:17 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.48 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:24
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6779: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:20:06 2020
+Results reported at Sat Feb  8 15:20:29 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     16.68 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:24
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6780: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:37:26 2020
+Results reported at Sat Feb  8 15:37:53 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     17.29 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: There was an error during testing
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:26
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6781: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sat Feb  8 15:40:36 2020
+Results reported at Sat Feb  8 15:40:56 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.39 sec.
+
+The output (if any) follows:
+

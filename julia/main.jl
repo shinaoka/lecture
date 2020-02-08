@@ -167,18 +167,50 @@ function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1}
     return M2_AF
 end
 
+# Kronecker delta
+function delta(i::Int64,j::Int64)
+    if i == j
+        return 1
+    else
+        return 0
+    end
+
+end
+
+function octopolar_v2(spins,num_spins::Int64,num_temps::Int64)
+    
+    T = zeros(num_temps)
+    
+    for i in 1:num_temps
+        temp = zeros(3^3)
+
+        for j in 1:num_spins
+ 
+            spin = spins[i][j]
+            index = 1
+
+            for (a,b,c) in Iterators.product(1:3,1:3,1:3)
+                temp[index] +=  spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c) + spin[b]*delta(c,a) + spin[c]*delta(a,b))/5
+                index += 1 
+            end
+        end
+        T[i] = sum(temp.^2)
+ 
+    end
+    return T
+end
+
 function octopolar_orderparameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
     
     op = zeros(num_temps)
      
     for temp in 1:num_temps
         
-        total_vec = (0.,0.,0.)
-        for i in 1:num_spins
-            total_vec = total_vec .+ spins[temp][i]
+        for (i,j) in Iterators.product(1:num_spins,1:num_spins)
+
+            op[temp] += dot(spins[temp][i],spins[temp][j])^3 - (3/5)*dot(spins[temp][i],spins[temp][j])
         end
 
-        op[temp] = norm(total_vec)^6 - (3/5)*norm(total_vec)^2
     end
     
     return op
@@ -295,7 +327,7 @@ function solve(input_file::String, comm)
    
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
             add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.)))
-            add!(acc,"op",octopolar_orderparameter(spins_local,num_spins,num_temps_local))
+            add!(acc,"op",octopolar_v2(spins_local,num_spins,num_temps_local))
   
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
