@@ -1,20 +1,86 @@
-Sat Feb  8 15:59:59 JST 2020
-num of temperatures = 1
+Sat Feb  8 18:13:10 JST 2020
+num of temperatures = 24
 Starting simulation...
 1 Complex{Float64}[1.0+0.0im, 1.0+0.0im]
-<E> [26.2569]
-<E^2> [689.425]
+2 Complex{Float64}[2.0+0.0im, 2.0+0.0im]
+3 Complex{Float64}[3.0+0.0im, 3.0+0.0im]
+4 Complex{Float64}[4.0+0.0im, 4.0+0.0im]
+5 Complex{Float64}[5.0+0.0im, 5.0+0.0im]
+6 Complex{Float64}[6.0+0.0im, 6.0+0.0im]
+7 Complex{Float64}[7.0+0.0im, 7.0+0.0im]
+8 Complex{Float64}[8.0+0.0im, 8.0+0.0im]
+9 Complex{Float64}[9.0+0.0im, 9.0+0.0im]
+10 Complex{Float64}[10.0+0.0im, 10.0+0.0im]
+11 Complex{Float64}[11.0+0.0im, 11.0+0.0im]
+12 Complex{Float64}[12.0+0.0im, 12.0+0.0im]
+13 Complex{Float64}[13.0+0.0im, 13.0+0.0im]
+14 Complex{Float64}[14.0+0.0im, 14.0+0.0im]
+15 Complex{Float64}[15.0+0.0im, 15.0+0.0im]
+16 Complex{Float64}[16.0+0.0im, 16.0+0.0im]
+17 Complex{Float64}[17.0+0.0im, 17.0+0.0im]
+18 Complex{Float64}[18.0+0.0im, 18.0+0.0im]
+19 Complex{Float64}[19.0+0.0im, 19.0+0.0im]
+20 Complex{Float64}[20.0+0.0im, 20.0+0.0im]
+21 Complex{Float64}[21.0+0.0im, 21.0+0.0im]
+22 Complex{Float64}[22.0+0.0im, 22.0+0.0im]
+23 Complex{Float64}[23.0+0.0im, 23.0+0.0im]
+24 Complex{Float64}[24.0+0.0im, 24.0+0.0im]
+<E> [-37.3256, -3.64115, -17.8253, 0.716026, -29.0137, -1.84394, 2.7871, 2.92512, -31.3323, 4.72735, 21.6984, -13.1586, -3.97096, -6.20716, -15.1316, -23.1165, -11.4479, 13.509, -36.9264, -16.5224, -7.09801, -7.9791, 4.53006, 32.9607]
+<E^2> [1393.2, 13.258, 317.742, 0.512693, 841.793, 3.4001, 7.76791, 8.55633, 981.711, 22.3478, 470.822, 173.149, 15.7685, 38.5288, 228.965, 534.372, 131.055, 182.492, 1363.56, 272.988, 50.3817, 63.6661, 20.5214, 1086.41]
 0.2  0.0
-octopolar: [0.00150209]
+0.20217391304347826  0.0
+0.20434782608695654  0.0
+0.20652173913043478  0.0
+0.20869565217391303  0.0
+0.2108695652173913  0.0
+0.21304347826086956  0.0
+0.21521739130434783  0.0
+0.21739130434782608  0.0
+0.21956521739130436  0.0
+0.2217391304347826  0.0
+0.22391304347826088  0.0
+0.22608695652173913  0.0
+0.22826086956521738  0.0
+0.23043478260869565  0.0
+0.2326086956521739  0.0
+0.23478260869565218  0.0
+0.23695652173913043  0.0
+0.2391304347826087  0.0
+0.24130434782608695  0.0
+0.24347826086956523  0.0
+0.24565217391304348  0.0
+0.24782608695652175  0.0
+0.25  0.0
+octopolar: [0.00246056, 0.00263816, 0.00258511, 0.00200131, 0.000895806, 0.00120716, 0.00134961, 0.00268399, 0.00137958, 0.00341903, 0.000996711, 0.00142719, 0.0012858, 0.00126745, 0.000984876, 0.00152626, 0.000980893, 0.00166224, 0.00154627, 0.00157502, 0.000814621, 0.0014131, 0.00162814, 0.00243855]
 <CPUtime> 
- rank=0 : [120982.0, 410938.0, 255961.0]
-M2_AF: [316.443]
-octopolar: [0.00901256]
+ rank=0 : [120981.0, 405938.0, 254961.0]
+M2_AF: [181.893, 28.0505, 71.9567, 559.797, 191.901, 135.709, 190.776, 226.895, 560.137, 212.636, 611.909, 170.995, 151.381, 284.044, 28.9846, 423.265, 632.922, 79.3652, 246.647, 307.613, 115.336, 597.92, 155.335, 284.251]
+octopolar: [0.0147634, 0.0158289, 0.0155106, 0.0120079, 0.00537484, 0.00724293, 0.00809764, 0.016104, 0.00827745, 0.0205142, 0.00598027, 0.00856313, 0.00771478, 0.00760469, 0.00590926, 0.00915757, 0.00588536, 0.00997346, 0.00927764, 0.00945011, 0.00488772, 0.00847859, 0.00976881, 0.0146313]
 
 Statistics of replica exchange Monte Carlo
-  7.129100 seconds (18.64 M allocations: 941.628 MiB, 5.81% gc time)
+itemp 1 <=> 2 acceptance_rate= 1.0
+itemp 2 <=> 3 acceptance_rate= 1.0
+itemp 3 <=> 4 acceptance_rate= 1.0
+itemp 4 <=> 5 acceptance_rate= 1.0
+itemp 5 <=> 6 acceptance_rate= 1.0
+itemp 6 <=> 7 acceptance_rate= 1.0
+itemp 7 <=> 8 acceptance_rate= 1.0
+itemp 8 <=> 9 acceptance_rate= 1.0
+itemp 9 <=> 10 acceptance_rate= 1.0
+itemp 10 <=> 11 acceptance_rate= 1.0
+itemp 11 <=> 12 acceptance_rate= 1.0
+itemp 12 <=> 13 acceptance_rate= 1.0
+itemp 13 <=> 14 acceptance_rate= 1.0
+itemp 14 <=> 15 acceptance_rate= 1.0
+itemp 15 <=> 16 acceptance_rate= 1.0
+itemp 16 <=> 17 acceptance_rate= 1.0
+itemp 17 <=> 18 acceptance_rate= 1.0
+itemp 18 <=> 19 acceptance_rate= 1.0
+itemp 19 <=> 20 acceptance_rate= 1.0
+itemp 20 <=> 21 acceptance_rate= 1.0
+itemp 21 <=> 22 acceptance_rate= 1.0
+itemp 22 <=> 23 acceptance_rate= 1.0
+itemp 23 <=> 24 acceptance_rate= 1.0
+  7.166245 seconds (19.20 M allocations: 967.123 MiB, 5.48% gc time)
 unit test results
-Test Failed at /home/kakizawa/lecture/julia/unit_test.jl:23
-  Expression: isapprox(octopolar_orderparameter(rand_spins, num_spins, num_temps), octopolar_v2(spins, num_spins, num_temps))
-   Evaluated: isapprox([-0.160008], [0.4])
-Sat Feb  8 16:00:18 JST 2020
+Sat Feb  8 18:13:26 JST 2020

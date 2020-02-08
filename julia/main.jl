@@ -349,9 +349,9 @@ function solve(input_file::String, comm)
     #M2 = mean_gather(acc, "M2", comm)
     #M4 = mean_gather(acc, "M4", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
-    #sx = mean_gather_array(acc, "sx", comm)
-    #sy = mean_gather_array(acc, "sy", comm)
-    #sz = mean_gather_array(acc, "sz", comm)
+    sx = mean_gather_array(acc, "sx", comm)
+    sy = mean_gather_array(acc, "sy", comm)
+    sz = mean_gather_array(acc, "sz", comm)
     #M1 = mean_gather_array(acc, "M1", comm)
     #M2 = mean_gather_array(acc, "M2", comm)
     #M3 = mean_gather_array(acc, "M3", comm)
@@ -384,7 +384,7 @@ function solve(input_file::String, comm)
         println("M2_AF: ",M2_AF)    
         println("octopolar: ",6*op/(num_spins^2))    
 
-        h5open("L12.h5","w") do fp
+        h5open("9.h5","w") do fp
             write(fp,"num_spins",num_spins)
             write(fp,"temps"    ,temps    )
             write(fp,"E"        ,E        )
@@ -397,13 +397,14 @@ function solve(input_file::String, comm)
             write(fp,"M2"       ,M2       ) 
             write(fp,"M3"       ,M3       ) 
             write(fp,"op"       ,op/(num_spins^2))
+            """
             grp = g_create(fp,"spin_config")            
             grp["num_spins"] = num_spins
             grp["temp"] = temps[1]
             grp["sx"] = sx[1]            
             grp["sy"] = sy[1]            
             grp["sz"] = sz[1]            
-            """
+            
         end
 
     end

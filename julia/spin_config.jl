@@ -54,7 +54,7 @@ end
 
 # pull numerical date from h5 file.
 
-fp = h5open("L4.h5","r") 
+fp = h5open("L9.h5","r") 
 gp = read(fp,"spin_config")
 
 num_spins = gp["num_spins"]
@@ -70,6 +70,6 @@ kagome = mk_stacked_structure(L,num_stack,lat_vec1,lat_vec2,lat_vec3,num_spins)
 plot_spin_direction(kagome,sx,sy,num_spins)
 PyPlot.title("spin configuration at $(L"T=0.001") and $(L"J_2=0.005")")
 
-savefig("L4_config")
+savefig("spin_config")
 
 close(fp)
