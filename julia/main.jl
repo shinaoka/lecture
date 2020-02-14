@@ -9,6 +9,7 @@ using HDF5
 include("mcmc.jl")
 include("accumulator.jl")
 include("replica_exchange.jl")
+include("loop_update.jl")
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
