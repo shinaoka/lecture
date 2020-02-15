@@ -26,12 +26,11 @@ function estimate_plane(spins::AbstractArray{HeisenbergSpin})
     return normal_vec
 end
 
-@enum Color red blue green
+@enum Color red blue green black
 
 function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)
     #=
     All elements of work must be initialized to zero.
-    THIS FUNCTION HAS NOT BEEND TESTED YET!
     =#
     num_spins = updater.num_spins
 
@@ -99,4 +98,64 @@ function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_
         # Return the 0-length array of the same for type-stability
         return zeros(UInt,0)
     end
+end
+
+
+function compute_dE_loop(updater::SingleSpinFlipUpdater,
+                          spin_idx_on_loop::Array{UInt},
+                          spins::Array{HeisenbergSpin},
+                          new_spins_on_loop::Array{HeisenbergSpin},
+                          work::Array{Int},
+                          check::Bool=false)
+    #=
+    Compute change in energy
+    All elements of work must be initialized to zero.
+    =#
+
+    # Optional expensive check
+    if check
+        @assert all(work .== 0)
+    end
+
+    num_spins = updater.num_spins
+    num_spins_loop = length(spin_idx_on_loop)
+
+    for isp_loop in 1:num_spins_loop
+        work[spin_idx_on_loop[isp_loop]] = isp_loop
+    end
+
+    dE = 0.0
+    for isp_loop in 1:num_spins_loop
+        ispin = spin_idx_on_loop[isp_loop]
+        si_old = spins[ispin]
+        for ic in 1:updater.coord_num[ispin]
+            c = updater.connection[ic, ispin]
+            jspin, Jx, Jy, Jz = c
+
+            si_old = spins[ispin]
+            sj_old = spins[jspin]
+            si_new = new_spins_on_loop[isp_loop]
+            # If the connected site is on the loop
+            if work[jspin] != 0
+                sj_new = new_spins_on_loop[work[jspin]]
+                dE_spin = (Jx * sj_old[1] * si_old[1] + Jy * sj_old[2] * si_old[2] + Jz * sj_old[3] * si_old[3])
+                dE_spin -= (Jx * sj_new[1] * si_new[1] + Jy * sj_new[2] * si_new[2] + Jz * sj_new[3] * si_new[3])
+                dE += 0.5 * dE_spin
+            else
+                d_si = si_new .- si_old
+                dE -= (Jx * sj_old[1] * d_si[1] + Jy * sj_old[2] * d_si[2] + Jz * sj_old[3] * d_si[3])
+            end
+        end
+    end
+
+    for isp_loop in 1:num_spins_loop
+        work[spin_idx_on_loop[isp_loop]] = 0
+    end
+
+    # Optional expensive check
+    if check
+        @assert all(work .== 0)
+    end
+
+    return dE
 end
