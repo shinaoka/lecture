@@ -384,7 +384,7 @@ function solve(input_file::String, comm)
         println("M2_AF: ",M2_AF)    
         println("octopolar: ",6*op/(num_spins^2))    
 
-        h5open("9.h5","w") do fp
+        h5open("L9.h5","w") do fp
             write(fp,"num_spins",num_spins)
             write(fp,"temps"    ,temps    )
             write(fp,"E"        ,E        )
