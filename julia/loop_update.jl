@@ -60,7 +60,9 @@ function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_
         for ins=1:updater.coord_num[current_spin_idx]
             # candidate must be either the first spin on the loop (work[ns]==1) or unvisited (work[ns]==0)
             ns = updater.connection[ins,current_spin_idx][1]
-            if colors[ns]==next_color && work[ns] <= 1 && ns != spin_before
+            # Is ns a nearest neighborb site from current site?
+            isnn = isapprox(updater.connection[ins,current_spin_idx][5],1)
+            if isnn && colors[ns]==next_color && work[ns] <= 1 && ns != spin_before
                 n_candidate += 1
                 candidate_spins[n_candidate] = ns
             end

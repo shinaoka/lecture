@@ -13407,3 +13407,96 @@ Resource usage summary:
 
 The output (if any) follows:
 
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6871: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Feb 17 12:00:54 2020
+Results reported at Mon Feb 17 12:01:16 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     13.11 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: LoadError: i or j is out of the range [1, num_spins].
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] (::getfield(Main, Symbol("##19#20")){Int64,Array{Tuple{Int64,Int64,Float64,Float64,Float64,Int64},1}})(::IOStream) at /home/kakizawa/lecture/julia/main.jl:64
+ [3] #open#310(::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}, ::Function, ::getfield(Main, Symbol("##19#20")){Int64,Array{Tuple{Int64,Int64,Float64,Float64,Float64,Int64},1}}, ::String, ::Vararg{String,N} where N) at ./iostream.jl:369
+ [4] open(::Function, ::String, ::String) at ./iostream.jl:367
+ [5] read_Jij(::String, ::Int64) at /home/kakizawa/lecture/julia/main.jl:50
+ [6] solve(::String, ::MPI.Comm) at /home/kakizawa/lecture/julia/main.jl:257
+ [7] top-level scope at util.jl:156
+ [8] include at ./boot.jl:326 [inlined]
+ [9] include_relative(::Module, ::String) at ./loading.jl:1038
+ [10] include(::Module, ::String) at ./sysimg.jl:29
+ [11] include(::String) at ./client.jl:403
+ [12] top-level scope at none:0
+ [13] include at ./boot.jl:326 [inlined]
+ [14] include_relative(::Module, ::String) at ./loading.jl:1038
+ [15] include(::Module, ::String) at ./sysimg.jl:29
+ [16] exec_options(::Base.JLOptions) at ./client.jl:267
+ [17] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:432
+in expression starting at /home/kakizawa/lecture/julia/unit_test.jl:2
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 6872: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Feb 17 12:03:44 2020
+Results reported at Mon Feb 17 12:04:04 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia ~/lecture/julia/unit_test.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.51 sec.
+
+The output (if any) follows:
+

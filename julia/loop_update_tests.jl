@@ -22,10 +22,10 @@ function ring_plus_one_model()
 
     Jij = []
     for ispin=1:loop_length-1
-        push!(Jij, (SpinIndex(ispin), SpinIndex(ispin+1), 0.1, 0.5, 1.))
+        push!(Jij, (SpinIndex(ispin), SpinIndex(ispin+1), 0.1, 0.5, 1.,1))
     end
-    push!(Jij, (SpinIndex(1), SpinIndex(loop_length), 0.1, 0.5, 1.))
-    push!(Jij, (SpinIndex(1), SpinIndex(num_spins), 0.2, 0.5, 100.))
+    push!(Jij, (SpinIndex(1), SpinIndex(loop_length), 0.1, 0.5, 1.,1))
+    push!(Jij, (SpinIndex(1), SpinIndex(num_spins), 0.2, 0.5, 100.,1))
     model = JModel(num_spins, Jij)
     colors = [red, blue, red, blue, black]
     return model, colors
@@ -35,7 +35,7 @@ function all_to_all_model(num_spins)
     Jij = []
     for ispin=1:num_spins
         for jspin=ispin+1:num_spins
-            push!(Jij, (SpinIndex(ispin), SpinIndex(jspin), rand(), rand(), rand()))
+            push!(Jij, (SpinIndex(ispin), SpinIndex(jspin), rand(), rand(), rand(),1))
         end
     end
     model = JModel(num_spins, Jij)
@@ -54,7 +54,7 @@ function test_find_loop(model::JModel, colors::Array{Color})
 
     loop_length = length(spin_idx_on_loop)
 
-    println("loop length", loop_length)
+    println("loop length: ", loop_length)
     @assert loop_length > 2
     @assert mod(loop_length, 2) == 0
 
@@ -78,7 +78,7 @@ function test_find_loop(model::JModel, colors::Array{Color})
     end
     dE_ref = compute_energy(model, new_spins) - compute_energy(model, spins)
 
-    println(dE)
+    println("dE: ", dE)
     @test isapprox(dE, dE_ref)
 end
 
@@ -86,8 +86,10 @@ test_estimate_plane()
 
 Random.seed!(10)
 model, colors = ring_plus_one_model()
+println("ring_plus_one_model results")
 test_find_loop(model, colors)
 
 Random.seed!(10)
 model, colors = all_to_all_model(20)
+println("all_to_all_model results")
 test_find_loop(model, colors)

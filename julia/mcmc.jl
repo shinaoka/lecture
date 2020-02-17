@@ -10,7 +10,7 @@ const HeisenbergSpin = Tuple{Float64,Float64,Float64}
 struct JModel
     # List of non-zero entries of Jij
     num_spins::Int
-    Jij::Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64}}
+    Jij::Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}
 end
 
 function compute_energy(model::JModel, spins::AbstractArray{IsingSpin})
@@ -51,7 +51,7 @@ end
 struct SingleSpinFlipUpdater
     num_spins::Int
     coord_num::Array{Int}
-    connection::Array{Tuple{SpinIndex,Float64,Float64,Float64},2}
+    connection::Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64},2}
 end
 
 function SingleSpinFlipUpdater(model::JModel)
@@ -61,16 +61,16 @@ function SingleSpinFlipUpdater(model::JModel)
     coord_num = zeros(Int, num_spins)
 
     # Figure out which spins each spin is connected to
-    connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64}}() for _ in 1:num_spins]
+    connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}() for _ in 1:num_spins]
     num_Jij = size(Jij, 1)
     for i_pair = 1:num_Jij
         i, j = Jij[i_pair][1:2]
-        push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
-        push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
+        push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
+        push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
     end
     max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
-    connection = Array{Tuple{SpinIndex,Float64,Float64,Float64}}(undef, max_coord_num, num_spins)
+    connection = Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
     coord_num = Array{Int}(undef, num_spins)
     for ispin = 1:num_spins
         coord_num[ispin] = length(connection_tmp[ispin])
