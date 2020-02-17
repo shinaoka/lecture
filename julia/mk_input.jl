@@ -96,9 +96,9 @@ function mk_interaction(L::Int64,J1::SSInteraction,J2::SSInteraction,len1::Float
                 push!(interaction, (site1,site2,J1[1],J1[2],J1[3],1))
            
             # make 2nd nearest neighbor interaction.    
-            # last element 2 is sign that this interaction is J2  
+            # last element 0 is sign that this interaction is J2  
             elseif isapprox(len2,distance)
-                push!(interaction, (site1,site2,J2[1],J2[2],J2[3],2))
+                push!(interaction, (site1,site2,J2[1],J2[2],J2[3],0))
    
             end
         end
