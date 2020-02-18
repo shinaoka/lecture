@@ -67,7 +67,7 @@ function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_sy
     num_spins = length(spins)
     colors = Color.([0 for i=1:num_spins])
 
-    # assign three colors to the site 
+    # Assign one of the three colors to each site 
     for i=1:num_spins
         
         spin = collect(spins[i])
