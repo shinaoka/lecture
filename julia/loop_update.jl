@@ -90,6 +90,66 @@ function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_sy
 end    
     
 
+function find_breaking_triangle(updater::SingleSpinFlipUpdater,colors::Array{Color})
+    #= 
+    Find triangles which don't have three colors and paint thier top black.
+    =#
+    
+    #First,find nearest neighbor pair which have same color.
+    same_color_pairs = []
+    
+    for idx=1:length(colors)
+        for ins=1:updater.coord_num[idx]
+            ns = updater.connection[ins,idx][1]
+            isnn = updater.connection[ins,idx][5] == 1
+            if isnn && colors[idx]==colors[ins] 
+                push!(same_color_pairs,(idx,ns))  
+            end
+        end
+    end
+    
+    #Second,find nearest neighbor site from each same color pairs. 
+    breaking_triangle = []
+    for idx=1:length(same_color_pairs)
+        i,j = same_color_pairs[idx]
+
+        nnset_i = []
+        for ins=1:updater.coord_num[i]
+            ns = updater.connection[ins,i][1]
+            isnn = updater.connection[ins,i][5] == 1
+            if isnn 
+                push!(nnset_i,ns)  
+            end
+        end
+
+        nnset_j = []
+        for ins=1:updater.coord_num[j]
+            ns = updater.connection[ins,j][1]
+            isnn = updater.connection[ins,j][5] == 1
+            if isnn 
+                push!(nnset_j,ns)  
+            end
+        end
+       
+        for temp in nnset_i
+            if in(temp,nnset_j)
+                push!(breaking_triangle,(i,j,temp)) 
+            end
+        end
+
+    end
+    
+    #Finally,assign black to sites on breaking triangles.
+    for i=1:length(breaking_triangle)
+        for j in collect(breaking_triangle[i])
+            colors[j] = black
+        end
+    end
+ 
+    return colors
+end
+
+
 function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)
     #=
     All elements of work must be initialized to zero.

@@ -42,6 +42,19 @@ function test_paint_rbg_differently()
     @test colors == [red,blue,green] 
 end
 
+function test_find_breaking_triangle()
+    num_spins = 3
+    Jij = []
+    push!(Jij, (1,2,1.,1.,1.,1))
+    push!(Jij, (1,3,1.,1.,1.,1))
+    push!(Jij, (2,3,1.,1.,1.,1))
+    
+    model = JModel(num_spins,Jij)
+    updater = SingleSpinFlipUpdater(model)
+    colors = [red,red,blue]
+
+    @test find_breaking_triangle(updater,colors) == [black,black,black]
+end
 
 function ring_plus_one_model()
     # 1D system of 4 spins with a periodic boundary condition and alternating red and blue colors
@@ -114,6 +127,7 @@ end
 test_estimate_plane()
 test_estimate_axes()
 test_paint_rbg_differently()
+test_find_breaking_triangle()
 
 Random.seed!(10)
 model, colors = ring_plus_one_model()
