@@ -41,12 +41,9 @@ function estimate_axes(spins::AbstractArray{HeisenbergSpin})
     return x_axis,y_axis,norm_vec
 end
 
-@enum Color red blue green black
-
 function mk_reference_system(spins::AbstractArray{HeisenbergSpin},num_rand_spins)
  
     num_spins  = length(spins)
-    colors     = Color.([rand(0:3) for i=1:num_spins])
     
     # random spin sampling and paint them black
     rand_spins = fill((0.,0.,0.),num_rand_spins) 
@@ -54,39 +51,37 @@ function mk_reference_system(spins::AbstractArray{HeisenbergSpin},num_rand_spins
     for i=1:num_rand_spins
         rand_idx = rand(1:num_spins)
         rand_spins[i] = spins[rand_idx]
-        colors[rand_idx] = black
     end
 
-    return rand_spins,colors
+    return rand_spins
 end
  
+@enum Color red blue green black
 
 # paint red blue green differently on kagome site.
 # For simple test,pass this function reference and color array as a argument.
-function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_system,colors)
+function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_system)
     
     x_axis,y_axis,norm_vec = estimate_axes(reference_system)
     
     num_spins = length(spins)
-    # assign three colors to the site except already painted black.
+    colors = Color.([0 for i=1:num_spins])
+
+    # assign three colors to the site 
     for i=1:num_spins
         
-        if colors[i] != black 
-            spin = collect(spins[i])
-            proj_unit_vec  = spin - (dot(spin,norm_vec))*norm_vec
-            proj_unit_vec /= norm(proj_unit_vec)  
+        spin = collect(spins[i])
+        proj_unit_vec  = spin - (dot(spin,norm_vec))*norm_vec
+        proj_unit_vec /= norm(proj_unit_vec)  
         
-            if dot(proj_unit_vec,x_axis) >= 1/2
-                    colors[i] = red
-            else
-                if dot(proj_unit_vec,y_axis) >= 0
-                    colors[i] = blue
-                else
-                    colors[i] = green
-                end
-            end
+        if dot(proj_unit_vec,x_axis) >= 1/2
+                 colors[i] = red
         else
-            continue
+            if dot(proj_unit_vec,y_axis) >= 0
+                 colors[i] = blue
+            else
+                 colors[i] = green
+            end
         end
 
     end

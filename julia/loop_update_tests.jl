@@ -27,7 +27,7 @@ end
 
 function test_paint_rbg_differently()
 
-    num_spins = 6
+    num_spins = 3
     spins = fill((0.,0.,0.),num_spins)
     
     for i=1:num_spins
@@ -35,12 +35,11 @@ function test_paint_rbg_differently()
         spins[i] = (cos(theta),sin(theta),0.)
     end
     
-    reference_system = spins[1:3]
-    colors = [black,black,black,red,red,red]   
+    reference_system = spins
 
-    colors = paint_rbg_differently(spins,reference_system,colors) 
+    colors = paint_rbg_differently(spins,reference_system) 
     
-    @test colors[4:6] == [red,blue,green] 
+    @test colors == [red,blue,green] 
 end
 
 
