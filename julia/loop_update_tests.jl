@@ -14,6 +14,36 @@ function test_estimate_plane()
     @test isapprox(estimate_plane(spins), [0., 0., 1.]) || isapprox(estimate_plane(spins), [0., 0., -1.])
 end
 
+function test_estimate_axes()
+    num_spins = 4
+    spins = fill((0.,0.,0.), num_spins)
+    for i=1:num_spins
+        theta = 10 * rand()
+        spins[i] = (cos(theta), sin(theta), 0.0)
+    end
+    
+    @test isapprox(estimate_axes(spins)[1],collect(spins[1]))
+end
+
+function test_paint_rbg_differently()
+
+    num_spins = 6
+    spins = fill((0.,0.,0.),num_spins)
+    
+    for i=1:num_spins
+        theta = i*(2*pi)/3         
+        spins[i] = (cos(theta),sin(theta),0.)
+    end
+    
+    reference_system = spins[1:3]
+    colors = [black,black,black,red,red,red]   
+
+    colors = paint_rbg_differently(spins,reference_system,colors) 
+    
+    @test colors[4:6] == [red,blue,green] 
+end
+
+
 function ring_plus_one_model()
     # 1D system of 4 spins with a periodic boundary condition and alternating red and blue colors
     # One black site is connected to spin 1
@@ -83,6 +113,8 @@ function test_find_loop(model::JModel, colors::Array{Color})
 end
 
 test_estimate_plane()
+test_estimate_axes()
+test_paint_rbg_differently()
 
 Random.seed!(10)
 model, colors = ring_plus_one_model()

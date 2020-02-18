@@ -26,7 +26,74 @@ function estimate_plane(spins::AbstractArray{HeisenbergSpin})
     return normal_vec
 end
 
+function estimate_axes(spins::AbstractArray{HeisenbergSpin})
+    #=
+    argument spins is random sampled array from original spins
+    =#
+    
+    norm_vec   = estimate_plane(spins)
+    first_spin = collect(spins[1])
+    
+    x_axis  = first_spin - dot(first_spin,norm_vec)*norm_vec
+    x_axis /= norm(x_axis)
+    y_axis  = cross(norm_vec,x_axis)
+
+    return x_axis,y_axis,norm_vec
+end
+
 @enum Color red blue green black
+
+function mk_reference_system(spins::AbstractArray{HeisenbergSpin},num_rand_spins)
+ 
+    num_spins  = length(spins)
+    colors     = Color.([rand(0:3) for i=1:num_spins])
+    
+    # random spin sampling and paint them black
+    rand_spins = fill((0.,0.,0.),num_rand_spins) 
+    
+    for i=1:num_rand_spins
+        rand_idx = rand(1:num_spins)
+        rand_spins[i] = spins[rand_idx]
+        colors[rand_idx] = black
+    end
+
+    return rand_spins,colors
+end
+ 
+
+# paint red blue green differently on kagome site.
+# For simple test,pass this function reference and color array as a argument.
+function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_system,colors)
+    
+    x_axis,y_axis,norm_vec = estimate_axes(reference_system)
+    
+    num_spins = length(spins)
+    # assign three colors to the site except already painted black.
+    for i=1:num_spins
+        
+        if colors[i] != black 
+            spin = collect(spins[i])
+            proj_unit_vec  = spin - (dot(spin,norm_vec))*norm_vec
+            proj_unit_vec /= norm(proj_unit_vec)  
+        
+            if dot(proj_unit_vec,x_axis) >= 1/2
+                    colors[i] = red
+            else
+                if dot(proj_unit_vec,y_axis) >= 0
+                    colors[i] = blue
+                else
+                    colors[i] = green
+                end
+            end
+        else
+            continue
+        end
+
+    end
+ 
+    return colors 
+end    
+    
 
 function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)
     #=
