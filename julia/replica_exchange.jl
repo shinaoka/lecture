@@ -11,11 +11,56 @@ end
 function ReplicaExchange(temps_init::Array{Float64}, start_idx, end_idx)
     num_temps = length(temps_init)
     num_temps_local = end_idx - start_idx + 1
+    if !all(temps_init[1:num_temps-1] .< temps_init[2:num_temps]) && !all(temps_init[1:num_temps-1] .> temps_init[2:num_temps])
+        error("Temperatures must be given either in ascending order or in descending order!")
+    end
+    if any(temps_init .== 0.0)
+        error("Zero temperature is not allowed!")
+    end
     ReplicaExchange(temps_init, zeros(UInt64, num_temps_local), zeros(UInt64, num_temps_local), start_idx, end_idx)
 end
 
 function swap_temps(a, i, j)
     a[i], a[j] = a[j], a[i]
+end
+
+function reset_stats!(rex::ReplicaExchange)
+    rex.num_attemps[:] .= 0
+    rex.num_accepted[:] .= 0
+end
+
+# Update the distribution of temperatures using an idea similar to the one described in Sec. 3 of K. Hukushima and K. Nemoto (1996)
+# Note: Equation (11) looks wrong.
+function update_temps_dist!(rex::ReplicaExchange, comm)
+    num_attemps = MPI.Allgather(rex.num_attemps, comm)
+    num_accepted = MPI.Allgather(rex.num_accepted, comm)
+    num_temps = length(rex.temps)
+    @assert length(num_attemps) == num_temps
+    @assert length(num_accepted) == num_temps
+
+    # Compute acceptance rates of exchange
+    # plus one is for avoinding singularity.
+    # Discard the last element.
+    pm = ((num_accepted .+ 1e-8)./(num_attemps .+ 1e-8))[1:end-1]
+    betas = 1 ./ rex.temps
+    c = (betas[end]-betas[1])/sum(pm .* (betas[2:end]-betas[1:end-1]))
+    
+    # Update beta
+    new_betas = similar(rex.temps)
+    new_betas[1] = betas[1]
+    for i in 2:num_temps
+        #println(i, " ", (betas[i] - betas[i-1]) * pm[i-1] * c, " ", pm[i-1] * c)
+        new_betas[i] = new_betas[i-1] + (betas[i] - betas[i-1]) * pm[i-1] * c
+    end
+    @assert all(new_betas .> 0)
+    @assert isapprox(new_betas[end], betas[end])
+
+    # Broadcast new temps
+    new_temps = 1 ./ new_betas
+    new_temps[1], new_temps[end] = rex.temps[1], rex.temps[end]
+    rex.temps[:] = MPI.bcast(new_temps, 0, comm)
+
+    reset_stats!(rex)
 end
 
 function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
