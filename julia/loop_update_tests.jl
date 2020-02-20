@@ -36,8 +36,8 @@ function test_paint_rbg_differently()
     end
     
     reference_system = spins
-
-    colors = paint_rbg_differently(spins,reference_system) 
+    colors = Color.([0 for i=1:num_spins])
+    colors = paint_rbg_differently(spins,reference_system,colors) 
     
     @test colors == [red,blue,green] 
 end
@@ -56,6 +56,27 @@ function test_find_breaking_triangle()
     @test find_breaking_triangle(updater,colors) == [black,black,black]
 end
 
+function test_flip_parallel()
+    
+    reference_system = [(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3]
+    spin = reference_system[2] 
+    color = red
+   
+    new_spin = flip_parallel(spin,color,reference_system)
+    @test isapprox(collect(new_spin),collect(reference_system[3]))
+
+end
+
+function test_mk_new_spins_on_loop()
+
+    spins_ref = [(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3]
+    colors_on_loop = (blue,green)
+    
+    new_spins_on_loop = mk_new_spins_on_loop(spins_ref,colors_on_loop,spins_ref)
+    expected_spins = [spins_ref[1],spins_ref[3],spins_ref[2]]
+    @test all(isapprox.(collect.(new_spins_on_loop),collect.(expected_spins)))
+end
+ 
 function ring_plus_one_model()
     # 1D system of 4 spins with a periodic boundary condition and alternating red and blue colors
     # One black site is connected to spin 1
@@ -128,6 +149,8 @@ test_estimate_plane()
 test_estimate_axes()
 test_paint_rbg_differently()
 test_find_breaking_triangle()
+test_flip_parallel()
+test_mk_new_spins_on_loop()
 
 Random.seed!(10)
 model, colors = ring_plus_one_model()
