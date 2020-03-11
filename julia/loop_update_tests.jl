@@ -6,11 +6,12 @@ println("unit test results")
 
 function test_estimate_plane()
     num_spins = 4
-    spins = fill((0.,0.,0.), num_spins)
-    for i=1:num_spins
-        theta = 10 * rand()
-        spins[i] = (cos(theta), sin(theta), 0.0)
+    spins = fill((0.,0.,0.), num_spins) 
+    for i=1:num_spins 
+        theta = 10 * rand() 
+        spins[i] = (cos(theta), sin(theta), 0.0) 
     end
+    
     @test isapprox(estimate_plane(spins), [0., 0., 1.]) || isapprox(estimate_plane(spins), [0., 0., -1.])
 end
 
@@ -22,12 +23,27 @@ function test_estimate_axes()
         spins[i] = (cos(theta), sin(theta), 0.0)
     end
     
-    @test isapprox(estimate_axes(spins)[1],collect(spins[1]))
+    normal_vec = estimate_plane(spins)
+    spin       = spins[1]
+    x_axis     = estimate_axes(spin,normal_vec)[1]
+    @test isapprox(x_axis,collect(spins[1]))
 end
 
+function test_paint_black()
+  
+    num_spins = 100
+    num_ref = 20
+    indices = [i for i=1:num_ref]
+    colors  = [red for i=1:num_spins]
+    paint_black(colors,indices)
+
+    @test colors[1:num_ref] == [black for i=1:20]
+end
+
+    
 function test_paint_rbg_differently()
 
-    num_spins = 3
+    num_spins = 6
     spins = fill((0.,0.,0.),num_spins)
     
     for i=1:num_spins
@@ -35,11 +51,12 @@ function test_paint_rbg_differently()
         spins[i] = (cos(theta),sin(theta),0.)
     end
     
-    reference_system = spins
-    colors = Color.([0 for i=1:num_spins])
-    colors = paint_rbg_differently(spins,reference_system,colors) 
+    reference_system = spins[1:3]
+    reference_index  = [1,2,3]
+    colors = [red for i=1:num_spins]
+    colors = paint_rbg_differently(spins,reference_system,reference_index,colors) 
     
-    @test colors == [red,blue,green] 
+    @test colors == [black,black,black,red,blue,green] 
 end
 
 function test_find_breaking_triangle()
@@ -56,13 +73,13 @@ function test_find_breaking_triangle()
     @test find_breaking_triangle(updater,colors) == [black,black,black]
 end
 
-function test_flip_parallel()
+function test_parallel_flip()
     
     reference_system = [(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3]
     spin = reference_system[2] 
     color = red
    
-    new_spin = flip_parallel(spin,color,reference_system)
+    new_spin = parallel_flip(spin,color,reference_system)
     @test isapprox(collect(new_spin),collect(reference_system[3]))
 
 end
@@ -76,7 +93,7 @@ function test_mk_new_spins_on_loop()
     expected_spins = [spins_ref[1],spins_ref[3],spins_ref[2]]
     @test all(isapprox.(collect.(new_spins_on_loop),collect.(expected_spins)))
 end
- 
+
 function ring_plus_one_model()
     # 1D system of 4 spins with a periodic boundary condition and alternating red and blue colors
     # One black site is connected to spin 1
@@ -145,11 +162,24 @@ function test_find_loop(model::JModel, colors::Array{Color})
     @test isapprox(dE, dE_ref)
 end
 
+function test_metropolis_method()
+    
+    beta = 1.
+    dE   = 1.
+    
+    spins = [(0.,0.,0.) for i=1:10]
+    spin_idx_on_loop  = [rand(1:10) for i=1:5]
+    new_spins_on_loop = [(1.,1.,1.) for i=1:5]
+
+    dE = metropolis_method(beta,dE,spins,spin_idx_on_loop,new_spins_on_loop) 
+    @test 
+    
 test_estimate_plane()
 test_estimate_axes()
+test_paint_black()
 test_paint_rbg_differently()
 test_find_breaking_triangle()
-test_flip_parallel()
+test_parallel_flip()
 test_mk_new_spins_on_loop()
 
 Random.seed!(10)
@@ -161,3 +191,5 @@ Random.seed!(10)
 model, colors = all_to_all_model(20)
 println("all_to_all_model results")
 test_find_loop(model, colors)
+
+test_metropolis_method()

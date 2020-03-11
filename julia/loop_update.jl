@@ -26,46 +26,57 @@ function estimate_plane(spins::AbstractArray{HeisenbergSpin})
     return normal_vec
 end
 
-function estimate_axes(spins::AbstractArray{HeisenbergSpin})
+function estimate_axes(spin::HeisenbergSpin,vec::Array{Float64,1})
     #=
-    argument spins is random sampled array from original spin configuration.
+    estimate x and y axis in a plane determined by the vec as (normal) vectors.
     =#
     
-    norm_vec   = estimate_plane(spins)
-    first_spin = collect(spins[1])
-    
-    x_axis  = first_spin - dot(first_spin,norm_vec)*norm_vec
+    x_axis  = collect(spin) - dot(collect(spin),vec)*vec
     x_axis /= norm(x_axis)
-    y_axis  = cross(norm_vec,x_axis)
+    y_axis  = cross(vec,x_axis)
 
-    return x_axis,y_axis,norm_vec
+    return x_axis,y_axis,vec
 end
 
 @enum Color red blue green black
 
-function mk_reference_system(spins::AbstractArray{HeisenbergSpin},num_ref::Int64,colors::Array{Color})
+function mk_ref_sys(spins::AbstractArray{HeisenbergSpin},num_ref::Int64,colors::Array{Color})
     #= 
-    Make reference system for estimate local spin coordination and paint them black.
+    Make a reference system for estimate local spin coordination.
     =#
  
     spins_ref = fill((0.,0.,0.),num_ref) 
-    
+    index_ref = fill(0,num_ref) 
+     
     for i=1:num_ref
-        rand_idx         = rand(1:length(spins))
-        spins_ref[i]     = spins[rand_idx]
-        colors[rand_idx] = black 
+        rand_idx     = rand(1:length(spins))
+        spins_ref[i] = spins[rand_idx]
+        index_ref[i] = rand_idx  
     end
 
-    return spins_ref
+    return spins_ref,index_ref
 end
 
-function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_system,colors::Array{Color})
+function paint_black(colors::Array{Color},indices)
+    
+    for i in indices
+        colors[i] = black 
+    end
+    
+    return colors
+end
+
+   
+function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},ref_sys,ref_index,colors::Array{Color})
     #=
     rbg = red blue green. paint spins rbg based on its direction in local spin coordination.
     =#    
-     
-    x_axis,y_axis,norm_vec = estimate_axes(reference_system)
     
+    # estimate coplanar axes  
+    normal_vec = estimate_plane(ref_sys)
+    x_axis,y_axis,normal_vec = estimate_axes(ref_sys[1],normal_vec)
+    paint_black(colors,ref_index)
+     
     num_spins = length(spins)
 
     for i=1:num_spins
@@ -73,7 +84,7 @@ function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},reference_sy
         if colors[i] !== black
                 
             spin = collect(spins[i])
-            proj_unit_vec  = spin - (dot(spin,norm_vec))*norm_vec
+            proj_unit_vec  = spin - (dot(spin,normal_vec))*normal_vec
             proj_unit_vec /= norm(proj_unit_vec)  
         
             if dot(proj_unit_vec,x_axis) >= 1/2
@@ -151,28 +162,25 @@ function find_breaking_triangle(updater::SingleSpinFlipUpdater,colors::Array{Col
     return colors
 end
 
-function flip_parallel(spin::HeisenbergSpin,color::Color,reference_system)
-    
-    x_axis,y_axis,norm_vec = estimate_axes(reference_system)
+function parallel_flip(spin::HeisenbergSpin,color::Color,reference_system)
+    normal_vec = estimate_plane(reference_system) 
+    x_axis,y_axis,normal_vec = estimate_axes(reference_system[1],normal_vec)
     
     # Color typed variable red=0 blue=1 green=2 black=3.
     theta = Int(color)*2pi/3
     mirror_vec = cos(theta)*x_axis + sin(theta)*y_axis
  
     spin = collect(spin)
-    spin_on_plane = spin - (dot(spin,norm_vec))*norm_vec
+    spin_on_plane = spin - (dot(spin,normal_vec))*normal_vec
     
-    #flip parallel
+    # parallel flip
     temp = (dot(spin_on_plane,mirror_vec))*mirror_vec 
     flipped_spin = 2*temp - spin_on_plane
 
-    return Tuple(flipped_spin + (dot(spin,norm_vec)) * norm_vec)
+    return Tuple(flipped_spin + (dot(spin,normal_vec)) * normal_vec)
 end
 
 function mk_new_spins_on_loop(spins_on_loop,colors_on_loop::Tuple{Color,Color},reference_system)
-    
-    loop_length = length(spins_on_loop) 
-    new_spins_on_loop = fill((0.,0.,0.),loop_length)
     
     # find the color not on the loop
     color = red
@@ -181,19 +189,18 @@ function mk_new_spins_on_loop(spins_on_loop,colors_on_loop::Tuple{Color,Color},r
             color = ic
         end
     end
+   
+    loop_length = length(spins_on_loop)
+    new_spins_on_loop = fill((0.,0.,0.),loop_length)
      
     for i=1:loop_length
-        new_spins_on_loop[i] = flip_parallel(spins_on_loop[i],color,reference_system) 
+        new_spins_on_loop[i] = parallel_flip(spins_on_loop[i],color,reference_system) 
     end
 
     return new_spins_on_loop
 end
 
-"""
-function swap_colors_on_loop{colors::Array{Color},colors_on_loop::Tuple{Color,Color}}
 
-end
-"""
 function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)
     #=
     All elements of work must be initialized to zero.
@@ -328,3 +335,23 @@ function compute_dE_loop(updater::SingleSpinFlipUpdater,
 
     return dE
 end
+
+function metropolis_method(beta,dE,spins::AbstractArray{HeisenbergSpin},spin_idx_on_loop::Array{UInt},new_spins_on_loop)
+
+    loop_length = length(spins_on_loop)
+
+    if rand() < exp(-beta*dE)
+     
+        for i=1:loop_length
+            temp_idx = spin_idx_on_loop[i]
+            spins_on_loop[temp_idx] = new_spins_on_loop[i]
+        end
+          
+        return dE
+    
+    else
+        return 0
+    end
+    
+end
+
