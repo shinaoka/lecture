@@ -29,21 +29,21 @@ function test_estimate_axes()
     @test isapprox(x_axis,collect(spins[1]))
 end
 
-function test_paint_black()
+function test_paint_black!()
   
     num_spins = 100
     num_ref = 20
     indices = [i for i=1:num_ref]
     colors  = [red for i=1:num_spins]
-    paint_black(colors,indices)
+    paint_black!(colors,indices)
 
     @test colors[1:num_ref] == [black for i=1:20]
 end
 
     
-function test_paint_rbg_differently()
+function test_paint_rbg_differently!()
 
-    num_spins = 6
+    num_spins = 3
     spins = fill((0.,0.,0.),num_spins)
     
     for i=1:num_spins
@@ -51,15 +51,15 @@ function test_paint_rbg_differently()
         spins[i] = (cos(theta),sin(theta),0.)
     end
     
-    reference_system = spins[1:3]
+    reference_system = spins
     reference_index  = [1,2,3]
     colors = [red for i=1:num_spins]
-    colors = paint_rbg_differently(spins,reference_system,reference_index,colors) 
+    paint_rbg_differently!(spins,reference_system,reference_index,colors) 
     
-    @test colors == [black,black,black,red,blue,green] 
+    @test colors == [red,blue,green] 
 end
 
-function test_find_breaking_triangle()
+function test_find_breaking_triangle!()
     num_spins = 3
     Jij = []
     push!(Jij, (1,2,1.,1.,1.,1))
@@ -69,10 +69,33 @@ function test_find_breaking_triangle()
     model = JModel(num_spins,Jij)
     updater = SingleSpinFlipUpdater(model)
     colors = [red,red,blue]
-
-    @test find_breaking_triangle(updater,colors) == [black,black,black]
+    
+    find_breaking_triangle!(updater,colors)
+    @test colors == [black for i=1:3]
 end
 
+function test_mk_init_colors()
+    num_spins = 3
+    spins = fill((0.,0.,0.),num_spins)
+
+    for i=1:num_spins
+        theta = i*(2*pi)/3
+        spins[i] = (cos(theta),sin(theta),0.)
+    end
+
+    Jij = []
+    push!(Jij, (1,2,1.,1.,1.,1))
+    push!(Jij, (1,3,1.,1.,1.,1))
+    push!(Jij, (2,3,1.,1.,1.,1))
+
+    model = JModel(num_spins,Jij)
+    updater = SingleSpinFlipUpdater(model)
+   
+    num_reference = 3
+    @test mk_init_colors(updater,spins,num_reference) == [black,black,black]
+end
+
+    
 function test_parallel_flip()
     
     reference_system = [(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3]
@@ -92,6 +115,19 @@ function test_mk_new_spins_on_loop()
     new_spins_on_loop = mk_new_spins_on_loop(spins_ref,colors_on_loop,spins_ref)
     expected_spins = [spins_ref[1],spins_ref[3],spins_ref[2]]
     @test all(isapprox.(collect.(new_spins_on_loop),collect.(expected_spins)))
+end
+
+function test_update_colors()
+  
+    colors = [blue for i=1:10]
+    spin_idx_on_loop = [UInt(2i) for i=1:5]
+    colors_on_loop = (blue,green)
+    
+    new_colors  = update_colors(colors,colors_on_loop,spin_idx_on_loop)
+    blue_array  = [blue for i=1:5]
+    green_array = [green for i=1:5]
+    @test all(new_colors[1:2:10].==blue_array) && all(new_colors[2:2:10].==green_array)
+
 end
 
 function ring_plus_one_model()
@@ -162,25 +198,18 @@ function test_find_loop(model::JModel, colors::Array{Color})
     @test isapprox(dE, dE_ref)
 end
 
-function test_metropolis_method()
-    
-    beta = 1.
-    dE   = 1.
-    
-    spins = [(0.,0.,0.) for i=1:10]
-    spin_idx_on_loop  = [rand(1:10) for i=1:5]
-    new_spins_on_loop = [(1.,1.,1.) for i=1:5]
-
-    dE = metropolis_method(beta,dE,spins,spin_idx_on_loop,new_spins_on_loop) 
-    @test 
     
 test_estimate_plane()
 test_estimate_axes()
-test_paint_black()
-test_paint_rbg_differently()
-test_find_breaking_triangle()
+test_paint_black!()
+test_paint_rbg_differently!()
+test_find_breaking_triangle!()
 test_parallel_flip()
 test_mk_new_spins_on_loop()
+test_update_colors()
+
+test_mk_init_colors()
+
 
 Random.seed!(10)
 model, colors = ring_plus_one_model()
@@ -192,4 +221,3 @@ model, colors = all_to_all_model(20)
 println("all_to_all_model results")
 test_find_loop(model, colors)
 
-test_metropolis_method()

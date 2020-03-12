@@ -35,12 +35,12 @@ function estimate_axes(spin::HeisenbergSpin,vec::Array{Float64,1})
     x_axis /= norm(x_axis)
     y_axis  = cross(vec,x_axis)
 
-    return x_axis,y_axis,vec
+    return x_axis,y_axis
 end
 
 @enum Color red blue green black
 
-function mk_ref_sys(spins::AbstractArray{HeisenbergSpin},num_ref::Int64,colors::Array{Color})
+function mk_reference(spins::AbstractArray{HeisenbergSpin},num_ref::Int64)
     #= 
     Make a reference system for estimate local spin coordination.
     =#
@@ -57,25 +57,23 @@ function mk_ref_sys(spins::AbstractArray{HeisenbergSpin},num_ref::Int64,colors::
     return spins_ref,index_ref
 end
 
-function paint_black(colors::Array{Color},indices)
+function paint_black!(colors::Array{Color},indices)
     
     for i in indices
         colors[i] = black 
     end
     
-    return colors
 end
 
    
-function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},ref_sys,ref_index,colors::Array{Color})
+function paint_rbg_differently!(spins::AbstractArray{HeisenbergSpin},ref_sys,ref_index,colors::Array{Color})
     #=
     rbg = red blue green. paint spins rbg based on its direction in local spin coordination.
     =#    
     
     # estimate coplanar axes  
     normal_vec = estimate_plane(ref_sys)
-    x_axis,y_axis,normal_vec = estimate_axes(ref_sys[1],normal_vec)
-    paint_black(colors,ref_index)
+    x_axis,y_axis = estimate_axes(ref_sys[1],normal_vec)
      
     num_spins = length(spins)
 
@@ -98,14 +96,14 @@ function paint_rbg_differently(spins::AbstractArray{HeisenbergSpin},ref_sys,ref_
             end
 
        end
+
     end
  
-    return colors 
 end    
 
-function find_breaking_triangle(updater::SingleSpinFlipUpdater,colors::Array{Color})
+function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Color})
     #= 
-    Find triangles which don't have three colors and paint thier top black.
+    breaking triangle has more than two site painted the same color.
     =#
     
     #First,find nearest neighbor pair which have same color.
@@ -159,12 +157,11 @@ function find_breaking_triangle(updater::SingleSpinFlipUpdater,colors::Array{Col
         end
     end
  
-    return colors
 end
 
 function parallel_flip(spin::HeisenbergSpin,color::Color,reference_system)
     normal_vec = estimate_plane(reference_system) 
-    x_axis,y_axis,normal_vec = estimate_axes(reference_system[1],normal_vec)
+    x_axis,y_axis = estimate_axes(reference_system[1],normal_vec)
     
     # Color typed variable red=0 blue=1 green=2 black=3.
     theta = Int(color)*2pi/3
@@ -355,3 +352,28 @@ function metropolis_method(beta,dE,spins::AbstractArray{HeisenbergSpin},spin_idx
     
 end
 
+function update_colors(colors::Array{Color},colors_on_loop::Tuple{Color,Color},spin_idx_on_loop::Array{UInt})
+
+    for idx=spin_idx_on_loop
+        colors[idx] == colors_on_loop[1] ? colors[idx] = colors_on_loop[2] : colors[idx] = colors_on_loop[1]
+    end
+  
+    return colors
+end
+
+
+function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},num_reference)
+
+   colors = [red for i=1:length(spins)]
+
+   reference,indices = mk_reference(spins,num_reference)
+   paint_black!(colors,indices)
+
+   paint_rbg_differently!(spins,reference,indices,colors) 
+   find_breaking_triangle!(updater,colors) 
+   
+   return colors 
+end
+
+    
+     
