@@ -46,7 +46,7 @@ function mk_reference(spins::AbstractArray{HeisenbergSpin},num_reference::Int64)
     =#
 
     rand_idx  = [rand(1:length(spins)) for i=1:num_reference] 
-    reference = copy(spins[rand_idx])
+    reference = spins[rand_idx]
 
     return reference,rand_idx
 end
@@ -331,14 +331,16 @@ function metropolis_method!(beta::Float64,dE::Float64,
                             colors::Array{Color},
                             colors_on_loop::Tuple{Color,Color},
                             spin_idx_on_loop::Array{UInt},
-                            new_spins_on_loop::Array{HeisenbergSpin})
+                            new_spins_on_loop::Array{HeisenbergSpin},
+                            num_accept::Int64)
 
     loop_length = length(spins_on_loop)
 
     if rand() < exp(-beta*dE)
-        
+           
         spins[spin_idx_on_loop] = new_spins_on_loop 
         update_colors!(colors,colors_on_loop,spin_idx_on_loop)
+        num_accept += 1
         return dE
     
     else
@@ -370,24 +372,68 @@ function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{Heis
 end
 
 function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
-                         spins::AbstractArray{HeisenbergSpin},
-                         updater::SingleSpinFlipUpdater,
-                         colors::Array{Color},
-                         colors_on_loop::Tuple{Color,Color},
-                         first_spin_idx::Int,
-                         max_length::Int,
-                         work::Array{Int},
-                         check::Bool=false)
+                          num_accept::Int64,
+                          spins::AbstractArray{HeisenbergSpin},
+                          updater::SingleSpinFlipUpdater,
+                          colors::Array{Color},
+                          colors_on_loop::Tuple{Color,Color},
+                          first_spin_idx::Int,
+                          max_length::Int,
+                          work::Array{Int},
+                          check::Bool=false)
 
     spin_idx_on_loop = find_loop(updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
     
-    spins_on_loop = copy(spins[spin_idx_on_loop])
+    spins_on_loop = spins[spin_idx_on_loop]
 
     new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,z_axis)
     dE = compute_dE_loop(updater,spin_idx_on_loop,spins,new_spins_on_loop,work,check)
     
-    return  metropolis_method!(beta,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop)
+    return  metropolis_method!(beta,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
 
 end
 
+function mk_init_condition(num_trial::Int64,counter::Int64,num_spins::Int64,colors::Array{Color})
+    
+    colors_on_loop = [red,red]
+    counter = 0 
+    while counter < num_trial 
+    
+    first_spin_idx = rand(1:num_spins)
+    color = colors[first_spin_idx]
+    
+    color !== black ? colors_on_loop[1] = color : continue
+    
+    temp_colors = [red,blue,green]
+    colors_on_loop[2] = rand(temp_colors[temp_colors .!== [color for i=1:3]])    
+    counter += 1 
+    return first_spin_idx,Tuple(colors_on_loop)
+    end
+end
+  
+function multi_loop_update!(num_trial::Int64,num_reference::Int64,
+                            update::SingleSpinFlipUpdater,beta::Float64,
+                            spins::AbstractArray{HeisenbergSpin})
+
+    indices,x_axis,y_axis,normal_vec = mk_reference(spins,num_reference)
+    colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices) 
+    
+    num_spins  = length(spins)
+    max_length = 2*Int(sqrt(num_spins/3)) 
+    
+    
+    dE   = 0.
+    work = [0 for i=1:length(spins)]
+    
+    counter    = 0
+    num_accept = 0 
+    for i=1:num_trial
+
+        first_spin_idx,colors_on_loop = mk_init_condition(num_trial,counter,num_spins,colors) 
+        dE += one_loop_update!(beta,x_axis,y_axis,normal_vec,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check,num_accept) 
+        
+    end
+   
+    return dE,num_accept
+end
 
