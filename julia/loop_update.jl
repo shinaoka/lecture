@@ -159,9 +159,7 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Co
  
 end
 
-function parallel_flip(spin::HeisenbergSpin,color::Color,reference_system)
-    normal_vec = estimate_plane(reference_system) 
-    x_axis,y_axis = estimate_axes(reference_system[1],normal_vec)
+function parallel_flip(spin::HeisenbergSpin,color::Color,x_axis,y_axis,normal_vec)
     
     # Color typed variable red=0 blue=1 green=2 black=3.
     theta = Int(color)*2pi/3
@@ -177,12 +175,12 @@ function parallel_flip(spin::HeisenbergSpin,color::Color,reference_system)
     return Tuple(flipped_spin + (dot(spin,normal_vec)) * normal_vec)
 end
 
-function mk_new_spins_on_loop(spins_on_loop,colors_on_loop::Tuple{Color,Color},reference_system)
+function mk_new_spins_on_loop(spins_on_loop,colors_on_loop::Tuple{Color,Color},x_axis,y_axis,normal_vec)
     
-    # find the color not on the loop
+    # find the color there are not on a loop
     color = red
-    for ic in collect(colors_on_loop)
-        if !in(ic,[red,blue,green])
+    for ic in [red,blue,green]
+        if !in(ic,collect(colors_on_loop))
             color = ic
         end
     end
@@ -191,7 +189,7 @@ function mk_new_spins_on_loop(spins_on_loop,colors_on_loop::Tuple{Color,Color},r
     new_spins_on_loop = fill((0.,0.,0.),loop_length)
      
     for i=1:loop_length
-        new_spins_on_loop[i] = parallel_flip(spins_on_loop[i],color,reference_system) 
+        new_spins_on_loop[i] = parallel_flip(spins_on_loop[i],color,x_axis,y_axis,normal_vec) 
     end
 
     return new_spins_on_loop
@@ -333,7 +331,20 @@ function compute_dE_loop(updater::SingleSpinFlipUpdater,
     return dE
 end
 
-function metropolis_method(beta,dE,spins::AbstractArray{HeisenbergSpin},spin_idx_on_loop::Array{UInt},new_spins_on_loop)
+function update_colors!(colors::Array{Color},colors_on_loop::Tuple{Color,Color},spin_idx_on_loop::Array{UInt})
+
+    for idx=spin_idx_on_loop
+        colors[idx] == colors_on_loop[1] ? colors[idx] = colors_on_loop[2] : colors[idx] = colors_on_loop[1]
+    end
+  
+end
+
+function metropolis_method!(beta::Float64,dE::Float64,
+                            spins::AbstractArray{HeisenbergSpin},
+                            colors::Array{Color},
+                            colors_on_loop::Tuple{Color,Color},
+                            spin_idx_on_loop::Array{UInt},
+                            new_spins_on_loop::Array{HeisenbergSpin})
 
     loop_length = length(spins_on_loop)
 
@@ -343,7 +354,8 @@ function metropolis_method(beta,dE,spins::AbstractArray{HeisenbergSpin},spin_idx
             temp_idx = spin_idx_on_loop[i]
             spins_on_loop[temp_idx] = new_spins_on_loop[i]
         end
-          
+        
+        update_colors!(colors,colors_on_loop,spin_idx_on_loop)
         return dE
     
     else
@@ -352,28 +364,51 @@ function metropolis_method(beta,dE,spins::AbstractArray{HeisenbergSpin},spin_idx
     
 end
 
-function update_colors(colors::Array{Color},colors_on_loop::Tuple{Color,Color},spin_idx_on_loop::Array{UInt})
-
-    for idx=spin_idx_on_loop
-        colors[idx] == colors_on_loop[1] ? colors[idx] = colors_on_loop[2] : colors[idx] = colors_on_loop[1]
-    end
+function estimate_coordination(spins,num_reference)
+    
+    reference,indices = mk_reference(spins,num_reference)
+    normal_vec = estimate_plane(reference)
+    x_axis,y_axis = estimate_axes(reference[1],normal_vec)
   
-    return colors
+    return indices,x_axis,y_axis,normal_vec
 end
-
 
 function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},num_reference)
 
    colors = [red for i=1:length(spins)]
-
-   reference,indices = mk_reference(spins,num_reference)
+   reference,indices  = mk_reference(spins,num_reference) 
    paint_black!(colors,indices)
 
    paint_rbg_differently!(spins,reference,indices,colors) 
    find_breaking_triangle!(updater,colors) 
    
-   return colors 
+   return colors
 end
 
+function one_loop_update!(beta::Float64,x_axis,y_axis,normal_vec,
+                         spins::AbstractArray{HeisenbergSpin},
+                         updater::SingleSpinFlipUpdater,
+                         colors::Array{Color},
+                         colors_on_loop::Tuple{Color,Color},
+                         first_spin_idx::Int,
+                         max_length::Int,
+                         work::Array{Int},
+                         check::Bool=false)
+
+    spin_idx_on_loop = find_loop(updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
     
-     
+    loop_length   = length(spin_idx_on_loop) 
+    spins_on_loop = fill((0.,0.,0.),loop_length)
+    for i=1:loop_length
+        temp_idx = spin_idx_on_loop[i]
+        spins_on_loop[i] = spins[temp_idx]
+    end
+
+    new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,normal_vec)
+    dE = compute_dE_loop(updater,spin_idx_on_loop,spins,new_spins_on_loop,work,check)
+    
+    return  metropolis_method!(beta,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop)
+
+end
+
+

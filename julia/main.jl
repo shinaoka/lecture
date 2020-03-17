@@ -9,7 +9,6 @@ using HDF5
 include("mcmc.jl")
 include("accumulator.jl")
 include("replica_exchange.jl")
-
 include("loop_update.jl")
 
 # Read a list of temperatures
@@ -314,6 +313,17 @@ function solve(input_file::String, comm)
             perform!(rex, spins_local, energy_local, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
+
+        # Loop update
+
+
+
+
+
+
+
+
+
 
         # Measurement
         ts_start = CPUtime_us()
