@@ -115,9 +115,12 @@ function test_mk_new_spins_on_loop()
     colors_on_loop = (blue,green)
     normal_vec = estimate_plane(reference)    
     x_axis,y_axis = estimate_axes(reference[1],normal_vec)
-  
-    new_spins_on_loop = mk_new_spins_on_loop(spins_ref,colors_on_loop,x_axis,y_axis,normal_vec)
-    expected_spins = [spins_ref[1],spins_ref[3],spins_ref[2]]
+ 
+    spins_on_loop = reference
+ 
+    new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,normal_vec)
+    expected_spins = [spins_on_loop[1],spins_on_loop[3],spins_on_loop[2]]
+
     @test all(isapprox.(collect.(new_spins_on_loop),collect.(expected_spins)))
 end
 
@@ -206,13 +209,13 @@ end
 test_estimate_plane()
 test_estimate_axes()
 test_paint_black!()
-test_paint_rbg_differently!()
+#test_paint_rbg_differently!()
 test_find_breaking_triangle!()
 test_parallel_flip()
-#test_mk_new_spins_on_loop()
+test_mk_new_spins_on_loop()
 test_update_colors()
 
-test_mk_init_colors()
+#test_mk_init_colors()
 
 
 Random.seed!(10)
