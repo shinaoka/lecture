@@ -1,6 +1,7 @@
 include("mcmc.jl")
 
 using LinearAlgebra
+using Random
 
 function estimate_plane(spins::AbstractArray{HeisenbergSpin})
     #=
@@ -336,7 +337,7 @@ function metropolis_method!(beta::Float64,dE::Float64,
 
     loop_length = length(spins_on_loop)
 
-    if rand() < exp(-beta*dE)
+    if rand(Random.GLOBAL_RNG) < exp(-beta*dE)
            
         spins[spin_idx_on_loop] = new_spins_on_loop 
         update_colors!(colors,colors_on_loop,spin_idx_on_loop)
@@ -362,7 +363,8 @@ end
 
 function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices)
 
-   colors = [red for i=1:length(spins)]
+   #colors = [red for i=1:length(spins)]
+   colors = fill(red, length(spins))
    paint_black!(colors,indices)
 
    paint_rbg_differently!(spins,x_axis,y_axis,z_axis,colors) 
@@ -395,6 +397,7 @@ end
 
 function mk_init_condition(num_trial::Int64,counter::Int64,num_spins::Int64,colors::Array{Color})
     
+    """
     colors_on_loop = [red,red]
     counter = 0 
     while counter < num_trial 
@@ -409,6 +412,23 @@ function mk_init_condition(num_trial::Int64,counter::Int64,num_spins::Int64,colo
     counter += 1 
     return first_spin_idx,Tuple(colors_on_loop)
     end
+    """
+    first_spin_idx = -1
+    color1 = black
+    for counter = 1:num_trial
+        first_spin_idx = rand(1:num_spins)
+        color1 = colors[first_spin_idx]
+        if color1 != black
+            break
+        end
+    end
+    if color1 == black
+        return -1, (black, black)
+    else
+        colors = Set([red, blue, green])
+        delete!(colors, color1)
+        return first_spin_idx, (color1, rand(colors))
+    end
 end
   
 function multi_loop_update!(num_trial::Int64,num_reference::Int64,
@@ -421,17 +441,17 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     num_spins  = length(spins)
     max_length = 2*Int(sqrt(num_spins/3)) 
     
-    
     dE   = 0.
-    work = [0 for i=1:length(spins)]
+    work = zeros(Int, length(spins))
     
     counter    = 0
     num_accept = 0 
     for i=1:num_trial
-
         first_spin_idx,colors_on_loop = mk_init_condition(num_trial,counter,num_spins,colors) 
+        if first_spin_idx == black
+            continue
+        end
         dE += one_loop_update!(beta,x_axis,y_axis,normal_vec,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check,num_accept) 
-        
     end
    
     return dE,num_accept
