@@ -395,39 +395,22 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
 
 end
 
-function mk_init_condition(num_trial::Int64,counter::Int64,num_spins::Int64,colors::Array{Color})
+function mk_init_condition(num_spins::Int64,colors::Array{Color})
     
-    """
-    colors_on_loop = [red,red]
-    counter = 0 
-    while counter < num_trial 
-    
-    first_spin_idx = rand(1:num_spins)
-    color = colors[first_spin_idx]
-    
-    color !== black ? colors_on_loop[1] = color : continue
-    
-    temp_colors = [red,blue,green]
-    colors_on_loop[2] = rand(temp_colors[temp_colors .!== [color for i=1:3]])    
-    counter += 1 
-    return first_spin_idx,Tuple(colors_on_loop)
-    end
-    """
     first_spin_idx = -1
     color1 = black
-    for counter = 1:num_trial
-        first_spin_idx = rand(1:num_spins)
-        color1 = colors[first_spin_idx]
-        if color1 != black
-            break
-        end
-    end
-    if color1 == black
-        return -1, (black, black)
-    else
+
+    first_spin_idx = rand(1:num_spins)
+    color1 = colors[first_spin_idx]
+
+    if color1 != black
         colors = Set([red, blue, green])
         delete!(colors, color1)
         return first_spin_idx, (color1, rand(colors))
+    end
+
+    if color1 == black
+        return -1, (black, black)
     end
 end
   
@@ -437,9 +420,7 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
 
     indices,x_axis,y_axis,normal_vec = mk_reference(spins,num_reference)
     colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices) 
-    
-    num_spins  = length(spins)
-    max_length = 2*Int(sqrt(num_spins/3)) 
+    max_length = 2*Int(sqrt(length(spins)/3)) 
     
     dE   = 0.
     work = zeros(Int, length(spins))
@@ -447,11 +428,13 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     counter    = 0
     num_accept = 0 
     for i=1:num_trial
-        first_spin_idx,colors_on_loop = mk_init_condition(num_trial,counter,num_spins,colors) 
-        if first_spin_idx == black
+        counter += 1
+        first_spin_idx,colors_on_loop = mk_init_condition(length(spins),colors) 
+        if first_spin_idx == -1
             continue
         end
-        dE += one_loop_update!(beta,x_axis,y_axis,normal_vec,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check,num_accept) 
+        dE += one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
+        
     end
    
     return dE,num_accept
