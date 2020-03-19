@@ -335,7 +335,7 @@ function metropolis_method!(beta::Float64,dE::Float64,
                             new_spins_on_loop::Array{HeisenbergSpin},
                             num_accept::Int64)
 
-    loop_length = length(spins_on_loop)
+    loop_length = length(new_spins_on_loop)
 
     if rand(Random.GLOBAL_RNG) < exp(-beta*dE)
            
@@ -345,6 +345,7 @@ function metropolis_method!(beta::Float64,dE::Float64,
         return dE
     
     else
+        println("update failed")
         return 0
     end
     
@@ -391,7 +392,7 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
     new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,z_axis)
     dE = compute_dE_loop(updater,spin_idx_on_loop,spins,new_spins_on_loop,work,check)
     
-    return  metropolis_method!(beta,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
+    return  metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
 
 end
 
@@ -404,9 +405,9 @@ function mk_init_condition(num_spins::Int64,colors::Array{Color})
     color1 = colors[first_spin_idx]
 
     if color1 != black
-        colors = Set([red, blue, green])
-        delete!(colors, color1)
-        return first_spin_idx, (color1, rand(colors))
+        temp_colors = Set([red, blue, green])
+        delete!(temp_colors, color1)
+        return first_spin_idx, (color1, rand(temp_colors))
     end
 
     if color1 == black
@@ -415,11 +416,13 @@ function mk_init_condition(num_spins::Int64,colors::Array{Color})
 end
   
 function multi_loop_update!(num_trial::Int64,num_reference::Int64,
-                            update::SingleSpinFlipUpdater,beta::Float64,
-                            spins::AbstractArray{HeisenbergSpin})
+                            updater::SingleSpinFlipUpdater,beta::Float64,
+                            spins::AbstractArray{HeisenbergSpin},
+                            check::Bool=false)
 
-    indices,x_axis,y_axis,normal_vec = mk_reference(spins,num_reference)
-    colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices) 
+    indices,x_axis,y_axis,normal_vec = estimate_loc_coord(spins,num_reference)
+
+    colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices)  
     max_length = 2*Int(sqrt(length(spins)/3)) 
     
     dE   = 0.

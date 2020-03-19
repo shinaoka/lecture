@@ -1,4 +1,5 @@
 using Test
+include("loop_update_tests.jl")
 include("main.jl")
 
 println("unit test results")

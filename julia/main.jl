@@ -269,7 +269,7 @@ function solve(input_file::String, comm)
     acc_proc = Accumulator(1)
 
     # Init spins
-    spins_local  = [fill((0.,0.,1.),num_spins) for it in 1:num_temps_local]
+    spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
 
     # Replica exchange
@@ -306,30 +306,36 @@ function solve(input_file::String, comm)
                 @assert abs(energy_local[it] - compute_energy(model, spins_local[it])) < 1e-5
             end
         end
-        
+         
         # Replica exchange
         ts_start = CPUtime_us()
         if mod(sweep, ex_interval) == 0
             perform!(rex, spins_local, energy_local, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
-
+        
+        
         # Loop update
-
-
-
-
-
-
-
-
-
+        ts_start = CPUtime_us()
+        num_trial       = 10
+        num_reference   = 40
+        accept_rate = zeros(Int64,num_temps_local)
+        
+        for it in 1:num_temps_local
+            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/temps[it+start_idx-1],spins_local[it])
+            energy_local[it] += dE
+            accept_rate[it]   = num_accept 
+        end
+        push!(elpsCPUtime, CPUtime_us() - ts_start)
+        
 
         # Measurement
         ts_start = CPUtime_us()
         if sweep >= num_therm_sweeps && mod(sweep, meas_interval) == 0
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
+            
+            add!(acc, "accept_rate",accept_rate)
 
             ss= Array{Array{ComplexF64}}(undef, num_temps_local)
             num_q = 2
@@ -357,6 +363,7 @@ function solve(input_file::String, comm)
     # Output results
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
+    accept_rate = mean_gather(acc,"accept_rate", comm)
     ss = mean_gather_array(acc, "ss", comm)
     #Mz2 = mean_gather(acc, "Mz2", comm)
     #M2 = mean_gather(acc, "M2", comm)
@@ -379,6 +386,13 @@ function solve(input_file::String, comm)
         for i in 1:num_temps
             println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
         end
+        
+        println("acceptant rate: ")
+        
+        for i in 1:num_temps
+            println(temps[i], " ", accept_rate[i])
+        end
+        
 
         println("octopolar: ",op/num_spins^2)
         """
