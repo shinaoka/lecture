@@ -168,7 +168,7 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Co
 
     #Second,find nearest neighbor site from each same color pairs. 
     breaking_triangle = Tuple{Int,Int,Int}[]
-    println("same_color_pairs", length(same_color_pairs))
+    #println("same_color_pairs", length(same_color_pairs))
     for idx=1:length(same_color_pairs)
         i,j = same_color_pairs[idx]
         tt1 = CPUtime_us()
@@ -199,7 +199,7 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Co
             end
         end
         tt4 = CPUtime_us()
-        println(" inner_loop", tt2-tt1, " ", tt3-tt2, " ", tt4-tt3)
+        #println(" inner_loop", tt2-tt1, " ", tt3-tt2, " ", tt4-tt3)
 
     end
     t3 = CPUtime_us()
@@ -276,7 +276,7 @@ function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_
     candidate_spins = zeros(UInt, max_coord_num)
 
     success = false
-    while loop_length <= max_length
+    while loop_length < max_length
         # Search connected spins
         n_candidate = 0
         next_color = colors[current_spin_idx]==colors_on_loop[1] ? colors_on_loop[2] : colors_on_loop[1]
@@ -400,22 +400,18 @@ function metropolis_method!(beta::Float64,dE::Float64,
                             colors_on_loop::Tuple{Color,Color},
                             spin_idx_on_loop::Array{UInt},
                             new_spins_on_loop::Array{HeisenbergSpin},
-                            num_accept::Int64)
-
+                            num_accept::Int64)::Float64
     loop_length = length(new_spins_on_loop)
-
     if rand(Random.GLOBAL_RNG) < exp(-beta*dE)
-           
         spins[spin_idx_on_loop] = new_spins_on_loop 
         update_colors!(colors,colors_on_loop,spin_idx_on_loop)
         num_accept += 1
         return dE
-    
     else
-        println("update failed")
-        return 0
+        #p = exp(-beta*dE)
+        #println("update failed: $(dE) $(p) $(dE*beta)")
+        return 0.0
     end
-    
 end
 
 
@@ -428,7 +424,7 @@ function estimate_loc_coord(spins,num_reference)
     return indices,x_axis,y_axis,normal_vec
 end
 
-function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices)
+function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices,triangles::Array{Tuple{Int,Int,Int}})
 
    #colors = [red for i=1:length(spins)]
    t1 = CPUtime_us()
@@ -438,9 +434,9 @@ function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{Heis
 
    paint_rbg_differently!(spins,x_axis,y_axis,z_axis,colors) 
    t3 = CPUtime_us()
-   find_breaking_triangle!(updater,colors) 
+   find_breaking_triangle!(updater,triangles,colors) 
    t4 = CPUtime_us()
-   println("mk_init_c ", t2-t1, " ", t3-t2, " ", t4-t3)
+   #println("mk_init_c ", t2-t1, " ", t3-t2, " ", t4-t3)
    
    return colors
 end
@@ -488,6 +484,7 @@ end
   
 function multi_loop_update!(num_trial::Int64,num_reference::Int64,
                             updater::SingleSpinFlipUpdater,beta::Float64,
+                            triangles::Array{Tuple{Int,Int,Int}},
                             spins::AbstractArray{HeisenbergSpin},
                             check::Bool=false)
 
@@ -495,13 +492,13 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     indices,x_axis,y_axis,normal_vec = estimate_loc_coord(spins,num_reference)
     t2 = CPUtime_us()
 
-    colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices)  
+    colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices,triangles)  
     t3 = CPUtime_us()
     max_length = 2*Int(sqrt(length(spins)/3)) 
     
     dE   = 0.
     work = zeros(Int, length(spins))
-    println("")
+    #println("")
     
     counter    = 0
     num_accept = 0 
@@ -511,16 +508,16 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
         first_spin_idx,colors_on_loop = mk_init_condition(length(spins),colors) 
         tt2 = CPUtime_us()
         if first_spin_idx == -1
-            println("debug2 ", i, " ", tt2-tt1)
+            #println("debug2 ", i, " ", tt2-tt1)
             continue
         end
         dE += one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
         tt3 = CPUtime_us()
-        println("debug2 ", i, " ", tt2-tt1, " ", tt3-tt2)
+        #println("debug2 ", i, " ", tt2-tt1, " ", tt3-tt2)
         
     end
     t4 = CPUtime_us()
-    println("debug ", t2-t1, " ", t3-t2, " ", t4-t3)
+    #println("debug ", t2-t1, " ", t3-t2, " ", t4-t3)
    
     return dE,num_accept
 end

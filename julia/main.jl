@@ -5,6 +5,7 @@ using MPI
 using Test
 using CPUTime
 using HDF5
+#using Profile
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -280,6 +281,10 @@ function solve(input_file::String, comm)
     if rank == 0
         println("Starting simulation...")
     end
+
+    # Find all triangles for loop updates
+    triangles = find_triangles(model, updater)
+
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
         if rank == 0 && time_ns() - last_output_time > 1e+10
@@ -314,7 +319,7 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
         
-        """ 
+        """
         # Loop update
         ts_start = CPUtime_us()
         num_trial       = 10
@@ -322,12 +327,12 @@ function solve(input_file::String, comm)
         accept_rate = zeros(Int64,num_temps_local)
         
         for it in 1:num_temps_local
-            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/temps[it+start_idx-1],spins_local[it])
+            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/temps[it+start_idx-1],triangles,spins_local[it])
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
-        """ 
+        """
 
         # Measurement
         ts_start = CPUtime_us()
@@ -385,7 +390,7 @@ function solve(input_file::String, comm)
         # paint latest spin configuration with lowest temperature differently.
         num_reference = 40
         indices,x_axis,y_axis,z_axis = estimate_loc_coord(spins_local[1],num_reference)
-        colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices)
+        colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices,triangles)
         num_black = 0
         for ic in colors
             if ic == black
