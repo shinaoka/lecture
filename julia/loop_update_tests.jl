@@ -78,6 +78,31 @@ function test_find_breaking_triangle!()
     @test colors == [black for i=1:3]
 end
 
+function test_find_breaking_triangle2()
+    # Two triangles sharing the site 3
+    num_spins = 5
+    Jij = []
+    # First triangle 1-2-3
+    push!(Jij, (1,2, 1.,1.,1., 1))
+    push!(Jij, (1,3, 1.,1.,1., 1))
+    push!(Jij, (2,3, 1.,1.,1., 1))
+    # Second triangle 3-4-5
+    push!(Jij, (3,4, 1.,1.,1., 1))
+    push!(Jij, (4,5, 1.,1.,1., 1))
+    push!(Jij, (3,5, 1.,1.,1., 1))
+    
+    model = JModel(num_spins,Jij)
+    updater = SingleSpinFlipUpdater(model)
+    colors = [red,red,blue,red,green]
+
+    triangles = find_triangles(model, updater)
+    println("triangles ", triangles)
+    @test triangles == [(1,2,3), (3,4,5)]
+    
+    find_breaking_triangle!(updater, triangles, colors)
+    @test colors == [black, black, black, red, green]
+end
+
 function test_mk_init_colors()
     num_spins = 3
     spins = fill((0.,0.,0.),num_spins)
@@ -225,6 +250,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
     test_paint_black!()
     #test_paint_rbg_differently!()
     test_find_breaking_triangle!()
+    test_find_breaking_triangle2()
     test_parallel_flip()
     test_mk_new_spins_on_loop()
     test_update_colors()

@@ -125,19 +125,24 @@ end
 function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Array{Tuple{Int,Int,Int}}, colors::Array{Color})
     #= 
     breaking triangle has more than two site painted the same color.
-    FIXME: THIS IMPLEMENTATION MAY RUN SLOW.
     =#
-    rgb = Set([red, green, blue])
-    breaking_triangle = Tuple{Int,Int,Int}[]
+    is_black = zeros(Bool, length(colors))
+    rgb::UInt8 = 1
+    rgb ⊻= 1 << UInt8(red)
+    rgb ⊻= 1 << UInt8(green)
+    rgb ⊻= 1 << UInt8(blue)
     for it in triangles
-        if Set(colors[collect(it)]) != rgb
-            push!(breaking_triangle, it)
+        x::UInt8 = 1
+        for isite in 1:3
+            x ⊻= 1 << UInt8(colors[it[isite]])
+        end
+        if x != rgb
+            for isite in 1:3
+                is_black[it[isite]] = true
+            end
         end
     end
-
-    for it in breaking_triangle
-        colors[collect(it)] .= black
-    end
+    colors[is_black] .= black
 end    
 
 function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Color})
