@@ -314,7 +314,7 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
         
-        
+        """ 
         # Loop update
         ts_start = CPUtime_us()
         num_trial       = 10
@@ -327,7 +327,7 @@ function solve(input_file::String, comm)
             accept_rate[it]   = num_accept 
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
-        
+        """ 
 
         # Measurement
         ts_start = CPUtime_us()
@@ -335,7 +335,7 @@ function solve(input_file::String, comm)
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
             
-            add!(acc, "accept_rate",accept_rate)
+            #add!(acc, "accept_rate",accept_rate)
 
             ss= Array{Array{ComplexF64}}(undef, num_temps_local)
             num_q = 2
@@ -351,27 +351,22 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
-        # How long does it take to execute one sweep or replica exchange, measuremnt?
         if sweep > num_therm_sweeps
             add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
         end
     end        
     
-    latest_spin_direction(acc,spins_local,num_spins,num_temps_local)
-
+    
 
     # Output results
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
-    accept_rate = mean_gather(acc,"accept_rate", comm)
+    #accept_rate = mean_gather(acc,"accept_rate", comm)
     ss = mean_gather_array(acc, "ss", comm)
     #Mz2 = mean_gather(acc, "Mz2", comm)
     #M2 = mean_gather(acc, "M2", comm)
     #M4 = mean_gather(acc, "M4", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
-    sx = mean_gather_array(acc, "sx", comm)
-    sy = mean_gather_array(acc, "sy", comm)
-    sz = mean_gather_array(acc, "sz", comm)
     #M1 = mean_gather_array(acc, "M1", comm)
     #M2 = mean_gather_array(acc, "M2", comm)
     #M3 = mean_gather_array(acc, "M3", comm)
@@ -387,53 +382,41 @@ function solve(input_file::String, comm)
             println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
         end
         
+        # paint latest spin configuration with lowest temperature differently.
+        num_reference = 40
+        indices,x_axis,y_axis,z_axis = estimate_loc_coord(spins_local[1],num_reference)
+        colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices)
+        num_black = 0
+        for ic in colors
+            if ic == black
+                num_black += 1
+            end
+        end
+        
+        println("num_black: ",num_black)
+        println("num_black == num_spins?: ",num_black == num_spins)
+      
+        """  
         println("acceptant rate: ")
         
         for i in 1:num_temps
             println(temps[i], " ", accept_rate[i])
         end
         
-
+        
         println("octopolar: ",op/num_spins^2)
-        """
+        
         open("g.dat", "w") do fp
             for i in 1:num_temps
                 g = (3 - (M4[i]/(M2[i]^2))) / 2
                 println(fp, temps[i], " ", g)
             end
         end
-        """  
+        """ 
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
         end
-        
-        println("M2_AF: ",M2_AF)    
-        println("octopolar: ",6*op/(num_spins^2))    
-
-        h5open("L9.h5","w") do fp
-            write(fp,"num_spins",num_spins)
-            write(fp,"temps"    ,temps    )
-            write(fp,"E"        ,E        )
-            write(fp,"E2"       ,E2       )
-            write(fp,"op"       ,op      )
-            write(fp,"M2_AF"       ,M2_AF      )
-             
-            """
-            write(fp,"M1"       ,M1       ) 
-            write(fp,"M2"       ,M2       ) 
-            write(fp,"M3"       ,M3       ) 
-            write(fp,"op"       ,op/(num_spins^2))
-            """
-            grp = g_create(fp,"spin_config")            
-            grp["num_spins"] = num_spins
-            grp["temp"] = temps[1]
-            grp["sx"] = sx[1]            
-            grp["sy"] = sy[1]            
-            grp["sz"] = sz[1]            
-            
-        end
-
     end
 
     # Stat of Replica Exchange MC

@@ -364,7 +364,6 @@ function metropolis_method!(beta::Float64,dE::Float64,
     
 end
 
-#################################################################
 
 function estimate_loc_coord(spins,num_reference)
     

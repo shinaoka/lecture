@@ -14982,3 +14982,313 @@ Resource usage summary:
 
 The output (if any) follows:
 
+ERROR: LoadError: LoadError: syntax: extra token "2" after end of expression
+Stacktrace:
+ [1] include at ./boot.jl:326 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] include(::String) at ./client.jl:403
+ [5] top-level scope at none:0
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:317
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[805,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+ERROR: LoadError: LoadError: syntax: extra token "2" after end of expression
+Stacktrace:
+ [1] include at ./boot.jl:326 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] include(::String) at ./client.jl:403
+ [5] top-level scope at none:0
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:317
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[838,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+unit test results
+same_color_pairs4
+ inner_loop3283 9 4465
+ inner_loop11 5 8
+ inner_loop4 2 2
+ inner_loop2 3 1
+breaking_t: 2838 71983 2
+ring_plus_one_model results
+loop length: 4
+1 red
+2 blue
+3 red
+4 blue
+dE: 200.0
+all_to_all_model results
+loop length: 6
+1 red
+2 blue
+3 red
+4 blue
+5 red
+6 blue
+dE: 87.00172713802836
+ERROR: LoadError: LoadError: KeyError: key "sx" not found
+Stacktrace:
+ [1] getindex at ./dict.jl:478 [inlined]
+ [2] mean(::Accumulator, ::String) at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:25
+ [3] mean_gather_array(::Accumulator, ::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:38
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:370
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] include(::String) at ./client.jl:403
+ [10] top-level scope at none:0
+ [11] include at ./boot.jl:326 [inlined]
+ [12] include_relative(::Module, ::String) at ./loading.jl:1038
+ [13] include(::Module, ::String) at ./sysimg.jl:29
+ [14] exec_options(::Base.JLOptions) at ./client.jl:267
+ [15] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:461
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[15580,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+ERROR: LoadError: LoadError: KeyError: key "sx" not found
+Stacktrace:
+ [1] getindex at ./dict.jl:478 [inlined]
+ [2] mean(::Accumulator, ::String) at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:25
+ [3] mean_gather_array(::Accumulator, ::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:38
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:370
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] include(::String) at ./client.jl:403
+ [10] top-level scope at none:0
+ [11] include at ./boot.jl:326 [inlined]
+ [12] include_relative(::Module, ::String) at ./loading.jl:1038
+ [13] include(::Module, ::String) at ./sysimg.jl:29
+ [14] exec_options(::Base.JLOptions) at ./client.jl:267
+ [15] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:434
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[15572,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+ERROR: LoadError: LoadError: UndefVarError: estimate_local_coord not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:387
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] include(::String) at ./client.jl:403
+ [7] top-level scope at none:0
+ [8] include at ./boot.jl:326 [inlined]
+ [9] include_relative(::Module, ::String) at ./loading.jl:1038
+ [10] include(::Module, ::String) at ./sysimg.jl:29
+ [11] exec_options(::Base.JLOptions) at ./client.jl:267
+ [12] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:431
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[15589,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+2020年 3月23日 月曜日 15時19分24秒 JST
+2020年 3月23日 月曜日 15時22分09秒 JST
+begin
+2020年 3月23日 月曜日 15時30分55秒 JST
+end
+2020年 3月23日 月曜日 15時31分19秒 JST
+begin
+2020年 3月23日 月曜日 15時36分10秒 JST
+end
+2020年 3月23日 月曜日 15時36分29秒 JST
+begin
+2020年 3月23日 月曜日 15時39分00秒 JST
+ERROR: LoadError: LoadError: ArgumentError: invalid base 10 digit 'e' in "1e2"
+Stacktrace:
+ [1] tryparse_internal(::Type{Int64}, ::String, ::Int64, ::Int64, ::Int64, ::Bool) at ./parse.jl:131
+ [2] #parse#348(::Nothing, ::Function, ::Type{Int64}, ::String) at ./parse.jl:238
+ [3] parse(::Type{Int64}, ::String) at ./parse.jl:238
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:235
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] include(::String) at ./client.jl:403
+ [10] top-level scope at none:0
+ [11] include at ./boot.jl:326 [inlined]
+ [12] include_relative(::Module, ::String) at ./loading.jl:1038
+ [13] include(::Module, ::String) at ./sysimg.jl:29
+ [14] exec_options(::Base.JLOptions) at ./client.jl:267
+ [15] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:432
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[15797,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月23日 月曜日 15時39分18秒 JST
+begin
+2020年 3月23日 月曜日 15時43分32秒 JST
+ERROR: LoadError: LoadError: invalid syntax on line: [model] 
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] parse_ini(::ConfParse) at /Users/humiyakakizawa/.julia/packages/ConfParser/40Z2H/src/ConfParser.jl:134
+ [3] parse_conf!(::ConfParse) at /Users/humiyakakizawa/.julia/packages/ConfParser/40Z2H/src/ConfParser.jl:71
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:226
+ [5] top-level scope at util.jl:156
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] include(::String) at ./client.jl:403
+ [10] top-level scope at none:0
+ [11] include at ./boot.jl:326 [inlined]
+ [12] include_relative(::Module, ::String) at ./loading.jl:1038
+ [13] include(::Module, ::String) at ./sysimg.jl:29
+ [14] exec_options(::Base.JLOptions) at ./client.jl:267
+ [15] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:432
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[15824,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月23日 月曜日 15時43分49秒 JST
+begin
+2020年 3月23日 月曜日 15時48分05秒 JST
+end
+2020年 3月23日 月曜日 15時48分22秒 JST
+begin
+2020年 3月23日 月曜日 15時52分18秒 JST
+end
+2020年 3月23日 月曜日 15時52分57秒 JST
+begin
+2020年 3月23日 月曜日 15時55分01秒 JST
+end
+2020年 3月23日 月曜日 15時55分58秒 JST
+begin
+2020年 3月23日 月曜日 16時05分21秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:439
+- at ./float.jl:397 [inlined]
+rand at /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.1/Random/src/generation.jl:35 [inlined]
+rand at /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.1/Random/src/Random.jl:222 [inlined]
+rand at /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.1/Random/src/Random.jl:222 [inlined]
+propose_unifo at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:39
+one_sweep at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:125
+unknown function (ip: 0x10a6d3045)
+solve at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:297
+jl_fptr_trampoline at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1842
+do_call at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:323
+eval_body at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:625
+jl_interpret_toplevel_thunk_callback at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x1083d09bf)
+unknown function (ip: 0x2)
+jl_interpret_toplevel_thunk at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:894
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:764
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:883
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:826 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:833
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+include at ./client.jl:403
+do_call at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:323
+eval_stmt_value at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:362 [inlined]
+eval_body at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:759
+jl_interpret_toplevel_thunk_callback at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x10678945f)
+unknown function (ip: 0xffffffffffffffff)
+jl_interpret_toplevel_thunk at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:894
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:764
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:883
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:826 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:833
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+true_main at /usr/local/bin/julia (unknown line)
+main at /usr/local/bin/julia (unknown line)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 290398928 (Pool: 290391430; Big: 7498); GC: 545
+end
+2020年 3月23日 月曜日 16時06分50秒 JST
+begin
+2020年 3月23日 月曜日 16時07分16秒 JST
+end
+2020年 3月23日 月曜日 16時15分11秒 JST
+begin
+2020年 3月23日 月曜日 16時17分45秒 JST
+end
+2020年 3月23日 月曜日 17時48分20秒 JST
