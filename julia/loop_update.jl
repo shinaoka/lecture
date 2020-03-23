@@ -128,17 +128,17 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Arra
     =#
     is_black = zeros(Bool, length(colors))
     rgb::UInt8 = 1
-    rgb ⊻= 1 << UInt8(red)
-    rgb ⊻= 1 << UInt8(green)
-    rgb ⊻= 1 << UInt8(blue)
-    for it in triangles
+    rgb |= (1 << UInt8(red))
+    rgb |= (1 << UInt8(green))
+    rgb |= (1 << UInt8(blue))
+    for three_sites in triangles
         x::UInt8 = 1
-        for isite in 1:3
-            x ⊻= 1 << UInt8(colors[it[isite]])
+        for isite in three_sites
+            x |= (1 << UInt8(colors[isite]))
         end
         if x != rgb
-            for isite in 1:3
-                is_black[it[isite]] = true
+            for isite in three_sites
+                is_black[isite] = true
             end
         end
     end
