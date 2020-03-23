@@ -110,7 +110,7 @@ end
 
 function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
     dE::Float64 = 0
-
+    num_acc = 0
     for ispin in 1:model.num_spins
 
         # Compute effective field from the rest of spins
@@ -130,6 +130,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         if rand() < exp(-beta*dE_prop)
             spins[ispin] = si_new
             dE += dE_prop
+            num_acc += 1
         end
 
         
@@ -138,5 +139,5 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
                 
     end
 
-    return dE
+    return dE, num_acc/model.num_spins
 end
