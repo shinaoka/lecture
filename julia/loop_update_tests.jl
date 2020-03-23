@@ -2,7 +2,6 @@ using Test
 using Random
 include("loop_update.jl")
 
-println("unit test results")
 
 function test_estimate_plane()
     num_spins = 4
@@ -69,8 +68,13 @@ function test_find_breaking_triangle!()
     model = JModel(num_spins,Jij)
     updater = SingleSpinFlipUpdater(model)
     colors = [red,red,blue]
+
+    triangles = find_triangles(model, updater)
+    println("triangles ", triangles)
+    @test triangles == [(1,2,3)]
     
-    find_breaking_triangle!(updater,colors)
+    find_breaking_triangle!(updater, triangles, colors)
+    #find_breaking_triangle!(updater,colors)
     @test colors == [black for i=1:3]
 end
 
@@ -214,26 +218,27 @@ function test_find_loop(model::JModel, colors::Array{Color})
     @test isapprox(dE, dE_ref)
 end
 
-     
-test_estimate_plane()
-test_estimate_axes()
-test_paint_black!()
-#test_paint_rbg_differently!()
-test_find_breaking_triangle!()
-test_parallel_flip()
-test_mk_new_spins_on_loop()
-test_update_colors()
-
-#test_mk_init_colors()
-#test_mk_init_condition()
-
-Random.seed!(10)
-model, colors = ring_plus_one_model()
-println("ring_plus_one_model results")
-test_find_loop(model, colors)
-
-Random.seed!(10)
-model, colors = all_to_all_model(20)
-println("all_to_all_model results")
-test_find_loop(model, colors)
-
+if abspath(PROGRAM_FILE) == @__FILE__
+    println("unit test results")
+    test_estimate_plane()
+    test_estimate_axes()
+    test_paint_black!()
+    #test_paint_rbg_differently!()
+    test_find_breaking_triangle!()
+    test_parallel_flip()
+    test_mk_new_spins_on_loop()
+    test_update_colors()
+    
+    #test_mk_init_colors()
+    #test_mk_init_condition()
+    
+    Random.seed!(10)
+    model, colors = ring_plus_one_model()
+    println("ring_plus_one_model results")
+    test_find_loop(model, colors)
+    
+    Random.seed!(10)
+    model, colors = all_to_all_model(20)
+    println("all_to_all_model results")
+    test_find_loop(model, colors)
+end

@@ -91,6 +91,55 @@ function paint_rbg_differently!(spins::AbstractArray{HeisenbergSpin},x_axis,y_ax
  
 end    
 
+function find_triangles(model::JModel, updater::SingleSpinFlipUpdater)
+    #= 
+    Find all triangles
+    =#
+    num_spins = updater.num_spins
+
+    # Creat a set of nn sites for each site
+    nn_sites = [Set{Int}() for i in 1:num_spins]
+    for isite=1:num_spins
+        for ins=1:updater.coord_num[isite]
+            if updater.connection[ins,isite][5] == 1
+                push!(nn_sites[isite], updater.connection[ins,isite][1])
+            end
+        end
+    end
+
+    triangles = Set{Tuple{Int,Int,Int}}()
+    for (i, j, Jx, Jy, Jz, is_nn) in model.Jij
+        if is_nn != 1
+            continue
+        end
+        common_nn = intersect(nn_sites[i], nn_sites[j])
+        @assert length(common_nn) <= 1
+        if length(common_nn) != 0
+            t_sites = sort([i, j, pop!(common_nn)])
+            push!(triangles, Tuple(t_sites))
+        end
+    end
+    return collect(triangles)
+end
+
+function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Array{Tuple{Int,Int,Int}}, colors::Array{Color})
+    #= 
+    breaking triangle has more than two site painted the same color.
+    FIXME: THIS IMPLEMENTATION MAY RUN SLOW.
+    =#
+    rgb = Set([red, green, blue])
+    breaking_triangle = Tuple{Int,Int,Int}[]
+    for it in triangles
+        if Set(colors[collect(it)]) != rgb
+            push!(breaking_triangle, it)
+        end
+    end
+
+    for it in breaking_triangle
+        colors[collect(it)] .= black
+    end
+end    
+
 function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Color})
     #= 
     breaking triangle has more than two site painted the same color.
