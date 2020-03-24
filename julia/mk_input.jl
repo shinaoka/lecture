@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 12
+L = 8
 num_spins = 3*L^2
 
 # lattice vectors
@@ -94,12 +94,12 @@ function mk_interaction(L::Int64,J1::SSInteraction,J2::SSInteraction,len1::Float
             # last element 1 is sign that this interaction is J1  
             if isapprox(len1,distance)
                 push!(interaction, (site1,site2,J1[1],J1[2],J1[3],1))
-            """ 
+            
             # make 2nd nearest neighbor interaction.    
             # last element 0 is sign that this interaction is J2  
             elseif isapprox(len2,distance)
                 push!(interaction, (site1,site2,J2[1],J2[2],J2[3],0))
-            """ 
+            
             end
         end
     end

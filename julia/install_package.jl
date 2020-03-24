@@ -15,5 +15,7 @@ Pkg.add("HDF5")
 Pkg.add("Test")
 Pkg.add("LaTeXStrings")
 Pkg.add("FFTW")
+Pkg.add("Distributions")
+
 
 

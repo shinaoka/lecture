@@ -15292,3 +15292,366 @@ begin
 2020年 3月23日 月曜日 16時17分45秒 JST
 end
 2020年 3月23日 月曜日 17時48分20秒 JST
+begin
+2020年 3月23日 月曜日 20時10分10秒 JST
+end
+2020年 3月23日 月曜日 20時10分32秒 JST
+begin
+2020年 3月23日 月曜日 20時12分08秒 JST
+end
+2020年 3月23日 月曜日 20時12分38秒 JST
+begin
+2020年 3月23日 月曜日 20時13分58秒 JST
+end
+2020年 3月23日 月曜日 20時14分27秒 JST
+begin
+2020年 3月23日 月曜日 20時16分45秒 JST
+end
+2020年 3月23日 月曜日 20時18分05秒 JST
+begin
+2020年 3月23日 月曜日 20時19分22秒 JST
+end
+2020年 3月23日 月曜日 20時20分50秒 JST
+begin
+2020年 3月23日 月曜日 20時22分59秒 JST
+end
+2020年 3月23日 月曜日 20時24分22秒 JST
+begin
+2020年 3月23日 月曜日 20時27分04秒 JST
+end
+2020年 3月23日 月曜日 20時28分23秒 JST
+begin
+2020年 3月23日 月曜日 20時29分33秒 JST
+end
+2020年 3月23日 月曜日 20時31分07秒 JST
+begin
+2020年 3月23日 月曜日 20時32分07秒 JST
+end
+2020年 3月23日 月曜日 20時33分38秒 JST
+begin
+2020年 3月23日 月曜日 20時34分46秒 JST
+end
+2020年 3月23日 月曜日 20時45分22秒 JST
+begin
+2020年 3月23日 月曜日 20時46分40秒 JST
+end
+2020年 3月23日 月曜日 20時56分17秒 JST
+begin
+2020年 3月23日 月曜日 21時01分11秒 JST
+end
+2020年 3月23日 月曜日 21時01分34秒 JST
+begin
+2020年 3月23日 月曜日 21時05分42秒 JST
+end
+2020年 3月23日 月曜日 21時06分08秒 JST
+begin
+2020年 3月23日 月曜日 21時15分22秒 JST
+end
+2020年 3月23日 月曜日 21時15分54秒 JST
+begin
+2020年 3月23日 月曜日 21時17分10秒 JST
+end
+2020年 3月23日 月曜日 21時18分51秒 JST
+begin
+2020年 3月23日 月曜日 21時20分37秒 JST
+end
+2020年 3月23日 月曜日 21時36分23秒 JST
+begin
+2020年 3月24日 火曜日 14時16分46秒 JST
+ERROR: LoadError: LoadError: UndefVarError: mk_gassian_dist not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:292
+ [2] top-level scope at util.jl:156
+ [3] include at ./boot.jl:326 [inlined]
+ [4] include_relative(::Module, ::String) at ./loading.jl:1038
+ [5] include(::Module, ::String) at ./sysimg.jl:29
+ [6] include(::String) at ./client.jl:403
+ [7] top-level scope at none:0
+ [8] include at ./boot.jl:326 [inlined]
+ [9] include_relative(::Module, ::String) at ./loading.jl:1038
+ [10] include(::Module, ::String) at ./sysimg.jl:29
+ [11] exec_options(::Base.JLOptions) at ./client.jl:267
+ [12] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[12960,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時17分06秒 JST
+begin
+2020年 3月24日 火曜日 14時18分23秒 JST
+ERROR: LoadError: LoadError: UndefVarError: d not defined
+Stacktrace:
+ [1] one_sweep(::SingleSpinFlipUpdater, ::Float64, ::JModel, ::Array{Tuple{Float64,Float64,Float64},1}, ::Truncated{Normal{Float64},Continuous,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:168
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:308
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] include(::String) at ./client.jl:403
+ [8] top-level scope at none:0
+ [9] include at ./boot.jl:326 [inlined]
+ [10] include_relative(::Module, ::String) at ./loading.jl:1038
+ [11] include(::Module, ::String) at ./sysimg.jl:29
+ [12] exec_options(::Base.JLOptions) at ./client.jl:267
+ [13] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[12990,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時18分42秒 JST
+begin
+2020年 3月24日 火曜日 14時20分11秒 JST
+ERROR: LoadError: LoadError: UndefVarError: sinew not defined
+Stacktrace:
+ [1] one_sweep(::SingleSpinFlipUpdater, ::Float64, ::JModel, ::Array{Tuple{Float64,Float64,Float64},1}, ::Truncated{Normal{Float64},Continuous,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:169
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:308
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] include(::String) at ./client.jl:403
+ [8] top-level scope at none:0
+ [9] include at ./boot.jl:326 [inlined]
+ [10] include_relative(::Module, ::String) at ./loading.jl:1038
+ [11] include(::Module, ::String) at ./sysimg.jl:29
+ [12] exec_options(::Base.JLOptions) at ./client.jl:267
+ [13] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[13004,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時20分30秒 JST
+begin
+2020年 3月24日 火曜日 14時21分38秒 JST
+ERROR: LoadError: LoadError: MethodError: no method matching /(::Tuple{Float64,Float64,Float64}, ::Float64)
+Closest candidates are:
+  /(!Matched::Float64, ::Float64) at float.jl:401
+  /(!Matched::Missing, ::Number) at missing.jl:97
+  /(!Matched::BigFloat, ::Union{Float16, Float32, Float64}) at mpfr.jl:445
+  ...
+Stacktrace:
+ [1] one_sweep(::SingleSpinFlipUpdater, ::Float64, ::JModel, ::Array{Tuple{Float64,Float64,Float64},1}, ::Truncated{Normal{Float64},Continuous,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:169
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:308
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] include(::String) at ./client.jl:403
+ [8] top-level scope at none:0
+ [9] include at ./boot.jl:326 [inlined]
+ [10] include_relative(::Module, ::String) at ./loading.jl:1038
+ [11] include(::Module, ::String) at ./sysimg.jl:29
+ [12] exec_options(::Base.JLOptions) at ./client.jl:267
+ [13] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[13018,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時21分57秒 JST
+begin
+2020年 3月24日 火曜日 14時23分10秒 JST
+ERROR: LoadError: LoadError: MethodError: no method matching copyto!(::Tuple{Float64,Float64,Float64}, ::Base.Broadcast.Broadcasted{Base.Broadcast.Style{Tuple},Tuple{Base.OneTo{Int64}},typeof(/),Tuple{Tuple{Float64,Float64,Float64},Float64}})
+Closest candidates are:
+  copyto!(!Matched::AbstractArray, ::Base.Broadcast.Broadcasted) at broadcast.jl:797
+  copyto!(!Matched::AbstractArray, ::Any) at abstractarray.jl:666
+  copyto!(::Any, !Matched::Base.Broadcast.Broadcasted{#s162,Axes,F,Args} where Args<:Tuple where F where Axes where #s162<:StaticArrays.StaticArrayStyle) at /Users/humiyakakizawa/.julia/packages/StaticArrays/1g9bq/src/broadcast.jl:29
+Stacktrace:
+ [1] materialize! at ./broadcast.jl:756 [inlined]
+ [2] one_sweep(::SingleSpinFlipUpdater, ::Float64, ::JModel, ::Array{Tuple{Float64,Float64,Float64},1}, ::Truncated{Normal{Float64},Continuous,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:169
+ [3] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:308
+ [4] top-level scope at util.jl:156
+ [5] include at ./boot.jl:326 [inlined]
+ [6] include_relative(::Module, ::String) at ./loading.jl:1038
+ [7] include(::Module, ::String) at ./sysimg.jl:29
+ [8] include(::String) at ./client.jl:403
+ [9] top-level scope at none:0
+ [10] include at ./boot.jl:326 [inlined]
+ [11] include_relative(::Module, ::String) at ./loading.jl:1038
+ [12] include(::Module, ::String) at ./sysimg.jl:29
+ [13] exec_options(::Base.JLOptions) at ./client.jl:267
+ [14] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[13008,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時23分30秒 JST
+begin
+2020年 3月24日 火曜日 14時32分23秒 JST
+ERROR: LoadError: LoadError: MethodError: no method matching length(::Color)
+Closest candidates are:
+  length(!Matched::Core.SimpleVector) at essentials.jl:561
+  length(!Matched::Base.MethodList) at reflection.jl:801
+  length(!Matched::Core.MethodTable) at reflection.jl:875
+  ...
+Stacktrace:
+ [1] _similar_for(::UnitRange{Int64}, ::Type{Any}, ::Color, ::Base.HasLength) at ./array.jl:517
+ [2] _collect(::UnitRange{Int64}, ::Color, ::Base.HasEltype, ::Base.HasLength) at ./array.jl:550
+ [3] collect(::Color) at ./array.jl:544
+ [4] broadcastable(::Color) at ./broadcast.jl:614
+ [5] broadcasted at ./broadcast.jl:1159 [inlined]
+ [6] find_breaking_triangle!(::SingleSpinFlipUpdater, ::Array{Tuple{Int64,Int64,Int64},1}, ::Array{Color,1}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update.jl:145
+ [7] mk_init_colors(::SingleSpinFlipUpdater, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Array{Int64,1}, ::Array{Tuple{Int64,Int64,Int64},1}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update.jl:437
+ [8] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:403
+ [9] top-level scope at util.jl:156
+ [10] include at ./boot.jl:326 [inlined]
+ [11] include_relative(::Module, ::String) at ./loading.jl:1038
+ [12] include(::Module, ::String) at ./sysimg.jl:29
+ [13] include(::String) at ./client.jl:403
+ [14] top-level scope at none:0
+ [15] include at ./boot.jl:326 [inlined]
+ [16] include_relative(::Module, ::String) at ./loading.jl:1038
+ [17] include(::Module, ::String) at ./sysimg.jl:29
+ [18] exec_options(::Base.JLOptions) at ./client.jl:267
+ [19] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[13042,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時32分45秒 JST
+begin
+2020年 3月24日 火曜日 14時36分12秒 JST
+ERROR: LoadError: LoadError: UndefVarError: d not defined
+Stacktrace:
+ [1] one_sweep(::SingleSpinFlipUpdater, ::Float64, ::JModel, ::Array{Tuple{Float64,Float64,Float64},1}, ::Truncated{Normal{Float64},Continuous,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:168
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:308
+ [3] top-level scope at util.jl:156
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] include(::String) at ./client.jl:403
+ [8] top-level scope at none:0
+ [9] include at ./boot.jl:326 [inlined]
+ [10] include_relative(::Module, ::String) at ./loading.jl:1038
+ [11] include(::Module, ::String) at ./sysimg.jl:29
+ [12] exec_options(::Base.JLOptions) at ./client.jl:267
+ [13] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[12802,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時36分38秒 JST
+begin
+2020年 3月24日 火曜日 14時37分59秒 JST
+ERROR: LoadError: LoadError: MethodError: no method matching length(::Color)
+Closest candidates are:
+  length(!Matched::Core.SimpleVector) at essentials.jl:561
+  length(!Matched::Base.MethodList) at reflection.jl:801
+  length(!Matched::Core.MethodTable) at reflection.jl:875
+  ...
+Stacktrace:
+ [1] _similar_for(::UnitRange{Int64}, ::Type{Any}, ::Color, ::Base.HasLength) at ./array.jl:517
+ [2] _collect(::UnitRange{Int64}, ::Color, ::Base.HasEltype, ::Base.HasLength) at ./array.jl:550
+ [3] collect(::Color) at ./array.jl:544
+ [4] broadcastable(::Color) at ./broadcast.jl:614
+ [5] broadcasted at ./broadcast.jl:1159 [inlined]
+ [6] find_breaking_triangle!(::SingleSpinFlipUpdater, ::Array{Tuple{Int64,Int64,Int64},1}, ::Array{Color,1}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update.jl:145
+ [7] mk_init_colors(::SingleSpinFlipUpdater, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Array{Float64,1}, ::Array{Int64,1}, ::Array{Tuple{Int64,Int64,Int64},1}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update.jl:437
+ [8] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:403
+ [9] top-level scope at util.jl:156
+ [10] include at ./boot.jl:326 [inlined]
+ [11] include_relative(::Module, ::String) at ./loading.jl:1038
+ [12] include(::Module, ::String) at ./sysimg.jl:29
+ [13] include(::String) at ./client.jl:403
+ [14] top-level scope at none:0
+ [15] include at ./boot.jl:326 [inlined]
+ [16] include_relative(::Module, ::String) at ./loading.jl:1038
+ [17] include(::Module, ::String) at ./sysimg.jl:29
+ [18] exec_options(::Base.JLOptions) at ./client.jl:267
+ [19] _start() at ./client.jl:436
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:455
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/unit_test.jl:3
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[12817,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 3月24日 火曜日 14時38分24秒 JST
+begin
+2020年 3月24日 火曜日 14時53分58秒 JST
+end
+2020年 3月24日 火曜日 14時54分18秒 JST
+begin
+2020年 3月24日 火曜日 15時00分09秒 JST
+end
+2020年 3月24日 火曜日 15時00分28秒 JST
+begin
+2020年 3月24日 火曜日 15時01分36秒 JST
+end
+2020年 3月24日 火曜日 15時01分55秒 JST

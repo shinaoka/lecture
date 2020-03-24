@@ -142,7 +142,7 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Arra
             end
         end
     end
-    colors[is_black] .= black
+    colors[is_black] = [black for i=1:length(colors[is_black])]
 end    
 
 function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Color})

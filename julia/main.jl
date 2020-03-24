@@ -269,6 +269,7 @@ function solve(input_file::String, comm)
     # Create accumulator for collecting stat for every process
     acc_proc = Accumulator(1)
 
+
     # Init spins
     spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
@@ -287,6 +288,9 @@ function solve(input_file::String, comm)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
+    
+    # Create a gaussian distribution for gaussian move.
+    gaussian_dist = mk_gaussian_dist()
 
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
@@ -302,7 +306,7 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         
         for it in 1:num_temps_local
-            dE, acc_rate = one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
+            dE, acc_rate = one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it], gaussian_dist)
             energy_local[it] += dE
             single_spin_flip_acc[it] = acc_rate
         end
@@ -394,6 +398,7 @@ function solve(input_file::String, comm)
             println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
         end
         
+        """ 
         # paint latest spin configuration with lowest temperature differently.
         num_reference = 10
         indices,x_axis,y_axis,z_axis = estimate_loc_coord(spins_local[1],num_reference)
@@ -407,6 +412,7 @@ function solve(input_file::String, comm)
         
         println("num_black: ",num_black)
         println("num_black == num_spins?: ",num_black == num_spins)
+        """
         println("single_spin_flip_acc: ", single_spin_flip_acc)
       
         """  

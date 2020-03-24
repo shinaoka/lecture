@@ -1,6 +1,7 @@
 using LinearAlgebra
 using StaticArrays
 using CPUTime
+using Distributions
 
 SpinIndex = Int
 
@@ -125,6 +126,48 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         si_new = propose_unifo()
 
          
+        # Flip spin
+        dE_prop = -dot(si_new .- spins[ispin], eff_h)
+        if rand() < exp(-beta*dE_prop)
+            spins[ispin] = si_new
+            dE += dE_prop
+            num_acc += 1
+        end
+
+        
+        # Over relaxation.
+        spins[ispin] = (2*dot(eff_h, spins[ispin])/(norm(eff_h)^2)) .* eff_h .- spins[ispin]
+                
+    end
+
+    return dE, num_acc/model.num_spins
+end
+
+function mk_gaussian_dist()
+    mu    = 0
+    sigma = 1
+    lb    = -1
+    ub    = 1 
+    return Truncated(Normal(mu,sigma),lb,ub)
+end
+
+
+function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin},dist::Truncated{Normal{Float64},Continuous,Float64})
+    dE::Float64 = 0
+    sigma_g = sqrt(beta^-1)
+    num_acc = 0
+    for ispin in 1:model.num_spins
+        # Compute effective field from the rest of spins
+        eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
+        for ic in 1:updater.coord_num[ispin]
+            c = updater.connection[ic, ispin]
+            eff_h = eff_h .+ (c[2]*spins[c[1]][1], c[3]*spins[c[1]][2], c[4]*spins[c[1]][3])
+        end
+
+        # Propose a new spin direction : Gaussian trial move 
+        si_new = spins[ispin] .+ sigma_g .* (rand(dist),rand(dist),rand(dist))
+        si_new = si_new ./ norm(si_new)
+ 
         # Flip spin
         dE_prop = -dot(si_new .- spins[ispin], eff_h)
         if rand() < exp(-beta*dE_prop)
