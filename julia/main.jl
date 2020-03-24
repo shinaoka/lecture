@@ -5,6 +5,7 @@ using MPI
 using Test
 using CPUTime
 using HDF5
+#using Profile
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -280,6 +281,13 @@ function solve(input_file::String, comm)
     if rank == 0
         println("Starting simulation...")
     end
+
+    # Find all triangles for loop updates
+    triangles = find_triangles(model, updater)
+
+    # For measuring acceptance rates
+    single_spin_flip_acc = zeros(Float64, num_temps_local)
+
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
         if rank == 0 && time_ns() - last_output_time > 1e+10
@@ -294,7 +302,9 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         
         for it in 1:num_temps_local
-            energy_local[it] += one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
+            dE, acc_rate = one_sweep(updater, 1/temps[it+start_idx-1], model, spins_local[it])
+            energy_local[it] += dE
+            single_spin_flip_acc[it] = acc_rate
         end
         #println("one_sweep", " ",ts_end - ts_start)
         push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -314,7 +324,7 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
         
-        """ 
+        """
         # Loop update
         ts_start = CPUtime_us()
         num_trial       = 10
@@ -322,18 +332,19 @@ function solve(input_file::String, comm)
         accept_rate = zeros(Int64,num_temps_local)
         
         for it in 1:num_temps_local
-            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/temps[it+start_idx-1],spins_local[it])
+            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/temps[it+start_idx-1],triangles,spins_local[it])
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
-        """ 
+        """
 
         # Measurement
         ts_start = CPUtime_us()
         if sweep >= num_therm_sweeps && mod(sweep, meas_interval) == 0
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
+            add!(acc, "single_spin_flip_acc", single_spin_flip_acc)
             
             #add!(acc, "accept_rate",accept_rate)
 
@@ -361,6 +372,7 @@ function solve(input_file::String, comm)
     # Output results
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
+    single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
     #accept_rate = mean_gather(acc,"accept_rate", comm)
     ss = mean_gather_array(acc, "ss", comm)
     #Mz2 = mean_gather(acc, "Mz2", comm)
@@ -385,7 +397,7 @@ function solve(input_file::String, comm)
         # paint latest spin configuration with lowest temperature differently.
         num_reference = 10
         indices,x_axis,y_axis,z_axis = estimate_loc_coord(spins_local[1],num_reference)
-        colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices)
+        colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices,triangles)
         num_black = 0
         for ic in colors
             if ic == black
@@ -395,6 +407,7 @@ function solve(input_file::String, comm)
         
         println("num_black: ",num_black)
         println("num_black == num_spins?: ",num_black == num_spins)
+        println("single_spin_flip_acc: ", single_spin_flip_acc)
       
         """  
         println("acceptant rate: ")
