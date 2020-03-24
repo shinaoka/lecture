@@ -383,7 +383,7 @@ function solve(input_file::String, comm)
         end
         
         # paint latest spin configuration with lowest temperature differently.
-        num_reference = 40
+        num_reference = 10
         indices,x_axis,y_axis,z_axis = estimate_loc_coord(spins_local[1],num_reference)
         colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices)
         num_black = 0
