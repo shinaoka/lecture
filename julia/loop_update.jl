@@ -127,12 +127,12 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Arra
     breaking triangle has more than two site painted the same color.
     =#
     is_black = zeros(Bool, length(colors))
-    rgb::UInt8 = 1
+    rgb::UInt8 = 0
     rgb |= (1 << UInt8(red))
     rgb |= (1 << UInt8(green))
     rgb |= (1 << UInt8(blue))
     for three_sites in triangles
-        x::UInt8 = 1
+        x::UInt8 = 0
         for isite in three_sites
             x |= (1 << UInt8(colors[isite]))
         end
