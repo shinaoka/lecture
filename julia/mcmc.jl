@@ -1,7 +1,7 @@
 using LinearAlgebra
 using StaticArrays
 using CPUTime
-using Distributions
+using Random
 
 SpinIndex = Int
 
@@ -143,18 +143,12 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
     return dE, num_acc/model.num_spins
 end
 
-function mk_gaussian_dist()
-    mu    = 0
-    sigma = 1
-    lb    = -1
-    ub    = 1 
-    return Truncated(Normal(mu,sigma),lb,ub)
-end
 
 
-function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin},dist::Truncated{Normal{Float64},Continuous,Float64})
+function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
     dE::Float64 = 0
-    sigma_g = sqrt(beta^-1)
+    sigma_g     = sqrt(beta^-1)
+    rand_array  = zeros(Float64,3)
     num_acc = 0
     for ispin in 1:model.num_spins
         # Compute effective field from the rest of spins
@@ -165,7 +159,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         end
 
         # Propose a new spin direction : Gaussian trial move 
-        si_new = spins[ispin] .+ sigma_g .* (rand(dist),rand(dist),rand(dist))
+        si_new = spins[ispin] .+ sigma_g .* Tuple(randn!(rand_array))
         si_new = si_new ./ norm(si_new)
  
         # Flip spin

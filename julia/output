@@ -1,15 +1,94 @@
-2020年 3月24日 火曜日 15時01分36秒 JST
+2020年 3月24日 火曜日 16時15分12秒 JST
 num of temperatures = 1
 Starting simulation...
+Done 11601 sweeps
+Done 25668 sweeps
+Done 39743 sweeps
+Done 53741 sweeps
+Done 67830 sweeps
+Done 81793 sweeps
+Done 95804 sweeps
+Done 108186 sweeps
+Done 121413 sweeps
+Done 134654 sweeps
+Done 147974 sweeps
+Done 161226 sweeps
+Done 174577 sweeps
+Done 187873 sweeps
+Done 201262 sweeps
+Done 214627 sweeps
+Done 224115 sweeps
+Done 231350 sweeps
+Done 241469 sweeps
+Done 254171 sweeps
+Done 267060 sweeps
+Done 279057 sweeps
+Done 290112 sweeps
+Done 302860 sweeps
+Done 316356 sweeps
+Done 329836 sweeps
+Done 342791 sweeps
+Done 356033 sweeps
+Done 369268 sweeps
+Done 382609 sweeps
+Done 395650 sweeps
+Done 409381 sweeps
+Done 422931 sweeps
+Done 436488 sweeps
+Done 447778 sweeps
+Done 459140 sweeps
+Done 469792 sweeps
+Done 483001 sweeps
+Done 492909 sweeps
+Done 505478 sweeps
+Done 519219 sweeps
+Done 533002 sweeps
+Done 545463 sweeps
+Done 558679 sweeps
+Done 568667 sweeps
+Done 580063 sweeps
+Done 592652 sweeps
+Done 606602 sweeps
+Done 619313 sweeps
+Done 632179 sweeps
+Done 645378 sweeps
+Done 659364 sweeps
+Done 673034 sweeps
+Done 685918 sweeps
+Done 699591 sweeps
+Done 713354 sweeps
+Done 727374 sweeps
+Done 740733 sweeps
+Done 754343 sweeps
+Done 768107 sweeps
+Done 782195 sweeps
+Done 796293 sweeps
+Done 810447 sweeps
+Done 823829 sweeps
+Done 837910 sweeps
+Done 851950 sweeps
+Done 866005 sweeps
+Done 880069 sweeps
+Done 894156 sweeps
+Done 908027 sweeps
+Done 918024 sweeps
+Done 931706 sweeps
+Done 940035 sweeps
+Done 950424 sweeps
+Done 963772 sweeps
+Done 976934 sweeps
+Done 990201 sweeps
 1 Complex{Float64}[1.0+0.0im, 1.0+0.0im]
-<E> [-38.1065]
-<E^2> [28986.7]
-0.0001  1.4340950578988228e10
-single_spin_flip_acc: [0.526094]
+<E> [-192.941]
+<E^2> [37226.2]
+0.0001  0.9884123149580167
+num_black: 46
+num_black == num_spins?: false
+single_spin_flip_acc: [0.421712]
 <CPUtime> 
- rank=0 : [30.4433, 0.902222, 478.453]
+ rank=0 : [695.039, 1.55045, 41.0548]
 
 Statistics of replica exchange Monte Carlo
-  7.270863 seconds (20.31 M allocations: 1023.674 MiB, 6.31% gc time)
+785.724180 seconds (5.80 G allocations: 191.416 GiB, 5.98% gc time)
 unit test results
-2020年 3月24日 火曜日 15時01分55秒 JST
+2020年 3月24日 火曜日 16時28分29秒 JST
