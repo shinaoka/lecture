@@ -22,9 +22,18 @@ function compute_energy(model::JModel, spins::AbstractArray{HeisenbergSpin})
 
     energy = 0.0
 
+    """
     for intr in model.Jij
         for j in 1:3
             energy += intr[j+2] * spins[intr[1]][j] * spins[intr[2]][j]
+        end
+    end
+    """
+    for intr in model.Jij
+        spin1 = spins[intr[1]]
+        spin2 = spins[intr[2]]
+        for j in 1:3
+            energy += intr[j+2] * spin1[j] * spin2[j]
         end
     end
     
@@ -148,7 +157,6 @@ end
 function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
     dE::Float64 = 0
     sigma_g     = sqrt(beta^-1)
-    rand_array  = zeros(Float64,3)
     num_acc = 0
     for ispin in 1:model.num_spins
         # Compute effective field from the rest of spins
@@ -159,21 +167,19 @@ function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JMo
         end
 
         # Propose a new spin direction : Gaussian trial move 
-        si_new = spins[ispin] .+ sigma_g .* Tuple(randn!(rand_array))
+        si_new = spins[ispin] .+ sigma_g .* (randn(Random.GLOBAL_RNG), rand(Random.GLOBAL_RNG), rand(Random.GLOBAL_RNG))
         si_new = si_new ./ norm(si_new)
  
         # Flip spin
         dE_prop = -dot(si_new .- spins[ispin], eff_h)
-        if rand() < exp(-beta*dE_prop)
+        if rand(Random.GLOBAL_RNG) < exp(-beta*dE_prop)
             spins[ispin] = si_new
             dE += dE_prop
             num_acc += 1
         end
-
         
         # Over relaxation.
         spins[ispin] = (2*dot(eff_h, spins[ispin])/(norm(eff_h)^2)) .* eff_h .- spins[ispin]
-                
     end
 
     return dE, num_acc/model.num_spins

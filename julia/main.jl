@@ -5,7 +5,7 @@ using MPI
 using Test
 using CPUTime
 using HDF5
-#using Profile
+using Profile
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -139,9 +139,10 @@ function make_kagome(num_spins)
     return unit_cell_position
 end
 
-function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64,q::Tuple{Float64,Float64})
+function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},
+                         num_spins::Int64, num_temps::Int64, q::Tuple{Float64,Float64}, unit_cell::Array{Tuple{Float64,Float64}})
     
-    unit_cell = make_kagome(num_spins) 
+    #unit_cell = make_kagome(num_spins) 
 
     M2_AF = zeros(num_temps) 
 
@@ -289,6 +290,9 @@ function solve(input_file::String, comm)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
+    
+    # For function order_parameter()
+    unit_cell = make_kagome(num_spins) 
 
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
@@ -330,9 +334,6 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         if sweep <= num_therm_sweeps && mod(sweep,100) == 0
             update_temps_dist!(rex,comm)
-            if rank == 0
-               println("Updating temperature distribution...")
-            end
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
@@ -360,15 +361,8 @@ function solve(input_file::String, comm)
             
             #add!(acc, "accept_rate",accept_rate)
 
-            ss= Array{Array{ComplexF64}}(undef, num_temps_local)
-            num_q = 2
-            for it in 1:num_temps_local
-                ss[it] = (it + 100*rank) * ones(Float64, num_q)
-            end
-            add!(acc, "ss", ss)
-   
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
-            add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.)))
+            add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.),unit_cell))
             add!(acc,"op",octopolar_v2(spins_local,num_spins,num_temps_local))
   
         end
@@ -386,7 +380,7 @@ function solve(input_file::String, comm)
     E2 = mean_gather(acc, "E2", comm)
     single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
     #accept_rate = mean_gather(acc,"accept_rate", comm)
-    ss = mean_gather_array(acc, "ss", comm)
+    #ss = mean_gather_array(acc, "ss", comm)
     #Mz2 = mean_gather(acc, "Mz2", comm)
     #M2 = mean_gather(acc, "M2", comm)
     #M4 = mean_gather(acc, "M4", comm)
@@ -397,10 +391,6 @@ function solve(input_file::String, comm)
     op = mean_gather(acc, "op", comm)
     M2_AF = mean_gather(acc,"M2_AF",comm)
     if rank == 0
-        for it in 1:num_temps
-            println(it, " ", ss[it])
-        end
-
         println()
         println("<E> <E^2> <C>")
         for i in 1:num_temps
@@ -467,4 +457,11 @@ rank = MPI.Comm_rank(comm)
 
 @time solve(args["input"], comm)
 
-MPI.finalize()
+      #@profile dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it])
+                #open("prof.txt", "w") do s
+                    #Profile.print(IOContext(s, :displaysize => (24, 500)))
+                #end
+                #exit()
+            #end
+
+MPI.Finalize()
