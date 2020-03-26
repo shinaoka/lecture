@@ -1,6 +1,7 @@
 using MPI
 
 struct ReplicaExchange
+    # All temperatures
     temps::Array{Float64}
     num_attemps::Array{UInt64}
     num_accepted::Array{UInt64}
@@ -17,7 +18,7 @@ function ReplicaExchange(temps_init::Array{Float64}, start_idx, end_idx)
     if any(temps_init .== 0.0)
         error("Zero temperature is not allowed!")
     end
-    ReplicaExchange(temps_init, zeros(UInt64, num_temps_local), zeros(UInt64, num_temps_local), start_idx, end_idx)
+    ReplicaExchange(copy(temps_init), zeros(UInt64, num_temps_local), zeros(UInt64, num_temps_local), start_idx, end_idx)
 end
 
 function swap_temps(a, i, j)

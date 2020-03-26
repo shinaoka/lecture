@@ -276,6 +276,7 @@ function solve(input_file::String, comm)
 
     # Replica exchange
     rex = ReplicaExchange(temps, start_idx, end_idx)
+    temps = 0
 
     # Perform MC
     last_output_time = time_ns()
@@ -303,7 +304,7 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         
         for it in 1:num_temps_local
-            dE, acc_rate = gaussian_move(updater, 1/temps[it+start_idx-1], model, spins_local[it])
+            dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it])
             energy_local[it] += dE
             single_spin_flip_acc[it] = acc_rate
         end
@@ -325,6 +326,16 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
         
+        # update temperatures distribution.
+        ts_start = CPUtime_us()
+        if sweep <= num_therm_sweeps && mod(sweep,100) == 0
+            update_temps_dist!(rex,comm)
+            if rank == 0
+               println("Updating temperature distribution...")
+            end
+        end
+        push!(elpsCPUtime, CPUtime_us() - ts_start)
+
         """
         # Loop update
         ts_start = CPUtime_us()
@@ -389,12 +400,13 @@ function solve(input_file::String, comm)
         for it in 1:num_temps
             println(it, " ", ss[it])
         end
-        println("<E> ", E)
-        println("<E^2> ", E2)
+
+        println()
+        println("<E> <E^2> <C>")
         for i in 1:num_temps
-            println(temps[i], "  ", ((E2[i]  - E[i]^2) / (temps[i]^2)) / num_spins)
+            println(rex.temps[i], "  ", E[i], " ", E2[i], " ", ((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)
         end
-        
+        println()
         
         # paint latest spin configuration with lowest temperature differently.
         num_reference = 10
@@ -451,5 +463,8 @@ args = parse_args(ARGS, s)
 # Initialize MPI environment
 MPI.Init()
 comm = MPI.COMM_WORLD
+rank = MPI.Comm_rank(comm)
 
 @time solve(args["input"], comm)
+
+MPI.finalize()
