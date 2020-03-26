@@ -23,7 +23,7 @@ rex = ReplicaExchange(temps_init, rank*num_temps_local+1, rank*num_temps_local+n
 
 # Our model: acceptance rate is propotional to the inverse of distance in beta.
 big_int = 1000000
-for iupdate = 1:10
+for iupdate = 1:200
     #if rank==0
         #betas_opt = 1 ./ rex.temps
         #d_betas_opt = abs.(betas_opt[2:end] - betas_opt[1:end-1])

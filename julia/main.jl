@@ -460,6 +460,10 @@ MPI.Init()
 comm = MPI.COMM_WORLD
 rank = MPI.Comm_rank(comm)
 
-@time solve(args["input"], comm)
+if rank == 0
+    @time solve(args["input"], comm)
+else
+    solve(args["input"], comm)
+end
 
 MPI.Finalize()

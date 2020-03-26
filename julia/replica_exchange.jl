@@ -33,6 +33,9 @@ end
 # Update the distribution of temperatures using an idea similar to the one described in Sec. 3 of K. Hukushima and K. Nemoto (1996)
 # Note: Equation (11) looks wrong.
 function update_temps_dist!(rex::ReplicaExchange, comm)
+    # mixing parameter
+    alpha = 0.1
+    rank = MPI.Comm_rank(comm)
     num_attemps = MPI.Allgather(rex.num_attemps, comm)
     num_accepted = MPI.Allgather(rex.num_accepted, comm)
     num_temps = length(rex.temps)
@@ -42,7 +45,8 @@ function update_temps_dist!(rex::ReplicaExchange, comm)
     # Compute acceptance rates of exchange
     # plus one is for avoinding singularity.
     # Discard the last element.
-    pm = ((num_accepted .+ 1e-8)./(num_attemps .+ 1e-8))[1:end-1]
+    pm = (num_accepted ./ num_attemps)[1:end-1]
+    pm = pm .+ 1e-8
     betas = 1 ./ rex.temps
     c = (betas[end]-betas[1])/sum(pm .* (betas[2:end]-betas[1:end-1]))
     
@@ -50,11 +54,15 @@ function update_temps_dist!(rex::ReplicaExchange, comm)
     new_betas = similar(rex.temps)
     new_betas[1] = betas[1]
     for i in 2:num_temps
-        #println(i, " ", (betas[i] - betas[i-1]) * pm[i-1] * c, " ", pm[i-1] * c)
+        #if rank == 0
+            #println(i, " ", (betas[i] - betas[i-1]) * pm[i-1] * c, " ", pm[i-1] * c)
+        #end
         new_betas[i] = new_betas[i-1] + (betas[i] - betas[i-1]) * pm[i-1] * c
     end
     @assert all(new_betas .> 0)
     @assert isapprox(new_betas[end], betas[end])
+
+    new_betas = alpha * new_betas + (1-alpha) * betas
 
     # Broadcast new temps
     new_temps = 1 ./ new_betas
