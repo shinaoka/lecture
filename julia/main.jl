@@ -390,6 +390,8 @@ function solve(input_file::String, comm)
     #M3 = mean_gather_array(acc, "M3", comm)
     op = mean_gather(acc, "op", comm)
     M2_AF = mean_gather(acc,"M2_AF",comm)
+    flush(stdout)
+    MPI.Barrier(comm)
     if rank == 0
         println()
         println("<E> <E^2> <C>")
@@ -435,10 +437,12 @@ function solve(input_file::String, comm)
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
         end
-    end
 
-    # Stat of Replica Exchange MC
-    print_stat(rex)
+        # Stat of Replica Exchange MC
+        print_stat(rex)
+    end
+    flush(stdout)
+    MPI.Barrier(comm)
 
 end
 
