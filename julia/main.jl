@@ -438,11 +438,12 @@ function solve(input_file::String, comm)
             println(" rank=", i-1, " : $t")
         end
 
-        # Stat of Replica Exchange MC
-        print_stat(rex)
     end
     flush(stdout)
     MPI.Barrier(comm)
+
+    # Stat of Replica Exchange MC
+    print_stat(rex)
 
 end
 
@@ -460,12 +461,5 @@ comm = MPI.COMM_WORLD
 rank = MPI.Comm_rank(comm)
 
 @time solve(args["input"], comm)
-
-      #@profile dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it])
-                #open("prof.txt", "w") do s
-                    #Profile.print(IOContext(s, :displaysize => (24, 500)))
-                #end
-                #exit()
-            #end
 
 MPI.Finalize()
