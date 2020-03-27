@@ -337,20 +337,18 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
-        """
         # Loop update
         ts_start = CPUtime_us()
         num_trial       = 10
-        num_reference   = 40
-        accept_rate = zeros(Int64,num_temps_local)
+        num_reference   = 10
+        accept_rate = zeros(Float64, num_temps_local)
         
         for it in 1:num_temps_local
-            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/temps[it+start_idx-1],triangles,spins_local[it])
+            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/rex.temps[it+start_idx-1],triangles,spins_local[it])
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
-        """
 
         # Measurement
         ts_start = CPUtime_us()
@@ -359,7 +357,7 @@ function solve(input_file::String, comm)
             add!(acc, "E2", energy_local.^2)
             add!(acc, "single_spin_flip_acc", single_spin_flip_acc)
             
-            #add!(acc, "accept_rate",accept_rate)
+            add!(acc, "accept_rate", accept_rate)
 
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
             add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.),unit_cell))
@@ -379,7 +377,7 @@ function solve(input_file::String, comm)
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
     single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
-    #accept_rate = mean_gather(acc,"accept_rate", comm)
+    accept_rate = mean_gather(acc,"accept_rate", comm)
     #ss = mean_gather_array(acc, "ss", comm)
     #Mz2 = mean_gather(acc, "Mz2", comm)
     #M2 = mean_gather(acc, "M2", comm)
@@ -416,20 +414,19 @@ function solve(input_file::String, comm)
         
         println("single_spin_flip_acc: ", single_spin_flip_acc)
       
-        """  
         println("acceptant rate: ")
         
         for i in 1:num_temps
-            println(temps[i], " ", accept_rate[i])
+            println(rex.temps[i], " ", accept_rate[i])
         end
         
-        
+        """  
         println("octopolar: ",op/num_spins^2)
         
         open("g.dat", "w") do fp
             for i in 1:num_temps
                 g = (3 - (M4[i]/(M2[i]^2))) / 2
-                println(fp, temps[i], " ", g)
+                println(fp, rex.temps[i], " ", g)
             end
         end
         """ 

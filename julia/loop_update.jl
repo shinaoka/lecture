@@ -39,6 +39,25 @@ function estimate_axes(spin::HeisenbergSpin,vec::Array{Float64,1})
     return x_axis,y_axis
 end
 
+function estimate_axes(spins::Array{HeisenbergSpin}, vec::Array{Float64})
+    #=
+    estimate x and y axis in a plane determined by the vec as (normal) vectors.
+    =#
+
+    function project(spin)
+       tmp = collect(spin) - dot(collect(spin),vec)*vec
+       return tmp/norm(tmp)
+    end
+    
+    x_axis0  = project(spins[1])
+    x_axis = sum([project(spins[i]) for i in eachindex(spins) if dot(project(spins[i]), x_axis0) > 1/2])
+    x_axis /= norm(x_axis)
+
+    y_axis  = cross(vec,x_axis)
+
+    return x_axis,y_axis
+end
+
 @enum Color red blue green black
 
 function mk_reference(spins::AbstractArray{HeisenbergSpin},num_reference::Int64)
@@ -419,7 +438,8 @@ function estimate_loc_coord(spins,num_reference)
     
     reference,indices = mk_reference(spins,num_reference)
     normal_vec = estimate_plane(reference)
-    x_axis,y_axis = estimate_axes(reference[1],normal_vec)
+    #x_axis,y_axis = estimate_axes(reference[1],normal_vec)
+    x_axis,y_axis = estimate_axes(reference, normal_vec)
   
     return indices,x_axis,y_axis,normal_vec
 end
