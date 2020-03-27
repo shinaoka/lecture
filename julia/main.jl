@@ -233,6 +233,10 @@ function solve(input_file::String, comm)
     num_spins = parse(Int64, retrieve(conf, "model", "num_spins"))
     Jij_file = retrieve(conf, "model", "Jij")
     temperature_file = retrieve(conf, "model", "temperatures")
+    is_xy = parse(Bool, retrieve(conf, "model", "xy_spins"))
+    if rank == 0 && is_xy
+        println("Using XY spins")
+    end
 
     num_sweeps       = parse(Int64, retrieve(conf, "simulation", "num_sweeps"))
     num_therm_sweeps = parse(Int64, retrieve(conf, "simulation", "num_therm_sweeps"))
@@ -308,7 +312,7 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         
         for it in 1:num_temps_local
-            dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it])
+            dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it], is_xy)
             energy_local[it] += dE
             single_spin_flip_acc[it] = acc_rate
         end

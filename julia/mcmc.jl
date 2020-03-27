@@ -154,10 +154,11 @@ end
 
 
 
-function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
+function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin}, xy::Bool=false)
     dE::Float64 = 0
     sigma_g     = sqrt(beta^-1)
     num_acc = 0
+    coeff_z = xy ? 0.0 : 1.0
     for ispin in 1:model.num_spins
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
@@ -167,7 +168,7 @@ function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JMo
         end
 
         # Propose a new spin direction : Gaussian trial move 
-        si_new = spins[ispin] .+ sigma_g .* (randn(Random.GLOBAL_RNG), rand(Random.GLOBAL_RNG), rand(Random.GLOBAL_RNG))
+        si_new = spins[ispin] .+ sigma_g .* (randn(Random.GLOBAL_RNG), rand(Random.GLOBAL_RNG), coeff_z*rand(Random.GLOBAL_RNG))
         si_new = si_new ./ norm(si_new)
  
         # Flip spin
