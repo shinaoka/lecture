@@ -244,6 +244,11 @@ function solve(input_file::String, comm)
     ex_interval      = parse(Int64, retrieve(conf, "simulation", "ex_interval"))
     seed             = parse(Int64, retrieve(conf, "simulation", "seed"))
 
+    # For loop updates
+    loop_num_trial  = parse(Int64, retrieve(conf, "loop_update", "num_trial"))
+    loop_num_reference_sites  = parse(Int64, retrieve(conf, "loop_update", "num_reference_sites"))
+    max_loop_length  = parse(Int64, retrieve(conf, "loop_update", "max_loop_length"))
+
     # Read a list of temperatures
     temps = read_temps(temperature_file)
     num_temps = length(temps)
@@ -332,26 +337,25 @@ function solve(input_file::String, comm)
         if mod(sweep, ex_interval) == 0
             perform!(rex, spins_local, energy_local, comm)
         end
-        push!(elpsCPUtime, CPUtime_us() - ts_start)
-        
-        # update temperatures distribution.
-        ts_start = CPUtime_us()
-        if sweep <= num_therm_sweeps && mod(sweep,100) == 0
+        if sweep <= num_therm_sweeps/2 && mod(sweep,100) == 0
             update_temps_dist!(rex,comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # Loop update
         ts_start = CPUtime_us()
-        num_trial       = 10
-        num_reference   = 10
         accept_rate = zeros(Float64, num_temps_local)
-        
         for it in 1:num_temps_local
-            dE,num_accept = multi_loop_update!(num_trial,num_reference,updater,1/rex.temps[it+start_idx-1],triangles,spins_local[it])
+            dE, num_accept = multi_loop_update!(loop_num_trial,
+                loop_num_reference_sites,updater,
+                1/rex.temps[it+start_idx-1],
+                triangles, max_loop_length, spins_local[it], rank==0)
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end
+        #if rank == 0
+            #println("debug_accept_rate ", accept_rate)
+        #end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # Measurement
@@ -374,7 +378,10 @@ function solve(input_file::String, comm)
             add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
         end
     end        
-    
+
+    #for it in 1:num_temps_local
+        #dE,num_accept = multi_loop_update!(loop_num_trial,loop_num_reference_sites,updater,1/rex.temps[it+start_idx-1],triangles,max_loop_length,spins_local[it],rank==0)
+    #end
     
 
     # Output results
@@ -418,8 +425,7 @@ function solve(input_file::String, comm)
         
         println("single_spin_flip_acc: ", single_spin_flip_acc)
       
-        println("acceptant rate: ")
-        
+        println("Acceptant rate of loop update: ")
         for i in 1:num_temps
             println(rex.temps[i], " ", accept_rate[i])
         end
