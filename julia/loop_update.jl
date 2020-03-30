@@ -160,81 +160,14 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Arra
             end
         end
     end
-    colors[is_black] = [black for i=1:length(colors[is_black])]
+    for isite in eachindex(colors)
+        if is_black[isite]
+            colors[isite] = black
+        end
+    end
 end    
 
-function find_breaking_triangle!(updater::SingleSpinFlipUpdater,colors::Array{Color})
-    #= 
-    breaking triangle has more than two site painted the same color.
-    =#
-    
-    #First,find nearest neighbor pair which have same color.
-    t1 = CPUtime_us()
-    same_color_pairs = []
-    
-    for idx=1:length(colors)
-        for ins=1:updater.coord_num[idx]
-            ns = updater.connection[ins,idx][1]
-            isnn = updater.connection[ins,idx][5] == 1
-            if isnn && colors[idx]==colors[ins] 
-                push!(same_color_pairs,(idx,ns))  
-            end
-        end
-    end
-    
-    t2 = CPUtime_us()
-
-    #Second,find nearest neighbor site from each same color pairs. 
-    breaking_triangle = Tuple{Int,Int,Int}[]
-    #println("same_color_pairs", length(same_color_pairs))
-    for idx=1:length(same_color_pairs)
-        i,j = same_color_pairs[idx]
-        tt1 = CPUtime_us()
-
-        nnset_i = Int[]
-        for ins=1:updater.coord_num[i]
-            ns = updater.connection[ins,i][1]
-            isnn = updater.connection[ins,i][5] == 1
-            if isnn 
-                push!(nnset_i,ns)  
-            end
-        end
-        tt2 = CPUtime_us()
-
-        nnset_j = Int[]
-        for ins=1:updater.coord_num[j]
-            ns = updater.connection[ins,j][1]
-            isnn = updater.connection[ins,j][5] == 1
-            if isnn 
-                push!(nnset_j,ns)  
-            end
-        end
-        tt3 = CPUtime_us()
-       
-        for temp in nnset_i
-            if in(temp,nnset_j)
-                push!(breaking_triangle,(i,j,temp)) 
-            end
-        end
-        tt4 = CPUtime_us()
-        #println(" inner_loop", tt2-tt1, " ", tt3-tt2, " ", tt4-tt3)
-
-    end
-    t3 = CPUtime_us()
-    
-    #Finally,assign black to sites on breaking triangles.
-    for i=1:length(breaking_triangle)
-        for j in collect(breaking_triangle[i])
-            colors[j] = black
-        end
-    end
-    t4 = CPUtime_us()
-    #println("breaking_t: ", t2-t1, " ", t3-t2, " ", t4-t3)
- 
-end
-
 function parallel_flip(spin::HeisenbergSpin,color::Color,x_axis,y_axis,z_axis)
-
     # Color typed variable red=0 blue=1 green=2 black=3.
     theta = Int(color) * 2pi/3
     mirror_vec = cos(theta) * x_axis + sin(theta) * y_axis
@@ -564,4 +497,12 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     return dE, num_accept/num_trial
 end
 
+"""
+struct LoopUpdater
+    num_spins::Int
+end
 
+function LoopUpdater(num_spins::Int)
+
+end
+"""
