@@ -1,6 +1,7 @@
 include("mcmc.jl")
 
 using LinearAlgebra
+using StaticArrays
 using Random
 
 function estimate_plane(spins::AbstractArray{HeisenbergSpin})
@@ -86,32 +87,26 @@ function paint_rbg_differently!(spins::AbstractArray{HeisenbergSpin},x_axis,y_ax
     #=
     rbg = red blue green. paint spins rbg based on its direction in local spin coordination.
     =#    
-    
      
-    num_spins = length(spins)
-
-    for i=1:num_spins
-        
-        if colors[i] !== black
-                
-            spin = collect(spins[i])
-            proj_unit_vec  = spin - (dot(spin,normal_vec))*normal_vec
-            proj_unit_vec /= norm(proj_unit_vec)  
-        
-            if dot(proj_unit_vec,x_axis) >= 1/2
-                    colors[i] = red
-            else
-                if dot(proj_unit_vec,y_axis) >= 0
-                    colors[i] = blue
-                else
-                    colors[i] = green
-                end
-            end
-
-       end
-
+    # Allocate static arrays as work space (much faster than using dynamic arrays)
+    xvec = SVector(x_axis[1], x_axis[2], x_axis[3])
+    yvec = SVector(y_axis[1], y_axis[2], y_axis[3])
+    zvec = SVector(normal_vec[1], normal_vec[2], normal_vec[3])
+    work = MVector(0.0, 0.0, 0.0)
+    for i in eachindex(spins)
+        if colors[i] == black
+            continue
+        end
+        for c = 1:3
+            work[c] = spins[i][c]
+        end
+        work[:]  = normalize(work - (dot(work,zvec))*zvec)
+        if dot(work, xvec) >= 1/2
+            colors[i] = red
+        else
+            colors[i] = dot(work, yvec) >= 0 ? blue : green
+        end
     end
- 
 end    
 
 function find_triangles(model::JModel, updater::SingleSpinFlipUpdater)
@@ -465,17 +460,14 @@ function estimate_loc_coord(spins,num_reference)
 end
 
 function mk_init_colors(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices,triangles::Array{Tuple{Int,Int,Int}})
-
-   #colors = [red for i=1:length(spins)]
-   t1 = CPUtime_us()
+   t1 = time_ns()
    colors = fill(red, length(spins))
    paint_black!(colors,indices)
-   t2 = CPUtime_us()
-
+   t2 = time_ns()
    paint_rbg_differently!(spins,x_axis,y_axis,z_axis,colors) 
-   t3 = CPUtime_us()
+   t3 = time_ns()
    find_breaking_triangle!(updater,triangles,colors) 
-   t4 = CPUtime_us()
+   t4 = time_ns()
    #println("mk_init_c ", t2-t1, " ", t3-t2, " ", t4-t3)
    
    return colors
@@ -536,39 +528,27 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
                             max_length::Int,
                             spins::AbstractArray{HeisenbergSpin},
                             check::Bool=false)
-
-    t1 = CPUtime_us()
     indices,x_axis,y_axis,normal_vec = estimate_loc_coord(spins,num_reference)
     if length(indices) == 0
         return 0.0, 0.0
     end
-    t2 = CPUtime_us()
 
+    t1 = time_ns()
     colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices,triangles)  
-    t3 = CPUtime_us()
-    #max_length = 2*Int(sqrt(length(spins)/3)) 
-    max_length = 1000
-    
+
+    t2 = time_ns()
+
     dE   = 0.
     work = zeros(Int, length(spins))
-    #println("")
+
+    t3 = time_ns()
     
     counter    = 0
     num_accept = 0 
     for i=1:num_trial
-        #if check
-            #println("")
-            #println("trial $i")
-        #end
         counter += 1
-        tt1 = CPUtime_us()
         first_spin_idx,colors_on_loop = mk_init_condition(length(spins),colors) 
-        tt2 = CPUtime_us()
-        #if check
-            #println("first_spin_idx $(first_spin_idx)")
-        #end
         if first_spin_idx == -1
-            #println("debug2 ", i, " ", tt2-tt1)
             continue
         end
         dE_tmp = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
@@ -576,15 +556,11 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
         if dE_tmp != 0
             num_accept += 1
         end
-        #if check
-           #println("dE $(dE_tmp)")
-        #end
-        tt3 = CPUtime_us()
-        ##println("debug2 ", i, " ", tt2-tt1, " ", tt3-tt2)
-        
     end
-    t4 = CPUtime_us()
-    #println("debug ", t2-t1, " ", t3-t2, " ", t4-t3)
+
+    t4 = time_ns()
+
+    #println("multi_loop: $(t2-t1) $(t3-t2) $(t4-t3)")
    
     return dE, num_accept/num_trial
 end
