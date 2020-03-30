@@ -559,9 +559,9 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     end
 
     t4 = time_ns()
-
     #println("multi_loop: $(t2-t1) $(t3-t2) $(t4-t3)")
    
     return dE, num_accept/num_trial
 end
+
 
