@@ -547,7 +547,6 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     colors = mk_init_colors(updater,spins,x_axis,y_axis,normal_vec,indices,triangles)  
     t3 = CPUtime_us()
     #max_length = 2*Int(sqrt(length(spins)/3)) 
-    max_length = 1000
     
     dE   = 0.
     work = zeros(Int, length(spins))
@@ -585,7 +584,13 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
     end
     t4 = CPUtime_us()
     #println("debug ", t2-t1, " ", t3-t2, " ", t4-t3)
-   
+    
+    if check 
+        println("debug ", t2-t1, " ", t3-t2, " ", t4-t3)
+    end
+
+           
     return dE, num_accept/num_trial
 end
+
 

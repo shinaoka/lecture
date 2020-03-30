@@ -19,7 +19,7 @@ J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
 #parameters for temepratures.
-num_temps = 72
+num_temps = 24
 min_T = 0.00001
 max_T = 0.1
 

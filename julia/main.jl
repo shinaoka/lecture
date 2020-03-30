@@ -337,7 +337,7 @@ function solve(input_file::String, comm)
         if mod(sweep, ex_interval) == 0
             perform!(rex, spins_local, energy_local, comm)
         end
-        if sweep <= num_therm_sweeps/2 && mod(sweep,100) == 0
+        if sweep <= Int(num_therm_sweeps/2) && mod(sweep,100) == 0
             update_temps_dist!(rex,comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -349,7 +349,7 @@ function solve(input_file::String, comm)
             dE, num_accept = multi_loop_update!(loop_num_trial,
                 loop_num_reference_sites,updater,
                 1/rex.temps[it+start_idx-1],
-                triangles, max_loop_length, spins_local[it], rank==0)
+                triangles, max_loop_length, spins_local[it],rank==0)
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end
@@ -440,6 +440,20 @@ function solve(input_file::String, comm)
             end
         end
         """ 
+        println("BEFORE OPEN H5FILE")
+        
+        println("temperatures less than 0.001: ",length(rex.temps[rex.temps .< 0.001]))
+
+        h5open("debug.h5","w") do fp
+            sx = [spins_local[1][site][1] for site=1:num_spins]
+            sy = [spins_local[1][site][2] for site=1:num_spins]
+            write(fp,"temps",rex.temps[1])
+            write(fp,"sx",sx)
+            write(fp,"sy",sy)
+        end
+       
+        println("AFTER CLOSE H5FILE")
+        
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
