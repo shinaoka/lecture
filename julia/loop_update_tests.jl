@@ -41,21 +41,23 @@ end
 
     
 function test_paint_rbg_differently!()
-
-    num_spins = 3
-    spins = fill((0.,0.,0.),num_spins)
-    
+    num_spins = 3 * 500
+    spins = fill((0.,0.,0.), num_spins)
     for i=1:num_spins
-        theta = i*(2*pi)/3         
+        theta = (i-1)*(2*pi)/3         
         spins[i] = (cos(theta),sin(theta),0.)
     end
     
-    reference_system = spins
-    reference_index  = [1,2,3]
     colors = [red for i=1:num_spins]
-    paint_rbg_differently!(spins,reference_system,reference_index,colors) 
+    x_axis = [1.0, 0.0, 0.0]
+    y_axis = [0.0, 1.0, 0.0]
+    z_axis = [0.0, 0.0, 1.0]
+
+    paint_rbg_differently!(spins, x_axis, y_axis, z_axis, colors) 
     
-    @test colors == [red,blue,green] 
+    @test all(colors[1:3:end] .== red)
+    @test all(colors[2:3:end] .== blue)
+    @test all(colors[3:3:end] .== green)
 end
 
 function test_find_breaking_triangle!()
