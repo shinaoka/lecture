@@ -18516,3 +18516,304 @@ Resource usage summary:
 
 The output (if any) follows:
 
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 7577: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon Mar 30 15:12:55 2020
+Results reported at Mon Mar 30 15:13:28 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    569.40 sec.
+
+The output (if any) follows:
+
+ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)
+Stacktrace:AssertionError: all(new_betas .> 0)
+Stacktrace:AssertionError: all(new_betas .> 0)
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:AssertionError: all(new_betas .> 0)
+Stacktrace:AssertionError: all(new_betas .> 0)AssertionError: all(new_betas .> 0)
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:AssertionError: all(new_betas .> 0)
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] AssertionError: all(new_betas .> 0)
+ [1] 
+ [1] 
+ [1] AssertionError: all(new_betas .> 0)
+Stacktrace:
+Stacktrace:
+ [1] 
+
+ [1]  [1] 
+Stacktrace:
+ [1] 
+ [1] 
+ [1] 
+ [1] 
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] 
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] 
+Stacktrace:
+Stacktrace:
+ [1] 
+Stacktrace:
+ [1] 
+ [1] update_temps_dist!
+ [1] update_temps_dist!
+ [1] update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!
+ [1] update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!update_temps_dist!(update_temps_dist!(::(update_temps_dist!((((::update_temps_dist!update_temps_dist!::(::::::::((((::(update_temps_dist!::::update_temps_dist!::((::::update_temps_dist!((::::::(::(::((::ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ::::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+(ReplicaExchange, ReplicaExchange, ::::MPI.MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] Commsolve(::)String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at util.jl:156
+ [4] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:485
+ [5]  at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] (ReplicaExchangeReplicaExchange, ::, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solveinclude at MPI.Comm) at ./boot.jl:326 [inlined]/misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [6] include_relative
+ [2] (::solve(::(String, Module, ::MPI.Comm)::String) at  at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] ./loading.jl:1038
+ [7] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+include(::Module [4] , ::String) at ./sysimg.jl:29
+ [8] exec_options(::::Base.String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] JLOptions) at ./client.jl:267
+ [9] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, include at ./boot.jl:326:: [inlined]
+ [5] include_relative(::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62Module, ::
+String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(:: [2] Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::JLOptions) at ./client.jl:267Base
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+.JLOptions) at ./client.jl:267
+ [8] _start(() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchangeinclude at ./boot.jl:326 [inlined]
+ [5] include_relative(::, Module::, ::String)MPI at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] ::solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ReplicaExchangeReplicaExchange, ::, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solveMPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62(
+ [2] solve(::::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String)ReplicaExchange at ./sysimg.jl:29
+, :: [7] exec_options(::MPI.CommBase.)JLOptions) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(:: at String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ./client.jl:267
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(:: [8] _startModule, ::String) at ./loading.jl:1038
+ [6] include((::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base) at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038include at ./boot.jl:326 [inlined]
+ [5] include_relative(::
+::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(:: [6] Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, ::ReplicaExchangeMPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62, 
+:: [2] solveMPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+(:: [2] String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Moduleinclude at ./boot.jl:326 [inlined]
+ [5] include_relative(::, ::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::StringBase.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487include at ./boot.jl:326 [inlined]
+ [4] 
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::ReplicaExchange, ::String) at MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62./sysimg.jl:29
+ [2] solve(::
+String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4]  [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::ReplicaExchange, String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::::Base.JLOptionsMPI) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm)include at ./boot.jl:326 [inlined] at /misc/home/kakizawa/lecture/julia/main.jl:341
+
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4]  [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::ReplicaExchangeModule, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions, ) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+::ReplicaExchange, MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+:: [2] solveMPI(::.String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] includeexec_options at ./boot.jl:326 [inlined]
+(:: [5] Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::MPI.Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Comm) at Base/misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] .JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
+ReplicaExchange, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:62
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/main.jl:341
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:487
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:484
