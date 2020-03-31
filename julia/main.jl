@@ -349,10 +349,10 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         accept_rate = zeros(Float64, num_temps_local)
         for it in 1:num_temps_local
-            dE, num_accept = multi_loop_update!(loop_num_trial,
+            dE, num_accept = multi_loop_update!(loop_updater, loop_num_trial,
                 loop_num_reference_sites,updater,
                 1/rex.temps[it+start_idx-1],
-                triangles, max_loop_length, spins_local[it],loop_updater.work,loop_updater.colors,rank==0)
+                triangles, max_loop_length, spins_local[it], rank==0)
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end

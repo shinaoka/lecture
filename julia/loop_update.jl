@@ -460,22 +460,37 @@ function mk_init_condition(num_spins::Int64,colors::Array{Color})
         return -1, (black, black)
     end
 end
+
+struct LoopUpdater
+    num_spins::Int
+    colors::Array{Color}
+    work::Array{Int}
+end
+
+function LoopUpdater(num_spins::Int)
+    colors = fill(red,num_spins)
+    work   = zeros(Int,num_spins)
+    return LoopUpdater(num_spins,colors,work) 
+end
+
   
-function multi_loop_update!(num_trial::Int64,num_reference::Int64,
+function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_reference::Int64,
                             updater::SingleSpinFlipUpdater,beta::Float64,
                             triangles::Array{Tuple{Int,Int,Int}},
                             max_length::Int,
                             spins::AbstractArray{HeisenbergSpin},
-                            work::Array{Int},
-                            colors::Array{Color},
                             check::Bool=false)
     indices,x_axis,y_axis,normal_vec = estimate_loc_coord(spins,num_reference)
     if length(indices) == 0
         return 0.0, 0.0
     end
 
+    # No copy
+    colors = loop_updater.colors
+    work = loop_updater.work
+
     t1 = time_ns()
-    mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors)  
+    mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors)
     t2 = time_ns()
 
     dE   = 0.
@@ -512,18 +527,3 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
    
     return dE, num_accept/num_trial
 end
-
-
-struct LoopUpdater
-    num_spins::Int
-    colors::Array{Color}
-    work::Array{Int}
-end
-
-function LoopUpdater(num_spins::Int)
-   
-    colors = fill(red,num_spins)
-    work   = zeros(Int,num_spins)
-    return LoopUpdater(num_spins,colors,work) 
-end
-
