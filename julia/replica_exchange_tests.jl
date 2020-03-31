@@ -3,6 +3,8 @@ using MPI
 
 include("replica_exchange.jl")
 
+const HeisenbergSpin = Tuple{Float64,Float64,Float64}
+
 # Number of temps per process
 const num_temps_local = 4
 const min_temp, max_temp = 1.0, 100.0
@@ -13,13 +15,15 @@ comm = MPI.COMM_WORLD
 rank = MPI.Comm_rank(comm)
 num_proc = MPI.Comm_size(comm)
 num_temps = num_temps_local * num_proc
+num_spins = 100
 
 #if num_proc == 1
     #error("Please run this test with multiple processes!")
 #end
 
 temps_init = collect(range(max_temp, stop=min_temp, length=num_proc*num_temps_local))
-rex = ReplicaExchange(temps_init, rank*num_temps_local+1, rank*num_temps_local+num_temps_local)
+rex = ReplicaExchange{HeisenbergSpin}(temps_init, rank*num_temps_local+1, rank*num_temps_local+num_temps_local, num_spins)
+@assert length(rex.recv_buffer) == num_spins
 
 # Our model: acceptance rate is propotional to the inverse of distance in beta.
 big_int = 1000000

@@ -285,7 +285,7 @@ function solve(input_file::String, comm)
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
 
     # Replica exchange
-    rex = ReplicaExchange(temps, start_idx, end_idx)
+    rex = ReplicaExchange{HeisenbergSpin}(temps, start_idx, end_idx, num_spins)
     temps = 0
 
     # Perform MC
@@ -340,7 +340,7 @@ function solve(input_file::String, comm)
         if mod(sweep, ex_interval) == 0
             perform!(rex, spins_local, energy_local, comm)
         end
-        if sweep <= Int(num_therm_sweeps/2) && rex.num_attemps[1] >= 100
+        if sweep <= Int(num_therm_sweeps/2) && rex.num_attemps >= 100
             update_temps_dist!(rex,comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
