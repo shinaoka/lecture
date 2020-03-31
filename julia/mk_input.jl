@@ -19,9 +19,9 @@ J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
 #parameters for temepratures.
-num_temps = 1
+num_temps = 72
 min_T = 0.0001
-max_T = min_T
+max_T = 0.1
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     

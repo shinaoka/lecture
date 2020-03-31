@@ -435,13 +435,11 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
     #end
     t4 = time_ns()
     
-    temp =  metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
-    t5 = time_ns()
+    t5 = time_ns() 
+    #println("one_loop_update: find_loop spin_flip compute_dE metropolis")
+    #println("one_loop_update: $(t5-t4) $(t4-t3) $(t3-t2) $(t2-t1)")
     
-    println("one_loop_update: find_loop spin_flip compute_dE metropolis")
-    println("one_loop_update: $(t5-t4) $(t4-t3) $(t3-t2) $(t2-t1)")
-    
-    return temp 
+    return metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
 end
 
 function mk_init_condition(num_spins::Int64,colors::Array{Color})
@@ -503,14 +501,14 @@ function multi_loop_update!(num_trial::Int64,num_reference::Int64,
             num_accept += 1
         end
         t7 = time_ns()
-        println("execution: init_condition one_update")
-        println("execution: $(t6-t5) $(t7-t6)")
+        #println("execution: init_condition one_update")
+        #println("execution: $(t6-t5) $(t7-t6)")
    
     end
 
     t4 = time_ns()
-    println("multi_loop: coloring work execution")
-    println("multi_loop: $(t2-t1) $(t3-t2) $(t4-t3)")
+    #println("multi_loop: coloring work execution")
+    #println("multi_loop: $(t2-t1) $(t3-t2) $(t4-t3)")
    
     return dE, num_accept/num_trial
 end
