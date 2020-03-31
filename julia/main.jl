@@ -296,6 +296,9 @@ function solve(input_file::String, comm)
 
     # Find all triangles for loop updates
     triangles = find_triangles(model, updater)
+  
+    # Create LoopUpdater 
+    loop_updater = LoopUpdater(num_spins)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
@@ -349,7 +352,7 @@ function solve(input_file::String, comm)
             dE, num_accept = multi_loop_update!(loop_num_trial,
                 loop_num_reference_sites,updater,
                 1/rex.temps[it+start_idx-1],
-                triangles, max_loop_length, spins_local[it],rank==0)
+                triangles, max_loop_length, spins_local[it],loop_updater.work,loop_updater.colors,rank==0)
             energy_local[it] += dE
             accept_rate[it]   = num_accept 
         end
@@ -409,20 +412,6 @@ function solve(input_file::String, comm)
         end
         println()
         
-        # paint latest spin configuration with lowest temperature differently.
-        num_reference = 10
-        indices,x_axis,y_axis,z_axis = estimate_loc_coord(spins_local[1],num_reference)
-        colors = mk_init_colors(updater,spins_local[1],x_axis,y_axis,z_axis,indices,triangles)
-        num_black = 0
-        for ic in colors
-            if ic == black
-                num_black += 1
-            end
-        end
-        
-        println("num_black: ",num_black)
-        println("num_black == num_spins?: ",num_black == num_spins)
-        
         println("single_spin_flip_acc: ", single_spin_flip_acc)
       
         println("Acceptant rate of loop update: ")
@@ -440,17 +429,9 @@ function solve(input_file::String, comm)
             end
         end
         """ 
-        println("BEFORE OPEN H5FILE")
         
         println("temperatures less than 0.001: ",length(rex.temps[rex.temps .< 0.001]))
 
-        h5open("debug.h5","w") do fp
-            sx = [spins_local[1][site][1] for site=1:num_spins]
-            sy = [spins_local[1][site][2] for site=1:num_spins]
-            write(fp,"temps",rex.temps[1])
-            write(fp,"sx",sx)
-            write(fp,"sy",sy)
-        end
        
         println("AFTER CLOSE H5FILE")
         
