@@ -395,6 +395,9 @@ function estimate_loc_coord(spins,num_reference)
 end
 
 function mk_init_colors!(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices,triangles::Array{Tuple{Int,Int,Int}},colors::Array{Color})
+   for i in eachindex(colors)
+       colors[i] = red
+   end
    t1 = time_ns()
    paint_black!(colors,indices)
    t2 = time_ns()
