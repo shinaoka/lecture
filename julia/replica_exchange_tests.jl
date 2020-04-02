@@ -4,17 +4,41 @@ using Test
 using MPI
 using Traceur
 
+include("mcmc.jl")
 include("replica_exchange.jl")
 
-function test()
-    HeisenbergSpin = Tuple{Float64,Float64,Float64}
-    
+function test_exchange(comm)
     # Number of temps per process
     num_temps_local = 4
     min_temp, max_temp = 1.0, 100.0
     
-    MPI.Init()
-    comm = MPI.COMM_WORLD
+    rank = MPI.Comm_rank(comm)
+    num_proc = MPI.Comm_size(comm)
+    num_temps = num_temps_local * num_proc
+    num_spins = 100
+    
+    temps_init = collect(range(max_temp, stop=min_temp, length=num_proc*num_temps_local))
+    rex = ReplicaExchange{HeisenbergSpin}(temps_init, rank*num_temps_local+1,
+        rank*num_temps_local+num_temps_local, num_spins)
+
+    config_local = [fill((0., 0., 1.), num_spins) for _ in 1:num_temps_local]
+    energy_local = fill(0.0, num_temps_local)
+    perform!(rex, config_local, energy_local, comm)
+
+    if rank == 0
+        @time perform!(rex, config_local, energy_local, comm)
+    else
+        perform!(rex, config_local, energy_local, comm)
+    end
+    #@trace perform!(rex, config_local, energy_local, comm)
+
+    @assert all(rex.num_accepted[1:end-1] .== 2)
+end
+    
+function test_update_dist(comm)
+    # Number of temps per process
+    num_temps_local = 4
+    min_temp, max_temp = 1.0, 100.0
     
     rank = MPI.Comm_rank(comm)
     num_proc = MPI.Comm_size(comm)
@@ -27,7 +51,6 @@ function test()
     
     temps_init = collect(range(max_temp, stop=min_temp, length=num_proc*num_temps_local))
     rex = ReplicaExchange{HeisenbergSpin}(temps_init, rank*num_temps_local+1, rank*num_temps_local+num_temps_local, num_spins)
-    @assert length(rex.recv_buffer) == num_spins
     
     # Our model: acceptance rate is propotional to the inverse of distance in beta.
     big_int = 1000000
@@ -51,6 +74,11 @@ function test()
     @assert all(isapprox.(d_betas_opt, abs(1/max_temp-1/min_temp)/(num_temps-1), rtol=1e-3))
 end
 
-test()
+MPI.Init()
+comm = MPI.COMM_WORLD
     
+test_update_dist(comm)
+test_exchange(comm)
+    
+MPI.Finalize()
 end

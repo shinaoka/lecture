@@ -7,7 +7,10 @@ mutable struct ReplicaExchange{T}
     num_accepted::Array{UInt64}
     start_idx::UInt64
     end_idx::UInt64
-    recv_buffer::Array{T}
+    #recv_buffer::Array{T}
+    recv_buffer::Array{Float64}
+    send_buffer::Array{Float64}
+    BufferType::Type
 end
 
 function ReplicaExchange{T}(temps_init::Array{Float64}, start_idx, end_idx, num_spins) where T
@@ -19,7 +22,13 @@ function ReplicaExchange{T}(temps_init::Array{Float64}, start_idx, end_idx, num_
     if any(temps_init .== 0.0)
         error("Zero temperature is not allowed!")
     end
-    ReplicaExchange{T}(copy(temps_init), 0, zeros(UInt64, num_temps_local), start_idx, end_idx, Array{T}(undef, num_spins))
+    ReplicaExchange{T}(copy(temps_init), 0, zeros(UInt64, num_temps_local),
+        start_idx, end_idx,
+        #Array{T}(undef, num_spins),
+        collect(reinterpret(Float64, Array{T}(undef, num_spins))),
+        collect(reinterpret(Float64, Array{T}(undef, num_spins))),
+        Float64
+    )
 end
 
 function swap_configs(energy_local::Array{Float64}, config_local::Array{Array{T,1},1}, i, j) where T
@@ -75,7 +84,7 @@ function update_temps_dist!(rex::ReplicaExchange, comm)
     reset_stats!(rex)
 end
 
-function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
+function perform!(rex::ReplicaExchange, config_local::Array{Array{T,1},1}, energy_local::Array{Float64}, comm) where T
     rex.num_attemps += 1
 
     rank = MPI.Comm_rank(comm)
@@ -142,20 +151,22 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
         end
 
         # Swap configs
+        rex.send_buffer[:] = reinterpret(rex.BufferType, config_local[my_idx])
         if mod(rank, 2) == 0
             rreq = MPI.Irecv!(rex.recv_buffer, target_rank, 2000, comm)
-            sreq = MPI.Isend(config_local[my_idx], target_rank, 2002, comm)
+            sreq = MPI.Isend(rex.send_buffer, target_rank, 2002, comm)
             stats = MPI.Waitall!([rreq, sreq])
-            config_local[my_idx][:] = rex.recv_buffer[:]
+            config_local[my_idx][:] = reinterpret(T, rex.recv_buffer)
 
             (new_ene, _) = MPI.recv(target_rank, 2001, comm)
             MPI.send(energy_local[my_idx], target_rank, 2003, comm)
             energy_local[my_idx] = new_ene
         else
-            sreq = MPI.Isend(config_local[my_idx], target_rank, 2000, comm)
+            sreq = MPI.Isend(rex.send_buffer, target_rank, 2000, comm)
             rreq = MPI.Irecv!(rex.recv_buffer, target_rank, 2002, comm)
             stats = MPI.Waitall!([rreq, sreq])
-            config_local[my_idx][:] = rex.recv_buffer[:]
+            #config_local[my_idx][:] = rex.recv_buffer[:]
+            config_local[my_idx][:] = reinterpret(T, rex.recv_buffer)
 
             MPI.send(energy_local[my_idx], target_rank, 2001, comm)
             (new_ene, _) = MPI.recv(target_rank, 2003, comm)
@@ -164,7 +175,7 @@ function perform!(rex::ReplicaExchange, config_local, energy_local, comm)
     end
 end
 
-function print_stat(rex::ReplicaExchange)
+function print_stat(rex::ReplicaExchange, comm)
     rank = MPI.Comm_rank(comm)
     num_accepted = MPI.Gather(rex.num_accepted, 0, comm)
     if MPI.Comm_rank(comm) == 0
