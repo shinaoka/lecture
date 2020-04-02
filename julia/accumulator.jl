@@ -1,4 +1,5 @@
 using MPI
+using Test
 using EllipsisNotation
 
 struct Accumulator

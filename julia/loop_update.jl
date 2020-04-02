@@ -216,25 +216,22 @@ function mk_new_spins_on_loop(loop_length, spins_on_loop,
     #return new_spins_on_loop
 end
 
-
-function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)::Int64
+function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{Color},
+    colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)::Int64
     #=
     All elements of work must be initialized to zero.
     =#
     num_spins = updater.num_spins
 
     # Optional expensive check
-    #if check
-        #@assert all(work .== 0)
-    #end
     @assert length(work) >= num_spins
     @assert colors[first_spin_idx] == colors_on_loop[1] || colors[first_spin_idx] == colors_on_loop[2]
 
     work[first_spin_idx] = 1
     spins_on_loop[1] = first_spin_idx
-    loop_length = 1
-    spin_before::SpinIndex = -1
-    current_spin_idx = first_spin_idx
+    loop_length::Int64 = 1
+    spin_before::Int64 = -1
+    current_spin_idx::Int64 = first_spin_idx
 
     max_coord_num = maximum(updater.coord_num)
     candidate_spins = zeros(UInt, max_coord_num)
@@ -251,19 +248,11 @@ function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{
         # Search connected spins
         n_candidate = 0
         next_color = colors[current_spin_idx]==colors_on_loop[1] ? colors_on_loop[2] : colors_on_loop[1]
-        for ins=1:updater.coord_num[current_spin_idx]
+        for ins in 1:updater.coord_num[current_spin_idx]
             # candidate must be either the first spin on the loop (work[ns]==1) or unvisited (work[ns]==0)
-            ns::SpinIndex = updater.connection[ins,current_spin_idx][1]
+            ns::SpinIndex = updater.connected_sites[ins,current_spin_idx]
             # Is ns a nearest neighborb site from current site?
-            isnn = updater.connection[ins,current_spin_idx][5] == 1
-            #if check && isnn
-               #println(" ns $(ns) color $(colors[ns]) next_color $(next_color) work $(work[ns]) spin_before $(spin_before)")
-            #end
-            #flag1::Bool = colors[ns]==next_color
-            #flag2::Bool = work[ns] <= 1
-            #flag3::Bool = ns != spin_before
-            #if isnn && flag1 && flag2 && flag3
-            if isnn && colors[ns]==next_color && work[ns] <= 1 && ns != spin_before
+            if updater.is_NN[ins,current_spin_idx] && colors[ns]==next_color && work[ns] <= 1 && ns != spin_before
                 n_candidate += 1
                 candidate_spins[n_candidate] = ns
             end
@@ -273,7 +262,6 @@ function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{
             break
         end
 
-        #next_spin_idx = rand(candidate_spins[1:n_candidate])
         next_spin_idx = candidate_spins[rand(1:n_candidate)]
         if work[next_spin_idx] == 1
             # OK, we've returned to the starting point.
@@ -296,10 +284,6 @@ function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{
     for l=1:loop_length
         work[spins_on_loop[l]] = 0
     end
-    # Optional expensive check
-    #if check
-        #@assert all(work .== 0)
-    #end
 
     if success
         return loop_length
@@ -519,9 +503,9 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors)
     t1_e = time_ns()
     timings[1] += t1_e - t1_s
-    if check
-       println("mk_init_color: $(1/beta) $(t1_e-t1_s)")
-    end
+    #if check
+       #println("mk_init_color: $(1/beta) $(t1_e-t1_s)")
+    #end
 
     dE   = 0.
     counter    = 0
@@ -534,9 +518,9 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
         first_spin_idx,colors_on_loop = mk_init_condition(length(spins),colors) 
         t2_e = time_ns()
         timings[2] += t2_e - t2_s
-        if check
-           println("mk_init_condition: $(1/beta) $(t2_e-t2_s)")
-        end
+        #if check
+           #println("mk_init_condition: $(1/beta) $(t2_e-t2_s)")
+        #end
         if first_spin_idx == -1
             continue
         end
@@ -545,9 +529,9 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
         loop_found, dE_tmp, tt1, tt2, tt3, tt4 = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,
                spins, new_spins, updater,colors,colors_on_loop,first_spin_idx,max_length,work,spins_on_loop,check) 
         t3_e = time_ns()
-        if check
-           println("one_loop_update $(1/beta) $(tt1) $(tt2) $(tt3) $(tt4)")
-        end
+        #if check
+           #println("one_loop_update $(1/beta) $(tt1) $(tt2) $(tt3) $(tt4)")
+        #end
         timings[3] += t3_e - t3_s
         dE += dE_tmp
         if loop_found

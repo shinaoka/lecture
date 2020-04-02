@@ -1,6 +1,9 @@
 using Test
+
 include("loop_update_tests.jl")
-include("main.jl")
+include("classical_mc.jl")
+
+using ClassicalMC
 
 println("unit test results")
 

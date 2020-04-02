@@ -1,8 +1,11 @@
+module ClassicalMC
+
 using Test
 using Random
 using Profile
-include("loop_update.jl")
+using Traceur
 
+include("loop_update.jl")
 
 function test_estimate_plane()
     num_spins = 4
@@ -227,13 +230,8 @@ function test_find_loop(model::JModel, colors::Array{Color})
 
     loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
     @assert all(work .== 0)
-
-    """
-    find_loop2(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
-    Profile.clear_malloc_data()
-    @time find_loop2(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
-    @assert all(work .== 0)
-    """
+    @time loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
+    #@trace loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
 
     println("loop length: ", loop_length)
     @assert loop_length > 2
@@ -290,4 +288,6 @@ if abspath(PROGRAM_FILE) == @__FILE__
     model, colors = all_to_all_model(20)
     println("all_to_all_model results")
     test_find_loop(model, colors)
+end
+
 end

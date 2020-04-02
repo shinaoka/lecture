@@ -16,6 +16,5 @@ Pkg.add("Test")
 Pkg.add("LaTeXStrings")
 Pkg.add("FFTW")
 Pkg.add("Distributions")
-
-
-
+Pkg.add("Traceur")
+Pkg.add("Profile")
