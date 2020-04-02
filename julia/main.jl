@@ -298,7 +298,7 @@ function solve(input_file::String, comm)
     triangles = find_triangles(model, updater)
   
     # Create LoopUpdater 
-    loop_updater = LoopUpdater(num_spins)
+    loop_updater = LoopUpdater{HeisenbergSpin}(num_spins, max_loop_length)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)

@@ -1,5 +1,6 @@
 using Test
 using Random
+using Profile
 include("loop_update.jl")
 
 
@@ -127,6 +128,7 @@ function test_mk_init_colors()
 end
 
     
+"""
 function test_parallel_flip()
     
     reference = [(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3]
@@ -139,29 +141,35 @@ function test_parallel_flip()
     @test isapprox(collect(new_spin),collect(reference[3]))
 
 end
+"""
 
 function test_mk_new_spins_on_loop()
-
-    reference = [(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3]
+    n_repeat = 10
+    reference = repeat([(cos(i*2pi/3),sin(i*2pi/3),0.) for i=1:3], n_repeat)
     colors_on_loop = (blue,green)
     normal_vec = estimate_plane(reference)    
     x_axis,y_axis = estimate_axes(reference[1],normal_vec)
  
     spins_on_loop = reference
+    loop_length = length(spins_on_loop)
  
-    new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,normal_vec)
-    expected_spins = [spins_on_loop[1],spins_on_loop[3],spins_on_loop[2]]
+    new_spins_on_loop = fill((0., 0., 0.), loop_length)
+    mk_new_spins_on_loop(loop_length, spins_on_loop, new_spins_on_loop, colors_on_loop,x_axis,y_axis,normal_vec)
+    expected_spins = repeat([spins_on_loop[1],spins_on_loop[3],spins_on_loop[2]], n_repeat)
 
     @test all(isapprox.(collect.(new_spins_on_loop),collect.(expected_spins)))
+
+    @time mk_new_spins_on_loop(loop_length, spins_on_loop, new_spins_on_loop, colors_on_loop,x_axis,y_axis,normal_vec)
 end
 
 function test_update_colors()
   
     colors = [blue for i=1:10]
     spin_idx_on_loop = [UInt(2i) for i=1:5]
+    loop_length = length(spin_idx_on_loop)
     colors_on_loop = (blue,green)
     
-    update_colors!(colors,colors_on_loop,spin_idx_on_loop)
+    update_colors!(colors,colors_on_loop,loop_length,spin_idx_on_loop)
     blue_array  = [blue for i=1:5]
     green_array = [green for i=1:5]
     @test all(colors[1:2:10].==blue_array) && all(colors[2:2:10].==green_array)
@@ -213,9 +221,19 @@ function test_find_loop(model::JModel, colors::Array{Color})
     work = fill(0, num_spins)
     colors_on_loop = (red, blue)
     start_spin_idx = findfirst(x->x==colors_on_loop[1], colors)
-    spin_idx_on_loop = find_loop(u, colors, colors_on_loop, start_spin_idx, num_spins, work, true)
 
-    loop_length = length(spin_idx_on_loop)
+    max_loop_length = num_spins
+    spin_idx_on_loop = zeros(UInt, max_loop_length)
+
+    loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
+    @assert all(work .== 0)
+
+    """
+    find_loop2(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
+    Profile.clear_malloc_data()
+    @time find_loop2(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
+    @assert all(work .== 0)
+    """
 
     println("loop length: ", loop_length)
     @assert loop_length > 2
@@ -233,7 +251,7 @@ function test_find_loop(model::JModel, colors::Array{Color})
    
     spins = fill((0.,0.,1.), num_spins)
     new_spins_on_loop = fill((0.,0.,-1.), loop_length)
-    dE = compute_dE_loop(u, spin_idx_on_loop, spins, new_spins_on_loop, work, true)
+    dE = compute_dE_loop(u, loop_length, spin_idx_on_loop, spins, new_spins_on_loop, work, true)
 
     new_spins = copy(spins)
     for i in 1:loop_length
@@ -253,17 +271,20 @@ if abspath(PROGRAM_FILE) == @__FILE__
     #test_paint_rbg_differently!()
     test_find_breaking_triangle!()
     test_find_breaking_triangle2()
-    test_parallel_flip()
+    #test_parallel_flip()
     test_mk_new_spins_on_loop()
     test_update_colors()
     
     #test_mk_init_colors()
     #test_mk_init_condition()
     
+    """
+    DEBUG
     Random.seed!(10)
     model, colors = ring_plus_one_model()
     println("ring_plus_one_model results")
     test_find_loop(model, colors)
+    """
     
     Random.seed!(10)
     model, colors = all_to_all_model(20)
