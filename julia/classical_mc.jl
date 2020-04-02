@@ -451,7 +451,7 @@ function solve(input_file::String, comm)
     MPI.Barrier(comm)
 
     # Stat of Replica Exchange MC
-    print_stat(rex)
+    print_stat(rex, comm)
 end
 
 end
