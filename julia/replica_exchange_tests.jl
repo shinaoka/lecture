@@ -15,7 +15,7 @@ function test_exchange(comm)
     rank = MPI.Comm_rank(comm)
     num_proc = MPI.Comm_size(comm)
     num_temps = num_temps_local * num_proc
-    num_spins = 100
+    num_spins = 10
     
     temps_init = collect(range(max_temp, stop=min_temp, length=num_proc*num_temps_local))
     rex = ReplicaExchange{HeisenbergSpin}(temps_init, rank*num_temps_local+1,
@@ -77,7 +77,8 @@ end
 MPI.Init()
 comm = MPI.COMM_WORLD
     
-test_update_dist(comm)
+#DEBUG
+#test_update_dist(comm)
 test_exchange(comm)
     
 MPI.Finalize()

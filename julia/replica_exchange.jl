@@ -46,9 +46,10 @@ end
 # Update the distribution of temperatures using an idea similar to the one described in Sec. 3 of K. Hukushima and K. Nemoto (1996)
 # Note: Equation (11) looks wrong.
 function update_temps_dist!(rex::ReplicaExchange, comm)
+    MPI.Barrier(comm)
+
     # mixing parameter
     alpha = 0.1
-    MPI.Barrier(comm)
     rank = MPI.Comm_rank(comm)
     num_accepted = MPI.Allgather(rex.num_accepted, comm)
     num_temps = length(rex.temps)
@@ -85,6 +86,8 @@ function update_temps_dist!(rex::ReplicaExchange, comm)
 end
 
 function perform!(rex::ReplicaExchange, config_local::Array{Array{T,1},1}, energy_local::Array{Float64}, comm) where T
+    MPI.Barrier(comm)
+
     rex.num_attemps += 1
 
     rank = MPI.Comm_rank(comm)
@@ -113,8 +116,6 @@ function perform!(rex::ReplicaExchange, config_local::Array{Array{T,1},1}, energ
     # iex = 1: 0<->1, 2<->3, 4<->5, ..
     # iex = 2: 1<->2, 3<->4, 5<->6, ..
     for iex in 1:2
-        MPI.Barrier(comm)
-
         if mod(rank, 2) == 0
             target_rank = rank - (-1)^iex
         else
@@ -165,14 +166,19 @@ function perform!(rex::ReplicaExchange, config_local::Array{Array{T,1},1}, energ
             sreq = MPI.Isend(rex.send_buffer, target_rank, 2000, comm)
             rreq = MPI.Irecv!(rex.recv_buffer, target_rank, 2002, comm)
             stats = MPI.Waitall!([rreq, sreq])
-            #config_local[my_idx][:] = rex.recv_buffer[:]
             config_local[my_idx][:] = reinterpret(T, rex.recv_buffer)
 
             MPI.send(energy_local[my_idx], target_rank, 2001, comm)
             (new_ene, _) = MPI.recv(target_rank, 2003, comm)
             energy_local[my_idx] = new_ene
         end
+        #if rank == 0
+           #println("DEBUGTT $(tt2-tt1) $(tt3-tt2) $(tt4-tt3) $(tt5-tt4)")
+        #end
     end
+    #if rank == 0
+       #println("DEBUG $(t2-t1) $(t3-t2) $(t4-t3)")
+    #end
 end
 
 function print_stat(rex::ReplicaExchange, comm)
