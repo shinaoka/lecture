@@ -347,15 +347,15 @@ function solve(input_file::String, comm)
 
         # Loop update
         ts_start = CPUtime_us()
-        accept_rate = zeros(Float64, num_temps_local)
+        loop_found_rate = zeros(Float64, num_temps_local)
+        loop_acc_rate = zeros(Float64, num_temps_local)
         if loop_num_trial > 0
             for it in 1:num_temps_local
-                dE, num_accept = multi_loop_update!(loop_updater, loop_num_trial,
+                dE, loop_found_rate[it], loop_acc_rate[it] = multi_loop_update!(loop_updater, loop_num_trial,
                     loop_num_reference_sites,updater,
                     1/rex.temps[it+start_idx-1],
                     triangles, max_loop_length, spins_local[it], rank==0)
                 energy_local[it] += dE
-                accept_rate[it]   = num_accept 
             end
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -367,7 +367,8 @@ function solve(input_file::String, comm)
             add!(acc, "E2", energy_local.^2)
             add!(acc, "single_spin_flip_acc", single_spin_flip_acc)
             
-            add!(acc, "accept_rate", accept_rate)
+            add!(acc, "loop_found_rate", loop_found_rate)
+            add!(acc, "loop_accept_rate", loop_acc_rate)
 
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
             add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.),unit_cell))
@@ -390,7 +391,8 @@ function solve(input_file::String, comm)
     E = mean_gather(acc, "E", comm)
     E2 = mean_gather(acc, "E2", comm)
     single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
-    accept_rate = mean_gather(acc,"accept_rate", comm)
+    loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
+    loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
     #ss = mean_gather_array(acc, "ss", comm)
     #Mz2 = mean_gather(acc, "Mz2", comm)
     #M2 = mean_gather(acc, "M2", comm)
@@ -415,7 +417,7 @@ function solve(input_file::String, comm)
       
         println("Acceptant rate of loop update: ")
         for i in 1:num_temps
-            println(rex.temps[i], " ", accept_rate[i])
+            println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
         end
         
         """  

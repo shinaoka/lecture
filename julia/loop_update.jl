@@ -419,11 +419,11 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
                           first_spin_idx::Int,
                           max_length::Int,
                           work::Array{Int},
-                          check::Bool=false)::Float64
+                          check::Bool=false)::Tuple{Bool,Float64}
     t1 = time_ns()
     spin_idx_on_loop = find_loop(updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
     if length(spin_idx_on_loop) == 0
-        return 0.0
+        return false, 0.0
     end
     t2 = time_ns()
     spins_on_loop = spins[spin_idx_on_loop]
@@ -442,7 +442,8 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
     #println("one_loop_update: find_loop spin_flip compute_dE metropolis")
     #println("one_loop_update: $(t5-t4) $(t4-t3) $(t3-t2) $(t2-t1)")
     
-    return metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
+    dE = metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
+    return (true, dE)
 end
 
 function mk_init_condition(num_spins::Int64,colors::Array{Color})
@@ -502,6 +503,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     
     counter    = 0
     num_accept = 0 
+    num_loop_found = 0
     
     for i=1:num_trial
         counter += 1
@@ -512,8 +514,11 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
         end
         t6 = time_ns()
 
-        dE_tmp = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
+        loop_found, dE_tmp = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
         dE += dE_tmp
+        if loop_found
+            num_loop_found += 1
+        end
      
         if dE_tmp != 0
             num_accept += 1
@@ -528,5 +533,5 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     #println("multi_loop: coloring work execution")
     #println("multi_loop: $(t2-t1) $(t3-t2) $(t4-t3)")
    
-    return dE, num_accept/num_trial
+    return dE, num_loop_found/num_trial, num_accept/num_trial
 end
