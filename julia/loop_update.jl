@@ -419,31 +419,26 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
                           first_spin_idx::Int,
                           max_length::Int,
                           work::Array{Int},
-                          check::Bool=false)::Tuple{Bool,Float64}
+                          check::Bool=false)::Tuple{Bool,Float64, Float64, Float64, Float64, Float64}
     t1 = time_ns()
     spin_idx_on_loop = find_loop(updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
-    if length(spin_idx_on_loop) == 0
-        return false, 0.0
-    end
     t2 = time_ns()
+    if length(spin_idx_on_loop) == 0
+        return false, 0.0,  t2-t1, 0.0, 0.0, 0.0
+    end
     spins_on_loop = spins[spin_idx_on_loop]
 
     new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,z_axis)
     t3 = time_ns()
     dE = compute_dE_loop(updater,spin_idx_on_loop,spins,new_spins_on_loop,work,check)
-    #if check
-        #println("spins_on_loop $(spins_on_loop)")
-        #println("new_spins_on_loop $(new_spins_on_loop)")
-        #println("True dE $(dE)")
-    #end
     t4 = time_ns()
     
     t5 = time_ns() 
     #println("one_loop_update: find_loop spin_flip compute_dE metropolis")
     #println("one_loop_update: $(t5-t4) $(t4-t3) $(t3-t2) $(t2-t1)")
-    
     dE = metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
-    return (true, dE)
+    t6 = time_ns() 
+    return true, dE, t2-t1, t3-t2, t4-t3, t6-t5
 end
 
 function mk_init_condition(num_spins::Int64,colors::Array{Color})
@@ -493,28 +488,41 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     colors = loop_updater.colors
     work = loop_updater.work
 
-    t1 = time_ns()
+    timings = zeros(Float64, 3)
+
+    t1_s = time_ns()
     mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors)
-    t2 = time_ns()
+    t1_e = time_ns()
+    timings[1] += t1_e - t1_s
+    if check
+       println("mk_init_color: $(1/beta) $(t1_e-t1_s)")
+    end
 
     dE   = 0.
-
-    t3 = time_ns()
-    
     counter    = 0
     num_accept = 0 
     num_loop_found = 0
     
     for i=1:num_trial
         counter += 1
-        t5 = time_ns()
+        t2_s = time_ns()
         first_spin_idx,colors_on_loop = mk_init_condition(length(spins),colors) 
+        t2_e = time_ns()
+        timings[2] += t2_e - t2_s
+        if check
+           println("mk_init_condition: $(1/beta) $(t2_e-t2_s)")
+        end
         if first_spin_idx == -1
             continue
         end
-        t6 = time_ns()
 
-        loop_found, dE_tmp = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
+        t3_s = time_ns()
+        loop_found, dE_tmp, tt1, tt2, tt3, tt4 = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
+        t3_e = time_ns()
+        if check
+           println("one_loop_update $(1/beta) $(tt1) $(tt2) $(tt3) $(tt4)")
+        end
+        timings[3] += t3_e - t3_s
         dE += dE_tmp
         if loop_found
             num_loop_found += 1
@@ -523,15 +531,15 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
         if dE_tmp != 0
             num_accept += 1
         end
-        t7 = time_ns()
         #println("execution: init_condition one_update")
         #println("execution: $(t6-t5) $(t7-t6)")
-   
     end
 
-    t4 = time_ns()
     #println("multi_loop: coloring work execution")
     #println("multi_loop: $(t2-t1) $(t3-t2) $(t4-t3)")
+    #if check
+       #println("multi_loop: $(1/beta) $(timings)")
+    #end
    
     return dE, num_loop_found/num_trial, num_accept/num_trial
 end
