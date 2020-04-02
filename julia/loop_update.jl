@@ -170,59 +170,70 @@ function find_breaking_triangle!(updater::SingleSpinFlipUpdater, triangles::Arra
     end
 end    
 
-function parallel_flip(spin::HeisenbergSpin,color::Color,x_axis,y_axis,z_axis)
+function parallel_flip(loop_length::Int,
+    spins::Array{HeisenbergSpin},
+    new_spins::Array{HeisenbergSpin},
+    color::Color,x_axis,y_axis,z_axis)
+
+    xvec = SVector(x_axis[1], x_axis[2], x_axis[3])
+    yvec = SVector(y_axis[1], y_axis[2], y_axis[3])
+    zvec = SVector(z_axis[1], z_axis[2], z_axis[3])
+    spin = MVector(0.0, 0.0, 0.0)
+    spin_on_plane = MVector(0.0, 0.0, 0.0)
+
     # Color typed variable red=0 blue=1 green=2 black=3.
     theta = Int(color) * 2pi/3
-    mirror_vec = cos(theta) * x_axis + sin(theta) * y_axis
- 
-    spin = collect(spin)
-    spin_on_plane = spin - (dot(spin,z_axis)) * z_axis
-    
-    # parallel flip
-    temp = (dot(spin_on_plane,mirror_vec)) * mirror_vec 
-    flipped_spin = 2 * temp - spin_on_plane
+    mirror_vec = cos(theta) * xvec + sin(theta) * yvec
 
-    return Tuple(flipped_spin + (dot(spin,z_axis)) * z_axis)
+    for i in 1:loop_length
+        for ix in 1:3
+           spin[ix] = spins[i][ix]
+        end
+        spin_on_plane[:] = spin - (dot(spin,zvec)) * zvec
+
+        # parallel flip
+        temp = (dot(spin_on_plane, mirror_vec)) * mirror_vec 
+        flipped_spin = 2 * temp - spin_on_plane
+        new_spin = flipped_spin + (dot(spin, zvec)) * zvec
+        new_spins[i] = (new_spin[1], new_spin[2], new_spin[3])
+    end
 end
 
-function mk_new_spins_on_loop(spins_on_loop,colors_on_loop::Tuple{Color,Color},x_axis,y_axis,z_axis)
+function mk_new_spins_on_loop(loop_length, spins_on_loop,
+    new_spins_on_loop,
+    colors_on_loop::Tuple{Color,Color},x_axis,y_axis,z_axis)
     
     # find the color there are not on a loop
     color = red
     for ic in [red,blue,green]
-        if !in(ic,collect(colors_on_loop))
+        if ic != colors_on_loop[1] && ic != colors_on_loop[2]
             color = ic
         end
     end
 
-    loop_length       = length(spins_on_loop)
-    new_spins_on_loop = fill((0.,0.,0.),loop_length)
-
-    for i=1:loop_length
-        new_spins_on_loop[i] = parallel_flip(spins_on_loop[i],color,x_axis,y_axis,z_axis) 
-    end
-    return new_spins_on_loop
+    #new_spins_on_loop = fill((0.,0.,0.),loop_length)
+    parallel_flip(loop_length, spins_on_loop, new_spins_on_loop, color,x_axis,y_axis,z_axis) 
+    #return new_spins_on_loop
 end
 
 
-function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)
+function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_on_loop::Tuple{Color,Color}, first_spin_idx::Int, max_length::Int, work::Array{Int}, check::Bool=false)::Int64
     #=
     All elements of work must be initialized to zero.
     =#
     num_spins = updater.num_spins
 
     # Optional expensive check
-    if check
-        @assert all(work .== 0)
-    end
+    #if check
+        #@assert all(work .== 0)
+    #end
     @assert length(work) >= num_spins
     @assert colors[first_spin_idx] == colors_on_loop[1] || colors[first_spin_idx] == colors_on_loop[2]
 
     work[first_spin_idx] = 1
-    spins_on_loop = zeros(UInt, max_length)
     spins_on_loop[1] = first_spin_idx
     loop_length = 1
-    spin_before = -1
+    spin_before::SpinIndex = -1
     current_spin_idx = first_spin_idx
 
     max_coord_num = maximum(updater.coord_num)
@@ -242,12 +253,16 @@ function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_
         next_color = colors[current_spin_idx]==colors_on_loop[1] ? colors_on_loop[2] : colors_on_loop[1]
         for ins=1:updater.coord_num[current_spin_idx]
             # candidate must be either the first spin on the loop (work[ns]==1) or unvisited (work[ns]==0)
-            ns = updater.connection[ins,current_spin_idx][1]
+            ns::SpinIndex = updater.connection[ins,current_spin_idx][1]
             # Is ns a nearest neighborb site from current site?
             isnn = updater.connection[ins,current_spin_idx][5] == 1
             #if check && isnn
                #println(" ns $(ns) color $(colors[ns]) next_color $(next_color) work $(work[ns]) spin_before $(spin_before)")
             #end
+            #flag1::Bool = colors[ns]==next_color
+            #flag2::Bool = work[ns] <= 1
+            #flag3::Bool = ns != spin_before
+            #if isnn && flag1 && flag2 && flag3
             if isnn && colors[ns]==next_color && work[ns] <= 1 && ns != spin_before
                 n_candidate += 1
                 candidate_spins[n_candidate] = ns
@@ -258,6 +273,7 @@ function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_
             break
         end
 
+        #next_spin_idx = rand(candidate_spins[1:n_candidate])
         next_spin_idx = candidate_spins[rand(1:n_candidate)]
         if work[next_spin_idx] == 1
             # OK, we've returned to the starting point.
@@ -281,21 +297,22 @@ function find_loop(updater::SingleSpinFlipUpdater, colors::Array{Color}, colors_
         work[spins_on_loop[l]] = 0
     end
     # Optional expensive check
-    if check
-        @assert all(work .== 0)
-    end
+    #if check
+        #@assert all(work .== 0)
+    #end
 
     if success
-        return spins_on_loop[1:loop_length]
+        return loop_length
     else
         # Return the 0-length array of the same for type-stability
-        return zeros(UInt,0)
+        return 0
     end
 end
 
    
 
 function compute_dE_loop(updater::SingleSpinFlipUpdater,
+                          loop_length::Int,
                           spin_idx_on_loop::Array{UInt},
                           spins::Array{HeisenbergSpin},
                           new_spins_on_loop::Array{HeisenbergSpin},
@@ -307,19 +324,18 @@ function compute_dE_loop(updater::SingleSpinFlipUpdater,
     =#
 
     # Optional expensive check
-    if check
-        @assert all(work .== 0)
-    end
+    #if check
+        #@assert all(work .== 0)
+    #end
 
     num_spins = updater.num_spins
-    num_spins_loop = length(spin_idx_on_loop)
 
-    for isp_loop in 1:num_spins_loop
+    for isp_loop in 1:loop_length
         work[spin_idx_on_loop[isp_loop]] = isp_loop
     end
 
     dE = 0.0
-    for isp_loop in 1:num_spins_loop
+    for isp_loop in 1:loop_length
         ispin = spin_idx_on_loop[isp_loop]
         si_old = spins[ispin]
         for ic in 1:updater.coord_num[ispin]
@@ -342,21 +358,21 @@ function compute_dE_loop(updater::SingleSpinFlipUpdater,
         end
     end
 
-    for isp_loop in 1:num_spins_loop
+    for isp_loop in 1:loop_length
         work[spin_idx_on_loop[isp_loop]] = 0
     end
 
     # Optional expensive check
-    if check
-        @assert all(work .== 0)
-    end
+    #if check
+        #@assert all(work .== 0)
+    #end
 
     return dE
 end
 
-function update_colors!(colors::Array{Color},colors_on_loop::Tuple{Color,Color},spin_idx_on_loop::Array{UInt})
+function update_colors!(colors::Array{Color},colors_on_loop::Tuple{Color,Color},loop_length::Int,spin_idx_on_loop::Array{UInt})
 
-    for idx=spin_idx_on_loop
+    for idx = spin_idx_on_loop[1:loop_length]
         colors[idx] == colors_on_loop[1] ? colors[idx] = colors_on_loop[2] : colors[idx] = colors_on_loop[1]
     end
   
@@ -366,13 +382,13 @@ function metropolis_method!(beta::Float64,dE::Float64,
                             spins::AbstractArray{HeisenbergSpin},
                             colors::Array{Color},
                             colors_on_loop::Tuple{Color,Color},
+                            loop_length::Int,
                             spin_idx_on_loop::Array{UInt},
                             new_spins_on_loop::Array{HeisenbergSpin},
                             num_accept::Int64)::Float64
-    loop_length = length(new_spins_on_loop)
     if rand(Random.GLOBAL_RNG) < exp(-beta*dE)
-        spins[spin_idx_on_loop] = new_spins_on_loop 
-        update_colors!(colors,colors_on_loop,spin_idx_on_loop)
+        spins[spin_idx_on_loop[1:loop_length]] = new_spins_on_loop[1:loop_length]
+        update_colors!(colors,colors_on_loop,loop_length,spin_idx_on_loop)
         num_accept += 1
         return dE
     else
@@ -413,30 +429,33 @@ end
 function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
                           num_accept::Int64,
                           spins::AbstractArray{HeisenbergSpin},
+                          new_spins::AbstractArray{HeisenbergSpin},
                           updater::SingleSpinFlipUpdater,
                           colors::Array{Color},
                           colors_on_loop::Tuple{Color,Color},
                           first_spin_idx::Int,
                           max_length::Int,
                           work::Array{Int},
+                          spin_idx_on_loop::Array{UInt},
                           check::Bool=false)::Tuple{Bool,Float64, Float64, Float64, Float64, Float64}
     t1 = time_ns()
-    spin_idx_on_loop = find_loop(updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
+    #spin_idx_on_loop = find_loop(spin_idx_on_loop, updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
+    loop_length = find_loop(spin_idx_on_loop, updater,colors,colors_on_loop,first_spin_idx,max_length,work,check)
     t2 = time_ns()
-    if length(spin_idx_on_loop) == 0
+    if loop_length == 0
         return false, 0.0,  t2-t1, 0.0, 0.0, 0.0
     end
-    spins_on_loop = spins[spin_idx_on_loop]
+    spins_on_loop = spins[spin_idx_on_loop[1:loop_length]]
 
-    new_spins_on_loop = mk_new_spins_on_loop(spins_on_loop,colors_on_loop,x_axis,y_axis,z_axis)
+    mk_new_spins_on_loop(loop_length,spins_on_loop,new_spins,colors_on_loop,x_axis,y_axis,z_axis)
     t3 = time_ns()
-    dE = compute_dE_loop(updater,spin_idx_on_loop,spins,new_spins_on_loop,work,check)
+    dE = compute_dE_loop(updater,loop_length,spin_idx_on_loop,spins,new_spins,work,check)
     t4 = time_ns()
     
     t5 = time_ns() 
     #println("one_loop_update: find_loop spin_flip compute_dE metropolis")
     #println("one_loop_update: $(t5-t4) $(t4-t3) $(t3-t2) $(t2-t1)")
-    dE = metropolis_method!(beta,dE,spins,colors,colors_on_loop,spin_idx_on_loop,new_spins_on_loop,num_accept)
+    dE = metropolis_method!(beta,dE,spins,colors,colors_on_loop,loop_length,spin_idx_on_loop,new_spins,num_accept)
     t6 = time_ns() 
     return true, dE, t2-t1, t3-t2, t4-t3, t6-t5
 end
@@ -460,16 +479,20 @@ function mk_init_condition(num_spins::Int64,colors::Array{Color})
     end
 end
 
-struct LoopUpdater
+struct LoopUpdater{T}
     num_spins::Int
     colors::Array{Color}
     work::Array{Int}
+    spins_on_loop::Array{UInt}
+    new_spins::Array{T}
 end
 
-function LoopUpdater(num_spins::Int)
+function LoopUpdater{T}(num_spins::Int64, max_loop_length::Int64) where T
     colors = fill(red,num_spins)
     work   = zeros(Int,num_spins)
-    return LoopUpdater(num_spins,colors,work) 
+    spins_on_loop  = zeros(Int, max_loop_length)
+    new_spins  = Array{T}(undef, max_loop_length)
+    return LoopUpdater{T}(num_spins,colors,work, spins_on_loop, new_spins)
 end
 
   
@@ -487,6 +510,8 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     # No copy
     colors = loop_updater.colors
     work = loop_updater.work
+    spins_on_loop = loop_updater.spins_on_loop
+    new_spins = loop_updater.new_spins
 
     timings = zeros(Float64, 3)
 
@@ -517,7 +542,8 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
         end
 
         t3_s = time_ns()
-        loop_found, dE_tmp, tt1, tt2, tt3, tt4 = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,spins,updater,colors,colors_on_loop,first_spin_idx,max_length,work,check) 
+        loop_found, dE_tmp, tt1, tt2, tt3, tt4 = one_loop_update!(beta,x_axis,y_axis,normal_vec,num_accept,
+               spins, new_spins, updater,colors,colors_on_loop,first_spin_idx,max_length,work,spins_on_loop,check) 
         t3_e = time_ns()
         if check
            println("one_loop_update $(1/beta) $(tt1) $(tt2) $(tt3) $(tt4)")
