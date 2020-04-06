@@ -49,7 +49,7 @@ function update_temps_dist!(rex::ReplicaExchange, comm)
     MPI.Barrier(comm)
 
     # mixing parameter
-    alpha = 0.1
+    alpha = 0.4
     rank = MPI.Comm_rank(comm)
     num_accepted = MPI.Allgather(rex.num_accepted, comm)
     num_temps = length(rex.temps)
