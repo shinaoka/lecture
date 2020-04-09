@@ -96,6 +96,7 @@ function paint_rbg_differently!(spins::AbstractArray{HeisenbergSpin},x_axis,y_ax
     yvec = SVector(y_axis[1], y_axis[2], y_axis[3])
     zvec = SVector(normal_vec[1], normal_vec[2], normal_vec[3])
     work = MVector(0.0, 0.0, 0.0)
+    
     for i in eachindex(spins)
         if colors[i] == black
             continue
@@ -108,6 +109,74 @@ function paint_rbg_differently!(spins::AbstractArray{HeisenbergSpin},x_axis,y_ax
             colors[i] = red
         else
             colors[i] = dot(work, yvec) >= 0 ? blue : green
+        end
+    end
+end    
+
+function paint_rbg_differently_v2!(spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,normal_vec,colors::Array{Color},dtheta::Float64)
+    #=
+    rbg = red blue green. paint spins rbg based on its direction in local spin coordination.
+    =#    
+     
+    # Allocate static arrays as work space (much faster than using dynamic arrays)
+    xvec = SVector(x_axis[1], x_axis[2], x_axis[3])
+    yvec = SVector(y_axis[1], y_axis[2], y_axis[3])
+    zvec = SVector(normal_vec[1], normal_vec[2], normal_vec[3])
+    work = MVector(0.0, 0.0, 0.0)
+
+    for i in eachindex(spins)
+        if colors[i] == black
+            continue
+        end
+        for c = 1:3
+            work[c] = spins[i][c]
+        end
+        work[:]  = normalize(work - (dot(work,zvec))*zvec)
+        if dot(work, xvec) >= cos(dtheta)
+            colors[i] = red
+        elseif cos(2pi/3-dtheta)<= dot(work,xvec) <= cos(2pi/3+dtheta) 
+            if dot(work,yvec) > 0
+                colors[i] = blue
+            else 
+                colors[i] = green
+            end
+        else
+            colors[i] = black
+        end
+    end
+end    
+
+function paint_rbg_differently_v3!(spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,normal_vec,colors::Array{Color},dtheta::Float64)
+    #=
+    rbg = red blue green. paint spins rbg based on its direction in local spin coordination.
+    =#    
+     
+    # Allocate static arrays as work space (much faster than using dynamic arrays)
+    xvec = SVector(x_axis[1], x_axis[2], x_axis[3])
+    yvec = SVector(y_axis[1], y_axis[2], y_axis[3])
+    zvec = SVector(normal_vec[1], normal_vec[2], normal_vec[3])
+    work = MVector(0.0, 0.0, 0.0)
+    
+     
+    for i in eachindex(spins)
+        if colors[i] == black
+            continue
+        end
+        for c = 1:3
+            work[c] = spins[i][c]
+        end
+        work[:]  = normalize(work - (dot(work,zvec))*zvec)
+        x = dot(work,xvec)
+        y = dot(work,yvec)
+        temp_angle = atan(y,x)
+        if - dtheta <= temp_angle <= dtheta
+            colors[i] = red
+        elseif 2pi/3 - dtheta <= temp_angle <= 2pi/3 + dtheta
+            colors[i] = blue
+        elseif 4pi/3 - dtheta <= temp_angle <= 4pi/3 + dtheta
+            colors[i] = green 
+        else
+            colors[i] = black
         end
     end
 end    
@@ -370,10 +439,12 @@ function metropolis_method!(beta::Float64,dE::Float64,
                             spin_idx_on_loop::Array{UInt},
                             new_spins_on_loop::Array{HeisenbergSpin},
                             num_accept::Int64)::Float64
+    
     if rand(Random.GLOBAL_RNG) < exp(-beta*dE)
         spins[spin_idx_on_loop[1:loop_length]] = new_spins_on_loop[1:loop_length]
         update_colors!(colors,colors_on_loop,loop_length,spin_idx_on_loop)
         num_accept += 1
+        
         return dE
     else
         #p = exp(-beta*dE)
@@ -394,14 +465,14 @@ function estimate_loc_coord(spins,num_reference)
     end
 end
 
-function mk_init_colors!(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices,triangles::Array{Tuple{Int,Int,Int}},colors::Array{Color})
+function mk_init_colors!(updater::SingleSpinFlipUpdater,spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,z_axis,indices,triangles::Array{Tuple{Int,Int,Int}},colors::Array{Color},dtheta::Float64)
    for i in eachindex(colors)
        colors[i] = red
    end
    t1 = time_ns()
    paint_black!(colors,indices)
    t2 = time_ns()
-   paint_rbg_differently!(spins,x_axis,y_axis,z_axis,colors) 
+   paint_rbg_differently_v3!(spins,x_axis,y_axis,z_axis,colors,dtheta) 
    t3 = time_ns()
    find_breaking_triangle!(updater,triangles,colors) 
    t4 = time_ns()
@@ -436,11 +507,17 @@ function one_loop_update!(beta::Float64,x_axis,y_axis,z_axis,
     dE = compute_dE_loop(updater,loop_length,spin_idx_on_loop,spins,new_spins,work,check)
     t4 = time_ns()
     
+    #if check 
+        #println("DEBUG: ", "loop_length", " ", "dE")
+        #println("DEBUG: ",  loop_length , " ",  dE )
+    #end
+            
     t5 = time_ns() 
     #println("one_loop_update: find_loop spin_flip compute_dE metropolis")
     #println("one_loop_update: $(t5-t4) $(t4-t3) $(t3-t2) $(t2-t1)")
     dE = metropolis_method!(beta,dE,spins,colors,colors_on_loop,loop_length,spin_idx_on_loop,new_spins,num_accept)
     t6 = time_ns() 
+
     return true, dE, t2-t1, t3-t2, t4-t3, t6-t5
 end
 
@@ -498,9 +575,10 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     new_spins = loop_updater.new_spins
 
     timings = zeros(Float64, 3)
+    dtheta  = min(50*sqrt(beta^-1),pi/3)
 
     t1_s = time_ns()
-    mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors)
+    mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors,dtheta)
     t1_e = time_ns()
     timings[1] += t1_e - t1_s
     #if check
