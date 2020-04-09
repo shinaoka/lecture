@@ -124,10 +124,6 @@ function paint_rbg_differently_v2!(spins::AbstractArray{HeisenbergSpin},x_axis,y
     zvec = SVector(normal_vec[1], normal_vec[2], normal_vec[3])
     work = MVector(0.0, 0.0, 0.0)
 
-    theta = 2*pi/3
-    temp1 = SVector(cos(theta)*xvec[1] - sin(theta)*xvec[2],sin(theta)*xvec[1] + cos(theta)*xvec[2],xvec[3])
-    temp2 = SVector(cos(2*theta)*xvec[1] - sin(2*theta)*xvec[2],sin(2*theta)*xvec[1] + cos(2*theta)*xvec[2],xvec[3])
-
     for i in eachindex(spins)
         if colors[i] == black
             continue
@@ -138,16 +134,52 @@ function paint_rbg_differently_v2!(spins::AbstractArray{HeisenbergSpin},x_axis,y
         work[:]  = normalize(work - (dot(work,zvec))*zvec)
         if dot(work, xvec) >= cos(dtheta)
             colors[i] = red
-        elseif dot(work,temp1) >= cos(dtheta) 
-            colors[i] = blue
-        elseif dot(work,temp2) >= cos(dtheta) 
-            colors[i] = green 
+        elseif cos(2pi/3-dtheta)<= dot(work,xvec) <= cos(2pi/3+dtheta) 
+            if dot(work,yvec) > 0
+                colors[i] = blue
+            else 
+                colors[i] = green
+            end
         else
             colors[i] = black
         end
     end
 end    
 
+function paint_rbg_differently_v3!(spins::AbstractArray{HeisenbergSpin},x_axis,y_axis,normal_vec,colors::Array{Color},dtheta::Float64)
+    #=
+    rbg = red blue green. paint spins rbg based on its direction in local spin coordination.
+    =#    
+     
+    # Allocate static arrays as work space (much faster than using dynamic arrays)
+    xvec = SVector(x_axis[1], x_axis[2], x_axis[3])
+    yvec = SVector(y_axis[1], y_axis[2], y_axis[3])
+    zvec = SVector(normal_vec[1], normal_vec[2], normal_vec[3])
+    work = MVector(0.0, 0.0, 0.0)
+    
+     
+    for i in eachindex(spins)
+        if colors[i] == black
+            continue
+        end
+        for c = 1:3
+            work[c] = spins[i][c]
+        end
+        work[:]  = normalize(work - (dot(work,zvec))*zvec)
+        x = dot(work,xvec)
+        y = dot(work,yvec)
+        temp_angle = atan(y,x)
+        if - dtheta <= temp_angle <= dtheta
+            colors[i] = red
+        elseif 2pi/3 - dtheta <= temp_angle <= 2pi/3 + dtheta
+            colors[i] = blue
+        elseif 4pi/3 - dtheta <= temp_angle <= 4pi/3 + dtheta
+            colors[i] = green 
+        else
+            colors[i] = black
+        end
+    end
+end    
 
 function find_triangles(model::JModel, updater::SingleSpinFlipUpdater)
     #= 
@@ -440,7 +472,7 @@ function mk_init_colors!(updater::SingleSpinFlipUpdater,spins::AbstractArray{Hei
    t1 = time_ns()
    paint_black!(colors,indices)
    t2 = time_ns()
-   paint_rbg_differently_v2!(spins,x_axis,y_axis,z_axis,colors,dtheta) 
+   paint_rbg_differently_v3!(spins,x_axis,y_axis,z_axis,colors,dtheta) 
    t3 = time_ns()
    find_breaking_triangle!(updater,triangles,colors) 
    t4 = time_ns()
@@ -543,7 +575,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     new_spins = loop_updater.new_spins
 
     timings = zeros(Float64, 3)
-    dtheta  = min(100*sqrt(beta^-1),2pi/3)
+    dtheta  = min(50*sqrt(beta^-1),pi/3)
 
     t1_s = time_ns()
     mk_init_colors!(updater,spins,x_axis,y_axis,normal_vec,indices,triangles,colors,dtheta)
