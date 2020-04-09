@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 4
+L = 9
 num_spins = 3*L^2
 
 # lattice vectors
@@ -19,9 +19,9 @@ J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
 #parameters for temepratures.
-num_temps = 72
-min_T = 0.0001
-max_T = 0.1
+num_temps = 1
+min_T = 0.001
+max_T = min_T
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     
