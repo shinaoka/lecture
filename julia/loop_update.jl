@@ -169,11 +169,12 @@ function paint_rbg_differently_v3!(spins::AbstractArray{HeisenbergSpin},x_axis,y
         x = dot(work,xvec)
         y = dot(work,yvec)
         temp_angle = atan(y,x)
+
         if - dtheta <= temp_angle <= dtheta
             colors[i] = red
-        elseif 2pi/3 - dtheta <= temp_angle <= 2pi/3 + dtheta
+        elseif  2pi/3 - dtheta <= temp_angle <=  2pi/3 + dtheta
             colors[i] = blue
-        elseif 4pi/3 - dtheta <= temp_angle <= 4pi/3 + dtheta
+        elseif -2pi/3 - dtheta <= temp_angle <= -2pi/3 + dtheta
             colors[i] = green 
         else
             colors[i] = black
@@ -589,6 +590,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     counter    = 0
     num_accept = 0 
     num_loop_found = 0
+
     
     for i=1:num_trial
         counter += 1
