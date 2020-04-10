@@ -1,0 +1,112 @@
+begin
+2020年 4月 6日 月曜日 15時06分25秒 JST
+ERROR: LoadError: LoadError: LoadError: IOError: mkdir: file already exists (EEXIST)
+Stacktrace:
+ [1] uv_error at ./libuv.jl:97 [inlined]
+ [2] mkdir(::String; mode::UInt16) at ./file.jl:177
+ [3] mkpath(::String; mode::UInt16) at ./file.jl:227
+ [4] mkpath at ./file.jl:222 [inlined]
+ [5] compilecache_path(::Base.PkgId) at ./loading.jl:1210
+ [6] compilecache(::Base.PkgId, ::String) at ./loading.jl:1240
+ [7] _require(::Base.PkgId) at ./loading.jl:1029
+ [8] require(::Base.PkgId) at ./loading.jl:927
+ [9] require(::Module, ::Symbol) at ./loading.jl:922
+ [10] include(::Module, ::String) at ./Base.jl:377
+ [11] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [12] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:5
+ [13] include(::String) at ./client.jl:439
+ [14] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [15] include(::Module, ::String) at ./Base.jl:377
+ [16] exec_options(::Base.JLOptions) at ./client.jl:288
+ [17] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:2
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:5
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/.julia/packages/StaticArrays/1g9bq/src/arraymath.jl:111
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:2
+_platform_strcmp at /usr/lib/system/libsystem_platform.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 4961091 (Pool: 4959964; Big: 1127); GC: 6
+kevent at /usr/lib/system/libsystem_kernel.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 2503 (Pool: 2493; Big: 10); GC: 0
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[39314,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月 6日 月曜日 15時06分28秒 JST
+begin
+2020年 4月 6日 月曜日 15時07分23秒 JST
+ERROR: LoadError: LoadError: LoadError: IOError: mkdir: file already exists (EEXIST)
+Stacktrace:
+ [1] uv_error at ./libuv.jl:97 [inlined]
+ [2] mkdir(::String; mode::UInt16) at ./file.jl:177
+ [3] mkpath(::String; mode::UInt16) at ./file.jl:227
+ [4] mkpath at ./file.jl:222 [inlined]
+ [5] compilecache_path(::Base.PkgId) at ./loading.jl:1210
+ [6] compilecache(::Base.PkgId, ::String) at ./loading.jl:1240
+ [7] _require(::Base.PkgId) at ./loading.jl:1029
+ [8] require(::Base.PkgId) at ./loading.jl:927
+ [9] require(::Module, ::Symbol) at ./loading.jl:922
+ [10] include(::Module, ::String) at ./Base.jl:377
+ [11] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [12] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:5
+ [13] include(::String) at ./client.jl:439
+ [14] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [15] include(::Module, ::String) at ./Base.jl:377
+ [16] exec_options(::Base.JLOptions) at ./client.jl:288
+ [17] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/mcmc.jl:3
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:5
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:3
+kevent at /usr/lib/system/libsystem_kernel.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 3333863 (Pool: 3332928; Big: 935); GC: 2
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[39231,1],1]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月 6日 月曜日 15時07分32秒 JST
+begin
+2020年 4月 6日 月曜日 15時13分43秒 JST
+end
+2020年 4月 6日 月曜日 15時14分05秒 JST
+begin
+2020年 4月 6日 月曜日 15時15分02秒 JST
+end
+2020年 4月 6日 月曜日 15時15分19秒 JST
+begin
+2020年 4月 6日 月曜日 15時34分35秒 JST
+end
+2020年 4月 6日 月曜日 15時34分53秒 JST
+begin
+2020年 4月 6日 月曜日 15時36分02秒 JST
+end
+2020年 4月 6日 月曜日 15時36分29秒 JST
+begin
+2020年 4月 6日 月曜日 15時42分02秒 JST
+end
+2020年 4月 6日 月曜日 16時04分35秒 JST

@@ -1,0 +1,152 @@
+2020年 4月 6日 月曜日 15時42分02秒 JST
+Using XY spins
+num of temperatures = 1
+Starting simulation...
+Done 73117 sweeps
+Done 153390 sweeps
+Done 233219 sweeps
+Done 327003 sweeps
+Done 418616 sweeps
+Done 508812 sweeps
+Done 598121 sweeps
+Done 686824 sweeps
+Done 771551 sweeps
+Done 855843 sweeps
+Done 909901 sweeps
+Done 959560 sweeps
+Done 1034680 sweeps
+Done 1110115 sweeps
+Done 1192901 sweeps
+Done 1276443 sweeps
+Done 1359688 sweeps
+Done 1441644 sweeps
+Done 1524998 sweeps
+Done 1609400 sweeps
+Done 1693125 sweeps
+Done 1777335 sweeps
+Done 1862465 sweeps
+Done 1947554 sweeps
+Done 2032841 sweeps
+Done 2117745 sweeps
+Done 2192174 sweeps
+Done 2270306 sweeps
+Done 2355003 sweeps
+Done 2440203 sweeps
+Done 2525313 sweeps
+Done 2610907 sweeps
+Done 2695695 sweeps
+Done 2778978 sweeps
+Done 2851640 sweeps
+Done 2921259 sweeps
+Done 2985840 sweeps
+Done 3061321 sweeps
+Done 3143401 sweeps
+Done 3219406 sweeps
+Done 3294866 sweeps
+Done 3374092 sweeps
+Done 3443272 sweeps
+Done 3511559 sweeps
+Done 3580744 sweeps
+Done 3646444 sweeps
+Done 3719799 sweeps
+Done 3791067 sweeps
+Done 3874175 sweeps
+Done 3959206 sweeps
+Done 4027406 sweeps
+Done 4097893 sweeps
+Done 4174421 sweeps
+Done 4248699 sweeps
+Done 4325811 sweeps
+Done 4412185 sweeps
+Done 4497844 sweeps
+Done 4582153 sweeps
+Done 4666272 sweeps
+Done 4750048 sweeps
+Done 4833417 sweeps
+Done 4919707 sweeps
+Done 5002972 sweeps
+Done 5085147 sweeps
+Done 5164500 sweeps
+Done 5238498 sweeps
+Done 5316492 sweeps
+Done 5398747 sweeps
+Done 5479083 sweeps
+Done 5560218 sweeps
+Done 5627037 sweeps
+Done 5703141 sweeps
+Done 5786426 sweeps
+Done 5868792 sweeps
+Done 5947874 sweeps
+Done 6031541 sweeps
+Done 6109526 sweeps
+Done 6191789 sweeps
+Done 6277826 sweeps
+Done 6350296 sweeps
+Done 6436471 sweeps
+Done 6523863 sweeps
+Done 6611373 sweeps
+Done 6698735 sweeps
+Done 6786337 sweeps
+Done 6873941 sweeps
+Done 6956702 sweeps
+Done 7022312 sweeps
+Done 7097154 sweeps
+Done 7177337 sweeps
+Done 7247747 sweeps
+Done 7321016 sweeps
+Done 7405788 sweeps
+Done 7489674 sweeps
+Done 7550721 sweeps
+Done 7625059 sweeps
+Done 7708471 sweeps
+Done 7789871 sweeps
+Done 7873178 sweeps
+Done 7955405 sweeps
+Done 8028319 sweeps
+Done 8080015 sweeps
+Done 8134003 sweeps
+Done 8215140 sweeps
+Done 8294691 sweeps
+Done 8365267 sweeps
+Done 8427615 sweeps
+Done 8500749 sweeps
+Done 8586825 sweeps
+Done 8673084 sweeps
+Done 8749329 sweeps
+Done 8831512 sweeps
+Done 8911095 sweeps
+Done 8988355 sweeps
+Done 9023532 sweeps
+Done 9054812 sweeps
+Done 9065208 sweeps
+Done 9087843 sweeps
+Done 9116379 sweeps
+Done 9154526 sweeps
+Done 9188356 sweeps
+Done 9228301 sweeps
+Done 9264656 sweeps
+Done 9297931 sweeps
+Done 9364133 sweeps
+Done 9425374 sweeps
+Done 9498530 sweeps
+Done 9563388 sweeps
+Done 9632901 sweeps
+Done 9714940 sweeps
+Done 9799326 sweeps
+Done 9883978 sweeps
+Done 9967965 sweeps
+
+<E> <E^2> <C>
+0.001  -238.7104879760037 56982.697159784926 0.3705478434780528
+
+single_spin_flip_acc: [0.692908562520847]
+Acceptant rate of loop update: 
+0.001 0.17728402523997677 0.0
+temperatures less than 0.001: 0
+AFTER CLOSE H5FILE
+<CPUtime> 
+ rank=0 : [34.520337, 1.1202356666666666, 77.94132744444444, 3.852107777777778]
+
+Statistics of replica exchange Monte Carlo
+1344.768354 seconds (5.89 G allocations: 439.258 GiB, 4.54% gc time)
+2020年 4月 6日 月曜日 16時04分35秒 JST

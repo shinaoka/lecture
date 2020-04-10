@@ -179,7 +179,7 @@ function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JMo
         end
 
         # Propose a new spin direction : Gaussian trial move 
-        si_new = spins[ispin] .+ sigma_g .* (randn(Random.GLOBAL_RNG), rand(Random.GLOBAL_RNG), coeff_z*rand(Random.GLOBAL_RNG))
+        si_new = spins[ispin] .+ sigma_g .* (randn(Random.GLOBAL_RNG), randn(Random.GLOBAL_RNG), coeff_z*randn(Random.GLOBAL_RNG))
         si_new = si_new ./ norm(si_new)
  
         # Flip spin
