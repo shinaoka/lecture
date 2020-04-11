@@ -261,7 +261,7 @@ function solve(input_file::String, comm)
     loop_num_trial  = parse(Int64, retrieve(conf, "loop_update", "num_trial"))
     loop_num_reference_sites  = parse(Int64, retrieve(conf, "loop_update", "num_reference_sites"))
     max_loop_length  = parse(Int64, retrieve(conf, "loop_update", "max_loop_length"))
-    loop_interval  = get_param(Int64, conf, "loop_update", "loop_interval", 10)
+    loop_interval  = get_param(Int64, conf, "loop_update", "interval", 10)
 
     # Read a list of temperatures
     temps = read_temps(temperature_file)
