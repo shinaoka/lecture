@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 9
+L = 24
 num_spins = 3*L^2
 
 # lattice vectors
@@ -14,22 +14,21 @@ len2 = 2*sin(pi/3)
 # parameter for Interaction.
 SSInteraction = Type3dVector
 tempJ1 = -1.
-tempJ2 = -0.00
+tempJ2 = -0.0
 J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
 #parameters for temepratures.
-num_temps = 1
-min_T = 0.001
-max_T = min_T
+num_temps = 192
+min_T = 0.00001
+max_T = 1.0
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
-    
+    logT = LinRange(log(min_T), log(max_T), num_temps)
     open("temperatures.txt", "w") do fp
        println(fp, num_temps)
-       temp = range(min_T, stop=max_T, length=num_temps)
-       for i in temp
-          println(fp, i)
+       for i in logT
+          println(fp, exp(i))
        end
      end
 end
