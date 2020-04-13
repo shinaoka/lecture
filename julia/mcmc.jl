@@ -67,6 +67,9 @@ struct SingleSpinFlipUpdater
 
     connected_sites::Array{SpinIndex,2}
     is_NN::Array{Bool,2}
+
+    nn_coord_num::Array{UInt16}
+    nn_sites::Array{SpinIndex,2}
 end
 
 function SingleSpinFlipUpdater(model::JModel)
@@ -77,11 +80,17 @@ function SingleSpinFlipUpdater(model::JModel)
 
     # Figure out which spins each spin is connected to
     connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}() for _ in 1:num_spins]
+    nn_connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64}}() for _ in 1:num_spins]
     num_Jij = size(Jij, 1)
     for i_pair = 1:num_Jij
         i, j = Jij[i_pair][1:2]
+        is_nn = Jij[i_pair][6] != 0
         push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
         push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
+        if is_nn
+            push!(nn_connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
+            push!(nn_connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
+        end
     end
     max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
@@ -98,7 +107,18 @@ function SingleSpinFlipUpdater(model::JModel)
         end
     end
 
-    return SingleSpinFlipUpdater(num_spins, coord_num, connection, connected_sites, is_NN)
+    nn_coord_num = zeros(UInt16, num_spins)
+    max_nn_coord_num = maximum([length(nn_connection_tmp[ispin]) for ispin in 1:num_spins])
+    nn_sites = Array{SpinIndex,2}(undef, (max_nn_coord_num, num_spins))
+    for ispin = 1:num_spins
+        nn_coord_num[ispin] = length(nn_connection_tmp[ispin])
+        for (ic, val) in enumerate(nn_connection_tmp[ispin])
+            nn_sites[ic, ispin] = val[1]
+        end
+    end
+
+    return SingleSpinFlipUpdater(num_spins, coord_num, connection, connected_sites, is_NN,
+        nn_coord_num, nn_sites)
 end
 
 

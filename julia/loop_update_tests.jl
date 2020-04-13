@@ -64,6 +64,34 @@ function test_paint_rbg_differently!()
     @test all(colors[3:3:end] .== green)
 end
 
+function test_paint_rbg_differently_v23!(target_func)
+    num_spins = 3 * 500
+    dtheta = 0.5 * pi/3
+
+    spins = fill((0.,0.,0.), num_spins)
+    # Uniform dist. [-pi/3, pi/3]
+    dtheta_spins = (rand(num_spins) .- 1/2) * (2*pi/3)
+    for i=1:num_spins
+        theta = (i-1)*(2*pi)/3 + dtheta_spins[i]
+        spins[i] = (cos(theta),sin(theta),0.)
+    end
+    
+    colors = [red for i=1:num_spins]
+    x_axis = [1.0, 0.0, 0.0]
+    y_axis = [0.0, 1.0, 0.0]
+    z_axis = [0.0, 0.0, 1.0]
+
+    target_func(spins, x_axis, y_axis, z_axis, colors, dtheta)
+    @time target_func(spins, x_axis, y_axis, z_axis, colors, dtheta)
+
+    rbg = [red, blue, green]
+    for i in 1:num_spins
+        color = abs(dtheta_spins[i]) < dtheta ? rbg[mod(i-1,3)+1] : black
+        @test colors[i] == color
+    end
+end
+
+
 function test_find_breaking_triangle!()
     num_spins = 3
     Jij = []
@@ -231,7 +259,6 @@ function test_find_loop(model::JModel, colors::Array{Color})
     loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
     @assert all(work .== 0)
     @time loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
-    #@trace loop_length = find_loop(spin_idx_on_loop, u, colors, colors_on_loop, start_spin_idx, max_loop_length, work, true) 
 
     println("loop length: ", loop_length)
     @assert loop_length > 2
@@ -267,6 +294,10 @@ if abspath(PROGRAM_FILE) == @__FILE__
     test_estimate_axes()
     test_paint_black!()
     #test_paint_rbg_differently!()
+
+    test_paint_rbg_differently_v23!(paint_rbg_differently_v2!)
+    test_paint_rbg_differently_v23!(paint_rbg_differently_v3!)
+
     test_find_breaking_triangle!()
     test_find_breaking_triangle2()
     #test_parallel_flip()

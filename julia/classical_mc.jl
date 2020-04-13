@@ -225,6 +225,14 @@ function octopolar_orderparameter(spins::Array{Array{Tuple{Float64,Float64,Float
     return op
 end
 
+function get_param(type, conf, block, key, default_value)
+    if haskey(conf, block, key)
+        return parse(type, retrieve(conf, block, key))
+    else
+        return convert(type, default_value)
+    end
+end
+
 function solve(input_file::String, comm)
     if !isfile(input_file)
         error("$input_file does not exists!")
@@ -235,10 +243,10 @@ function solve(input_file::String, comm)
     rank = MPI.Comm_rank(comm)
     num_proc = MPI.Comm_size(comm)
 
-    num_spins = parse(Int64, retrieve(conf, "model", "num_spins"))
+    num_spins = get_param(Int64, conf, "model", "num_spins", 0)
     Jij_file = retrieve(conf, "model", "Jij")
     temperature_file = retrieve(conf, "model", "temperatures")
-    is_xy = parse(Bool, retrieve(conf, "model", "xy_spins"))
+    is_xy = get_param(Bool, conf, "model", "xy_spins", false)
     if rank == 0 && is_xy
         println("Using XY spins")
     end
@@ -253,6 +261,7 @@ function solve(input_file::String, comm)
     loop_num_trial  = parse(Int64, retrieve(conf, "loop_update", "num_trial"))
     loop_num_reference_sites  = parse(Int64, retrieve(conf, "loop_update", "num_reference_sites"))
     max_loop_length  = parse(Int64, retrieve(conf, "loop_update", "max_loop_length"))
+    loop_interval  = get_param(Int64, conf, "loop_update", "interval", 10)
 
     # Read a list of temperatures
     temps = read_temps(temperature_file)
@@ -354,7 +363,7 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         loop_found_rate = zeros(Float64, num_temps_local)
         loop_acc_rate = zeros(Float64, num_temps_local)
-        if loop_num_trial > 0
+        if loop_num_trial > 0 && mod(sweep, loop_interval) == 0
             for it in 1:num_temps_local
                 dE, loop_found_rate[it], loop_acc_rate[it] = multi_loop_update!(loop_updater, loop_num_trial,
                     loop_num_reference_sites,updater,
