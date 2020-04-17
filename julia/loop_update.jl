@@ -335,6 +335,17 @@ function find_loop(spins_on_loop, updater::SingleSpinFlipUpdater, colors::Array{
             break
         end
 
+        temp_n_candidate = 0
+        for i in candidate_spins
+            if i !== 0
+                temp_n_candidate += 1
+            end
+        end
+        println("DEBUG A:",temp_n_candidate)
+        #println("DEBUG B:",candidate_spins)
+        println("DEBUG C:",n_candidate)
+        
+
         next_spin_idx = candidate_spins[rand(1:n_candidate)]
         if work[next_spin_idx] == 1
             # OK, we've returned to the starting point.
@@ -587,7 +598,6 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,num_refe
     counter    = 0
     num_accept = 0 
     num_loop_found = 0
-
     
     for i=1:num_trial
         counter += 1
