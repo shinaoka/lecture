@@ -259,7 +259,6 @@ function solve(input_file::String, comm)
 
     # For loop updates
     loop_num_trial  = parse(Int64, retrieve(conf, "loop_update", "num_trial"))
-    loop_num_reference_sites  = parse(Int64, retrieve(conf, "loop_update", "num_reference_sites"))
     max_loop_length  = parse(Int64, retrieve(conf, "loop_update", "max_loop_length"))
     loop_interval  = get_param(Int64, conf, "loop_update", "interval", 10)
 
@@ -308,17 +307,13 @@ function solve(input_file::String, comm)
         println("Starting simulation...")
     end
 
-    # Find all triangles for loop updates
-    triangles = find_triangles(model, updater)
   
     # Create LoopUpdater 
     loop_updater = LoopUpdater{HeisenbergSpin}(num_spins, max_loop_length)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
-    
-    # For function order_parameter()
-    unit_cell = make_kagome(num_spins) 
+
 
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
@@ -366,9 +361,9 @@ function solve(input_file::String, comm)
         if loop_num_trial > 0 && mod(sweep, loop_interval) == 0
             for it in 1:num_temps_local
                 dE, loop_found_rate[it], loop_acc_rate[it] = multi_loop_update!(loop_updater, loop_num_trial,
-                    loop_num_reference_sites,updater,
+                    updater,
                     1/rex.temps[it+start_idx-1],
-                    triangles, max_loop_length, spins_local[it], rank==0)
+                    max_loop_length, spins_local[it], rank==0)
                 energy_local[it] += dE
             end
         end
@@ -385,8 +380,8 @@ function solve(input_file::String, comm)
             add!(acc, "loop_accept_rate", loop_acc_rate)
 
             #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
-            add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.),unit_cell))
-            add!(acc,"op",octopolar_v2(spins_local,num_spins,num_temps_local))
+            #add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.),unit_cell))
+            #add!(acc,"op",octopolar_v2(spins_local,num_spins,num_temps_local))
   
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -415,8 +410,8 @@ function solve(input_file::String, comm)
     #M1 = mean_gather_array(acc, "M1", comm)
     #M2 = mean_gather_array(acc, "M2", comm)
     #M3 = mean_gather_array(acc, "M3", comm)
-    op = mean_gather(acc, "op", comm)
-    M2_AF = mean_gather(acc,"M2_AF",comm)
+    #op = mean_gather(acc, "op", comm)
+    #M2_AF = mean_gather(acc,"M2_AF",comm)
     flush(stdout)
     MPI.Barrier(comm)
     if rank == 0
@@ -433,22 +428,7 @@ function solve(input_file::String, comm)
         for i in 1:num_temps
             println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
         end
-        
-        """  
-        println("octopolar: ",op/num_spins^2)
-        
-        open("g.dat", "w") do fp
-            for i in 1:num_temps
-                g = (3 - (M4[i]/(M2[i]^2))) / 2
-                println(fp, rex.temps[i], " ", g)
-            end
-        end
-        """ 
-        
-        println("temperatures less than 0.001: ",length(rex.temps[rex.temps .< 0.001]))
-
        
-        println("AFTER CLOSE H5FILE")
         
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)

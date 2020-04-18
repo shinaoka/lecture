@@ -110,3 +110,41 @@ begin
 2020年 4月 6日 月曜日 15時42分02秒 JST
 end
 2020年 4月 6日 月曜日 16時04分35秒 JST
+begin
+2020年 4月18日 土曜日 14時25分50秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+_platform_bzero$VARIANT$Haswell at /usr/lib/system/libsystem_platform.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 28139702 (Pool: 28133328; Big: 6374); GC: 30
+end
+2020年 4月18日 土曜日 14時26分03秒 JST
+begin
+2020年 4月18日 土曜日 14時26分31秒 JST
+ERROR: LoadError: UndefVarError: unit_cell not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:383
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[21368,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 14時26分49秒 JST
+begin
+2020年 4月18日 土曜日 14時29分35秒 JST
+end
+2020年 4月18日 土曜日 14時29分50秒 JST

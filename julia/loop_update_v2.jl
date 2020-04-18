@@ -26,7 +26,7 @@ function find_loop(spins,
                    first_spin_idx,
                    second_spin_idx,
                    max_length::Int, 
-                   work::Array{Int}, verbose::Bool=false)::Int64
+                   work::Array{Int}, verbose::Bool=false)
     #=
     All elements of work must be initialized to zero.
     =#
@@ -82,14 +82,14 @@ function find_loop(spins,
         #println("DEBUG B:",candidate_spins)
         println("DEBUG C:",n_candidate)
         """
-        """
+        
         # we need only sum of boundary spins.
         if n_candidate !== 2
             sum_boundary_spins = sum_boundary_spins .+ spins[current_spin_idx]
             continue
         end
         #println("DEBUG A:", sum_boundary_spins)
-        """
+        
 
         if n_candidate == 0
             status = 1
@@ -276,7 +276,7 @@ function one_loop_update!(updater::SingleSpinFlipUpdater,
     dE = metropolis_method!(beta,dE,spins,loop_length,spins_on_loop,new_spins,num_accept)
 end
 
-function loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
+function mulit_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
                       updater::SingleSpinFlipUpdater,beta::Float64,
                       max_length::Int,
                       spins::AbstractArray{HeisenbergSpin},
@@ -317,9 +317,7 @@ function loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         num_loop_found += 1
              
         reflect_spins_on_loop!(loop_length,spins,new_spins,spins_on_loop,updater,sum_boundary_spins)
-    
         dE_loop = compute_dE_loop(updater,loop_length,spins_on_loop,spins,new_spins,work,verbose)
-   
         dE += metropolis_method!(beta,dE_loop,spins,loop_length,spins_on_loop,new_spins,num_accept)
 
         # in metropolis_method!(),num_accept += 1 when update is accepted.
