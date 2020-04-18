@@ -45,7 +45,7 @@ function find_loop(spins,
 
     max_coord_num = maximum(updater.coord_num)
     candidate_spins = zeros(UInt, max_coord_num)
-
+    
     #if verbose
        #println("colors_on_loop $(colors_on_loop)")
     #end
@@ -80,8 +80,8 @@ function find_loop(spins,
         end
         println("DEBUG A:",temp_n_candidate)
         #println("DEBUG B:",candidate_spins)
-        println("DEBUG C:",n_candidate)
         """
+        println("DEBUG C:",n_candidate)
         
         # we need only sum of boundary spins.
         if n_candidate !== 2
@@ -245,59 +245,30 @@ function metropolis_method!(beta::Float64,dE::Float64,
     end
 end
 
-function one_loop_update!(updater::SingleSpinFlipUpdater,
-                          beta::Float64,
-                          spins::Array{HeisenbergSpin},
-                          new_spins::Array{HeisenbergSpin},
-                          spins_on_loop::Array{UInt},
-                          first_spin_idx,second_spin_idx,
-                          max_length::Int64,
-                          work::Array{Int},
-                          verbose::Bool)::Float64
-         
-    loop_length,sum_boundary_spins = find_loop(spins,spins_on_loop,updater,first_spin_idx,
-                                               second_spin_idx,max_length,work,verbose)
-
-    # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
-    cp_spins_on_loop = copy(spins_on_loop)
-    first_spin_idx_inv  = spins_on_loop[1:loop_length][end]
-    second_spin_idx_inv = spins_on_loop[1:loop_length][end-1]
-    loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_on_loop,updater,first_spin_idx_inv,
-                                                       second_spin_idx_inv,max_length,work,verbose)
-    """
-    if !all(reverse(spins_on_loop),cp_spins_on_loop)
-        continue
-    end
-    """
-    reflect_spins_on_loop!(loop_length,spins,new_spins,spins_on_loop,updater,sum_boundary_spins)
-    
-    dE = compute_dE_loop(updater,loop_length,spins_on_loop,spins,new_spins,work,verbose)
-   
-    dE = metropolis_method!(beta,dE,spins,loop_length,spins_on_loop,new_spins,num_accept)
-end
-
-function mulit_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
+function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
                       updater::SingleSpinFlipUpdater,beta::Float64,
                       max_length::Int,
                       spins::AbstractArray{HeisenbergSpin},
                       verbose::Bool=false)
-
+    
     # No copy
     work = loop_updater.work
     spins_on_loop = loop_updater.spins_on_loop
     new_spins = loop_updater.new_spins
 
+    num_spins = updater.num_spins
+    max_coord_num = maximum(updater.coord_num)
+    
     dE   = 0.
     num_accept = 0
     num_loop_found = 0
-
+     
     for i=1:num_trial
-        counter += 1
         
         first_spin_idx = rand(1:num_spins) 
         candidate_second_spin_idx = zeros(UInt,max_coord_num)
-        for ins in 1:u.nn_coord_num[first_spin_idx]
-            candidate_second_spin_idx[ins] = u.nn_sites[ins,first_spin_idx]
+        for ins in 1:updater.nn_coord_num[first_spin_idx]
+            candidate_second_spin_idx[ins] = updater.nn_sites[ins,first_spin_idx]
         end
         second_spin_idx = rand(candidate_second_spin_idx)
 
