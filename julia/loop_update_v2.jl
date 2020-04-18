@@ -31,6 +31,7 @@ function find_loop(spins,
     All elements of work must be initialized to zero.
     =#
     
+
     num_spins = updater.num_spins
 
     @assert length(work) >= num_spins
@@ -53,9 +54,6 @@ function find_loop(spins,
     success = false
     status = -1
 
-  # for speed up we need to add sum_boundary_spins to constructor LoopUpdater and then MVectorize.
-    sum_boundary_spins::HeisenbergSpin = (0.,0.,0.)
-
     while loop_length < max_length
         #if verbose
            #println("current_spin_idx $(current_spin_idx)")
@@ -70,26 +68,6 @@ function find_loop(spins,
                 candidate_spins[n_candidate] = ns
             end
         end
-        
-        """  
-        temp_n_candidate = 0
-        for i in candidate_spins
-            if i !== 0
-                temp_n_candidate += 1
-            end
-        end
-        println("DEBUG A:",temp_n_candidate)
-        #println("DEBUG B:",candidate_spins)
-        """
-        println("DEBUG C:",n_candidate)
-        
-        # we need only sum of boundary spins.
-        if n_candidate !== 2
-            sum_boundary_spins = sum_boundary_spins .+ spins[current_spin_idx]
-            continue
-        end
-        #println("DEBUG A:", sum_boundary_spins)
-        
 
         if n_candidate == 0
             status = 1
@@ -97,16 +75,9 @@ function find_loop(spins,
         end
 
         # next spin index must be determined by value of inner product between one before spin.
-        inner_prod = zeros(Float64,length(candidate_spins))
+        inner_prod = zeros(Float64,n_candidate)
         
-        for idx in 1:length(candidate_spins)
-            """
-            #println("DEBUG A:",spins[spin_before])
-            #println("DEBUG B:",spins[candidate_spins[idx]])
-            #println("DEBUG C:",candidate_spins)
-            println("DEBUG D:",candidate_spins[idx])
-            println("DEBUG E:",idx)
-            """
+        for idx in 1:n_candidate
             # candidate_spins has some 0 elements
             # so spins[candidate[idx]] is acces 0th element of spins.
             if candidate_spins[idx] == 0
@@ -144,6 +115,20 @@ function find_loop(spins,
     end
 
     if success
+        # find boundary spins of loop and add them up all.
+        sum_boundary_spins::HeisenbergSpin = (0.,0.,0.)
+        
+        for idx in spins_on_loop[1:loop_length]
+            for ins in 1:updater.nn_coord_num[idx]
+                 ns::SpinIndex = updater.nn_sites[ins,idx]
+
+                 if in(ns,spins_on_loop[1:loop_length])
+                     continue
+                 end
+            end
+            sum_boundary_spins = sum_boundary_spins .+ spins[idx]
+        end
+
         return loop_length, sum_boundary_spins
     else
         # Return the 0-length array of the same for type-stability
@@ -267,13 +252,18 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         
         first_spin_idx = rand(1:num_spins) 
         candidate_second_spin_idx = zeros(UInt,max_coord_num)
-        for ins in 1:updater.nn_coord_num[first_spin_idx]
+        nn_coord_num = updater.nn_coord_num[first_spin_idx]
+        for ins in 1:nn_coord_num
             candidate_second_spin_idx[ins] = updater.nn_sites[ins,first_spin_idx]
         end
-        second_spin_idx = rand(candidate_second_spin_idx)
+        second_spin_idx = rand(candidate_second_spin_idx[1:nn_coord_num])
 
         loop_length,sum_boundary_spins = find_loop(spins,spins_on_loop,updater,first_spin_idx,
                                                    second_spin_idx,max_length,work,verbose)
+        
+        if loop_length == 0 
+            continue
+        end
 
         # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
         cp_spins_on_loop = copy(spins_on_loop)
@@ -282,7 +272,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_on_loop,updater,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_length,work,verbose)
    
-        if !all(reverse(spins_on_loop),cp_spins_on_loop)
+        if !all(reverse(spins_on_loop) .== cp_spins_on_loop)
             continue
         end
         num_loop_found += 1

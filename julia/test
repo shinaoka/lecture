@@ -152,3 +152,292 @@ begin
 2020年 4月18日 土曜日 14時49分04秒 JST
 end
 2020年 4月18日 土曜日 14時49分23秒 JST
+begin
+2020年 4月18日 土曜日 18時50分20秒 JST
+ERROR: LoadError: LoadError: LoadError: syntax: "for" at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:130 expected "end", got "else"
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:142
+ [2] include(::Module, ::String) at ./Base.jl:377
+ [3] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:8
+ [5] include(::String) at ./client.jl:439
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:142
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:8
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[1299,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 18時50分27秒 JST
+begin
+2020年 4月18日 土曜日 18時52分35秒 JST
+ERROR: LoadError: LoadError: LoadError: syntax: multiple type declarations for "sum_boundary_spins"
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:23
+ [2] include(::Module, ::String) at ./Base.jl:377
+ [3] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:8
+ [5] include(::String) at ./client.jl:439
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:23
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:8
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[1575,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 18時52分41秒 JST
+begin
+2020年 4月18日 土曜日 18時55分14秒 JST
+ERROR: LoadError: BoundsError: attempt to access 0-element Array{UInt64,1} at index [0]
+Stacktrace:
+ [1] getindex at ./array.jl:787 [inlined]
+ [2] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:271
+ [3] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [4] macro expansion at ./util.jl:175 [inlined]
+ [5] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] exec_options(::Base.JLOptions) at ./client.jl:288
+ [8] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[1943,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 18時55分31秒 JST
+begin
+2020年 4月18日 土曜日 18時59分46秒 JST
+ERROR: LoadError: BoundsError: attempt to access 48-element Array{Int64,1} at index [0]
+Stacktrace:
+ [1] setindex! at ./array.jl:825 [inlined]
+ [2] setindex! at ./multidimensional.jl:545 [inlined]
+ [3] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:40
+ [4] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:266
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[1853,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時00分04秒 JST
+begin
+2020年 4月18日 土曜日 19時02分52秒 JST
+ERROR: LoadError: BoundsError: attempt to access 48-element Array{Int64,1} at index [0]
+Stacktrace:
+ [1] setindex! at ./array.jl:825 [inlined]
+ [2] setindex! at ./multidimensional.jl:545 [inlined]
+ [3] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:40
+ [4] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:266
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[209,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時03分09秒 JST
+begin
+2020年 4月18日 土曜日 19時05分42秒 JST
+ERROR: LoadError: BoundsError: attempt to access 48-element Array{Int64,1} at index [0]
+Stacktrace:
+ [1] setindex! at ./array.jl:825 [inlined]
+ [2] setindex! at ./multidimensional.jl:545 [inlined]
+ [3] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:43
+ [4] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:269
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[113,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時05分59秒 JST
+begin
+2020年 4月18日 土曜日 19時08分00秒 JST
+ERROR: LoadError: BoundsError: attempt to access 48-element Array{Int64,1} at index [0]
+Stacktrace:
+ [1] setindex! at ./array.jl:825 [inlined]
+ [2] setindex! at ./multidimensional.jl:545 [inlined]
+ [3] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:43
+ [4] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:270
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[494,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時08分16秒 JST
+begin
+2020年 4月18日 土曜日 19時08分57秒 JST
+ERROR: LoadError: UndefVarError: loop_length not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:268
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[326,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時09分14秒 JST
+begin
+2020年 4月18日 土曜日 19時13分53秒 JST
+ERROR: LoadError: BoundsError: attempt to access 48-element Array{Int64,1} at index [0]
+Stacktrace:
+ [1] getindex at ./array.jl:787 [inlined]
+ [2] getindex(::Array{Int64,1}, ::UInt64) at ./multidimensional.jl:543
+ [3] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:104
+ [4] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:271
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[532,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時14分10秒 JST
+begin
+2020年 4月18日 土曜日 19時17分38秒 JST
+ERROR: LoadError: MethodError: objects of type Array{UInt64,1} are not callable
+Use square brackets [] for indexing an Array.
+Stacktrace:
+ [1] _all(::Array{UInt64,1}, ::Array{UInt64,1}, ::Colon) at ./reduce.jl:820
+ [2] all(::Array{UInt64,1}, ::Array{UInt64,1}) at ./reduce.jl:815
+ [3] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:278
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [5] macro expansion at ./util.jl:175 [inlined]
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[913,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月18日 土曜日 19時18分01秒 JST
+begin
+2020年 4月18日 土曜日 19時22分13秒 JST
+end
+2020年 4月18日 土曜日 19時22分31秒 JST
+begin
+2020年 4月18日 土曜日 19時27分58秒 JST
+end
+2020年 4月18日 土曜日 19時30分34秒 JST
+begin
+2020年 4月18日 土曜日 19時33分57秒 JST
+end
+2020年 4月18日 土曜日 19時37分36秒 JST
