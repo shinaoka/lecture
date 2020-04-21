@@ -26,7 +26,7 @@ function find_loop(spins,
                    first_spin_idx,
                    second_spin_idx,
                    max_length::Int, 
-                   work::Array{Int}, verbose::Bool=false)
+                   work::Array{Int}, verbose::Bool=false, check_n_candidate::Bool=true)
     #=
     All elements of work must be initialized to zero.
     =#
@@ -44,7 +44,7 @@ function find_loop(spins,
     spin_before::Int64    = first_spin_idx
     current_spin_idx::Int64 = second_spin_idx
 
-    max_coord_num = maximum(updater.coord_num)
+    max_coord_num = maximum(updater.nn_coord_num)
     candidate_spins = zeros(UInt, max_coord_num)
     
     #if verbose
@@ -54,6 +54,8 @@ function find_loop(spins,
     success = false
     status = -1
 
+    sum_boundary_spins::HeisenbergSpin = (0.,0.,0.)
+    inner_prod = zeros(Float64, max_coord_num)
     while loop_length < max_length
         #if verbose
            #println("current_spin_idx $(current_spin_idx)")
@@ -74,16 +76,24 @@ function find_loop(spins,
             break
         end
 
+        if check_n_candidate
+            @assert n_candidate == 2
+        end
+
         # next spin index must be determined by value of inner product between one before spin.
-        inner_prod = zeros(Float64,n_candidate)
-        
         for idx in 1:n_candidate
             inner_prod[idx] = dot(spins[spin_before],spins[candidate_spins[idx]])
         end
         
-        #next_spin_idx = candidate_spins[rand(1:n_candidate)]
-       
-        next_spin_idx = candidate_spins[1:n_candidate][findmax(inner_prod)[2]] # findmax() returns (max element,its index)
+        next_spin_idx = candidate_spins[1:n_candidate][findmax(inner_prod[1:n_candidate])[2]] # findmax() returns (max element,its index)
+
+        for idx in 1:n_candidate
+            if candidate_spins[idx] == next_spin_idx
+                continue
+            end
+            sum_boundary_spins = sum_boundary_spins .+ spins[candidate_spins[idx]]
+        end
+
 
         if work[next_spin_idx] == 1
             # OK, we've returned to the starting point.
@@ -108,20 +118,6 @@ function find_loop(spins,
     end
 
     if success
-        # find boundary spins of loop and add them up all.
-        sum_boundary_spins::HeisenbergSpin = (0.,0.,0.)
-        
-        for idx in spins_on_loop[1:loop_length]
-            for ins in 1:updater.nn_coord_num[idx]
-                 ns::SpinIndex = updater.nn_sites[ins,idx]
-
-                 if in(ns,spins_on_loop[1:loop_length])
-                     continue
-                 end
-            end
-            sum_boundary_spins = sum_boundary_spins .+ spins[idx]
-        end
-
         return loop_length, sum_boundary_spins
     else
         # Return the 0-length array of the same for type-stability

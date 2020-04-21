@@ -70,7 +70,7 @@ function test_find_loop(model::JModel)
         spins[i] = (cos(theta),sin(theta),0.)
     end
 
-    loop_length,sum_boundary_spins = find_loop(spins,spin_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true) 
+    loop_length,sum_boundary_spins = find_loop(spins,spin_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true, false)
     @assert all(work .== 0)
 
     # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
@@ -78,7 +78,7 @@ function test_find_loop(model::JModel)
     first_spin_idx_inv  = spin_idx_on_loop[loop_length]
     second_spin_idx_inv = spin_idx_on_loop[loop_length-1]
     loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spin_idx_on_loop,u,first_spin_idx_inv,
-                                                           second_spin_idx_inv,max_loop_length,work,false)
+                                                           second_spin_idx_inv,max_loop_length,work,false,false)
 
     @test all(reverse(spin_idx_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length])
     
