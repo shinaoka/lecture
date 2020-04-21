@@ -441,3 +441,194 @@ begin
 2020年 4月18日 土曜日 19時33分57秒 JST
 end
 2020年 4月18日 土曜日 19時37分36秒 JST
+begin
+2020年 4月21日 火曜日 13時59分01秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+inst_type_w_ at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:1455
+jl_substitute_var at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:949 [inlined]
+check_datatype_parameters at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:1038
+inst_datatype_inner at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:1153
+inst_type_w_ at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:1531
+jl_instantiate_unionall at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:943
+rename_unionall at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:460 [inlined]
+unalias_unionall at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:810
+subtype_unionall at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:838 [inlined]
+subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1284
+with_tvar at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:733
+subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+with_tvar at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:733
+subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+exists_subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1425 [inlined]
+forall_exists_subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1453
+jl_types_equal at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1934
+inst_datatype_inner at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:1114
+inst_type_w_ at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:1531
+jl_instantiate_unionall at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:943 [inlined]
+jl_apply_type at /Users/julia/buildbot/worker/package_macos64/build/src/jltypes.c:897
+widenconst at ./compiler/typelattice.jl:206
+anymap at ./compiler/utilities.jl:39
+argtypes_to_type at ./compiler/typeutils.jl:46 [inlined]
+abstract_call_known at ./compiler/abstractinterpretation.jl:872
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1227
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_edge at ./compiler/typeinfer.jl:488
+abstract_call_method at ./compiler/abstractinterpretation.jl:404
+abstract_call_gf_by_type at ./compiler/abstractinterpretation.jl:101
+abstract_call_known at ./compiler/abstractinterpretation.jl:873
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1227
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_edge at ./compiler/typeinfer.jl:488
+abstract_call_method at ./compiler/abstractinterpretation.jl:404
+abstract_call_gf_by_type at ./compiler/abstractinterpretation.jl:101
+abstract_call_known at ./compiler/abstractinterpretation.jl:873
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1227
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_edge at ./compiler/typeinfer.jl:488
+abstract_call_method at ./compiler/abstractinterpretation.jl:404
+abstract_call_gf_by_type at ./compiler/abstractinterpretation.jl:101
+abstract_call_known at ./compiler/abstractinterpretation.jl:873
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1227
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_edge at ./compiler/typeinfer.jl:488
+abstract_call_method at ./compiler/abstractinterpretation.jl:404
+abstract_call_gf_by_type at ./compiler/abstractinterpretation.jl:101
+abstract_call_known at ./compiler/abstractinterpretation.jl:873
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1227
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_edge at ./compiler/typeinfer.jl:488
+abstract_call_method at ./compiler/abstractinterpretation.jl:404
+abstract_call_gf_by_type at ./compiler/abstractinterpretation.jl:101
+abstract_call_known at ./compiler/abstractinterpretation.jl:873
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1213
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_ext at ./compiler/typeinfer.jl:574
+typeinf_ext at ./compiler/typeinfer.jl:605
+jfptr_typeinf_ext_1.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+jl_type_infer at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:213
+jl_compile_method_internal at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1887
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2153 [inlined]
+jl_apply_generic at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2322
+macro expansion at ./util.jl:175 [inlined]
+top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:808
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+exec_options at ./client.jl:288
+_start at ./client.jl:484
+jfptr__start_2076.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+true_main at /usr/local/bin/julia (unknown line)
+main at /usr/local/bin/julia (unknown line)
+unknown function (ip: 0x0)
+Allocations: 21100654 (Pool: 21095741; Big: 4913); GC: 22
+end
+2020年 4月21日 火曜日 13時59分15秒 JST
+begin
+2020年 4月21日 火曜日 13時59分51秒 JST
+ERROR: LoadError: UndefVarError: loop_lengthp not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:276
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37575,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 14時00分11秒 JST
+begin
+2020年 4月21日 火曜日 14時01分01秒 JST
+ERROR: LoadError: AssertionError: loop_length must to be even.
+Stacktrace:
+ [1] reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:147
+ [2] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:281
+ [3] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [4] macro expansion at ./util.jl:175 [inlined]
+ [5] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] exec_options(::Base.JLOptions) at ./client.jl:288
+ [8] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37551,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 14時01分21秒 JST
+begin
+2020年 4月21日 火曜日 14時03分31秒 JST
+ERROR: LoadError: BoundsError: attempt to access 0-element Array{UInt64,1} at index [0]
+Stacktrace:
+ [1] getindex at ./array.jl:787 [inlined]
+ [2] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:271
+ [3] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [4] macro expansion at ./util.jl:175 [inlined]
+ [5] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] exec_options(::Base.JLOptions) at ./client.jl:288
+ [8] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37883,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 14時03分51秒 JST
+begin
+2020年 4月21日 火曜日 14時05分53秒 JST
+end
+2020年 4月21日 火曜日 14時10分52秒 JST

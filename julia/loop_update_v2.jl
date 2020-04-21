@@ -145,19 +145,20 @@ function reflect_spins_on_loop!(loop_length::Int64,
          
          #implement Equ.(9)
          @assert mod(loop_length,2) == 0 "loop_length must to be even."
-         perpendicular_vec = (0.,0.,0.)
+         perpendicular_vec = zeros(Float64,3)
          for i in 1:Int(loop_length/2)
-             temp = spins[spins_on_loop[2i]] - spins[spins_on_loop[2i-1]]
-             perpendicular_vec = perpendicular_vec .+ temp
+             temp = collect(spins[spins_on_loop[2i]] .- spins[spins_on_loop[2i-1]])
+             perpendicular_vec += temp
          end
 
          #impliment Equ.(10)
+         sum_boundary_spins = collect(sum_boundary_spins)
          normal_vec = normalize(cross(sum_boundary_spins,cross(sum_boundary_spins,perpendicular_vec)))
 
          #impliment Equ.(11)
          for i in 1:loop_length
-             spin_old = spins[spins_on_loop[i]]
-             new_spins_on_loop[i] = normalize(spin_old .- 2 * dot(spin_old,noemal_vec) .* normal_vec)
+             spin_old = collect(spins[spins_on_loop[i]])
+             new_spins_on_loop[i] = Tuple(normalize(spin_old - 2 * dot(spin_old,normal_vec) * normal_vec))
          end
 end
 
@@ -261,7 +262,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         loop_length,sum_boundary_spins = find_loop(spins,spins_on_loop,updater,first_spin_idx,
                                                    second_spin_idx,max_length,work,verbose)
         
-        if loop_length == 0 
+        if loop_length == 0 || mod(loop_length,2) !== 0
             continue
         end
 
@@ -272,7 +273,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_on_loop,updater,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_length,work,verbose)
    
-        if !all(reverse(spins_on_loop) .== cp_spins_on_loop)
+        if !all(reverse(spins_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length])
             continue
         end
         num_loop_found += 1
