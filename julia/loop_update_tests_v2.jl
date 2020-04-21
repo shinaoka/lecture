@@ -23,6 +23,7 @@ function ring_plus_one_model()
     return model
 end
 
+
 function all_to_all_model(num_spins)
     Jij = []
     for ispin=1:num_spins
@@ -56,13 +57,18 @@ function test_find_loop(model::JModel)
     for ins in 1:u.nn_coord_num[first_spin_idx]
         candidate_second_spin_idx[ins] = u.nn_sites[ins,first_spin_idx]
     end
-    second_spin_idx = rand(candidate_second_spin_idx)     
+    second_spin_idx = rand(candidate_second_spin_idx[1:u.nn_coord_num[first_spin_idx]])     
 
     max_loop_length = num_spins
     spin_idx_on_loop = zeros(UInt, max_loop_length)
     #spins = mk_test_spins(num_spins)
     sum_boundary_spins = MVector(0.,0.,0.)
-    spins = fill((0.,0.,1.), num_spins)
+
+    spins = fill((0.,0.,0.),num_spins)
+    for i in 1:num_spins
+        theta  = 10*rand(Random.GLOBAL_RNG)
+        spins[i] = (cos(theta),sin(theta),0.)
+    end
 
     loop_length,sum_boundary_spins = find_loop(spins,spin_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true) 
     @assert all(work .== 0)
@@ -78,7 +84,7 @@ function test_find_loop(model::JModel)
     
     println("loop length: ", loop_length)
     @assert loop_length > 2
-    #@assert mod(loop_length, 2) == 0
+    @assert mod(loop_length, 2) == 0
    
     new_spins_on_loop = fill((0.,0.,-1.), loop_length)
     #new_spins_on_loop = mk_test_spins(num_spins)
@@ -91,23 +97,24 @@ function test_find_loop(model::JModel)
     dE_ref = compute_energy(model, new_spins) - compute_energy(model, spins)
 
     println("dE: ", dE)
-    #@test isapprox(dE, dE_ref)
+    @test isapprox(dE, dE_ref)
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
     println("unit test results")
-    """
-    DEBUG
-    Random.seed!(10)
-    model, colors = ring_plus_one_model()
-    println("ring_plus_one_model results")
-    test_find_loop(model, colors)
-    """
     
+    #DEBUG
+    Random.seed!(10)
+    model  = ring_plus_one_model()
+    println("ring_plus_one_model results")
+    test_find_loop(model)
+    
+    """
     Random.seed!(10)
     model = all_to_all_model(20)
     println("all_to_all_model results")
     test_find_loop(model)
+    """
 end
 
 end

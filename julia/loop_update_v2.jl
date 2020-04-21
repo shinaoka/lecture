@@ -78,19 +78,12 @@ function find_loop(spins,
         inner_prod = zeros(Float64,n_candidate)
         
         for idx in 1:n_candidate
-            # candidate_spins has some 0 elements
-            # so spins[candidate[idx]] is acces 0th element of spins.
-            if candidate_spins[idx] == 0
-                continue
-            end
-
             inner_prod[idx] = dot(spins[spin_before],spins[candidate_spins[idx]])
         end
         
         #next_spin_idx = candidate_spins[rand(1:n_candidate)]
        
-        next_spin_idx = candidate_spins[findmax(inner_prod)[2]] # findmax() returns (max element,its index)
-        #println("DEBUG ?:", next_spin_idx)
+        next_spin_idx = candidate_spins[1:n_candidate][findmax(inner_prod)[2]] # findmax() returns (max element,its index)
 
         if work[next_spin_idx] == 1
             # OK, we've returned to the starting point.
