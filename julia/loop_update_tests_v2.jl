@@ -75,8 +75,8 @@ function test_find_loop(model::JModel)
 
     # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
     cp_spins_on_loop = copy(spin_idx_on_loop)
-    first_spin_idx_inv   = spin_idx_on_loop[1:loop_length][end]
-    second_spin_idx_inv  = spin_idx_on_loop[1:loop_length][end-1]
+    first_spin_idx_inv  = spin_idx_on_loop[loop_length]
+    second_spin_idx_inv = spin_idx_on_loop[loop_length-1]
     loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spin_idx_on_loop,u,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_loop_length,work,false)
 
