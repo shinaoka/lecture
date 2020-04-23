@@ -26,7 +26,7 @@ function find_loop(spins,
                    first_spin_idx,
                    second_spin_idx,
                    max_length::Int, 
-                   work::Array{Int}, verbose::Bool=false, check_n_candidate::Bool=true)
+                   work::Array{Int}, verbose::Bool=false,check_n_candidate::Bool=true)
     #=
     All elements of work must be initialized to zero.
     =#
@@ -75,11 +75,13 @@ function find_loop(spins,
             status = 1
             break
         end
-
+        
+        """
+        println("DEBUG A': ",n_candidate)
         if check_n_candidate
             @assert n_candidate == 2
         end
-
+        """
         # next spin index must be determined by value of inner product between one before spin.
         for idx in 1:n_candidate
             inner_prod[idx] = dot(spins[spin_before],spins[candidate_spins[idx]])
@@ -135,16 +137,17 @@ function reflect_spins_on_loop!(loop_length::Int64,
          #implement Equ.(9)
          @assert mod(loop_length,2) == 0 "loop_length must to be even."
          perpendicular_vec = zeros(Float64,3)
-         for i in 1:Int(loop_length/2)
-             temp = collect(spins[spins_on_loop[2i]] .- spins[spins_on_loop[2i-1]])
-             perpendicular_vec += temp
+         for i in 1:loop_length
+             perpendicular_vec .+= (-1)^i * collect(spins[spins_on_loop[i]])
          end
 
-         #impliment Equ.(10)
+         #implement Equ.(10)
          sum_boundary_spins = collect(sum_boundary_spins)
          normal_vec = normalize(cross(sum_boundary_spins,cross(sum_boundary_spins,perpendicular_vec)))
-
-         #impliment Equ.(11)
+         
+         println("DEBUG A: ",normal_vec[1]," ",normal_vec[2]," ",normal_vec[3])
+         println("DEBUG B: ",dot(normal_vec,sum_boundary_spins))
+         #implement Equ.(11)
          for i in 1:loop_length
              spin_old = collect(spins[spins_on_loop[i]])
              new_spins_on_loop[i] = Tuple(normalize(spin_old - 2 * dot(spin_old,normal_vec) * normal_vec))
@@ -207,11 +210,13 @@ function metropolis_method!(beta::Float64,dE::Float64,
                             spin_idx_on_loop::Array{UInt},
                             new_spins_on_loop::Array{HeisenbergSpin},
                             num_accept::Int64)::Float64
-    
-    if rand(Random.GLOBAL_RNG) < exp(-beta*dE)
+ 
+    temp_rn = rand(Random.GLOBAL_RNG)
+    println("DEBUG C: ",temp_rn," ",beta," ",dE)
+
+    if temp_rn < exp(-beta*dE)
         spins[spin_idx_on_loop[1:loop_length]] = new_spins_on_loop[1:loop_length]
         num_accept += 1
-        
         return dE
     else
         #p = exp(-beta*dE)
@@ -221,10 +226,10 @@ function metropolis_method!(beta::Float64,dE::Float64,
 end
 
 function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
-                      updater::SingleSpinFlipUpdater,beta::Float64,
-                      max_length::Int,
-                      spins::AbstractArray{HeisenbergSpin},
-                      verbose::Bool=false)
+                            updater::SingleSpinFlipUpdater,beta::Float64,
+                            max_length::Int,
+                            spins::AbstractArray{HeisenbergSpin},
+                            verbose::Bool=false)
     
     # No copy
     work = loop_updater.work
@@ -254,22 +259,37 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         if loop_length == 0 || mod(loop_length,2) !== 0
             continue
         end
+        num_loop_found += 1
+        
+        before_flipped_spins = copy(spins[spins_on_loop[1:loop_length]])
+        reflect_spins_on_loop!(loop_length,spins,new_spins,spins_on_loop,updater,sum_boundary_spins)
+        temp_dE_loop = compute_dE_loop(updater,loop_length,spins_on_loop,spins,new_spins,work,verbose)
+        dE_loop =  metropolis_method!(beta,temp_dE_loop,spins,loop_length,spins_on_loop,new_spins,num_accept)
+       
+        if dE_loop == 0
+            continue
+        end
 
         # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
-        cp_spins_on_loop = copy(spins_on_loop)
+        cp_spins_on_loop = copy(spins_on_loop[1:loop_length])
         first_spin_idx_inv  = spins_on_loop[loop_length]
         second_spin_idx_inv = spins_on_loop[loop_length-1]
         loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_on_loop,updater,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_length,work,verbose)
    
-        if !all(reverse(spins_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length])
+        if !all(reverse(spins_on_loop[1:loop_length]) .== cp_spins_on_loop)
+            num_loop_found -= 1  
+            num_accept     -= 1  
+            spins[cp_spins_on_loop] = before_flipped_spins    
             continue
         end
-        num_loop_found += 1
-             
-        reflect_spins_on_loop!(loop_length,spins,new_spins,spins_on_loop,updater,sum_boundary_spins)
-        dE_loop = compute_dE_loop(updater,loop_length,spins_on_loop,spins,new_spins,work,verbose)
-        dE += metropolis_method!(beta,dE_loop,spins,loop_length,spins_on_loop,new_spins,num_accept)
+        
+        println("DEBUG D: ",loop_length)
+
+        for i in 1:loop_length
+            sx,sy,sz = spins[spins_on_loop[i]]
+            println("DEBUG E: ",sx," ",sy," ",sz)
+        end
 
         # in metropolis_method!(),num_accept += 1 when update is accepted.
         """

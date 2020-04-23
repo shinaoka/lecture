@@ -632,3 +632,347 @@ begin
 2020年 4月21日 火曜日 14時05分53秒 JST
 end
 2020年 4月21日 火曜日 14時10分52秒 JST
+begin
+2020年 4月21日 火曜日 18時14分10秒 JST
+ERROR: LoadError: AssertionError: n_candidate == 2
+Stacktrace:
+ [1] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:80
+ [2] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:35
+ [3] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:252
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [5] macro expansion at ./util.jl:175 [inlined]
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[33435,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 18時14分30秒 JST
+begin
+2020年 4月21日 火曜日 18時18分46秒 JST
+ERROR: LoadError: AssertionError: n_candidate == 2
+Stacktrace:
+ [1] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:80
+ [2] find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:35
+ [3] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:252
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [5] macro expansion at ./util.jl:175 [inlined]
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[33615,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 18時19分03秒 JST
+begin
+2020年 4月21日 火曜日 20時46分54秒 JST
+ERROR: LoadError: DimensionMismatch("dimensions must match: a has dims (Base.OneTo(3),), must have singleton at dim 1")
+Stacktrace:
+ [1] promote_shape at ./indices.jl:183 [inlined]
+ [2] promote_shape at ./indices.jl:169 [inlined]
+ [3] +(::Array{Float64,1}, ::Array{UInt64,0}) at ./arraymath.jl:45
+ [4] reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:140
+ [5] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:273
+ [6] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [7] macro expansion at ./util.jl:175 [inlined]
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [9] include(::Module, ::String) at ./Base.jl:377
+ [10] exec_options(::Base.JLOptions) at ./client.jl:288
+ [11] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[48583,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 20時47分14秒 JST
+begin
+2020年 4月21日 火曜日 20時51分10秒 JST
+ERROR: LoadError: DimensionMismatch("dimensions must match: a has dims (Base.OneTo(3),), must have singleton at dim 1")
+Stacktrace:
+ [1] promote_shape at ./indices.jl:183 [inlined]
+ [2] promote_shape at ./indices.jl:169 [inlined]
+ [3] +(::Array{Float64,1}, ::Array{UInt64,0}) at ./arraymath.jl:45
+ [4] reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64}) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:140
+ [5] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:273
+ [6] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [7] macro expansion at ./util.jl:175 [inlined]
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [9] include(::Module, ::String) at ./Base.jl:377
+ [10] exec_options(::Base.JLOptions) at ./client.jl:288
+ [11] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[48407,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 20時51分29秒 JST
+begin
+2020年 4月21日 火曜日 20時54分59秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+kevent at /usr/lib/system/libsystem_kernel.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 1163701812 (Pool: 1162982719; Big: 719093); GC: 1378
+end
+2020年 4月21日 火曜日 21時19分43秒 JST
+begin
+2020年 4月21日 火曜日 21時20分16秒 JST
+end
+2020年 4月21日 火曜日 21時22分03秒 JST
+begin
+2020年 4月21日 火曜日 21時30分38秒 JST
+end
+2020年 4月21日 火曜日 21時41分11秒 JST
+begin
+2020年 4月21日 火曜日 21時43分38秒 JST
+end
+2020年 4月21日 火曜日 21時43分54秒 JST
+begin
+2020年 4月21日 火曜日 21時49分09秒 JST
+ERROR: LoadError: UndefVarError: update not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:432
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[47511,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月21日 火曜日 21時49分27秒 JST
+begin
+2020年 4月21日 火曜日 21時50分25秒 JST
+end
+2020年 4月21日 火曜日 21時50分41秒 JST
+begin
+2020年 4月21日 火曜日 21時59分12秒 JST
+end
+2020年 4月21日 火曜日 21時59分29秒 JST
+begin
+2020年 4月21日 火曜日 22時14分24秒 JST
+end
+2020年 4月21日 火曜日 22時14分39秒 JST
+begin
+2020年 4月21日 火曜日 22時42分17秒 JST
+end
+2020年 4月21日 火曜日 22時42分37秒 JST
+begin
+2020年 4月22日 水曜日 12時50分46秒 JST
+end
+2020年 4月22日 水曜日 13時03分30秒 JST
+begin
+2020年 4月22日 水曜日 13時15分35秒 JST
+end
+2020年 4月22日 水曜日 13時34分37秒 JST
+begin
+2020年 4月22日 水曜日 13時40分22秒 JST
+end
+2020年 4月22日 水曜日 13時41分03秒 JST
+begin
+2020年 4月22日 水曜日 13時46分29秒 JST
+end
+2020年 4月22日 水曜日 13時47分47秒 JST
+begin
+2020年 4月22日 水曜日 14時24分35秒 JST
+end
+2020年 4月22日 水曜日 14時25分41秒 JST
+begin
+2020年 4月22日 水曜日 14時32分34秒 JST
+end
+2020年 4月22日 水曜日 14時33分48秒 JST
+begin
+2020年 4月22日 水曜日 16時16分51秒 JST
+end
+2020年 4月22日 水曜日 16時21分56秒 JST
+begin
+2020年 4月22日 水曜日 17時00分27秒 JST
+end
+2020年 4月22日 水曜日 17時03分27秒 JST
+begin
+2020年 4月22日 水曜日 17時29分04秒 JST
+ERROR: LoadError: i or j is out of the range [1, num_spins].
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] (::Main.ClassicalMC.var"#23#24"{Int64,Array{Tuple{UInt32,UInt32,Float64,Float64,Float64,Int64},1}})(::IOStream) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:69
+ [3] open(::Main.ClassicalMC.var"#23#24"{Int64,Array{Tuple{UInt32,UInt32,Float64,Float64,Float64,Int64},1}}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [4] open at ./io.jl:296 [inlined]
+ [5] read_Jij at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:55 [inlined]
+ [6] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:280
+ [7] macro expansion at ./util.jl:175 [inlined]
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [9] include(::Module, ::String) at ./Base.jl:377
+ [10] exec_options(::Base.JLOptions) at ./client.jl:288
+ [11] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[53830,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月22日 水曜日 17時29分21秒 JST
+begin
+2020年 4月22日 水曜日 17時44分01秒 JST
+end
+2020年 4月22日 水曜日 17時48分46秒 JST
+begin
+2020年 4月22日 水曜日 19時10分36秒 JST
+end
+2020年 4月22日 水曜日 19時14分03秒 JST
+begin
+2020年 4月22日 水曜日 23時02分08秒 JST
+ERROR: LoadError: MethodError: objects of type Array{Tuple{Float64,Float64,Float64},1} are not callable
+Use square brackets [] for indexing an Array.
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:264
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[52087,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月22日 水曜日 23時02分31秒 JST
+begin
+2020年 4月22日 水曜日 23時03分56秒 JST
+ERROR: LoadError: LoadError: LoadError: syntax: missing comma or ) in argument list
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:265
+ [2] include(::Module, ::String) at ./Base.jl:377
+ [3] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:8
+ [5] include(::String) at ./client.jl:439
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:265
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:8
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[50400,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月22日 水曜日 23時04分04秒 JST
+begin
+2020年 4月22日 水曜日 23時04分34秒 JST
+end
+2020年 4月22日 水曜日 23時05分11秒 JST
+begin
+2020年 4月22日 水曜日 23時06分25秒 JST
+end
+2020年 4月22日 水曜日 23時10分01秒 JST
+begin
+2020年 4月22日 水曜日 23時10分52秒 JST
+end
+2020年 4月22日 水曜日 23時24分03秒 JST
+begin
+2020年 4月22日 水曜日 23時32分13秒 JST
+end
+2020年 4月23日 木曜日 00時05分59秒 JST
+begin
+2020年 4月23日 木曜日 14時23分07秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+kevent at /usr/lib/system/libsystem_kernel.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 1234098033 (Pool: 1234089254; Big: 8779); GC: 1546
+end
+2020年 4月23日 木曜日 14時30分34秒 JST
+begin
+2020年 4月23日 木曜日 14時30分43秒 JST
+end
+2020年 4月23日 木曜日 14時31分17秒 JST
+begin
+2020年 4月23日 木曜日 14時32分49秒 JST
+end
+2020年 4月23日 木曜日 14時34分25秒 JST
+begin
+2020年 4月23日 木曜日 14時44分51秒 JST
+end
+2020年 4月23日 木曜日 14時57分02秒 JST
+begin
+2020年 4月23日 木曜日 15時02分10秒 JST
+end
+2020年 4月23日 木曜日 15時16分53秒 JST
+begin
+2020年 4月23日 木曜日 15時28分07秒 JST
+end
+2020年 4月23日 木曜日 15時44分45秒 JST
