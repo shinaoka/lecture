@@ -36,15 +36,15 @@ function find_loop(spins,
 
     @assert length(work) >= num_spins
 
-    work[first_spin_idx]  = 1
-    spins_on_loop[1]      = first_spin_idx
-    work[second_spin_idx] = 2
-    spins_on_loop[2]      = second_spin_idx
-    loop_length::Int64    = 2
-    spin_before::Int64    = first_spin_idx
+    work[first_spin_idx]    = 1
+    work[second_spin_idx]   = 2
+    spins_on_loop[1]        = first_spin_idx
+    spins_on_loop[2]        = second_spin_idx
+    loop_length::Int64      = 2
+    spin_before::Int64      = first_spin_idx
     current_spin_idx::Int64 = second_spin_idx
 
-    max_coord_num = maximum(updater.nn_coord_num)
+    max_coord_num   = maximum(updater.nn_coord_num)
     candidate_spins = zeros(UInt, max_coord_num)
     
     #if verbose
@@ -57,9 +57,11 @@ function find_loop(spins,
     sum_boundary_spins::HeisenbergSpin = (0.,0.,0.)
     inner_prod = zeros(Float64, max_coord_num)
     while loop_length < max_length
+
         #if verbose
            #println("current_spin_idx $(current_spin_idx)")
         #end
+
         # Search connected spins
         n_candidate = 0
         for ins in 1:updater.nn_coord_num[current_spin_idx]
@@ -76,18 +78,14 @@ function find_loop(spins,
             break
         end
         
-        """
-        println("DEBUG A': ",n_candidate)
-        if check_n_candidate
-            @assert n_candidate == 2
-        end
-        """
+
         # next spin index must be determined by value of inner product between one before spin.
         for idx in 1:n_candidate
             inner_prod[idx] = dot(spins[spin_before],spins[candidate_spins[idx]])
         end
-        
-        next_spin_idx = candidate_spins[1:n_candidate][findmax(inner_prod[1:n_candidate])[2]] # findmax() returns (max element,its index)
+
+        max_inner_prod = findmax(inner_prod[1:n_candidate])[2] # findmax() returns (max element,its index)
+        next_spin_idx  = candidate_spins[1:n_candidate][max_inner_prod]
 
         for idx in 1:n_candidate
             if candidate_spins[idx] == next_spin_idx
@@ -127,6 +125,7 @@ function find_loop(spins,
     end
 end
 
+
 function reflect_spins_on_loop!(loop_length::Int64,
                                 spins::Array{HeisenbergSpin},
                                 new_spins_on_loop::Array{HeisenbergSpin},
@@ -134,26 +133,28 @@ function reflect_spins_on_loop!(loop_length::Int64,
                                 updater::SingleSpinFlipUpdater,
                                 sum_boundary_spins::HeisenbergSpin)
          
-         #implement Equ.(9)
-         @assert mod(loop_length,2) == 0 "loop_length must to be even."
-         perpendicular_vec = zeros(Float64,3)
-         for i in 1:loop_length
-             perpendicular_vec .+= (-1)^i * collect(spins[spins_on_loop[i]])
-         end
+    #implement Equ.(9)
+    @assert mod(loop_length,2) == 0 "loop_length must to be even."
+    perpendicular_vec = zeros(Float64,3)
+    for i in 1:loop_length
+        perpendicular_vec .+= (-1)^i * collect(spins[spins_on_loop[i]])
+    end
 
-         #implement Equ.(10)
-         sum_boundary_spins = collect(sum_boundary_spins)
-         normal_vec = normalize(cross(sum_boundary_spins,cross(sum_boundary_spins,perpendicular_vec)))
+    #implement Equ.(10)
+    sum_boundary_spins = collect(sum_boundary_spins)
+    normal_vec = normalize(cross(sum_boundary_spins,cross(sum_boundary_spins,perpendicular_vec)))
          
-         println("DEBUG A: ",normal_vec[1]," ",normal_vec[2]," ",normal_vec[3])
-         println("DEBUG B: ",dot(normal_vec,sum_boundary_spins))
+    #println("DEBUG A: ",normal_vec[1]," ",normal_vec[2]," ",normal_vec[3])
+    #println("DEBUG B: ",dot(normal_vec,sum_boundary_spins))
 
-         #implement Equ.(11)
-         for i in 1:loop_length
-             spin_old = collect(spins[spins_on_loop[i]])
-             new_spins_on_loop[i] = Tuple(normalize(spin_old - 2 * dot(spin_old,normal_vec) * normal_vec))
-         end
+    #implement Equ.(11)
+    for i in 1:loop_length
+        spin_old = collect(spins[spins_on_loop[i]])
+        new_spins_on_loop[i] = Tuple(normalize(spin_old - 2 * dot(spin_old,normal_vec) * normal_vec))
+    end
+
 end
+
 
 function compute_dE_loop(updater::SingleSpinFlipUpdater,
                           loop_length::Int,
@@ -187,7 +188,7 @@ function compute_dE_loop(updater::SingleSpinFlipUpdater,
             # If the connected site is on the loop
             if work[jspin] != 0
                 sj_new = new_spins_on_loop[work[jspin]]
-                dE_spin = (Jx * sj_old[1] * si_old[1] + Jy * sj_old[2] * si_old[2] + Jz * sj_old[3] * si_old[3])
+                dE_spin  = (Jx * sj_old[1] * si_old[1] + Jy * sj_old[2] * si_old[2] + Jz * sj_old[3] * si_old[3])
                 dE_spin -= (Jx * sj_new[1] * si_new[1] + Jy * sj_new[2] * si_new[2] + Jz * sj_new[3] * si_new[3])
                 dE += 0.5 * dE_spin
             else
@@ -219,10 +220,10 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
     num_spins = updater.num_spins
     max_coord_num = maximum(updater.coord_num)
     
-    dE   = 0.
-    num_accept = 0
+    dE             = 0.
+    num_accept     = 0
     num_loop_found = 0
-     
+
     for i=1:num_trial
         
         first_spin_idx = rand(1:num_spins) 
@@ -235,7 +236,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
 
         loop_length,sum_boundary_spins = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx,
                                                    second_spin_idx,max_length,work,verbose)
-        
+
         if loop_length == 0 || mod(loop_length,2) !== 0
             continue
         end
@@ -245,7 +246,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         before_flipped_spins = copy(spins[spins_idx_on_loop[1:loop_length]])
         reflect_spins_on_loop!(loop_length,spins,new_spins_on_loop,spins_idx_on_loop,updater,sum_boundary_spins)
         dE_loop = compute_dE_loop(updater,loop_length,spins_idx_on_loop,spins,new_spins_on_loop,work,verbose)
-   
+
         # implement metropolis method.
         temp_r = rand(Random.GLOBAL_RNG)
         if temp_r < exp(-beta*dE_loop)
@@ -255,15 +256,15 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             continue
         end
         
-        println("DEBUG A': ",temp_r," ",beta," ",dE_loop)
+        #println("DEBUG A': ",temp_r," ",beta," ",dE_loop)
 
         # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
         cp_spins_idx_on_loop = copy(spins_idx_on_loop[1:loop_length])
-        first_spin_idx_inv  = spins_idx_on_loop[loop_length]
-        second_spin_idx_inv = spins_idx_on_loop[loop_length-1]
+        first_spin_idx_inv   = spins_idx_on_loop[loop_length]
+        second_spin_idx_inv  = spins_idx_on_loop[loop_length-1]
         loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_length,work,verbose)
-   
+
         if !all(reverse(spins_idx_on_loop[1:loop_length]) .== cp_spins_idx_on_loop) && loop_length !== loop_length_inv 
             num_loop_found -= 1  
             num_accept     -= 1  
@@ -271,25 +272,24 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             continue
         end
         
-        println("DEBUG D: ",loop_length)
+        #println("DEBUG D: ",loop_length)
 
-        for i in 1:loop_length
-            sx,sy,sz = spins[spins_idx_on_loop[i]]
-            println("DEBUG E: ",sx," ",sy," ",sz)
-        end
-
+        #for i in 1:loop_length
+            #sx,sy,sz = spins[spins_idx_on_loop[i]]
+            #println("DEBUG E: ",sx," ",sy," ",sz)
+        #end
 
         dE += dE_loop
         
     end
 
     #if verbose
-       #println("multi_loop: $(1/beta) $(timings)")
+       #println("multi_loop: $(1/beta) $(timing)")
     #end
     
-    if num_accept != 0
-        println("DEBUG F: ", num_accept)
-    end
+    #if num_accept != 0
+        #println("DEBUG F: ", num_accept)
+    #end
 
     return dE, num_loop_found/num_trial, num_accept/num_trial
 end
