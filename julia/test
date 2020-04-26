@@ -976,3 +976,137 @@ begin
 2020年 4月23日 木曜日 15時28分07秒 JST
 end
 2020年 4月23日 木曜日 15時44分45秒 JST
+begin
+2020年 4月23日 木曜日 21時06分13秒 JST
+ERROR: LoadError: UndefVarError: new_spins_on_loop not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:249
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[59660,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月23日 木曜日 21時06分32秒 JST
+begin
+2020年 4月23日 木曜日 21時16分43秒 JST
+ERROR: LoadError: UndefVarError: loop_legth not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update_v2.jl:268
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:363
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[60034,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月23日 木曜日 21時17分00秒 JST
+begin
+2020年 4月23日 木曜日 21時18分07秒 JST
+end
+2020年 4月23日 木曜日 21時18分57秒 JST
+begin
+2020年 4月23日 木曜日 21時21分27秒 JST
+end
+2020年 4月23日 木曜日 21時27分32秒 JST
+begin
+2020年 4月23日 木曜日 21時37分28秒 JST
+end
+2020年 4月23日 木曜日 21時38分14秒 JST
+begin
+2020年 4月23日 木曜日 21時42分17秒 JST
+end
+2020年 4月23日 木曜日 21時43分11秒 JST
+begin
+2020年 4月23日 木曜日 21時44分05秒 JST
+end
+2020年 4月23日 木曜日 21時52分07秒 JST
+begin
+2020年 4月23日 木曜日 21時58分00秒 JST
+end
+2020年 4月23日 木曜日 22時08分51秒 JST
+begin
+2020年 4月23日 木曜日 22時40分11秒 JST
+end
+2020年 4月23日 木曜日 23時02分43秒 JST
+begin
+2020年 4月23日 木曜日 23時16分04秒 JST
+end
+2020年 4月23日 木曜日 23時31分13秒 JST
+begin
+2020年 4月23日 木曜日 23時57分29秒 JST
+ERROR: unknown option `--trackallocation`
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[57423,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月23日 木曜日 23時57分31秒 JST
+begin
+2020年 4月23日 木曜日 23時58分06秒 JST
+ERROR: unknown option `-t`
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[57830,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 4月23日 木曜日 23時58分08秒 JST
+begin
+2020年 4月24日 金曜日 00時02分29秒 JST
+end
+2020年 4月24日 金曜日 00時02分53秒 JST
+begin
+2020年 4月24日 金曜日 00時20分20秒 JST
+end
+2020年 4月24日 金曜日 00時22分06秒 JST
+begin
+2020年 4月24日 金曜日 00時30分30秒 JST
+end
+2020年 4月24日 金曜日 00時32分12秒 JST
+begin
+2020年 4月24日 金曜日 00時41分39秒 JST
+end
+2020年 4月24日 金曜日 00時48分51秒 JST
+begin
+2020年 4月24日 金曜日 00時55分03秒 JST
+end
+2020年 4月24日 金曜日 01時27分58秒 JST
