@@ -26,12 +26,11 @@ function find_loop(spins,
                    first_spin_idx,
                    second_spin_idx,
                    max_length::Int, 
-                   work::Array{Int}, verbose::Bool=false,check_n_candidate::Bool=true)
+                   work::Array{Int}, verbose::Bool=false,check_n_candidate::Bool=false)
     #=
     All elements of work must be initialized to zero.
     =#
     
-
     num_spins = updater.num_spins
 
     @assert length(work) >= num_spins
@@ -46,10 +45,6 @@ function find_loop(spins,
 
     max_coord_num   = maximum(updater.nn_coord_num)
     candidate_spins = zeros(UInt, max_coord_num)
-    
-    #if verbose
-       #println("colors_on_loop $(colors_on_loop)")
-    #end
 
     success = false
     status = -1
@@ -61,7 +56,6 @@ function find_loop(spins,
         #if verbose
            #println("current_spin_idx $(current_spin_idx)")
         #end
-
         # Search connected spins
         n_candidate = 0
         for ins in 1:updater.nn_coord_num[current_spin_idx]
@@ -82,9 +76,6 @@ function find_loop(spins,
         # next spin index must be determined by value of inner product between one before spin.
         for idx in 1:n_candidate
             inner_prod[idx] = dot(spins[spin_before],spins[candidate_spins[idx]])
-        end
-       
-        next_spin_idx = candidate_spins[findmax(inner_prod)[2]] # findmax() returns (max element,its index)
         end
 
         max_inner_prod = findmax(inner_prod[1:n_candidate])[2] # findmax() returns (max element,its index)
@@ -268,7 +259,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_length,work,verbose)
 
-        if !all(reverse(spins_idx_on_loop[1:loop_length]) .== cp_spins_idx_on_loop) && loop_length !== loop_length_inv 
+        if !all(reverse(spins_idx_on_loop[1:loop_length]) .== cp_spins_idx_on_loop) || loop_length !== loop_length_inv 
             num_loop_found -= 1  
             num_accept     -= 1  
             spins[cp_spins_idx_on_loop] = before_flipped_spins    

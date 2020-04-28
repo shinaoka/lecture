@@ -80,19 +80,16 @@ function test_find_loop(model::JModel)
      loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spin_idx_on_loop,u,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_loop_length,work,false)
 
-<<<<<<< HEAD
      @test all(reverse(spin_idx_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length]) 
-=======
     # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
     cp_spins_on_loop = copy(spin_idx_on_loop)
     first_spin_idx_inv  = spin_idx_on_loop[loop_length]
     second_spin_idx_inv = spin_idx_on_loop[loop_length-1]
     loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spin_idx_on_loop,u,first_spin_idx_inv,
-                                                           second_spin_idx_inv,max_loop_length,work,false,false)
+                                                           second_spin_idx_inv,max_loop_length,work,false)
 
     @test all(reverse(spin_idx_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length])
     
->>>>>>> 8c37e04b1f6d4868b39cd6a73862311fec6bd111
     println("loop length: ", loop_length)
     @assert loop_length > 2
     @assert mod(loop_length, 2) == 0
