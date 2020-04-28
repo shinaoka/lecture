@@ -26,7 +26,7 @@ function find_loop(spins,
                    first_spin_idx,
                    second_spin_idx,
                    max_length::Int, 
-                   work::Array{Int}, verbose::Bool=false,check_n_candidate::Bool=true)
+                   work::Array{Int}, verbose::Bool=false,check_n_candidate::Bool=false)
     #=
     All elements of work must be initialized to zero.
     =#
@@ -46,10 +46,6 @@ function find_loop(spins,
 
     max_coord_num   = maximum(updater.nn_coord_num)
     candidate_spins = zeros(UInt, max_coord_num)
-    
-    #if verbose
-       #println("colors_on_loop $(colors_on_loop)")
-    #end
 
     success = false
     status = -1
