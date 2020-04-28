@@ -236,8 +236,6 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         if loop_length == 0 || mod(loop_length,2) !== 0
             continue
         end
-        num_loop_found += 1
-        
 
         before_flipped_spins = copy(spins[spins_idx_on_loop[1:loop_length]])
         reflect_spins_on_loop!(loop_length,spins,new_spins_on_loop,spins_idx_on_loop,updater,sum_boundary_spins)
@@ -247,7 +245,6 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         temp_r = rand(Random.GLOBAL_RNG)
         if temp_r < exp(-beta*dE_loop)
             spins[spins_idx_on_loop[1:loop_length]] = new_spins_on_loop[1:loop_length]
-            num_accept += 1
         else
             continue
         end
@@ -262,12 +259,13 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
                                                            second_spin_idx_inv,max_length,work,verbose)
 
         if !all(reverse(spins_idx_on_loop[1:loop_length]) .== cp_spins_idx_on_loop) && loop_length !== loop_length_inv 
-            num_loop_found -= 1  
-            num_accept     -= 1  
             spins[cp_spins_idx_on_loop] = before_flipped_spins    
             continue
         end
         
+        num_loop_found += 1
+        num_accept     += 1
+
         #println("DEBUG D: ",loop_length)
 
         #for i in 1:loop_length
