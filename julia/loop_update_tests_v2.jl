@@ -23,6 +23,7 @@ function ring_plus_one_model()
     return model
 end
 
+
 function all_to_all_model(num_spins)
     Jij = []
     for ispin=1:num_spins
@@ -56,15 +57,20 @@ function test_find_loop(model::JModel)
     for ins in 1:u.nn_coord_num[first_spin_idx]
         candidate_second_spin_idx[ins] = u.nn_sites[ins,first_spin_idx]
     end
-    second_spin_idx = rand(candidate_second_spin_idx)     
+    second_spin_idx = rand(candidate_second_spin_idx[1:u.nn_coord_num[first_spin_idx]])     
 
     max_loop_length = num_spins
     spin_idx_on_loop = zeros(UInt, max_loop_length)
     #spins = mk_test_spins(num_spins)
     sum_boundary_spins = MVector(0.,0.,0.)
-    spins = fill((0.,0.,1.), num_spins)
 
-    loop_length,sum_boundary_spins = find_loop(spins,spin_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true) 
+    spins = fill((0.,0.,0.),num_spins)
+    for i in 1:num_spins
+        theta  = 10*rand(Random.GLOBAL_RNG)
+        spins[i] = (cos(theta),sin(theta),0.)
+    end
+
+    loop_length,sum_boundary_spins = find_loop(spins,spin_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true, false)
     @assert all(work .== 0)
     
      # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
@@ -74,10 +80,22 @@ function test_find_loop(model::JModel)
      loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spin_idx_on_loop,u,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_loop_length,work,false)
 
+<<<<<<< HEAD
      @test all(reverse(spin_idx_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length]) 
+=======
+    # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
+    cp_spins_on_loop = copy(spin_idx_on_loop)
+    first_spin_idx_inv  = spin_idx_on_loop[loop_length]
+    second_spin_idx_inv = spin_idx_on_loop[loop_length-1]
+    loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spin_idx_on_loop,u,first_spin_idx_inv,
+                                                           second_spin_idx_inv,max_loop_length,work,false,false)
+
+    @test all(reverse(spin_idx_on_loop[1:loop_length]) .== cp_spins_on_loop[1:loop_length])
+    
+>>>>>>> 8c37e04b1f6d4868b39cd6a73862311fec6bd111
     println("loop length: ", loop_length)
     @assert loop_length > 2
-    #@assert mod(loop_length, 2) == 0
+    @assert mod(loop_length, 2) == 0
    
     new_spins_on_loop = fill((0.,0.,-1.), loop_length)
     #new_spins_on_loop = mk_test_spins(num_spins)
@@ -95,18 +113,19 @@ end
 
 if abspath(PROGRAM_FILE) == @__FILE__
     println("unit test results")
-    """
-    DEBUG
-    Random.seed!(10)
-    model, colors = ring_plus_one_model()
-    println("ring_plus_one_model results")
-    test_find_loop(model, colors)
-    """
     
+    #DEBUG
+    Random.seed!(10)
+    model  = ring_plus_one_model()
+    println("ring_plus_one_model results")
+    test_find_loop(model)
+    
+    """
     Random.seed!(10)
     model = all_to_all_model(20)
     println("all_to_all_model results")
     test_find_loop(model)
+    """
 end
 
 end

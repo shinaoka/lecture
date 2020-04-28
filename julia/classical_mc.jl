@@ -428,7 +428,10 @@ function solve(input_file::String, comm)
         for i in 1:num_temps
             println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
         end
-       
+        
+        temp_idx = rand(1:num_spins)
+     
+        println("num of nn_sites of $(temp_idx)th site: ",updater.nn_coord_num[temp_idx])
         
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)
