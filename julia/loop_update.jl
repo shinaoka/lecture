@@ -258,7 +258,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         loop_length_inv,sum_boundary_spins_inv = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx_inv,
                                                            second_spin_idx_inv,max_length,work,verbose)
 
-        if !all(reverse(spins_idx_on_loop[1:loop_length]) .== cp_spins_idx_on_loop) && loop_length !== loop_length_inv 
+        if reverse(spins_idx_on_loop[1:loop_length]) !== cp_spins_idx_on_loop || loop_length !== loop_length_inv 
             spins[cp_spins_idx_on_loop] = before_flipped_spins    
             continue
         end
