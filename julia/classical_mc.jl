@@ -338,7 +338,6 @@ function solve(input_file::String, comm)
     if is_read_spin_config
         spin_config = retrieve(conf, "model", "spin_config")
         spins_local = fill(read_spin_config(spin_config,num_spins),num_temps_local)
-        println("init spins: ",spins_local[1]) # debug
     end
 
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]

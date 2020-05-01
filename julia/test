@@ -2226,3 +2226,1922 @@ begin
 2020年 5月 1日 金曜日 16時53分29秒 JST
 end
 2020年 5月 1日 金曜日 16時53分48秒 JST
+Sender: LSF System <lavaadmin@sakura02.local>
+Subject: Job 8263: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <22*sakura02.local>, in queue <normal>, as user <kakizawa>.
+                            <2*sakura03.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 21:18:39 2020
+Results reported at Fri May  1 21:22:16 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4098.46 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8264: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <23*sakura05.local>, in queue <normal>, as user <kakizawa>.
+                            <1*sakura04.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 21:46:32 2020
+Results reported at Fri May  1 21:49:47 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4172.37 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8265: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <23*sakura05.local>, in queue <normal>, as user <kakizawa>.
+                            <1*sakura03.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 21:58:23 2020
+Results reported at Fri May  1 21:58:59 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    482.10 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: UndefVarError: loop_length_iv not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+ERROR: LoadError: ERROR: ERROR: LoadError: ERROR: LoadError: LoadError: ERROR: LoadError: ERROR: ERROR: LoadError: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: ERROR: LoadError: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: LoadError: ERROR: UndefVarError: loop_length_iv not definedERROR: LoadError: 
+Stacktrace:LoadError: ERROR: UndefVarError: loop_length_iv not defined
+ [1] LoadError: 
+Stacktrace:UndefVarError: loop_length_iv not definedERROR: ERROR: 
+ [1] UndefVarError: loop_length_iv not definedLoadError: LoadError: multi_loop_update!
+Stacktrace:UndefVarError: loop_length_iv not definedERROR: 
+ [1] 
+Stacktrace:LoadError: (UndefVarError: loop_length_iv not definedmulti_loop_update!
+Stacktrace:
+ [1] ::ERROR: UndefVarError: loop_length_iv not defined
+ [1] 
+Stacktrace:LoadError: (UndefVarError: loop_length_iv not definedmulti_loop_update!::
+ [1] 
+Stacktrace:multi_loop_update!Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] 
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+ [1] (UndefVarError: loop_length_iv not defined::multi_loop_update!
+ [1] (::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::UndefVarError: loop_length_iv not definedMPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] multi_loop_update!
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+(UndefVarError: loop_length_iv not defined::
+ [1] multi_loop_update!ERROR: 
+Stacktrace:(Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] multi_loop_update!::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:LoadError: 
+ [1] Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] (include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+ [1] ::(multi_loop_update!::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+multi_loop_update!(::multi_loop_update!Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] UndefVarError: loop_length_iv not definedinclude at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},(1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+::(::
+Stacktrace:Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},
+ [1] 1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+UndefVarError: loop_length_iv not definedUndefVarError: loop_length_iv not definedMain.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:multi_loop_update!
+ [1] UndefVarError: loop_length_iv not defined
+ [1] (::UndefVarError: loop_length_iv not defined
+Stacktrace:UndefVarError: loop_length_iv not defined
+ [1] multi_loop_update!multi_loop_update!
+Stacktrace:
+Stacktrace:
+ [1] Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},
+ [1] (1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::(Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+::UndefVarError: loop_length_iv not defined::multi_loop_update!UndefVarError: loop_length_iv not defined
+Stacktrace:UndefVarError: loop_length_iv not definedmulti_loop_update!(
+Stacktrace:multi_loop_update!
+ [1] ::UndefVarError: loop_length_iv not definedMain.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64
+,Float64}, [1] 1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] 1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+Stacktrace:
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+((::
+Stacktrace:
+ [1] ::
+ [1] multi_loop_update!Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+multi_loop_update!ERROR: (Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at multi_loop_update!/misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at 1}, ::./sysimg.jl:29
+ [7] exec_optionsBool(::)Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+ at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+(UndefVarError: loop_length_iv not definedLoadError: multi_loop_update!::(::
+Stacktrace:(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [1] 
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+UndefVarError: loop_length_iv not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:261
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at util.jl:156
+ [4] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:21
+ [5] include at ./boot.jl:326 [inlined]
+ [6] include_relative(::Module, ::String) at ./loading.jl:1038
+ [7] include(::Module, ::String) at ./sysimg.jl:29
+ [8] exec_options(::Base.JLOptions) at ./client.jl:267
+ [9] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8266: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <23*sakura05.local>, in queue <normal>, as user <kakizawa>.
+                            <1*sakura04.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 22:00:22 2020
+Results reported at Fri May  1 22:03:43 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4284.43 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8267: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <23*sakura05.local>, in queue <normal>, as user <kakizawa>.
+                            <1*sakura04.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 22:07:52 2020
+Results reported at Fri May  1 22:11:06 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4139.09 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura04.local>
+Subject: Job 8268: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <23*sakura04.local>, in queue <normal>, as user <kakizawa>.
+                            <1*sakura03.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 22:31:33 2020
+Results reported at Fri May  1 22:33:33 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   2205.51 sec.
+
+The output (if any) follows:
+
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+__select at /lib64/libc.so.6 (unknown line)
+jl_typemap_entry_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/typemap.c:775
+jl_typemap_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/julia_internal.h:923 [inlined]
+jl_lookup_generic_ at /misc/home/tool/build/julia-1.1.0/src/gf.c:2169 [inlined]
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2215
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+mt_pop! at ./array.jl:729 [inlined]
+rand_inbounds at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/RNGs.jl:306 [inlined]
+rand_inbounds at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/RNGs.jl:310 [inlined]
+rand at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/RNGs.jl:315 [inlined]
+rand at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/Random.jl:219 [inlined]
+rand at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/generation.jl:119 [inlined]
+rand at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/Random.jl:219 [inlined]
+randn at /home/tool/build/julia-1.1.0/usr/share/julia/stdlib/v1.1/Random/src/normal.jl:38 [inlined]
+gaussian_move at /misc/home/kakizawa/lecture/julia/mcmc.jl:202
+unknown function (ip: 0x2b29594e5533)
+jl_apply at /misc/home/tool/build/julia-1.1.0/src/julia.h:1571 [inlined]
+jl_f__apply at /misc/home/tool/build/julia-1.1.0/src/builtins.c:556
+_totuple at ./tuple.jl:264 [inlined]
+Type at ./tuple.jl:246 [inlined]
+reflect_spins_on_loop! at /misc/home/kakizawa/lecture/julia/loop_update.jl:149
+unknown function (ip: 0x2af5dd7e900d)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+multi_loop_update! at /misc/home/kakizawa/lecture/julia/loop_update.jl:241
+unknown function (ip: 0x2af5dd7e5435)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2af5daee8fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+sweep_page at /misc/home/tool/build/julia-1.1.0/src/gc.c:1220 [inlined]
+sweep_pool_page at /misc/home/tool/build/julia-1.1.0/src/gc.c:1287 [inlined]
+sweep_pool_pagetable0 at /misc/home/tool/build/julia-1.1.0/src/gc.c:1307 [inlined]
+sweep_pool_pagetable1 at /misc/home/tool/build/julia-1.1.0/src/gc.c:1327 [inlined]
+sweep_pool_pagetable at /misc/home/tool/build/julia-1.1.0/src/gc.c:1356 [inlined]
+gc_sweep_pool at /misc/home/tool/build/julia-1.1.0/src/gc.c:1431
+_jl_gc_collect at /misc/home/tool/build/julia-1.1.0/src/gc.c:2804
+jl_gc_collect at /misc/home/tool/build/julia-1.1.0/src/gc.c:2874
+jl_gc_pool_alloc at /misc/home/tool/build/julia-1.1.0/src/gc.c:1102
+jl_gc_alloc_ at /misc/home/tool/build/julia-1.1.0/src/julia_internal.h:263 [inlined]
+jl_gc_alloc at /misc/home/tool/build/julia-1.1.0/src/gc.c:2911
+_new_array_ at /misc/home/tool/build/julia-1.1.0/src/array.c:100 [inlined]
+_new_array at /misc/home/tool/build/julia-1.1.0/src/array.c:160 [inlined]
+jl_alloc_array_1d at /misc/home/tool/build/julia-1.1.0/src/array.c:420
+Type at ./boot.jl:402 [inlined]
+similar at ./array.jl:316 [inlined]
+getindex at ./array.jl:737
+unknown function (ip: 0x2b563b0504a6)
+exists_subtype at /misc/home/tool/build/julia-1.1.0/src/subtype.c:1085 [inlined]
+forall_exists_subtype at /misc/home/tool/build/julia-1.1.0/src/subtype.c:1120
+jl_subtype_env at /misc/home/tool/build/julia-1.1.0/src/subtype.c:1180
+jl_isa at /misc/home/tool/build/julia-1.1.0/src/subtype.c:1304
+jl_tuple_isa at /misc/home/tool/build/julia-1.1.0/src/subtype.c:1229
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+jl_typemap_entry_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/typemap.c:804
+jl_typemap_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/julia_internal.h:923 [inlined]
+jl_typemap_level_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/typemap.c:834
+jl_typemap_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/julia_internal.h:927 [inlined]
+jl_lookup_generic_ at /misc/home/tool/build/julia-1.1.0/src/gf.c:2169 [inlined]
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2215
+broadcasted at ./broadcast.jl:1169 [inlined]
+broadcasted at ./broadcast.jl:1167
+unknown function (ip: 0x2b92c4298244)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+find_loop at /misc/home/kakizawa/lecture/julia/loop_update.jl:90
+find_loop at /misc/home/kakizawa/lecture/julia/loop_update.jl:35
+unknown function (ip: 0x2b92c42967ed)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+multi_loop_update! at /misc/home/kakizawa/lecture/julia/loop_update.jl:233
+unknown function (ip: 0x2b92c4295435)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:377
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b2956becfff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+
+signal (2): Interrupt
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+jl_typemap_entry_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/typemap.c:798
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+find_loop at /misc/home/kakizawa/lecture/julia/loop_update.jl:84
+find_loop at /misc/home/kakizawa/lecture/julia/loop_update.jl:35
+unknown function (ip: 0x2b563b0507ed)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+multi_loop_update! at /misc/home/kakizawa/lecture/julia/loop_update.jl:233
+unknown function (ip: 0x2b563b04f435)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b5638754fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_typemap_level_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/typemap.c:839
+jl_typemap_assoc_exact at /misc/home/tool/build/julia-1.1.0/src/julia_internal.h:927 [inlined]
+jl_lookup_generic_ at /misc/home/tool/build/julia-1.1.0/src/gf.c:2169 [inlined]
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2215
+find_loop at /misc/home/kakizawa/lecture/julia/loop_update.jl:90
+find_loop at /misc/home/kakizawa/lecture/julia/loop_update.jl:35
+unknown function (ip: 0x2b8a8df1a7ed)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+multi_loop_update! at /misc/home/kakizawa/lecture/julia/loop_update.jl:233
+unknown function (ip: 0x2b8a8df19435)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b8a8b61cfff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b92c1914fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./boot.jl:326 [inlined]
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+exec_options at ./client.jl:267
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include_relative at ./loading.jl:1038
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+_start at ./client.jl:436
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 438945937 (Pool: 438894061; Big: 51876); GC: 1010
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 505099605 (Pool: 504993713; Big: 105892); GC: 1242
+exec_options at ./client.jl:267
+include_relative at ./loading.jl:1038
+_start at ./client.jl:436
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 515771021 (Pool: 515656308; Big: 114713); GC: 1275
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 512515531 (Pool: 512401460; Big: 114071); GC: 1263
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 514363680 (Pool: 514248099; Big: 115581); GC: 1271
+MPID_nem_tcp_connpoll at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/netmod/tcp/socksm.c:2738
+MPID_nem_tcp_poll at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/netmod/tcp/socksm.c:2585
+MPID_nem_network_poll at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/mpid_nem_network_poll.c:23
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:779
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b90c71d8fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+poll_all_fboxes at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_fbox.h:97 [inlined]
+MPID_nem_mpich_test_recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_inline.h:970 [inlined]
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:459
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:625
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b57673e79df)
+unknown function (ip: 0x8)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+data.10537 at julia (unknown line)
+data.10537 at julia (unknown line)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+data.10537 at julia (unknown line)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 428901744 (Pool: 428744373; Big: 157371); GC: 942
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 515271296 (Pool: 515159578; Big: 111718); GC: 1273
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:443
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:443
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b0f56284fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2abf53218fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:443
+poll_all_fboxes at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_fbox.h:97 [inlined]
+MPID_nem_mpich_test_recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_inline.h:970 [inlined]
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:459
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:441
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+poll_active_fboxes at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_fbox.h:51 [inlined]
+MPID_nem_mpich_blocking_recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_inline.h:1117 [inlined]
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:455
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:443
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:196
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+OPA_load_acquire_int at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/src/openpa/src/primitives/opa_gcc_intel_32_64_ops.h:65 [inlined]
+poll_active_fboxes at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_fbox.h:43 [inlined]
+MPID_nem_mpich_test_recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_inline.h:926 [inlined]
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:459
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:414
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:764
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:445
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+OPA_load_acquire_int at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/src/openpa/src/primitives/opa_gcc_intel_32_64_ops.h:65 [inlined]
+poll_all_fboxes at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_fbox.h:97 [inlined]
+MPID_nem_mpich_test_recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_inline.h:970 [inlined]
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:459
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIDU_Sched_are_pending at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/common/sched/mpid_sched.c:65
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+exec_options at ./client.jl:267
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+MPIDU_Sched_are_pending at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/common/sched/mpid_sched.c:65
+poll_all_fboxes at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_fbox.h:96 [inlined]
+MPID_nem_mpich_test_recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/include/mpid_nem_inline.h:970 [inlined]
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:459
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:448
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:448
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 514725932 (Pool: 514612556; Big: 113376); GC: 1269
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+MPIDU_Sched_are_pending at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/common/sched/mpid_sched.c:65
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:448
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+MPIC_Sendrecv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:559
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b61f8e94fff)
+unknown function (ip: 0x16)
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2ad2bc74cfff)
+unknown function (ip: 0x16)
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2aebaa310fff)
+unknown function (ip: 0x16)
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b5ab347cfff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2af9b262cfff)
+unknown function (ip: 0x16)
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b68015f4fff)
+unknown function (ip: 0x16)
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2ab006a74fff)
+unknown function (ip: 0x16)
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:224
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2ab409e3cfff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b6fa2198fff)
+unknown function (ip: 0x16)
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2ab90057cfff)
+unknown function (ip: 0x16)
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b22e59acfff)
+unknown function (ip: 0x16)
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2ad9f64a0fff)
+unknown function (ip: 0x16)
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b47a8898fff)
+unknown function (ip: 0x16)
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2b0852938fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 407245813 (Pool: 407186031; Big: 59782); GC: 892
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+PMPIDI_CH3I_Progress at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpid/ch3/channels/nemesis/src/ch3_progress.c:443
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+include at ./sysimg.jl:29
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 415028026 (Pool: 414937226; Big: 90800); GC: 908
+_start at ./client.jl:436
+exec_options at ./client.jl:267
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 507091869 (Pool: 506985183; Big: 106686); GC: 1248
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 504940178 (Pool: 504837597; Big: 102581); GC: 1240
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 406463469 (Pool: 406418927; Big: 44542); GC: 896
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 515368387 (Pool: 515257121; Big: 111266); GC: 1274
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 492829362 (Pool: 492736861; Big: 92501); GC: 1198
+MPIC_Wait at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:281
+MPIC_Recv at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/helper_fns.c:407
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:250
+I_MPIR_Barrier_intra at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:752
+MPIR_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:648
+MPIR_Barrier_impl at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:699
+exec_options at ./client.jl:267
+PMPI_Barrier at /tmp/mpi5.xtmpdir.7b663e0dc22b2304e487307e376dc132.205535_32e/mpi5.32e.ww03.20160120/dev/x86_64/release_mt/../../src/mpi/coll/barrier.c:914
+Barrier at /home/kakizawa/.julia/packages/MPI/RzbIV/src/collective.jl:15 [inlined]
+perform! at /misc/home/kakizawa/lecture/julia/replica_exchange.jl:89
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 514225177 (Pool: 514108837; Big: 116340); GC: 1269
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 517308741 (Pool: 517194406; Big: 114335); GC: 1279
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 516027608 (Pool: 515911066; Big: 116542); GC: 1275
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 514911578 (Pool: 514795389; Big: 116189); GC: 1270
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+solve at /misc/home/kakizawa/lecture/julia/classical_mc.jl:395
+jl_fptr_trampoline at /misc/home/tool/build/julia-1.1.0/src/gf.c:1864
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+do_call at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:323
+eval_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:411
+eval_stmt_value at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:362 [inlined]
+eval_body at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:773
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 509202828 (Pool: 509093226; Big: 109602); GC: 1252
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 415655034 (Pool: 415614770; Big: 40264); GC: 930
+jl_interpret_toplevel_thunk_callback at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:885
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x2af7fc3b4fff)
+unknown function (ip: 0x16)
+jl_interpret_toplevel_thunk at /misc/home/tool/build/julia-1.1.0/src/interpreter.c:894
+jl_toplevel_eval_flex at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:764
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 472578556 (Pool: 472500384; Big: 78172); GC: 1129
+jl_parse_eval_all at /misc/home/tool/build/julia-1.1.0/src/ast.c:883
+exec_options at ./client.jl:267
+jl_load at /misc/home/tool/build/julia-1.1.0/src/toplevel.c:826
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 508342314 (Pool: 508235399; Big: 106915); GC: 1252
+include at ./boot.jl:326 [inlined]
+include_relative at ./loading.jl:1038
+include at ./sysimg.jl:29
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+exec_options at ./client.jl:267
+_start at ./client.jl:436
+jl_apply_generic at /misc/home/tool/build/julia-1.1.0/src/gf.c:2219
+unknown function (ip: 0x4026ed)
+unknown function (ip: 0x402313)
+__libc_start_main at /lib64/libc.so.6 (unknown line)
+unknown function (ip: 0x4023b4)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 510010188 (Pool: 509899100; Big: 111088); GC: 1255
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8269: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <23*sakura05.local>, in queue <normal>, as user <kakizawa>.
+                            <1*sakura04.local>
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 22:35:35 2020
+Results reported at Fri May  1 22:38:50 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4154.55 sec.
+
+The output (if any) follows:
+
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8270: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 22:45:19 2020
+Results reported at Fri May  1 22:45:45 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    485.07 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: ERROR: LoadError: LoadError: ERROR: LoadError: ERROR: ERROR: LoadError: ERROR: LoadError: ERROR: LoadError: LoadError: UndefVarError: num_accep not definedERROR: LoadError: 
+Stacktrace:ERROR: UndefVarError: num_accep not definedUndefVarError: num_accep not definedUndefVarError: num_accep not defined
+ [1] LoadError: ERROR: 
+Stacktrace:LoadError: 
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] 
+ [1] multi_loop_update!(multi_loop_update!::multi_loop_update!multi_loop_update!(::ERROR: ((::::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},UndefVarError: num_accep not defined1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] UndefVarError: num_accep not definedinclude at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] includeLoadError: (::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+UndefVarError: num_accep not defined
+Stacktrace:Main.ClassicalMC.LoopUpdater{Tuple{Float64
+Stacktrace:,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:Main.ClassicalMC.LoopUpdater{Tuple{Float64Main.ClassicalMC,Float64,Float64}}, ::.Int64, ::LoopUpdaterSingleSpinFlipUpdater, ::Float64, ::Int64, ::{Array{Tuple{Float64,Float64,Float64},Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] 1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] 
+ [1] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions
+ [1] ) at ./client.jl:267include at ./boot.jl:326 [inlined]
+ [5] include_relative(::
+ [8] Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::_startBase.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+ [1] UndefVarError: num_accep not definedERROR: UndefVarError: num_accep not definedLoadError: multi_loop_update!multi_loop_update!
+Stacktrace:ERROR: ERROR: multi_loop_update!UndefVarError: num_accep not defined
+ [1] 
+Stacktrace:LoadError: LoadError: ((
+ [1] ::::(
+Stacktrace:ERROR: UndefVarError: num_accep not defined::
+ [1] UndefVarError: num_accep not definedLoadError: multi_loop_update!UndefVarError: num_accep not defined
+Stacktrace:Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},Main.ClassicalMCmulti_loop_update!.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{1}, ::Float64Bool,Float64,Float64},) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] 1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+UndefVarError: num_accep not defined
+ [1]  [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] 
+Stacktrace:include at (./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+ [1] ::multi_loop_update!
+ [1] (
+Stacktrace:::
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] multi_loop_update!include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+multi_loop_update!Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] (include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+UndefVarError: num_accep not defined::multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},(UndefVarError: num_accep not defined1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+::
+Stacktrace:(::
+ [1] UndefVarError: num_accep not definedMain.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,
+Stacktrace:Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::ERROR: String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+ [1] Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] LoadError: include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},
+ [1] 1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::StringERROR: , ::MPI.multi_loop_update!Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+LoadError: multi_loop_update!(UndefVarError: num_accep not defined::multi_loop_update!(::
+Stacktrace:
+ [1] (Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] ::include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+multi_loop_update!Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+UndefVarError: num_accep not definedUndefVarError: num_accep not defined(::
+Stacktrace:
+Stacktrace:UndefVarError: num_accep not defined
+ [1] 
+ [1] UndefVarError: num_accep not definedMain.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},
+Stacktrace:1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+ [1] 
+Stacktrace:multi_loop_update!multi_loop_update!
+ [1] ((::multi_loop_update!::multi_loop_update!(Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},::1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start(Main.ClassicalMC.LoopUpdater{) at Tuple./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+UndefVarError: num_accep not definedMain.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] UndefVarError: num_accep not definedinclude at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] multi_loop_update!multi_loop_update!((::::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Main.ClassicalMCBool) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::.String, ::LoopUpdaterMPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:23
+ [4] {Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},include1} at ./boot.jl:326 [inlined]
+ [5] include_relative(::, ::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::BaseBool.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+) at /misc/home/kakizawa/lecture/julia/loop_update.jl:249
+ [2] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:408
+ [3] top-level scope at util.jl:156
+ [4] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:21
+ [5] include at ./boot.jl:326 [inlined]
+ [6] include_relative(::Module, ::String) at ./loading.jl:1038
+ [7] include(::Module, ::String) at ./sysimg.jl:29
+ [8] exec_options(::Base.JLOptions) at ./client.jl:267
+ [9] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8271: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Fri May  1 22:47:09 2020
+Results reported at Fri May  1 22:50:14 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   4314.22 sec.
+
+The output (if any) follows:
+
