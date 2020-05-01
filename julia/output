@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Tue Apr 28 10:35:05 JST 2020
 num of temperatures = 24
 Starting simulation...
@@ -108,3 +109,22 @@ itemp 22 <=> 23 acceptance_rate= 0.17957894736842106
 itemp 23 <=> 24 acceptance_rate= 0.06242105263157895
  22.482024 seconds (49.38 M allocations: 2.530 GiB, 5.71% gc time)
 Tue Apr 28 10:35:39 JST 2020
+=======
+2020年 4月28日 火曜日 10時13分38秒 JST
+num of temperatures = 1
+Starting simulation...
+
+<E> <E^2> <C>
+9.999999999999999e-6  -26.95171667134402 726.5034823221176 4.0166959153490715e7
+
+single_spin_flip_acc: [0.4278373823323892]
+Acceptant rate of loop update: 
+9.999999999999999e-6 0.6722752497225312 0.0029300776914539415
+num of nn_sites of 23th site: 4
+<CPUtime> 
+ rank=0 : [4.599666666666667, 0.9204444444444444, 121.93777777777778, 0.9787777777777777]
+
+Statistics of replica exchange Monte Carlo
+ 12.571546 seconds (37.06 M allocations: 1.815 GiB, 6.04% gc time)
+2020年 4月28日 火曜日 10時14分04秒 JST
+>>>>>>> 7c320bc04824c3a55214fa4f726a78ce86cc4bc6

@@ -1155,6 +1155,7 @@ begin
 2020年 4月26日 日曜日 22時33分13秒 JST
 end
 2020年 4月26日 日曜日 22時39分17秒 JST
+<<<<<<< HEAD
 Sender: LSF System <lavaadmin@sakura05.local>
 Subject: Job 8169: <test> Done
 
@@ -1855,3 +1856,9 @@ Resource usage summary:
 
 The output (if any) follows:
 
+=======
+begin
+2020年 4月28日 火曜日 10時13分38秒 JST
+end
+2020年 4月28日 火曜日 10時14分04秒 JST
+>>>>>>> 7c320bc04824c3a55214fa4f726a78ce86cc4bc6
