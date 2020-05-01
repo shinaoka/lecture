@@ -50,29 +50,66 @@ function distribute_temps(rank, num_temps, num_proc)
 end
 
 # Read non-zero elements in the right-upper triangle part of Jij
-function read_Jij(Jij_file::String, num_spins)
+function read_Jij(Jij_file::String,num_spins::Int64)
     Jij = Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}(undef, 0)
     open(Jij_file, "r" ) do fp
+        
+        @assert num_spins == parse(Int64, readline(fp)) "!match num_spins. See 2d.ini and head of Jij.txt"
+
         num_Jij_elems = parse(Int64, readline(fp))
         for i in 1:num_Jij_elems
-            str = split(readline(fp))
-            i         = parse(SpinIndex, str[1])
-            j         = parse(SpinIndex, str[2])
-            val_x     = parse(Float64,   str[3])
-            val_y     = parse(Float64,   str[4])
-            val_z     = parse(Float64,   str[5])
-            typeofJij = parse(Int64,     str[6])
+            str     = split(readline(fp))
+            i       = parse(SpinIndex, str[1])
+            j       = parse(SpinIndex, str[2])
+            val_x   = parse(Float64,   str[3])
+            val_y   = parse(Float64,   str[4])
+            val_z   = parse(Float64,   str[5])
+            flag_nn = parse(Int64,     str[6])
             if i >= j
                 error("Only right-upper triangle part must be given.")
             end
             if i > num_spins || i < 0  || j > num_spins || j < 0
                 error("i or j is out of the range [1, num_spins].")
             end
-            push!(Jij, (i, j, val_x, val_y, val_z,typeofJij))
+            push!(Jij, (i, j, val_x, val_y, val_z,flag_nn))
         end
     end
     return Jij
 end
+
+function read_spin_config(file_name::String,num_spins::Int64)
+
+    spins = fill((0.,0.,0.),num_spins)
+
+    open(file_name,"r") do fp
+
+        @assert num_spins == parse(Int64, readline(fp)) "!match num_spins. See 2d.ini and head of spin_config.txt "
+
+        for i in 1:num_spins
+            str = split(readline(fp))
+            sx = parse(Float64, str[1])
+            sy = parse(Float64, str[2])
+            sz = parse(Float64, str[3])
+            spins[i] = (sx,sy,sz)
+        end
+    end
+
+    return spins
+end
+
+function write_spin_config(file_name::String,spins)
+    
+    num_spins = length(spins)
+    open(file_name,"w") do fp
+        println(fp,num_spins)
+        for i in 1:num_spins 
+            sx,sy,sz = spins[i]
+            println(fp,sx," ",sy," ",sz)
+        end
+    end
+
+end
+         
 
 function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_temps::Int64)
     
@@ -295,6 +332,15 @@ function solve(input_file::String, comm)
 
     # Init spins
     spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
+    
+    # Optional init spin configuration.
+    is_read_spin_config     = get_param(Bool, conf, "simulation", "read_spin_config", false)
+    if is_read_spin_config
+        spin_config = retrieve(conf, "model", "spin_config")
+        spins_local = fill(read_spin_config(spin_config,num_spins),num_temps_local)
+        println("init spins: ",spins_local[1]) # debug
+    end
+
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
 
     # Replica exchange
@@ -437,6 +483,9 @@ function solve(input_file::String, comm)
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
         end
+   
+        #write_spin_config("spin_config.txt",spins_local[1])
+
 
     end
     flush(stdout)

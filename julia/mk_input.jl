@@ -19,9 +19,9 @@ J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
 #parameters for temepratures.
-num_temps = 24
+num_temps = 1
 min_T = 1e-5
-max_T = 1.0
+max_T = min_T
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     logT = LinRange(log(min_T), log(max_T), num_temps)
@@ -107,10 +107,11 @@ function mk_interaction(L::Int64,J1::SSInteraction,J2::SSInteraction,len1::Float
 
 end
 
-function input_Jij(interaction::Array{Any,1})
+function input_Jij(num_spins::Int64,interaction::Array{Any,1})
 
     open("Jij.txt", "w") do fp
-        
+
+        println(fp,num_spins)
         println(fp,length(interaction))
         
         for intr in interaction
@@ -123,4 +124,4 @@ end
 
 # output Jij
 println("num_spins: ",num_spins)
-input_Jij(mk_interaction(L,J1,J2,len1,len2))
+input_Jij(num_spins,mk_interaction(L,J1,J2,len1,len2))
