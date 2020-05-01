@@ -6,7 +6,7 @@ using Profile
 using Traceur
 using StaticArrays
 
-include("loop_update_v2.jl")
+include("loop_update.jl")
  
 function ring_plus_one_model()
     # 1D system of 4 spins with a periodic boundary condition.
