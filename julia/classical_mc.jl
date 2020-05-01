@@ -5,7 +5,7 @@ export solve
 include("mcmc.jl")
 include("accumulator.jl")
 include("replica_exchange.jl")
-include("loop_update_v2.jl")
+include("loop_update.jl")
 
 using Random
 using ConfParser
