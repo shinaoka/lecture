@@ -4182,3 +4182,46 @@ Resource usage summary:
 
 The output (if any) follows:
 
+begin
+2020年 5月 2日 土曜日 23時14分10秒 JST
+ERROR: LoadError: UndefVarError: check not defined
+Stacktrace:
+ [1] multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool) at /Users/humiyakakizawa/Desktop/lecture/julia/loop_update.jl:244
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:408
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[49750,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月 2日 土曜日 23時14分30秒 JST
+begin
+2020年 5月 2日 土曜日 23時18分17秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+kevent at /usr/lib/system/libsystem_kernel.dylib (unknown line)
+unknown function (ip: 0x0)
+Allocations: 53115387 (Pool: 53106293; Big: 9094); GC: 56
+end
+2020年 5月 2日 土曜日 23時18分37秒 JST
+begin
+2020年 5月 2日 土曜日 23時19分27秒 JST
+end
+2020年 5月 2日 土曜日 23時19分46秒 JST
+begin
+2020年 5月 2日 土曜日 23時39分14秒 JST
+end
+2020年 5月 2日 土曜日 23時39分36秒 JST
