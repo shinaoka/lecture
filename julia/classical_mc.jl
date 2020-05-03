@@ -293,6 +293,7 @@ function solve(input_file::String, comm)
     meas_interval    = parse(Int64, retrieve(conf, "simulation", "meas_interval"))
     ex_interval      = parse(Int64, retrieve(conf, "simulation", "ex_interval"))
     seed             = parse(Int64, retrieve(conf, "simulation", "seed"))
+    opt_temps_dist   = get_param(Bool,       conf, "simulation", "opt_temps_dist", true)
 
     # For loop updates
     loop_num_trial  = parse(Int64, retrieve(conf, "loop_update", "num_trial"))
@@ -394,9 +395,12 @@ function solve(input_file::String, comm)
         if mod(sweep, ex_interval) == 0
             perform!(rex, spins_local, energy_local, comm)
         end
-        if sweep <= Int(num_therm_sweeps/2) && rex.num_attemps >= 100
-            update_temps_dist!(rex,comm)
+        if opt_temps_dist
+            if sweep <= Int(num_therm_sweeps/2) && rex.num_attemps >= 100
+                update_temps_dist!(rex,comm)
+            end
         end
+
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         # Loop update
@@ -484,6 +488,14 @@ function solve(input_file::String, comm)
         end
    
         write_spin_config("spin_config.txt",spins_local[1])
+       
+        # overwrite initial temperature distribution.        
+        open("temperatures.txt","w") do fp
+             println(fp,num_temps)
+             for i in 1:num_temps
+                 println(fp,rex.temps[i])
+             end
+        end
 
 
     end

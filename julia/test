@@ -4182,3 +4182,39 @@ Resource usage summary:
 
 The output (if any) follows:
 
+Sender: LSF System <lavaadmin@sakura01.local>
+Subject: Job 8298: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura01.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sun May  3 18:44:53 2020
+Results reported at Sun May  3 18:49:29 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   6193.51 sec.
+
+The output (if any) follows:
+
