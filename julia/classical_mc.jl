@@ -1,6 +1,6 @@
 module ClassicalMC
 
-export solve
+export solve,get_param,read_temps,read_Jij,read_spin_config
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -496,8 +496,7 @@ function solve(input_file::String, comm)
                  println(fp,rex.temps[i])
              end
         end
-
-
+    
     end
     flush(stdout)
     MPI.Barrier(comm)

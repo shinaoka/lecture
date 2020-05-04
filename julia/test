@@ -4300,3 +4300,108 @@ the job to be terminated. The first process to do so was:
 --------------------------------------------------------------------------
 end
 2020年 5月 3日 日曜日 20時54分31秒 JST
+begin
+2020年 5月 4日 月曜日 20時02分00秒 JST
+ERROR: unknown option `-t`
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[33389,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月 4日 月曜日 20時02分02秒 JST
+begin
+2020年 5月 4日 月曜日 20時02分50秒 JST
+ERROR: LoadError: DivideError: integer division error
+Stacktrace:
+ [1] div at ./int.jl:230 [inlined]
+ [2] div at ./div.jl:215 [inlined]
+ [3] div at ./div.jl:260 [inlined]
+ [4] fld at ./div.jl:226 [inlined]
+ [5] mod at ./int.jl:222 [inlined]
+ [6] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:395
+ [7] macro expansion at ./util.jl:175 [inlined]
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [9] include(::Module, ::String) at ./Base.jl:377
+ [10] exec_options(::Base.JLOptions) at ./client.jl:288
+ [11] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[33563,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月 4日 月曜日 20時03分15秒 JST
+begin
+2020年 5月 4日 月曜日 20時06分31秒 JST
+end
+2020年 5月 4日 月曜日 20時06分55秒 JST
+begin
+2020年 5月 4日 月曜日 20時08分28秒 JST
+ERROR: LoadError: UndefVarError: profile not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:500
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[48639,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月 4日 月曜日 20時08分54秒 JST
+begin
+2020年 5月 4日 月曜日 20時09分57秒 JST
+┌ Warning: There were no samples collected. Run your program longer (perhaps by
+│ running it multiple times), or adjust the delay between samples with
+│ `Profile.init()`.
+└ @ Profile /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:851
+end
+2020年 5月 4日 月曜日 20時10分20秒 JST
+begin
+2020年 5月 4日 月曜日 20時10分53秒 JST
+┌ Warning: There were no samples collected. Run your program longer (perhaps by
+│ running it multiple times), or adjust the delay between samples with
+│ `Profile.init()`.
+└ @ Profile /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:851
+end
+2020年 5月 4日 月曜日 20時11分16秒 JST
+begin
+2020年 5月 4日 月曜日 20時12分37秒 JST
+┌ Warning: There were no samples collected. Run your program longer (perhaps by
+│ running it multiple times), or adjust the delay between samples with
+│ `Profile.init()`.
+└ @ Profile /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:851
+end
+2020年 5月 4日 月曜日 20時12分59秒 JST
+begin
+2020年 5月 4日 月曜日 20時14分30秒 JST
+┌ Warning: There were no samples collected. Run your program longer (perhaps by
+│ running it multiple times), or adjust the delay between samples with
+│ `Profile.init()`.
+└ @ Profile /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:851
+end
+2020年 5月 4日 月曜日 20時14分55秒 JST

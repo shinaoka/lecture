@@ -241,9 +241,9 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         num_loop_found += 1
 
         t1_e = time_ns()
-        if verbose
-            println("loop_find: $(1/beta) $(t1_e - t1_s)")
-        end
+        #if verbose
+            #println("loop_find: $(1/beta) $(t1_e - t1_s)")
+        #end
   
         t2_s = time_ns()
         before_flipped_spins = copy(spins[spins_idx_on_loop[1:loop_length]])
@@ -260,9 +260,9 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         end
         
         t2_e = time_ns() 
-        if verbose
-            println("metropolis_method: $(1/beta) $(t2_e - t2_s)")
-        end
+        #if verbose
+            #println("metropolis_method: $(1/beta) $(t2_e - t2_s)")
+        #end
 
         #println("DEBUG A': ",temp_r," ",beta," ",dE_loop)
     
@@ -282,9 +282,9 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         end
         
         t3_e = time_ns()
-        if verbose
-            println("find_loop_inv: $(1/beta) $(t3_e - t3_s)")
-        end
+        #if verbose
+            #println("find_loop_inv: $(1/beta) $(t3_e - t3_s)")
+        #end
 
         #println("DEBUG D: ",loop_length)
 
