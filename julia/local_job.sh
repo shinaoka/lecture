@@ -4,7 +4,7 @@ echo begin >> test
 date >> test
 
 date > output
-mpirun -np 1 julia  main.jl 2d.ini 1>> output 2>> test 
+mpirun -np 1 julia -trackallocation main.jl 2d.ini 1>> output 2>> test 
 date >> output
 
 echo end >> test
