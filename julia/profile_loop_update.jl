@@ -18,9 +18,9 @@ function profile_loop_update(input_file::String)
     Jij_file = retrieve(conf,"model","Jij")
     Jij = read_Jij(Jij_file,num_spins)
  
-    # T,an array contains one element,is enough for profing.
+    # for profiling single process is enough.
     temperature_file = retrieve(conf,"model","temperatures")
-    T = read_temps(temperature_file) 
+    temps = read_temps(temperature_file) 
     
     # laod spin configration thermaly converged.
     spin_config::String = retrieve(conf,"model","spin_config")
@@ -35,7 +35,7 @@ function profile_loop_update(input_file::String)
     updater = SingleSpinFlipUpdater(model)
 
     loop_num_trial = parse(Int64,retrieve(conf,"loop_update","num_trial"))
-    @profile multi_loop_update!(loop_updater,loop_num_trial,updater,1/T[1],
+    @profile multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
                                 max_loop_length,spins,true)
 
     Profile.print()
