@@ -197,3 +197,67 @@ WARNING: using ClassicalMC.JModel in module Main conflicts with an existing iden
 WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
 end
 2020年 5月 4日 月曜日 23時13分27秒 JST
+begin
+2020年 5月 5日 火曜日 10時19分13秒 JST
+WARNING: using ClassicalMC.JModel in module Main conflicts with an existing identifier.
+WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
+ERROR: LoadError: UndefVarError: mcmc not defined
+Stacktrace:
+ [1] profile_loop_update(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:31
+ [2] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:53
+ [3] include(::Module, ::String) at ./Base.jl:377
+ [4] exec_options(::Base.JLOptions) at ./client.jl:288
+ [5] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:53
+end
+2020年 5月 5日 火曜日 10時19分24秒 JST
+begin
+2020年 5月 5日 火曜日 10時21分57秒 JST
+WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
+WARNING: using ClassicalMC.JModel in module Main conflicts with an existing identifier.
+end
+2020年 5月 5日 火曜日 10時22分08秒 JST
+begin
+2020年 5月 5日 火曜日 10時22分29秒 JST
+WARNING: using ClassicalMC.JModel in module Main conflicts with an existing identifier.
+WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
+end
+2020年 5月 5日 火曜日 10時22分40秒 JST
+begin
+2020年 5月 5日 火曜日 10時24分39秒 JST
+ERROR: LoadError: UndefVarError: get_param not defined
+Stacktrace:
+ [1] profile_loop_update(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:17
+ [2] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:53
+ [3] include(::Module, ::String) at ./Base.jl:377
+ [4] exec_options(::Base.JLOptions) at ./client.jl:288
+ [5] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:53
+end
+2020年 5月 5日 火曜日 10時24分50秒 JST
+begin
+2020年 5月 5日 火曜日 10時25分03秒 JST
+WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
+WARNING: using ClassicalMC.JModel in module Main conflicts with an existing identifier.
+end
+2020年 5月 5日 火曜日 10時25分15秒 JST
+begin
+2020年 5月 5日 火曜日 10時29分27秒 JST
+WARNING: using ClassicalMC.JModel in module Main conflicts with an existing identifier.
+WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
+ERROR: LoadError: UndefVarError: spin_config not defined
+Stacktrace:
+ [1] profile_loop_update(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:28
+ [2] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:54
+ [3] include(::Module, ::String) at ./Base.jl:377
+ [4] exec_options(::Base.JLOptions) at ./client.jl:288
+ [5] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:54
+end
+2020年 5月 5日 火曜日 10時29分38秒 JST
+begin
+2020年 5月 5日 火曜日 10時30分06秒 JST
+WARNING: using ClassicalMC.JModel in module Main conflicts with an existing identifier.
+WARNING: using ClassicalMC.SingleSpinFlipUpdater in module Main conflicts with an existing identifier.
+end
+2020年 5月 5日 火曜日 10時30分18秒 JST

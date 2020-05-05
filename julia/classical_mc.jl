@@ -337,8 +337,8 @@ function solve(input_file::String, comm)
     # Optional init spin configuration.
     is_read_spin_config     = get_param(Bool, conf, "simulation", "read_spin_config", false)
     if is_read_spin_config
-        spin_config = retrieve(conf, "model", "spin_config")
-        spins_local = fill(read_spin_config(spin_config,num_spins),num_temps_local)
+        spin_config_file = retrieve(conf, "model", "spin_config")
+        spins_local = fill(read_spin_config(spin_config_file,num_spins),num_temps_local)
     end
 
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
