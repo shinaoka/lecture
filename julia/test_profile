@@ -375,3 +375,120 @@ in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_
 in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:7
 end
 2020年 5月 8日 金曜日 14時46分58秒 JST
+begin
+2020年 5月 8日 金曜日 17時02分10秒 JST
+ERROR: LoadError: LoadError: UndefVarError: @test not defined
+Stacktrace:
+ [1] top-level scope
+ [2] include(::Module, ::String) at ./Base.jl:377
+ [3] exec_options(::Base.JLOptions) at ./client.jl:288
+ [4] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:35
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:31
+end
+2020年 5月 8日 金曜日 17時02分33秒 JST
+begin
+2020年 5月 8日 金曜日 17時03分44秒 JST
+ERROR: LoadError: syntax: incomplete: "for" at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:39 requires end
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:32
+ [2] include(::Module, ::String) at ./Base.jl:377
+ [3] exec_options(::Base.JLOptions) at ./client.jl:288
+ [4] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:32
+end
+2020年 5月 8日 金曜日 17時04分05秒 JST
+begin
+2020年 5月 8日 金曜日 17時09分09秒 JST
+┌ Warning: `@add_arg_table` is deprecated, use `@add_arg_table!` instead
+└ @ ArgParse :-1
+ERROR: LoadError: UndefVarError: get_param not defined
+Stacktrace:
+ [1] profile_loop_update(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:88
+ [2] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:126
+ [3] include(::Module, ::String) at ./Base.jl:377
+ [4] exec_options(::Base.JLOptions) at ./client.jl:288
+ [5] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:126
+end
+2020年 5月 8日 金曜日 17時09分38秒 JST
+begin
+2020年 5月 8日 金曜日 17時10分24秒 JST
+┌ Warning: `@add_arg_table` is deprecated, use `@add_arg_table!` instead
+└ @ ArgParse :-1
+end
+2020年 5月 8日 金曜日 17時11分04秒 JST
+begin
+2020年 5月 8日 金曜日 17時12分00秒 JST
+end
+2020年 5月 8日 金曜日 17時12分31秒 JST
+begin
+2020年 5月 8日 金曜日 17時13分13秒 JST
+
+signal (2): Interrupt: 2
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/profile_loop_update.jl:3
+jl_is_concrete_type at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1222 [inlined]
+obviously_disjoint at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:311
+obviously_disjoint at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:371
+jl_type_intersection_env_s at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3213
+jl_typemap_intersection_node_visitor at /Users/julia/buildbot/worker/package_macos64/build/src/typemap.c:484
+jl_typemap_intersection_visitor at /Users/julia/buildbot/worker/package_macos64/build/src/typemap.c:572
+ml_matches at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2723
+jl_matching_methods at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1811
+jl_insert_backedges at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:2312 [inlined]
+_jl_restore_incremental at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:3276
+jl_restore_incremental at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:3314
+_include_from_serialized at ./loading.jl:681
+_require_search_from_serialized at ./loading.jl:781
+_tryrequire_from_serialized at ./loading.jl:712
+_require_search_from_serialized at ./loading.jl:770
+_tryrequire_from_serialized at ./loading.jl:712
+_require_search_from_serialized at ./loading.jl:770
+_require at ./loading.jl:1006
+require at ./loading.jl:927
+require at ./loading.jl:922
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+call_require at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:399 [inlined]
+eval_import_path at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:436
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:656
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+exec_options at ./client.jl:288
+_start at ./client.jl:484
+jfptr__start_2076.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+true_main at /usr/local/bin/julia (unknown line)
+main at /usr/local/bin/julia (unknown line)
+unknown function (ip: 0x0)
+Allocations: 9152844 (Pool: 9150912; Big: 1932); GC: 10
+end
+2020年 5月 8日 金曜日 17時13分24秒 JST
+begin
+2020年 5月 8日 金曜日 17時13分36秒 JST
+end
+2020年 5月 8日 金曜日 17時14分17秒 JST
+begin
+2020年 5月 8日 金曜日 17時24分37秒 JST
+end
+2020年 5月 8日 金曜日 17時25分07秒 JST
+begin
+2020年 5月 8日 金曜日 17時30分16秒 JST
+end
+2020年 5月 8日 金曜日 17時30分44秒 JST
+begin
+2020年 5月 8日 金曜日 17時31分05秒 JST
+end
+2020年 5月 8日 金曜日 17時31分34秒 JST
+begin
+2020年 5月 8日 金曜日 17時37分23秒 JST
+end
+2020年 5月 8日 金曜日 17時38分14秒 JST
+begin
+2020年 5月 8日 金曜日 18時05分45秒 JST
+end
+2020年 5月 8日 金曜日 18時06分11秒 JST
+begin
+2020年 5月 8日 金曜日 18時07分40秒 JST
+end
+2020年 5月 8日 金曜日 18時08分04秒 JST
