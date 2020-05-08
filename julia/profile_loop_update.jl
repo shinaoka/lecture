@@ -1,5 +1,6 @@
 using ConfParser
 using Profile
+using ProfileView
 using ArgParse
 include("mcmc.jl")
 include("loop_update.jl")
@@ -37,6 +38,8 @@ function profile_loop_update(input_file::String)
 
     loop_num_trial = parse(Int64,retrieve(conf,"loop_update","num_trial"))
     @profile multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
+
+    #@profview multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
                                 max_loop_length,spins,true)
 
     Profile.print()
