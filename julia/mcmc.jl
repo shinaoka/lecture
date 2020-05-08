@@ -13,7 +13,7 @@ export JModel, SingleSpinFlipUpdater
 struct JModel
     # List of non-zero entries of Jij
     num_spins::Int
-    Jij::Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}
+    Jij::Vector{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}
 end
 
 function compute_energy(model::JModel, spins::AbstractArray{IsingSpin})
@@ -62,13 +62,13 @@ end
 
 struct SingleSpinFlipUpdater
     num_spins::Int
-    coord_num::Array{UInt16}
+    coord_num::Vector{UInt16}
     connection::Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64},2}
 
     connected_sites::Array{SpinIndex,2}
     is_NN::Array{Bool,2}
 
-    nn_coord_num::Array{UInt16}
+    nn_coord_num::Vector{UInt16}
     nn_sites::Array{SpinIndex,2}
 end
 
@@ -95,7 +95,7 @@ function SingleSpinFlipUpdater(model::JModel)
     max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
     connection = Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
-    coord_num = Array{UInt16}(undef, num_spins)
+    coord_num = Vector{UInt16}(undef, num_spins)
     connected_sites = Array{SpinIndex,2}(undef, (max_coord_num, num_spins))
     is_NN = Array{Bool,2}(undef, (max_coord_num, num_spins))
     for ispin = 1:num_spins

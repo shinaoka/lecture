@@ -6,15 +6,15 @@ using Random
 
 struct LoopUpdater{T}
     num_spins::Int
-    work::Array{Int}
-    spins_on_loop::Array{UInt}
-    new_spins::Array{T}
+    work::Vector{Int}
+    spins_on_loop::Vector{UInt}
+    new_spins::Vector{T}
 end
 
 function LoopUpdater{T}(num_spins::Int64, max_loop_length::Int64) where T
     work   = zeros(Int,num_spins)
     spins_on_loop  = zeros(Int, max_loop_length)
-    new_spins  = Array{T}(undef, max_loop_length)
+    new_spins  = Vector{T}(undef, max_loop_length)
     return LoopUpdater{T}(num_spins,work, spins_on_loop, new_spins)
 end
 
@@ -26,7 +26,7 @@ function find_loop(spins,
                    first_spin_idx,
                    second_spin_idx,
                    max_length::Int, 
-                   work::Array{Int}, verbose::Bool=false,check_n_candidate::Bool=false)
+                   work::Vector{Int}, verbose::Bool=false,check_n_candidate::Bool=false)
     #=
     All elements of work must be initialized to zero.
     =#
@@ -123,9 +123,9 @@ end
 
 
 function reflect_spins_on_loop!(loop_length::Int64,
-                                spins::Array{HeisenbergSpin},
-                                new_spins_on_loop::Array{HeisenbergSpin},
-                                spins_on_loop::Array{UInt},
+                                spins::Vector{HeisenbergSpin},
+                                new_spins_on_loop::Vector{HeisenbergSpin},
+                                spins_on_loop::Vector{UInt},
                                 updater::SingleSpinFlipUpdater,
                                 sum_boundary_spins::HeisenbergSpin)
          
@@ -154,10 +154,10 @@ end
 
 function compute_dE_loop(updater::SingleSpinFlipUpdater,
                           loop_length::Int,
-                          spin_idx_on_loop::Array{UInt},
-                          spins::Array{HeisenbergSpin},
-                          new_spins_on_loop::Array{HeisenbergSpin},
-                          work::Array{Int},
+                          spin_idx_on_loop::Vector{UInt},
+                          spins::Vector{HeisenbergSpin},
+                          new_spins_on_loop::Vector{HeisenbergSpin},
+                          work::Vector{Int},
                           verbose::Bool=false)
     #=
     Compute change in energy
