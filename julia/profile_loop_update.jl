@@ -6,7 +6,6 @@ include("loop_update.jl")
 include("classical_mc.jl")
 using .ClassicalMC
 
-
 function profile_loop_update(input_file::String)
     Profile.init()
 
@@ -35,10 +34,16 @@ function profile_loop_update(input_file::String)
     updater = SingleSpinFlipUpdater(model)
 
     loop_num_trial = parse(Int64,retrieve(conf,"loop_update","num_trial"))
+
+    # Force compilation
+    multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
+                                max_loop_length,spins,true)
+
     @profile multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
                                 max_loop_length,spins,true)
 
-    Profile.print()
+    #Profile.print()
+    Profile.print(IOContext(stdout, :displaysize => (24, 500)))
     Profile.init()
 end
 
