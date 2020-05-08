@@ -1,7 +1,7 @@
-2020年 5月 8日 金曜日 19時02分54秒 JST
+2020年 5月 8日 金曜日 20時08分03秒 JST
 Variables
-  #self#::Core.Compiler.Const(multi_loop_update!, false)
-  loop_updater::LoopUpdater{Tuple{Float64,Float64,Float64}}
+  #self#::Core.Compiler.Const(Main.ClassicalMC.multi_loop_update!, false)
+  loop_updater::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}
   num_trial::Int64
   updater::SingleSpinFlipUpdater
   beta::Float64
@@ -51,7 +51,7 @@ Body::Tuple{Float64,Float64,Float64}
 │           (new_spins_on_loop = Base.getproperty(loop_updater, :new_spins))
 │           (num_spins = Base.getproperty(updater, :num_spins))
 │    %5   = Base.getproperty(updater, :coord_num)::ARRAY{UINT16,N} WHERE N
-│           (max_coord_num = Main.maximum(%5))
+│           (max_coord_num = Main.ClassicalMC.maximum(%5))
 │           (dE = 0.0)
 │           (num_accept = 0)
 │           (num_loop_found = 0)
@@ -81,10 +81,10 @@ Body::Tuple{Float64,Float64,Float64}
 │    %33  = @_17::Tuple{Int64,Int64}::Tuple{Int64,Int64}
 │           (i = Core.getfield(%33, 1))
 │    %35  = Core.getfield(%33, 2)::Int64
-│           (t1_s = Main.time_ns())
+│           (t1_s = Main.ClassicalMC.time_ns())
 │    %37  = (1:num_spins)::Core.Compiler.PartialStruct(UnitRange{Int64}, Any[Core.Compiler.Const(1, false), Int64])
-│           (first_spin_idx = Main.rand(%37))
-│           (candidate_second_spin_idx = Main.zeros(Main.UInt, max_coord_num))
+│           (first_spin_idx = Main.ClassicalMC.rand(%37))
+│           (candidate_second_spin_idx = Main.ClassicalMC.zeros(Main.ClassicalMC.UInt, max_coord_num))
 │    %40  = Base.getproperty(updater, :nn_coord_num)::ARRAY{UINT16,N} WHERE N
 │           (nn_coord_num = Base.getindex(%40, first_spin_idx))
 │    %42  = (1:nn_coord_num)::Core.Compiler.PartialStruct(UnitRange{Int64}, Any[Core.Compiler.Const(1, false), Int64])
@@ -107,8 +107,8 @@ Body::Tuple{Float64,Float64,Float64}
 5 ┄─ %59  = candidate_second_spin_idx::ANY
 │    %60  = (1:nn_coord_num)::Core.Compiler.PartialStruct(UnitRange{Int64}, Any[Core.Compiler.Const(1, false), Int64])
 │    %61  = Base.getindex(%59, %60)::ANY
-│           (second_spin_idx = Main.rand(%61))
-│    %63  = Main.find_loop(spins, spins_idx_on_loop, updater, first_spin_idx, second_spin_idx, max_length, work, verbose)::Tuple{Int64,Tuple{Float64,Float64,Float64}}
+│           (second_spin_idx = Main.ClassicalMC.rand(%61))
+│    %63  = Main.ClassicalMC.find_loop(spins, spins_idx_on_loop, updater, first_spin_idx, second_spin_idx, max_length, work, verbose)::Tuple{Int64,Tuple{Float64,Float64,Float64}}
 │    %64  = Base.indexed_iterate(%63, 1)::Core.Compiler.PartialStruct(Tuple{Int64,Int64}, Any[Int64, Core.Compiler.Const(2, false)])
 │           (loop_length = Core.getfield(%64, 1))
 │           (@_26 = Core.getfield(%64, 2))
@@ -118,26 +118,26 @@ Body::Tuple{Float64,Float64,Float64}
 └───        goto #7 if not %69
 6 ──        (@_43 = %69)
 └───        goto #8
-7 ── %73  = Main.mod(loop_length, 2)::Int64
+7 ── %73  = Main.ClassicalMC.mod(loop_length, 2)::Int64
 └───        (@_43 = %73 !== 0)
 8 ┄─        goto #10 if not @_43
 9 ──        goto #19
 10 ─        (num_loop_found = num_loop_found + 1)
-│           (t1_e = Main.time_ns())
-│           (t2_s = Main.time_ns())
+│           (t1_e = Main.ClassicalMC.time_ns())
+│           (t2_s = Main.ClassicalMC.time_ns())
 │    %80  = spins_idx_on_loop::ARRAY{UINT64,N} WHERE N
 │    %81  = (1:loop_length)::Core.Compiler.PartialStruct(UnitRange{Int64}, Any[Core.Compiler.Const(1, false), Int64])
 │    %82  = Base.getindex(%80, %81)::Array{UInt64,1}
 │    %83  = Base.getindex(spins, %82)::Array{Tuple{Float64,Float64,Float64},1}
-│           (before_flipped_spins = Main.copy(%83))
-│           Main.reflect_spins_on_loop!(loop_length, spins, new_spins_on_loop, spins_idx_on_loop, updater, sum_boundary_spins)
-│           (dE_loop = Main.compute_dE_loop(updater, loop_length, spins_idx_on_loop, spins, new_spins_on_loop, work, verbose))
-│    %87  = Random.GLOBAL_RNG::Core.Compiler.Const(Random._GLOBAL_RNG(), false)
-│           (temp_r = Main.rand(%87))
+│           (before_flipped_spins = Main.ClassicalMC.copy(%83))
+│           Main.ClassicalMC.reflect_spins_on_loop!(loop_length, spins, new_spins_on_loop, spins_idx_on_loop, updater, sum_boundary_spins)
+│           (dE_loop = Main.ClassicalMC.compute_dE_loop(updater, loop_length, spins_idx_on_loop, spins, new_spins_on_loop, work, verbose))
+│    %87  = Base.getproperty(Main.ClassicalMC.Random, :GLOBAL_RNG)::Core.Compiler.Const(Random._GLOBAL_RNG(), false)
+│           (temp_r = Main.ClassicalMC.rand(%87))
 │    %89  = temp_r::Float64
 │    %90  = -beta::Float64
 │    %91  = (%90 * dE_loop)::Float64
-│    %92  = Main.exp(%91)::Float64
+│    %92  = Main.ClassicalMC.exp(%91)::Float64
 │    %93  = (%89 < %92)::Bool
 └───        goto #12 if not %93
 11 ─ %95  = new_spins_on_loop::ARRAY{TUPLE{FLOAT64,FLOAT64,FLOAT64},N} WHERE N
@@ -150,17 +150,17 @@ Body::Tuple{Float64,Float64,Float64}
 │           (num_accept = num_accept + 1)
 └───        goto #13
 12 ─        goto #19
-13 ─        (t2_e = Main.time_ns())
-│           (t3_s = Main.time_ns())
+13 ─        (t2_e = Main.ClassicalMC.time_ns())
+│           (t3_s = Main.ClassicalMC.time_ns())
 │    %107 = spins_idx_on_loop::ARRAY{UINT64,N} WHERE N
 │    %108 = (1:loop_length)::Core.Compiler.PartialStruct(UnitRange{Int64}, Any[Core.Compiler.Const(1, false), Int64])
 │    %109 = Base.getindex(%107, %108)::Array{UInt64,1}
-│           (cp_spins_idx_on_loop = Main.copy(%109))
+│           (cp_spins_idx_on_loop = Main.ClassicalMC.copy(%109))
 │           (first_spin_idx_inv = Base.getindex(spins_idx_on_loop, loop_length))
 │    %112 = spins_idx_on_loop::ARRAY{UINT64,N} WHERE N
 │    %113 = (loop_length - 1)::Int64
 │           (second_spin_idx_inv = Base.getindex(%112, %113))
-│    %115 = Main.find_loop(spins, spins_idx_on_loop, updater, first_spin_idx_inv, second_spin_idx_inv, max_length, work, verbose)::Tuple{Int64,Tuple{Float64,Float64,Float64}}
+│    %115 = Main.ClassicalMC.find_loop(spins, spins_idx_on_loop, updater, first_spin_idx_inv, second_spin_idx_inv, max_length, work, verbose)::Tuple{Int64,Tuple{Float64,Float64,Float64}}
 │    %116 = Base.indexed_iterate(%115, 1)::Core.Compiler.PartialStruct(Tuple{Int64,Int64}, Any[Int64, Core.Compiler.Const(2, false)])
 │           (loop_length_inv = Core.getfield(%116, 1))
 │           (@_39 = Core.getfield(%116, 2))
@@ -169,7 +169,7 @@ Body::Tuple{Float64,Float64,Float64}
 │    %121 = spins_idx_on_loop::ARRAY{UINT64,N} WHERE N
 │    %122 = (1:loop_length)::Core.Compiler.PartialStruct(UnitRange{Int64}, Any[Core.Compiler.Const(1, false), Int64])
 │    %123 = Base.getindex(%121, %122)::Array{UInt64,1}
-│    %124 = Main.reverse(%123)::Array{UInt64,1}
+│    %124 = Main.ClassicalMC.reverse(%123)::Array{UInt64,1}
 │    %125 = (%124 != cp_spins_idx_on_loop)::Bool
 └───        goto #15 if not %125
 14 ─        (@_44 = %125)
@@ -180,7 +180,7 @@ Body::Tuple{Float64,Float64,Float64}
 │           (num_loop_found = num_loop_found - 1)
 │           (num_accept = num_accept - 1)
 └───        goto #19
-18 ─        (t3_e = Main.time_ns())
+18 ─        (t3_e = Main.ClassicalMC.time_ns())
 └───        (dE = dE + dE_loop)
 19 ┄        (@_17 = Base.iterate(%10, %35))
 │    %138 = (@_17 === nothing)::Bool
@@ -194,124 +194,117 @@ Body::Tuple{Float64,Float64,Float64}
 └───        return %145
 Overhead ╎ [+additional indent] Count File:Line; Function
 =========================================================
- 1╎1   @Base/array.jl:319; copyto!(::Array{Float64,1}, ::Int64, ::Array{Float64,1}, ::Int64, ::Int64)
-  ╎281 @Base/client.jl:484; _start()
-  ╎ 281 @Base/client.jl:288; exec_options(::Base.JLOptions)
-  ╎  281 @Base/Base.jl:377; include(::Module, ::String)
-  ╎   281 /Users/hiroshi/git/lecture/julia/profile_loop_update.jl:128; profile_loop_update(::String)
-  ╎    281 /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:28; macro expansion
- 2╎     3   /Users/hiroshi/git/lecture/julia/loop_update.jl:228; multi_loop_update!(::LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+ 1╎1   @Base/broadcast.jl:1235; broadcasted(::Function, ::Tuple{Float64,Float64,Float64}, ::Tuple{Float64,Float64,Float64})
+  ╎297 @Base/client.jl:484; _start()
+  ╎ 297 @Base/client.jl:288; exec_options(::Base.JLOptions)
+  ╎  297 @Base/Base.jl:377; include(::Module, ::String)
+  ╎   297 /Users/hiroshi/git/lecture/julia/profile_loop_update.jl:129; profile_loop_update(::String)
+  ╎    297 /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:28; macro expansion
+  ╎     1   /Users/hiroshi/git/lecture/julia/loop_update.jl:228; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
   ╎    ╎ 1   @Base/array.jl:500; zeros(::Type{UInt64}, ::UInt16)
-  ╎    ╎  1   @Base/array.jl:504; zeros
-  ╎    ╎   1   @Base/baseext.jl:25; Array
-  ╎    ╎    1   @Base/boot.jl:414; Array
- 1╎    ╎     1   @Base/boot.jl:405; Array
- 1╎     2   /Users/hiroshi/git/lecture/julia/loop_update.jl:233; multi_loop_update!(::LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
-  ╎    ╎ 1   @Base/array.jl:795; getindex(::Array{UInt64,1}, ::UnitRange{Int64})
-  ╎    ╎  1   @Base/array.jl:360; similar
- 1╎    ╎   1   @Base/boot.jl:405; Array
-  ╎     131 /Users/hiroshi/git/lecture/julia/loop_update.jl:235; multi_loop_update!(::LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
- 4╎    ╎ 131 /Users/hiroshi/git/lecture/julia/loop_update.jl:35; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool)
- 1╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:0; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
- 1╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:35; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
- 2╎    ╎  2   /Users/hiroshi/git/lecture/julia/loop_update.jl:48; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
-  ╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:65; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
- 1╎    ╎   1   @Base/Base.jl:0; getproperty
- 4╎    ╎  4   /Users/hiroshi/git/lecture/julia/loop_update.jl:68; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
-23╎    ╎  28  /Users/hiroshi/git/lecture/julia/loop_update.jl:80; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
- 2╎    ╎   4   @Base/multidimensional.jl:543; getindex(::Array{Tuple{Float64,Float64,Float64},1}, ::UInt64)
- 1╎    ╎    1   @Base/array.jl:787; getindex
- 1╎    ╎    1   @Base/multidimensional.jl:543; getindex
-  ╎    ╎   1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:871; dot(::Tuple{Float64,Float64,Float64}, ::Tuple{Float64,Float64,Float64})
- 1╎    ╎    1   @Base/tuple.jl:61; iterate
- 4╎    ╎  11  /Users/hiroshi/git/lecture/julia/loop_update.jl:83; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
-  ╎    ╎   3   @Base/array.jl:795; getindex(::Array{Float64,1}, ::UnitRange{Int64})
+  ╎    ╎  1   @Base/array.jl:505; zeros
+  ╎    ╎   1   @Base/array.jl:338; fill!(::Array{UInt64,1}, ::UInt64)
+ 1╎    ╎    1   @Base/array.jl:825; setindex!
+ 1╎     1   /Users/hiroshi/git/lecture/julia/loop_update.jl:229; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+ 2╎     3   /Users/hiroshi/git/lecture/julia/loop_update.jl:233; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+  ╎    ╎ 1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/Random.jl:258; rand(::Array{UInt64,1})
+  ╎    ╎  1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/Random.jl:253; rand
+  ╎    ╎   1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/generation.jl:345; rand
+ 1╎    ╎    1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/generation.jl:212; rand(::Random.MersenneTwister, ::Random.SamplerRangeFast{UInt64,Int64})
+  ╎     215 /Users/hiroshi/git/lecture/julia/loop_update.jl:235; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+ 1╎    ╎ 215 /Users/hiroshi/git/lecture/julia/loop_update.jl:35; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool)
+ 1╎    ╎  1   /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib:?; getindex(::Array{UInt64,1}, ::Int64)
+  ╎    ╎  2   /Users/hiroshi/git/lecture/julia/loop_update.jl:47; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   2   @Base/reducedim.jl:652; maximum
+ 2╎    ╎    2   @Base/reducedim.jl:652; #maximum#587
+  ╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:48; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   1   @Base/array.jl:500; zeros(::Type{UInt64}, ::UInt16)
+  ╎    ╎    1   @Base/array.jl:504; zeros
+  ╎    ╎     1   @Base/baseext.jl:25; Array
+  ╎    ╎    ╎ 1   @Base/boot.jl:414; Array
+ 1╎    ╎    ╎  1   @Base/boot.jl:405; Array
+ 1╎    ╎  3   /Users/hiroshi/git/lecture/julia/loop_update.jl:54; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   2   @Base/array.jl:500; zeros(::Type{Float64}, ::UInt16)
+  ╎    ╎    2   @Base/array.jl:504; zeros
+  ╎    ╎     2   @Base/baseext.jl:25; Array
+  ╎    ╎    ╎ 2   @Base/boot.jl:414; Array
+ 2╎    ╎    ╎  2   @Base/boot.jl:405; Array
+ 1╎    ╎  2   /Users/hiroshi/git/lecture/julia/loop_update.jl:63; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   1   @Base/range.jl:3; Colon
+  ╎    ╎    1   @Base/promotion.jl:282; promote
+  ╎    ╎     1   @Base/promotion.jl:259; _promote
+  ╎    ╎    ╎ 1   @Base/number.jl:7; convert
+  ╎    ╎    ╎  1   @Base/boot.jl:707; Int64
+ 1╎    ╎    ╎   1   @Base/boot.jl:630; toInt64
+  ╎    ╎  2   /Users/hiroshi/git/lecture/julia/loop_update.jl:65; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+ 2╎    ╎   2   @Base/array.jl:788; getindex
+ 1╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:66; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+ 7╎    ╎  9   /Users/hiroshi/git/lecture/julia/loop_update.jl:68; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+ 1╎    ╎   1   @Base/array.jl:825; setindex!(::Array{UInt64,1}, ::UInt32, ::Int64)
+  ╎    ╎   1   @Base/range.jl:597; iterate
+ 1╎    ╎    1   @Base/promotion.jl:398; ==
+28╎    ╎  28  /Users/hiroshi/git/lecture/julia/loop_update.jl:80; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+83╎    ╎  97  /Users/hiroshi/git/lecture/julia/loop_update.jl:83; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   11  @Base/array.jl:795; getindex(::Array{Float64,1}, ::UnitRange{Int64})
+  ╎    ╎    11  @Base/array.jl:360; similar
+11╎    ╎     11  @Base/boot.jl:405; Array
+ 3╎    ╎   3   @Base/tuple.jl:24; getindex
+ 3╎    ╎  6   /Users/hiroshi/git/lecture/julia/loop_update.jl:84; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   3   @Base/array.jl:795; getindex(::Array{UInt64,1}, ::UnitRange{Int64})
   ╎    ╎    3   @Base/array.jl:360; similar
  3╎    ╎     3   @Base/boot.jl:405; Array
-  ╎    ╎   1   @Base/reducedim.jl:817; findmax(::Array{Float64,1})
-  ╎    ╎    1   @Base/reducedim.jl:817; #findmax#610
-  ╎    ╎     1   @Base/array.jl:2121; _findmax
- 1╎    ╎    ╎ 1   @Base/float.jl:456; !=
- 3╎    ╎   3   @Base/tuple.jl:24; getindex
- 5╎    ╎  11  /Users/hiroshi/git/lecture/julia/loop_update.jl:84; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
-  ╎    ╎   6   @Base/array.jl:795; getindex(::Array{UInt64,1}, ::UnitRange{Int64})
-  ╎    ╎    6   @Base/array.jl:360; similar
- 6╎    ╎     6   @Base/boot.jl:405; Array
  8╎    ╎  8   /Users/hiroshi/git/lecture/julia/loop_update.jl:87; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
-23╎    ╎  50  /Users/hiroshi/git/lecture/julia/loop_update.jl:90; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
- 1╎    ╎   21  @Base/broadcast.jl:1238; broadcasted(::Function, ::Tuple{Float64,Float64,Float64}, ::Tuple{Float64,Float64,Float64})
-20╎    ╎    20  @Base/broadcast.jl:1240; broadcasted
- 6╎    ╎   6   @Base/broadcast.jl:820; materialize
- 3╎    ╎  3   /Users/hiroshi/git/lecture/julia/loop_update.jl:94; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
- 7╎    ╎  7   /Users/hiroshi/git/lecture/julia/loop_update.jl:102; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
-  ╎     1   /Users/hiroshi/git/lecture/julia/loop_update.jl:249; multi_loop_update!(::LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
- 1╎    ╎ 1   @Base/array.jl:352; copy
-  ╎     138 /Users/hiroshi/git/lecture/julia/loop_update.jl:250; multi_loop_update!(::LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
-  ╎    ╎ 82  /Users/hiroshi/git/lecture/julia/loop_update.jl:136; reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64})
-  ╎    ╎  3   @Base/array.jl:603; collect
-  ╎    ╎   3   @Base/array.jl:609; _collect
-  ╎    ╎    3   @Base/array.jl:576; _similar_for
-  ╎    ╎     3   @Base/abstractarray.jl:628; similar
-  ╎    ╎    ╎ 3   @Base/abstractarray.jl:636; similar
-  ╎    ╎    ╎  3   @Base/boot.jl:414; Array
- 3╎    ╎    ╎   3   @Base/boot.jl:405; Array
- 1╎    ╎  1   @Base/array.jl:787; getindex
-  ╎    ╎  77  @Base/arraymath.jl:52; *(::Int64, ::Array{Float64,1})
-  ╎    ╎   77  @Base/broadcast.jl:809; broadcast_preserving_zero_d
-  ╎    ╎    77  @Base/broadcast.jl:820; materialize
-  ╎    ╎     77  @Base/broadcast.jl:840; copy
-  ╎    ╎    ╎ 77  @Base/broadcast.jl:196; similar
-  ╎    ╎    ╎  77  @Base/abstractarray.jl:670; similar
-  ╎    ╎    ╎   77  @Base/abstractarray.jl:671; similar
-  ╎    ╎    ╎    77  @Base/boot.jl:422; Array
-  ╎    ╎    ╎     77  @Base/boot.jl:414; Array
-77╎    ╎    ╎    ╎ 77  @Base/boot.jl:405; Array
-  ╎    ╎  1   @Base/multidimensional.jl:543; getindex
- 1╎    ╎   1   @Base/array.jl:787; getindex
-  ╎    ╎ 1   /Users/hiroshi/git/lecture/julia/loop_update.jl:140; reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64})
-  ╎    ╎  1   @Base/array.jl:603; collect
-  ╎    ╎   1   @Base/array.jl:609; _collect
-  ╎    ╎    1   @Base/array.jl:576; _similar_for
-  ╎    ╎     1   @Base/abstractarray.jl:628; similar
-  ╎    ╎    ╎ 1   @Base/abstractarray.jl:636; similar
-  ╎    ╎    ╎  1   @Base/boot.jl:414; Array
- 1╎    ╎    ╎   1   @Base/boot.jl:405; Array
+29╎    ╎  47  /Users/hiroshi/git/lecture/julia/loop_update.jl:90; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎   11  @Base/broadcast.jl:1238; broadcasted(::Function, ::Tuple{Float64,Float64,Float64}, ::Tuple{Float64,Float64,Float64})
+11╎    ╎    11  @Base/broadcast.jl:1240; broadcasted
+ 7╎    ╎   7   @Base/broadcast.jl:820; materialize
+ 2╎    ╎  2   /Users/hiroshi/git/lecture/julia/loop_update.jl:94; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+ 3╎    ╎  3   /Users/hiroshi/git/lecture/julia/loop_update.jl:102; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+  ╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:104; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+ 1╎    ╎   1   @Base/array.jl:825; setindex!
+  ╎    ╎  1   /Users/hiroshi/git/lecture/julia/loop_update.jl:105; find_loop(::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Int64, ::UInt64, ::Int64, ::Array{Int64,1}, ::Bool, ::Bool)
+ 1╎    ╎   1   @Base/array.jl:825; setindex!
+ 1╎     62  /Users/hiroshi/git/lecture/julia/loop_update.jl:250; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+  ╎    ╎ 7   /Users/hiroshi/git/lecture/julia/loop_update.jl:136; reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64})
+  ╎    ╎  6   @Base/array.jl:603; collect
+  ╎    ╎   6   @Base/array.jl:609; _collect
+  ╎    ╎    6   @Base/array.jl:576; _similar_for
+  ╎    ╎     6   @Base/abstractarray.jl:628; similar
+  ╎    ╎    ╎ 6   @Base/abstractarray.jl:636; similar
+  ╎    ╎    ╎  6   @Base/boot.jl:414; Array
+ 6╎    ╎    ╎   6   @Base/boot.jl:405; Array
+  ╎    ╎  1   @Base/arraymath.jl:52; *(::Int64, ::Array{Float64,1})
+  ╎    ╎   1   @Base/broadcast.jl:809; broadcast_preserving_zero_d
+  ╎    ╎    1   @Base/broadcast.jl:820; materialize
+  ╎    ╎     1   @Base/broadcast.jl:840; copy
+  ╎    ╎    ╎ 1   @Base/broadcast.jl:196; similar
+  ╎    ╎    ╎  1   @Base/abstractarray.jl:670; similar
+  ╎    ╎    ╎   1   @Base/abstractarray.jl:671; similar
+  ╎    ╎    ╎    1   @Base/boot.jl:422; Array
+  ╎    ╎    ╎     1   @Base/boot.jl:414; Array
+ 1╎    ╎    ╎    ╎ 1   @Base/boot.jl:405; Array
   ╎    ╎ 3   /Users/hiroshi/git/lecture/julia/loop_update.jl:148; reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64})
   ╎    ╎  3   @Base/array.jl:603; collect
   ╎    ╎   3   @Base/array.jl:609; _collect
-  ╎    ╎    3   @Base/array.jl:576; _similar_for
-  ╎    ╎     3   @Base/abstractarray.jl:628; similar
-  ╎    ╎    ╎ 3   @Base/abstractarray.jl:636; similar
-  ╎    ╎    ╎  3   @Base/boot.jl:414; Array
- 3╎    ╎    ╎   3   @Base/boot.jl:405; Array
- 2╎    ╎ 52  /Users/hiroshi/git/lecture/julia/loop_update.jl:149; reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64})
+  ╎    ╎    1   @Base/abstractarray.jl:724; copyto!
+ 1╎    ╎     1   @Base/array.jl:825; setindex!
+  ╎    ╎    2   @Base/array.jl:576; _similar_for
+  ╎    ╎     2   @Base/abstractarray.jl:628; similar
+  ╎    ╎    ╎ 2   @Base/abstractarray.jl:636; similar
+  ╎    ╎    ╎  2   @Base/boot.jl:414; Array
+ 2╎    ╎    ╎   2   @Base/boot.jl:405; Array
+ 4╎    ╎ 51  /Users/hiroshi/git/lecture/julia/loop_update.jl:149; reflect_spins_on_loop!(::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{UInt64,1}, ::SingleSpinFlipUpdater, ::Tuple{Float64,Float64,Float64})
  1╎    ╎  1   @Base/arraymath.jl:38; -(::Array{Float64,1}, ::Array{Float64,1})
-  ╎    ╎  6   @Base/arraymath.jl:39; -(::Array{Float64,1}, ::Array{Float64,1})
-  ╎    ╎   5   @Base/broadcast.jl:809; broadcast_preserving_zero_d
-  ╎    ╎    5   @Base/broadcast.jl:820; materialize
-  ╎    ╎     5   @Base/broadcast.jl:840; copy
-  ╎    ╎    ╎ 1   @Base/broadcast.jl:864; copyto!
-  ╎    ╎    ╎  1   @Base/broadcast.jl:908; copyto!
-  ╎    ╎    ╎   1   @Base/broadcast.jl:891; preprocess
-  ╎    ╎    ╎    1   @Base/broadcast.jl:894; preprocess_args
-  ╎    ╎    ╎     1   @Base/broadcast.jl:892; preprocess
- 1╎    ╎    ╎    ╎ 1   @Base/broadcast.jl:885; broadcast_unalias
-  ╎    ╎    ╎ 4   @Base/broadcast.jl:196; similar
-  ╎    ╎    ╎  4   @Base/abstractarray.jl:670; similar
-  ╎    ╎    ╎   4   @Base/abstractarray.jl:671; similar
-  ╎    ╎    ╎    4   @Base/boot.jl:422; Array
-  ╎    ╎    ╎     4   @Base/boot.jl:414; Array
- 4╎    ╎    ╎    ╎ 4   @Base/boot.jl:405; Array
-  ╎    ╎   1   @Base/broadcast.jl:810; broadcast_preserving_zero_d
-  ╎    ╎    1   @Base/broadcast.jl:206; axes
-  ╎    ╎     1   @Base/broadcast.jl:208; _axes
-  ╎    ╎    ╎ 1   @Base/broadcast.jl:473; combine_axes
-  ╎    ╎    ╎  1   @Base/broadcast.jl:474; combine_axes
-  ╎    ╎    ╎   1   @Base/abstractarray.jl:75; axes
-  ╎    ╎    ╎    1   @Base/tuple.jl:157; map
-  ╎    ╎    ╎     1   @Base/range.jl:320; OneTo
-  ╎    ╎    ╎    ╎ 1   @Base/range.jl:311; OneTo
- 1╎    ╎    ╎    ╎  1   @Base/promotion.jl:409; max
+  ╎    ╎  8   @Base/arraymath.jl:39; -(::Array{Float64,1}, ::Array{Float64,1})
+  ╎    ╎   8   @Base/broadcast.jl:809; broadcast_preserving_zero_d
+  ╎    ╎    8   @Base/broadcast.jl:820; materialize
+  ╎    ╎     8   @Base/broadcast.jl:840; copy
+  ╎    ╎    ╎ 8   @Base/broadcast.jl:196; similar
+  ╎    ╎    ╎  8   @Base/abstractarray.jl:670; similar
+  ╎    ╎    ╎   8   @Base/abstractarray.jl:671; similar
+  ╎    ╎    ╎    8   @Base/boot.jl:422; Array
+  ╎    ╎    ╎     8   @Base/boot.jl:414; Array
+ 8╎    ╎    ╎    ╎ 8   @Base/boot.jl:405; Array
   ╎    ╎  2   @Base/operators.jl:529; *
   ╎    ╎   2   @Base/arraymath.jl:52; *(::Float64, ::Array{Float64,1})
   ╎    ╎    2   @Base/broadcast.jl:809; broadcast_preserving_zero_d
@@ -323,35 +316,43 @@ Overhead ╎ [+additional indent] Count File:Line; Function
   ╎    ╎    ╎     2   @Base/boot.jl:422; Array
   ╎    ╎    ╎    ╎ 2   @Base/boot.jl:414; Array
  2╎    ╎    ╎    ╎  2   @Base/boot.jl:405; Array
-  ╎    ╎  32  @Base/tuple.jl:230; Tuple
-29╎    ╎   32  @Base/tuple.jl:258; _totuple
-  ╎    ╎    3   @Base/array.jl:605; collect
-  ╎    ╎     3   @Base/array.jl:621; _collect_indices
-  ╎    ╎    ╎ 1   @Base/array.jl:330; copyto!
- 1╎    ╎    ╎  1   @Base/array.jl:313; copyto!(::Array{Float64,1}, ::Int64, ::Array{Float64,1}, ::Int64, ::Int64)
-  ╎    ╎    ╎ 2   @Base/boot.jl:422; Array
-  ╎    ╎    ╎  2   @Base/boot.jl:414; Array
- 2╎    ╎    ╎   2   @Base/boot.jl:405; Array
-  ╎    ╎  6   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:1657; normalize
- 1╎    ╎   3   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:1657; normalize(::Array{Float64,1}, ::Int64)
-  ╎    ╎    2   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:607; norm(::Array{Float64,1}, ::Int64)
-  ╎    ╎     2   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/dense.jl:105; norm2(::Array{Float64,1})
-  ╎    ╎    ╎ 1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:477; generic_norm2(::Array{Float64,1})
-  ╎    ╎    ╎  1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:536; normInf
- 1╎    ╎    ╎   1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:452; generic_normInf
- 1╎    ╎    ╎ 1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:481; generic_norm2(::Array{Float64,1})
-  ╎    ╎   3   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:1659; normalize(::Array{Float64,1}, ::Int64)
-  ╎    ╎    3   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/LinearAlgebra.jl:347; copy_oftype
- 3╎    ╎     3   @Base/array.jl:352; copy
- 1╎    ╎  2   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/matmul.jl:9; dot
- 1╎    ╎   1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/blas.jl:330; dot(::Array{Float64,1}, ::Array{Float64,1})
- 1╎     6   /Users/hiroshi/git/lecture/julia/loop_update.jl:251; multi_loop_update!(::LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+  ╎    ╎  30  @Base/tuple.jl:230; Tuple
+24╎    ╎   30  @Base/tuple.jl:258; _totuple
+  ╎    ╎    6   @Base/array.jl:605; collect
+  ╎    ╎     6   @Base/array.jl:621; _collect_indices
+  ╎    ╎    ╎ 6   @Base/boot.jl:422; Array
+  ╎    ╎    ╎  6   @Base/boot.jl:414; Array
+ 6╎    ╎    ╎   6   @Base/boot.jl:405; Array
+  ╎    ╎  2   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:1657; normalize
+  ╎    ╎   2   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:1659; normalize(::Array{Float64,1}, ::Int64)
+  ╎    ╎    2   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/LinearAlgebra.jl:347; copy_oftype
+ 2╎    ╎     2   @Base/array.jl:352; copy
+  ╎    ╎  3   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/matmul.jl:9; dot
+  ╎    ╎   3   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/blas.jl:335; dot(::Array{Float64,1}, ::Array{Float64,1})
+ 3╎    ╎    3   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/blas.jl:286; dot
+ 1╎     14  /Users/hiroshi/git/lecture/julia/loop_update.jl:251; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+ 1╎    ╎ 1   @Base/Base.jl:0; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
  2╎    ╎ 2   @Base/array.jl:0; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
+  ╎    ╎ 1   /Users/hiroshi/git/lecture/julia/loop_update.jl:170; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
+ 1╎    ╎  1   @Base/range.jl:597; iterate
   ╎    ╎ 2   /Users/hiroshi/git/lecture/julia/loop_update.jl:177; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
- 1╎    ╎  2   @Base/multidimensional.jl:543; getindex
- 1╎    ╎   1   @Base/array.jl:787; getindex(::Array{UInt16,1}, ::Int64)
+ 2╎    ╎  2   @Base/multidimensional.jl:543; getindex
+  ╎    ╎ 1   /Users/hiroshi/git/lecture/julia/loop_update.jl:182; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
+  ╎    ╎  1   @Base/multidimensional.jl:543; getindex
+ 1╎    ╎   1   @Base/array.jl:787; getindex
+  ╎    ╎ 1   /Users/hiroshi/git/lecture/julia/loop_update.jl:187; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
+  ╎    ╎  1   @Base/operators.jl:529; +
+ 1╎    ╎   1   @Base/float.jl:401; +
+  ╎    ╎ 3   /Users/hiroshi/git/lecture/julia/loop_update.jl:188; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
+ 3╎    ╎  3   @Base/float.jl:403; -
   ╎    ╎ 1   /Users/hiroshi/git/lecture/julia/loop_update.jl:189; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
  1╎    ╎  1   @Base/float.jl:401; +
- 1╎1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:856; dot(::Tuple{Float64,Float64,Float64}, ::Tuple{Float64,Float64,Float64})
-Total snapshots: 292
-2020年 5月 8日 金曜日 19時03分14秒 JST
+  ╎    ╎ 1   /Users/hiroshi/git/lecture/julia/loop_update.jl:192; compute_dE_loop(::SingleSpinFlipUpdater, ::Int64, ::Array{UInt64,1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Tuple{Float64,Float64,Float64},1}, ::Array{Int64,1}, ::Bool)
+ 1╎    ╎  1   @Base/float.jl:403; -
+  ╎     1   /Users/hiroshi/git/lecture/julia/loop_update.jl:254; multi_loop_update!(::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64, ::SingleSpinFlipUpdater, ::Float64, ::Int64, ::Array{Tuple{Float64,Float64,Float64},1}, ::Bool)
+  ╎    ╎ 1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/Random.jl:256; rand
+  ╎    ╎  1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/Random.jl:256; rand
+  ╎    ╎   1   /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Random/src/generation.jl:35; rand
+ 1╎    ╎    1   @Base/float.jl:403; -
+Total snapshots: 303
+2020年 5月 8日 金曜日 20時08分24秒 JST

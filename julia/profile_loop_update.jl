@@ -1,12 +1,13 @@
+module ClassicalMC
+
 using ConfParser
 using Profile
 using ProfileView
 using ProfileSVG
-using ArgParse
 include("mcmc.jl")
 include("loop_update.jl")
-#include("classical_mc.jl")
-#using .ClassicalMC
+
+export profile_loop_update
 
 # To use @code_warntype
 using InteractiveUtils
@@ -133,6 +134,11 @@ function profile_loop_update(input_file::String)
     ProfileSVG.save("profile.svg")
     Profile.init()
 end
+
+end #module ClassicalMC
+
+using ArgParse
+using .ClassicalMC
 
 s = ArgParseSettings()
 @add_arg_table! s begin
