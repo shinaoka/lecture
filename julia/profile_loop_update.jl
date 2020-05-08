@@ -8,6 +8,9 @@ include("loop_update.jl")
 #include("classical_mc.jl")
 #using .ClassicalMC
 
+# To use @code_warntype
+using InteractiveUtils
+
 # Read a list of temperatures
 function read_temps(temperature_file::String)
     temps = Array{Float64}(undef, 0)
@@ -119,9 +122,10 @@ function profile_loop_update(input_file::String)
     multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
                                 max_loop_length,spins,true)
 
-    @profile multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
+    @code_warntype multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
+                                max_loop_length,spins,true)
 
-    #@profview multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
+    @profile multi_loop_update!(loop_updater,loop_num_trial,updater,1/temps[1],
                                 max_loop_length,spins,true)
     
 

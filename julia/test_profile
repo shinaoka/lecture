@@ -517,3 +517,382 @@ begin
 2020年 5月 8日 金曜日 18時45分43秒 JST
 end
 2020年 5月 8日 金曜日 18時46分01秒 JST
+begin
+2020年 5月 8日 金曜日 18時51分18秒 JST
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ reduce.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ reduce.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ reduce.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ reduce.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ array.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ array.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ array.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ array.jl:-1
+┌ Warning: iy is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning: iy is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning: ix is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning: ix is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning: x is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ iterators.jl:-1
+┌ Warning: x is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ iterators.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Pair{Int64,Float64},Int64}}
+└ @ array.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Pair{Int64,Float64},Int64}}
+└ @ array.jl:-1
+┌ Warning: getindex returns Union{Float64, Int64}
+└ @ tuple.jl:24
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base._maximum(Base.getfield(updater, nn_coord_num), Base.:(:))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Main.zeros(Main.UInt, Base._maximum(Base.getfield(updater, nn_coord_num), Base.:(:)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Main.zeros(Main.Float64, Base._maximum(Base.getfield(updater, nn_coord_num), Base.:(:)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(Base.getfield(updater, nn_coord_num), φ (%55 => %30, %220 => %204))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.setindex!(φ (%44 => %42, %46 => %45), Base.arrayref(true, Base.getfield(updater, nn_sites), φ (%75 => %72, %108 => %103), φ (%55 => %30, %220 => %204)), Base.add_int(φ (%75 => 0, %108 => %97), 1))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(φ (%44 => %42, %46 => %45), φ (%123 => %120, %141 => %136))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%123 => %120, %141 => %136)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Main.dot(Base.arrayref(true, spins, φ (%55 => _5, %220 => %58)), Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%123 => %120, %141 => %136))))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.setindex!(φ (%52 => %50, %54 => %53), Main.dot(Base.arrayref(true, spins, φ (%55 => _5, %220 => %58)), Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%123 => %120, %141 => %136)))), φ (%123 => %120, %141 => %136))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Main.findmax(Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0))))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(φ (%44 => %42, %46 => %45), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(Base.getindex(φ (%44 => %42, %46 => %45), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0))), Base.getfield(Main.findmax(Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))), 2, true))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191)) == Base.getindex(Base.getindex(φ (%44 => %42, %46 => %45), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0))), Base.getfield(Main.findmax(Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))), 2, true))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.broadcasted(Main.:+, φ (%163 => %59, %196 => %185), Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191))))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.Broadcast.instantiate(Base.broadcasted(Main.:+, φ (%163 => %59, %196 => %185), Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191)))))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.Broadcast.copy(Base.Broadcast.instantiate(Base.broadcasted(Main.:+, φ (%163 => %59, %196 => %185), Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191))))))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.convert(Main.HeisenbergSpin, Base.Broadcast.copy(Base.Broadcast.instantiate(Base.broadcasted(Main.:+, φ (%163 => %59, %196 => %185), Base.getindex(spins, Base.getindex(φ (%44 => %42, %46 => %45), φ (%163 => %160, %196 => %191)))))))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(work, Base.getindex(Base.getindex(φ (%44 => %42, %46 => %45), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0))), Base.getfield(Main.findmax(Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))), 2, true)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.getindex(work, Base.getindex(Base.getindex(φ (%44 => %42, %46 => %45), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0))), Base.getfield(Main.findmax(Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))), 2, true))) == 1
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning: dynamic dispatch to Base.convert(Main.Int64, Base.getindex(Base.getindex(φ (%44 => %42, %46 => %45), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0))), Base.getfield(Main.findmax(Base.getindex(φ (%52 => %50, %54 => %53), %new(UnitRange{Int64}, 1, Base.ifelse(Base.sle_int(1, φ (%107 => %97, %75 => 0)), φ (%107 => %97, %75 => 0), 0)))), 2, true)))
+└ @ ~/git/lecture/julia/loop_update.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{UInt64,Int64}}
+└ @ abstractarray.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{UInt64,Int64}}
+└ @ abstractarray.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{UInt64,Int64}}
+└ @ multidimensional.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{UInt64,Int64}}
+└ @ multidimensional.jl:-1
+┌ Warning: Dy is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ multidimensional.jl:-1
+┌ Warning: Dy is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ multidimensional.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ abstractarray.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ abstractarray.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ abstractarray.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ abstractarray.jl:-1
+┌ Warning: getindex returns Union{Int64, Array{Float64,1}}
+└ @ tuple.jl:24
+┌ Warning: getindex returns Union{Int64, Base.Broadcast.Extruded{Array{Float64,1},Tuple{Bool},Tuple{Int64}}}
+└ @ tuple.jl:24
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Nothing
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Nothing
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ array.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ array.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning: y is assigned as Union{Nothing, Tuple{Float64,Int64}}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning:  is assigned as Nothing
+└ @ /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/generic.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ reinterpretarray.jl:-1
+┌ Warning:  is assigned as Union{Nothing, Tuple{Int64,Int64}}
+└ @ reinterpretarray.jl:-1
+┌ Warning: getindex returns Union{Float64, Array{Float64,1}}
+└ @ tuple.jl:24
+┌ Warning: getindex returns Union{Float64, Base.Broadcast.Extruded{Array{Float64,1},Tuple{Bool},Tuple{Int64}}}
+└ @ tuple.jl:24
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Nothing
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ indices.jl:-1
+┌ Warning:  is assigned as Nothing
+└ @ indices.jl:-1
+┌ Warning:  is assigned as Tuple{Int64,Int64}
+└ @ broadcast.jl:-1
+┌ Warning:  is assigned as Nothing
+└ @ broadcast.jl:-1
+
+signal (2): Interrupt: 2
+in expression starting at /Users/hiroshi/git/lecture/julia/profile_loop_update.jl:143
+_ZN4llvm13StringMapImpl9RemoveKeyENS_9StringRefE at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/libLLVM.dylib (unknown line)
+remove at /Users/julia/buildbot/worker/package_macos64/build/usr/include/llvm/ADT/StringMap.h:433 [inlined]
+erase at /Users/julia/buildbot/worker/package_macos64/build/usr/include/llvm/ADT/StringMap.h:438 [inlined]
+erase at /Users/julia/buildbot/worker/package_macos64/build/usr/include/llvm/ADT/StringMap.h:445 [inlined]
+jl_finalize_module at /Users/julia/buildbot/worker/package_macos64/build/src/jitlayers.cpp:853
+jl_compile_linfo at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:1294
+jl_compile_method_internal at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1889
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2153 [inlined]
+jl_apply_generic at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2322
+eachline at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/analysis.jl:49
+globals at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/analysis.jl:94
+analyse at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/analysis.jl:189
+posthook at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:36
+Broadcasted at ./broadcast.jl:179 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x15450e72c)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47 [inlined]
+Broadcasted at ./broadcast.jl:179 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x15450dcfc)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+unknown function (ip: 0x15450d920)
+broadcasted at ./broadcast.jl:1240 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x15450d178)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+unknown function (ip: 0x15450bab0)
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+do_apply at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:643
+broadcasted at ./broadcast.jl:1232 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x154501ce8)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+_collect_indices at ./array.jl:621 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x15450145c)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+unknown function (ip: 0x152643a00)
+collect at ./array.jl:605 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47 [inlined]
+_totuple at ./tuple.jl:258 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+Tuple at ./tuple.jl:230 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+reflect_spins_on_loop! at /Users/hiroshi/git/lecture/julia/loop_update.jl:149 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x1518d78a7)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+do_apply at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:643
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+multi_loop_update! at /Users/hiroshi/git/lecture/julia/loop_update.jl:250 [inlined]
+overdub at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+unknown function (ip: 0x14e388e2e)
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2158 [inlined]
+jl_gf_invoke_by_method at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2404 [inlined]
+jl_gf_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2372
+jl_f_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:1010
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+do_apply at /Users/julia/buildbot/worker/package_macos64/build/src/builtins.c:643
+overdub at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:47
+#29 at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:88 [inlined]
+recurse at /Users/hiroshi/.julia/packages/Cassette/158rp/src/overdub.jl:0
+#trace#20 at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:51 [inlined]
+trace at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:51 [inlined]
+#warntrace#21 at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:54 [inlined]
+warntrace at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:54 [inlined]
+macro expansion at /Users/hiroshi/.julia/packages/Traceur/OKJwj/src/trace.jl:88 [inlined]
+profile_loop_update at /Users/hiroshi/git/lecture/julia/profile_loop_update.jl:123
+unknown function (ip: 0x11071ca2c)
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+do_call at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:369
+eval_body at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:0
+jl_interpret_toplevel_thunk at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:911
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:814
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+exec_options at ./client.jl:288
+_start at ./client.jl:484
+jfptr__start_2076.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+true_main at /Applications/Julia-1.4.app/Contents/Resources/julia/bin/julia (unknown line)
+main at /Applications/Julia-1.4.app/Contents/Resources/julia/bin/julia (unknown line)
+unknown function (ip: 0x0)
+Allocations: 645959835 (Pool: 645906629; Big: 53206); GC: 590
+end
+2020年 5月 8日 金曜日 18時56分14秒 JST
+begin
+2020年 5月 8日 金曜日 19時00分37秒 JST
+end
+2020年 5月 8日 金曜日 19時00分59秒 JST
+begin
+2020年 5月 8日 金曜日 19時02分28秒 JST
+
+signal (2): Interrupt: 2
+in expression starting at /Users/hiroshi/git/lecture/julia/profile_loop_update.jl:3
+jl_obvious_subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1622
+jl_subtype_env at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1806
+jl_subtype at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:1854 [inlined]
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:2896
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:2093
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+intersect_union at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:2093
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:0
+intersect_tuple at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:2642 [inlined]
+intersect at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:2958
+intersect_all at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3047
+jl_type_intersection_env_s at /Users/julia/buildbot/worker/package_macos64/build/src/subtype.c:3241
+jl_typemap_intersection_node_visitor at /Users/julia/buildbot/worker/package_macos64/build/src/typemap.c:484
+jl_typemap_intersection_visitor at /Users/julia/buildbot/worker/package_macos64/build/src/typemap.c:572
+jl_typemap_intersection_visitor at /Users/julia/buildbot/worker/package_macos64/build/src/typemap.c:563
+check_ambiguous_matches at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1310
+jl_method_table_insert at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1627
+jl_insert_methods at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:2267 [inlined]
+_jl_restore_incremental at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:3269
+jl_restore_incremental at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:3314
+_include_from_serialized at ./loading.jl:681
+_require_search_from_serialized at ./loading.jl:781
+_tryrequire_from_serialized at ./loading.jl:712
+_require_search_from_serialized at ./loading.jl:770
+_tryrequire_from_serialized at ./loading.jl:712
+_require_search_from_serialized at ./loading.jl:770
+_require at ./loading.jl:1006
+require at ./loading.jl:927
+require at ./loading.jl:922
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+call_require at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:399 [inlined]
+eval_import_path at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:436
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:656
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+exec_options at ./client.jl:288
+_start at ./client.jl:484
+jfptr__start_2076.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+true_main at /Applications/Julia-1.4.app/Contents/Resources/julia/bin/julia (unknown line)
+main at /Applications/Julia-1.4.app/Contents/Resources/julia/bin/julia (unknown line)
+unknown function (ip: 0x0)
+Allocations: 8271471 (Pool: 8269562; Big: 1909); GC: 6
+end
+2020年 5月 8日 金曜日 19時02分34秒 JST
+begin
+2020年 5月 8日 金曜日 19時02分54秒 JST
+end
+2020年 5月 8日 金曜日 19時03分14秒 JST

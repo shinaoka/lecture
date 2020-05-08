@@ -1,455 +1,369 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" width="1000" height="355" viewBox="0 0 1000 355"
-     xmlns="http://www.w3.org/2000/svg" id="fig-320a0b6030eb4d1093f6d1c79802ebd6">
+     xmlns="http://www.w3.org/2000/svg" id="fig-dbfeb28a44084cafb043350898e425e7">
 <defs>
-    <linearGradient id="fig-320a0b6030eb4d1093f6d1c79802ebd6-background" y1="0" y2="1" x1="0" x2="0">
+    <linearGradient id="fig-dbfeb28a44084cafb043350898e425e7-background" y1="0" y2="1" x1="0" x2="0">
         <stop stop-color="#eeeeee" offset="5%" />
         <stop stop-color="#eeeeb0" offset="95%" />
     </linearGradient>
-    <clipPath id="fig-320a0b6030eb4d1093f6d1c79802ebd6-clip">
+    <clipPath id="fig-dbfeb28a44084cafb043350898e425e7-clip">
         <rect x="0" y="0" width="1000" height="355"/>
     </clipPath>
 </defs>
 <style type="text/css">
-    #fig-320a0b6030eb4d1093f6d1c79802ebd6 text {
+    #fig-dbfeb28a44084cafb043350898e425e7 text {
         pointer-events: none;
         font-family: Verdana;
         font-size: 12px;
         fill: #000000;
     }
-    text#fig-320a0b6030eb4d1093f6d1c79802ebd6-caption {
+    text#fig-dbfeb28a44084cafb043350898e425e7-caption {
         font-size: 17px;
         text-anchor: middle;
     }
-    #fig-320a0b6030eb4d1093f6d1c79802ebd6-bg {
-        fill: url(#fig-320a0b6030eb4d1093f6d1c79802ebd6-background);
+    #fig-dbfeb28a44084cafb043350898e425e7-bg {
+        fill: url(#fig-dbfeb28a44084cafb043350898e425e7-background);
     }
-    #fig-320a0b6030eb4d1093f6d1c79802ebd6-viewport rect {
+    #fig-dbfeb28a44084cafb043350898e425e7-viewport rect {
         vector-effect: non-scaling-stroke;
     }
-    #fig-320a0b6030eb4d1093f6d1c79802ebd6-viewport text {
+    #fig-dbfeb28a44084cafb043350898e425e7-viewport text {
         stroke: #000000;
         stroke-width: 0;
         stroke-opacity: 0.35;
     }
-    #fig-320a0b6030eb4d1093f6d1c79802ebd6-viewport rect:hover {
+    #fig-dbfeb28a44084cafb043350898e425e7-viewport rect:hover {
         stroke: #000000;
         stroke-width: 1;
     }
 </style>
-<g id="fig-320a0b6030eb4d1093f6d1c79802ebd6-frame" clip-path="url(#fig-320a0b6030eb4d1093f6d1c79802ebd6-clip)">
-<rect id="fig-320a0b6030eb4d1093f6d1c79802ebd6-bg" x="0" y="0" width="1000" height="355"/>
-<text id="fig-320a0b6030eb4d1093f6d1c79802ebd6-caption" x="600" y="24">Profile results</text>
+<g id="fig-dbfeb28a44084cafb043350898e425e7-frame" clip-path="url(#fig-dbfeb28a44084cafb043350898e425e7-clip)">
+<rect id="fig-dbfeb28a44084cafb043350898e425e7-bg" x="0" y="0" width="1000" height="355"/>
+<text id="fig-dbfeb28a44084cafb043350898e425e7-caption" x="600" y="24">Profile results</text>
 <text x="10" y="338">Function:</text>
-<text x="70" y="338" id="fig-320a0b6030eb4d1093f6d1c79802ebd6-details"> </text>
-<g id="fig-320a0b6030eb4d1093f6d1c79802ebd6-viewport" transform="scale(1)">
+<text x="70" y="338" id="fig-dbfeb28a44084cafb043350898e425e7-details"> </text>
+<g id="fig-dbfeb28a44084cafb043350898e425e7-viewport" transform="scale(1)">
 <rect x="10" y="300" width="980" height="15" fill="#E870DD" rx="2" data-dinfo=""/>
 <text x="10" dx="4" y="311.5"> in :-1</text>
-<rect x="10" y="285" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="10" dx="4" y="296.5">copyto! in array.jl:313</text>
-<rect x="13.14" y="285" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="13.14" dx="4" y="296.5">* in arraymath.jl:52</text>
-<rect x="16.28" y="285" width="939.17" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="296.5">_start in client.jl:484</text>
-<rect x="16.28" y="270" width="939.17" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="281.5">exec_options in client.jl:288</text>
-<rect x="16.28" y="255" width="939.17" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="266.5">include in Base.jl:377</text>
-<rect x="16.28" y="240" width="939.17" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="16.28" dx="4" y="251.5">profile_loop_update in profile_loop_update.jl:122</text>
-<rect x="16.28" y="225" width="939.17" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/"/>
-<text x="16.28" dx="4" y="236.5">macro expansion in Profile.jl:28</text>
-<rect x="16.28" y="210" width="6.28" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="16.28" dx="4" y="221.5">multi_loop_update! in loop_update.jl:228</text>
-<rect x="16.28" y="195" width="6.28" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="206.5">zeros in array.jl:500</text>
-<rect x="16.28" y="180" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="191.5">zeros in array.jl:504</text>
-<rect x="16.28" y="165" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="176.5">Array in baseext.jl:25</text>
-<rect x="16.28" y="150" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="161.5">Array in boot.jl:414</text>
-<rect x="16.28" y="135" width="3.14" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
-<text x="16.28" dx="4" y="146.5">Array in boot.jl:405</text>
-<rect x="19.42" y="180" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="19.42" dx="4" y="191.5">zeros in array.jl:505</text>
-<rect x="19.42" y="165" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="19.42" dx="4" y="176.5">fill! in array.jl:338</text>
-<rect x="19.42" y="150" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="19.42" dx="4" y="161.5">setindex! in array.jl:825</text>
-<rect x="22.56" y="210" width="6.28" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="22.56" dx="4" y="221.5">multi_loop_update! in loop_update.jl:231</text>
-<rect x="28.85" y="210" width="6.28" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="28.85" dx="4" y="221.5">multi_loop_update! in loop_update.jl:233</text>
-<rect x="35.13" y="210" width="442.88" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="35.13" dx="4" y="221.5">multi_loop_update! in loop_update.jl:235</text>
-<rect x="35.13" y="195" width="442.88" height="15" fill="#A8A200" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="35.13" dx="4" y="206.5">find_loop in loop_update.jl:35</text>
-<rect x="35.13" y="180" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="35.13" dx="4" y="191.5">find_loop in loop_update.jl:35</text>
-<rect x="38.27" y="180" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="38.27" dx="4" y="191.5">find_loop in loop_update.jl:47</text>
-<rect x="38.27" y="165" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="176.5">maximum in reducedim.jl:652</text>
-<rect x="38.27" y="150" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="161.5">#maximum#587 in reducedim.jl:652</text>
-<rect x="38.27" y="135" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="146.5">_maximum in reducedim.jl:656</text>
-<rect x="38.27" y="120" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="131.5">_maximum in reducedim.jl:657</text>
-<rect x="38.27" y="105" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="116.5">mapreduce in reducedim.jl:307</text>
-<rect x="38.27" y="90" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="101.5">#mapreduce#580 in reducedim.jl:307</text>
-<rect x="38.27" y="75" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="86.5">_mapreduce_dim in reducedim.jl:312</text>
-<rect x="38.27" y="60" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="71.5">_mapreduce in reduce.jl:407</text>
-<rect x="38.27" y="45" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="56.5">mapreduce_impl in reduce.jl:588</text>
-<rect x="38.27" y="30" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="38.27" dx="4" y="41.5">getindex in array.jl:787</text>
-<rect x="41.41" y="180" width="6.28" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="41.41" dx="4" y="191.5">find_loop in loop_update.jl:54</text>
-<rect x="44.55" y="165" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="44.55" dx="4" y="176.5">zeros in array.jl:500</text>
-<rect x="44.55" y="150" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="44.55" dx="4" y="161.5">zeros in array.jl:504</text>
-<rect x="44.55" y="135" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="44.55" dx="4" y="146.5">Array in baseext.jl:25</text>
-<rect x="44.55" y="120" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="44.55" dx="4" y="131.5">Array in boot.jl:414</text>
-<rect x="44.55" y="105" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="44.55" dx="4" y="116.5">Array in boot.jl:405</text>
-<rect x="47.69" y="180" width="6.28" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="47.69" dx="4" y="191.5">find_loop in loop_update.jl:63</text>
-<rect x="50.83" y="165" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="50.83" dx="4" y="176.5">getindex in array.jl:787</text>
-<rect x="53.97" y="180" width="12.56" height="15" fill="#FFA49C" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="53.97" dx="4" y="191.5">find_loop in loop_update.jl:66</text>
-<rect x="53.97" y="165" width="6.28" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="53.97" dx="4" y="176.5">getindex in multidimensional.jl:543</text>
-<rect x="53.97" y="150" width="6.28" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="53.97" dx="4" y="161.5">getindex in array.jl:787</text>
-<rect x="66.54" y="180" width="28.27" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="66.54" dx="4" y="191.5">find_loop in loop_update.jl:68</text>
-<rect x="85.38" y="165" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="85.38" dx="4" y="176.5">setindex! in array.jl:825</text>
-<rect x="94.81" y="180" width="50.26" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="94.81" dx="4" y="191.5">find_loop in loop_update.jl:80</text>
-<rect x="132.5" y="165" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="132.5" dx="4" y="176.5">getindex in multidimensional.jl:543</text>
-<rect x="132.5" y="150" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="132.5" dx="4" y="161.5">getindex in array.jl:787</text>
-<rect x="145.06" y="180" width="37.69" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="145.06" dx="4" y="191.5">find_loop in loop_update.jl:83</text>
-<rect x="145.06" y="165" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="145.06" dx="4" y="176.5">getindex in tuple.jl:24</text>
-<rect x="160.77" y="165" width="9.42" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="160.77" dx="4" y="176.5">getindex in array.jl:795</text>
-<rect x="160.77" y="150" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="160.77" dx="4" y="161.5">similar in array.jl:360</text>
-<rect x="160.77" y="135" width="9.42" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
-<text x="160.77" dx="4" y="146.5">Array in boot.jl:405</text>
-<rect x="170.19" y="165" width="6.28" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="176.5">findmax in reducedim.jl:817</text>
-<rect x="170.19" y="150" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="161.5">#findmax#610 in reducedim.jl:817</text>
-<rect x="170.19" y="135" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="146.5">_findmax in array.jl:2117</text>
-<rect x="170.19" y="120" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="131.5">iterate in iterators.jl:234</text>
-<rect x="170.19" y="105" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="116.5">iterate in indices.jl:482</text>
-<rect x="170.19" y="90" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="101.5">iterate in range.jl:597</text>
-<rect x="170.19" y="75" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="170.19" dx="4" y="86.5">== in promotion.jl:398</text>
-<rect x="182.76" y="180" width="15.71" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="182.76" dx="4" y="191.5">find_loop in loop_update.jl:84</text>
-<rect x="189.04" y="165" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="189.04" dx="4" y="176.5">getindex in array.jl:793</text>
-<rect x="189.04" y="150" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="189.04" dx="4" y="161.5">checkbounds in abstractarray.jl:502</text>
-<rect x="189.04" y="135" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="189.04" dx="4" y="146.5">checkbounds in abstractarray.jl:487</text>
-<rect x="189.04" y="120" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="189.04" dx="4" y="131.5">checkindex in abstractarray.jl:564</text>
-<rect x="189.04" y="105" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="189.04" dx="4" y="116.5">checkindex in abstractarray.jl:559</text>
-<rect x="189.04" y="90" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="189.04" dx="4" y="101.5">&amp;lt;= in int.jl:410</text>
-<rect x="192.18" y="165" width="6.28" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="192.18" dx="4" y="176.5">getindex in array.jl:795</text>
-<rect x="192.18" y="150" width="6.28" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="192.18" dx="4" y="161.5">similar in array.jl:360</text>
-<rect x="192.18" y="135" width="6.28" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="192.18" dx="4" y="146.5">Array in boot.jl:405</text>
-<rect x="198.46" y="180" width="43.97" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="198.46" dx="4" y="191.5">find_loop in loop_update.jl:87</text>
-<rect x="242.44" y="180" width="182.18" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="242.44" dx="4" y="191.5">find_loop in loop_update.jl:90</text>
-<rect x="242.44" y="165" width="25.13" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
-<text x="242.44" dx="4" y="176.5">materialize in broadcast.jl:820</text>
-<rect x="368.08" y="165" width="50.26" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="368.08" dx="4" y="176.5">broadcasted in broadcast.jl:1238</text>
-<rect x="368.08" y="150" width="50.26" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
-<text x="368.08" dx="4" y="161.5">broadcasted in broadcast.jl:1240</text>
-<rect x="418.33" y="165" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="418.33" dx="4" y="176.5">getindex in multidimensional.jl:543</text>
-<rect x="418.33" y="150" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="418.33" dx="4" y="161.5">getindex in multidimensional.jl:543</text>
-<rect x="424.62" y="180" width="21.99" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="424.62" dx="4" y="191.5">find_loop in loop_update.jl:94</text>
-<rect x="424.62" y="165" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="424.62" dx="4" y="176.5">== in promotion.jl:398</text>
-<rect x="446.6" y="180" width="28.27" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="446.6" dx="4" y="191.5">find_loop in loop_update.jl:102</text>
-<rect x="478.01" y="210" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="478.01" dx="4" y="221.5">multi_loop_update! in loop_update.jl:249</text>
-<rect x="478.01" y="195" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="478.01" dx="4" y="206.5">copy in array.jl:352</text>
-<rect x="481.15" y="210" width="458.59" height="15" fill="#00DEE6" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="481.15" dx="4" y="221.5">multi_loop_update! in loop_update.jl:250</text>
-<rect x="481.15" y="195" width="25.13" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="481.15" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:136</text>
-<rect x="481.15" y="180" width="9.42" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="191.5">collect in array.jl:603</text>
-<rect x="481.15" y="165" width="9.42" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="176.5">_collect in array.jl:609</text>
-<rect x="481.15" y="150" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="161.5">_similar_for in array.jl:576</text>
-<rect x="481.15" y="135" width="9.42" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="146.5">similar in abstractarray.jl:628</text>
-<rect x="481.15" y="120" width="9.42" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="131.5">similar in abstractarray.jl:636</text>
-<rect x="481.15" y="105" width="9.42" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="116.5">Array in boot.jl:414</text>
-<rect x="481.15" y="90" width="9.42" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="481.15" dx="4" y="101.5">Array in boot.jl:405</text>
-<rect x="490.58" y="180" width="12.56" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="191.5">* in arraymath.jl:52</text>
-<rect x="490.58" y="165" width="12.56" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="176.5">broadcast_preserving_zero_d in broadcast.jl:809</text>
-<rect x="490.58" y="150" width="12.56" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="161.5">materialize in broadcast.jl:820</text>
-<rect x="490.58" y="135" width="12.56" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="146.5">copy in broadcast.jl:840</text>
-<rect x="490.58" y="120" width="12.56" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="131.5">similar in broadcast.jl:196</text>
-<rect x="490.58" y="105" width="12.56" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="116.5">similar in abstractarray.jl:670</text>
-<rect x="490.58" y="90" width="12.56" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="101.5">similar in abstractarray.jl:671</text>
-<rect x="490.58" y="75" width="12.56" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="86.5">Array in boot.jl:422</text>
-<rect x="490.58" y="60" width="12.56" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="71.5">Array in boot.jl:414</text>
-<rect x="490.58" y="45" width="12.56" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="490.58" dx="4" y="56.5">Array in boot.jl:405</text>
-<rect x="503.14" y="180" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="503.14" dx="4" y="191.5">^ in intfuncs.jl:238</text>
-<rect x="503.14" y="165" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="503.14" dx="4" y="176.5">power_by_squaring in intfuncs.jl:224</text>
-<rect x="503.14" y="150" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="503.14" dx="4" y="161.5">&amp;gt;&amp;gt; in int.jl:430</text>
-<rect x="503.14" y="135" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="503.14" dx="4" y="146.5">&amp;gt;&amp;gt; in int.jl:423</text>
-<rect x="506.28" y="195" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="506.28" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:140</text>
-<rect x="506.28" y="180" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="191.5">collect in array.jl:603</text>
-<rect x="506.28" y="165" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="176.5">_collect in array.jl:609</text>
-<rect x="506.28" y="150" width="3.14" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="161.5">_similar_for in array.jl:576</text>
-<rect x="506.28" y="135" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="146.5">similar in abstractarray.jl:628</text>
-<rect x="506.28" y="120" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="131.5">similar in abstractarray.jl:636</text>
-<rect x="506.28" y="105" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="116.5">Array in boot.jl:414</text>
-<rect x="506.28" y="90" width="3.14" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
-<text x="506.28" dx="4" y="101.5">Array in boot.jl:405</text>
-<rect x="509.42" y="195" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="509.42" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:141</text>
-<rect x="509.42" y="180" width="3.14" height="15" fill="#FFA49C" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="509.42" dx="4" y="191.5">cross in generic.jl:296</text>
-<rect x="509.42" y="165" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="509.42" dx="4" y="176.5">vect in array.jl:130</text>
-<rect x="509.42" y="150" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="509.42" dx="4" y="161.5">_array_for in array.jl:657</text>
-<rect x="509.42" y="135" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="509.42" dx="4" y="146.5">similar in abstractarray.jl:670</text>
-<rect x="509.42" y="120" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="509.42" dx="4" y="131.5">similar in abstractarray.jl:671</text>
-<rect x="509.42" y="105" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="509.42" dx="4" y="116.5">Array in boot.jl:414</text>
-<rect x="509.42" y="90" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="509.42" dx="4" y="101.5">Array in boot.jl:405</text>
-<rect x="512.56" y="195" width="9.42" height="15" fill="#A8A200" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="512.56" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:148</text>
-<rect x="512.56" y="180" width="9.42" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="191.5">collect in array.jl:603</text>
-<rect x="512.56" y="165" width="9.42" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="176.5">_collect in array.jl:609</text>
-<rect x="512.56" y="150" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="161.5">_similar_for in array.jl:576</text>
-<rect x="512.56" y="135" width="9.42" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="146.5">similar in abstractarray.jl:628</text>
-<rect x="512.56" y="120" width="9.42" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="131.5">similar in abstractarray.jl:636</text>
-<rect x="512.56" y="105" width="9.42" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="116.5">Array in boot.jl:414</text>
-<rect x="512.56" y="90" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="512.56" dx="4" y="101.5">Array in boot.jl:405</text>
-<rect x="521.99" y="195" width="417.76" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="521.99" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:149</text>
-<rect x="521.99" y="180" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="191.5">- in arraymath.jl:38</text>
-<rect x="521.99" y="165" width="6.28" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="176.5">promote_shape in indices.jl:169</text>
-<rect x="521.99" y="150" width="6.28" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="161.5">axes in abstractarray.jl:75</text>
-<rect x="521.99" y="135" width="6.28" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="146.5">map in tuple.jl:157</text>
-<rect x="521.99" y="120" width="6.28" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="131.5">OneTo in range.jl:320</text>
-<rect x="521.99" y="105" width="6.28" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="116.5">OneTo in range.jl:311</text>
-<rect x="521.99" y="90" width="6.28" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="521.99" dx="4" y="101.5">max in promotion.jl:409</text>
-<rect x="531.41" y="180" width="263.85" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="191.5">- in arraymath.jl:39</text>
-<rect x="531.41" y="165" width="263.85" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="176.5">broadcast_preserving_zero_d in broadcast.jl:809</text>
-<rect x="531.41" y="150" width="263.85" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="161.5">materialize in broadcast.jl:820</text>
-<rect x="531.41" y="135" width="263.85" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="146.5">copy in broadcast.jl:840</text>
-<rect x="531.41" y="120" width="263.85" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="131.5">similar in broadcast.jl:196</text>
-<rect x="531.41" y="105" width="263.85" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="116.5">similar in abstractarray.jl:670</text>
-<rect x="531.41" y="90" width="263.85" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="101.5">similar in abstractarray.jl:671</text>
-<rect x="531.41" y="75" width="263.85" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="86.5">Array in boot.jl:422</text>
-<rect x="531.41" y="60" width="263.85" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="71.5">Array in boot.jl:414</text>
-<rect x="531.41" y="45" width="263.85" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
-<text x="531.41" dx="4" y="56.5">Array in boot.jl:405</text>
-<rect x="795.26" y="180" width="9.42" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="191.5">* in operators.jl:529</text>
-<rect x="795.26" y="165" width="9.42" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="176.5">* in arraymath.jl:52</text>
-<rect x="795.26" y="150" width="9.42" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="161.5">broadcast_preserving_zero_d in broadcast.jl:809</text>
-<rect x="795.26" y="135" width="9.42" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="146.5">materialize in broadcast.jl:820</text>
-<rect x="795.26" y="120" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="131.5">copy in broadcast.jl:840</text>
-<rect x="795.26" y="105" width="9.42" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="116.5">similar in broadcast.jl:196</text>
-<rect x="795.26" y="90" width="9.42" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="101.5">similar in abstractarray.jl:670</text>
-<rect x="795.26" y="75" width="9.42" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="86.5">similar in abstractarray.jl:671</text>
-<rect x="795.26" y="60" width="9.42" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="71.5">Array in boot.jl:422</text>
-<rect x="795.26" y="45" width="9.42" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="56.5">Array in boot.jl:414</text>
-<rect x="795.26" y="30" width="9.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="795.26" dx="4" y="41.5">Array in boot.jl:405</text>
-<rect x="804.68" y="180" width="81.67" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="191.5">Tuple in tuple.jl:230</text>
-<rect x="804.68" y="165" width="81.67" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="176.5">_totuple in tuple.jl:258</text>
-<rect x="804.68" y="150" width="9.42" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="161.5">collect in array.jl:605</text>
-<rect x="804.68" y="135" width="9.42" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="146.5">_collect_indices in array.jl:621</text>
-<rect x="804.68" y="120" width="9.42" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="131.5">Array in boot.jl:422</text>
-<rect x="804.68" y="105" width="9.42" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="116.5">Array in boot.jl:414</text>
-<rect x="804.68" y="90" width="9.42" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
-<text x="804.68" dx="4" y="101.5">Array in boot.jl:405</text>
-<rect x="908.33" y="180" width="15.71" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="908.33" dx="4" y="191.5">normalize in generic.jl:1657</text>
-<rect x="908.33" y="165" width="6.28" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="908.33" dx="4" y="176.5">normalize in generic.jl:1657</text>
-<rect x="908.33" y="150" width="6.28" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="908.33" dx="4" y="161.5">norm in generic.jl:607</text>
-<rect x="908.33" y="135" width="6.28" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="908.33" dx="4" y="146.5">norm2 in dense.jl:105</text>
-<rect x="908.33" y="120" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="908.33" dx="4" y="131.5">generic_norm2 in generic.jl:0</text>
-<rect x="911.47" y="120" width="3.14" height="15" fill="#FFA49C" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="911.47" dx="4" y="131.5">generic_norm2 in generic.jl:478</text>
-<rect x="914.62" y="165" width="6.28" height="15" fill="#A8A200" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="914.62" dx="4" y="176.5">normalize in generic.jl:1659</text>
-<rect x="914.62" y="150" width="6.28" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="914.62" dx="4" y="161.5">copy_oftype in LinearAlgebra.jl:347</text>
-<rect x="914.62" y="135" width="6.28" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="914.62" dx="4" y="146.5">copy in array.jl:352</text>
-<rect x="920.9" y="165" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="920.9" dx="4" y="176.5">normalize in generic.jl:1660</text>
-<rect x="920.9" y="150" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="920.9" dx="4" y="161.5">__normalize! in generic.jl:1615</text>
-<rect x="920.9" y="135" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="920.9" dx="4" y="146.5">rmul! in generic.jl:162</text>
-<rect x="920.9" y="120" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="920.9" dx="4" y="131.5">macro expansion in simdloop.jl:77</text>
-<rect x="920.9" y="105" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="920.9" dx="4" y="116.5">macro expansion in generic.jl:163</text>
-<rect x="920.9" y="90" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="920.9" dx="4" y="101.5">setindex! in array.jl:825</text>
-<rect x="924.04" y="180" width="6.28" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="924.04" dx="4" y="191.5">dot in matmul.jl:9</text>
-<rect x="924.04" y="165" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="924.04" dx="4" y="176.5">dot in blas.jl:330</text>
-<rect x="927.18" y="165" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="927.18" dx="4" y="176.5">dot in blas.jl:335</text>
-<rect x="939.74" y="210" width="15.71" height="15" fill="#FFA49C" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="939.74" dx="4" y="221.5">multi_loop_update! in loop_update.jl:251</text>
-<rect x="939.74" y="195" width="3.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
-<text x="939.74" dx="4" y="206.5">compute_dE_loop in array.jl:0</text>
-<rect x="942.88" y="195" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="942.88" dx="4" y="206.5">compute_dE_loop in loop_update.jl:181</text>
-<rect x="942.88" y="180" width="3.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
-<text x="942.88" dx="4" y="191.5">getindex in multidimensional.jl:543</text>
-<rect x="942.88" y="165" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="942.88" dx="4" y="176.5">getindex in array.jl:787</text>
-<rect x="946.03" y="195" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="946.03" dx="4" y="206.5">compute_dE_loop in loop_update.jl:182</text>
-<rect x="946.03" y="180" width="3.14" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="191.5">getindex in multidimensional.jl:543</text>
-<rect x="946.03" y="165" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="176.5">to_indices in multidimensional.jl:689</text>
-<rect x="946.03" y="150" width="3.14" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="161.5">to_indices in indices.jl:325</text>
-<rect x="946.03" y="135" width="3.14" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="146.5">to_index in indices.jl:274</text>
-<rect x="946.03" y="120" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="131.5">to_index in indices.jl:289</text>
-<rect x="946.03" y="105" width="3.14" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="116.5">convert in number.jl:7</text>
-<rect x="946.03" y="90" width="3.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="101.5">Int64 in boot.jl:707</text>
-<rect x="946.03" y="75" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
-<text x="946.03" dx="4" y="86.5">toInt64 in boot.jl:631</text>
-<rect x="949.17" y="195" width="3.14" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="949.17" dx="4" y="206.5">compute_dE_loop in loop_update.jl:188</text>
-<rect x="949.17" y="180" width="3.14" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
-<text x="949.17" dx="4" y="191.5">- in float.jl:403</text>
-<rect x="952.31" y="195" width="3.14" height="15" fill="#A8A200" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
-<text x="952.31" dx="4" y="206.5">compute_dE_loop in loop_update.jl:192</text>
-<rect x="952.31" y="180" width="3.14" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
-<text x="952.31" dx="4" y="191.5">- in float.jl:403</text>
-<rect x="961.73" y="285" width="6.28" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
-<text x="961.73" dx="4" y="296.5">dot in generic.jl:862</text>
+<rect x="10" y="285" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="10" dx="4" y="296.5">copyto! in array.jl:319</text>
+<rect x="13.36" y="285" width="943.08" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="13.36" dx="4" y="296.5">_start in client.jl:484</text>
+<rect x="13.36" y="270" width="943.08" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="13.36" dx="4" y="281.5">exec_options in client.jl:288</text>
+<rect x="13.36" y="255" width="943.08" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="13.36" dx="4" y="266.5">include in Base.jl:377</text>
+<rect x="13.36" y="240" width="943.08" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="13.36" dx="4" y="251.5">profile_loop_update in profile_loop_update.jl:128</text>
+<rect x="13.36" y="225" width="943.08" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/"/>
+<text x="13.36" dx="4" y="236.5">macro expansion in Profile.jl:28</text>
+<rect x="13.36" y="210" width="10.07" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="13.36" dx="4" y="221.5">multi_loop_update! in loop_update.jl:228</text>
+<rect x="20.07" y="195" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="20.07" dx="4" y="206.5">zeros in array.jl:500</text>
+<rect x="20.07" y="180" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="20.07" dx="4" y="191.5">zeros in array.jl:504</text>
+<rect x="20.07" y="165" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="20.07" dx="4" y="176.5">Array in baseext.jl:25</text>
+<rect x="20.07" y="150" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="20.07" dx="4" y="161.5">Array in boot.jl:414</text>
+<rect x="20.07" y="135" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="20.07" dx="4" y="146.5">Array in boot.jl:405</text>
+<rect x="23.42" y="210" width="6.71" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="23.42" dx="4" y="221.5">multi_loop_update! in loop_update.jl:233</text>
+<rect x="23.42" y="195" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="23.42" dx="4" y="206.5">getindex in array.jl:795</text>
+<rect x="23.42" y="180" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="23.42" dx="4" y="191.5">similar in array.jl:360</text>
+<rect x="23.42" y="165" width="3.36" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="23.42" dx="4" y="176.5">Array in boot.jl:405</text>
+<rect x="30.14" y="210" width="439.66" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="30.14" dx="4" y="221.5">multi_loop_update! in loop_update.jl:235</text>
+<rect x="30.14" y="195" width="439.66" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="30.14" dx="4" y="206.5">find_loop in loop_update.jl:35</text>
+<rect x="30.14" y="180" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="30.14" dx="4" y="191.5">find_loop in loop_update.jl:0</text>
+<rect x="33.49" y="180" width="3.36" height="15" fill="#00DEE6" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="33.49" dx="4" y="191.5">find_loop in loop_update.jl:35</text>
+<rect x="36.85" y="180" width="6.71" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="36.85" dx="4" y="191.5">find_loop in loop_update.jl:48</text>
+<rect x="43.56" y="180" width="3.36" height="15" fill="#FFA49C" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="43.56" dx="4" y="191.5">find_loop in loop_update.jl:65</text>
+<rect x="43.56" y="165" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="43.56" dx="4" y="176.5">getproperty in Base.jl:0</text>
+<rect x="46.92" y="180" width="13.42" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="46.92" dx="4" y="191.5">find_loop in loop_update.jl:68</text>
+<rect x="60.34" y="180" width="93.97" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="60.34" dx="4" y="191.5">find_loop in loop_update.jl:80</text>
+<rect x="114.04" y="165" width="13.42" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="114.04" dx="4" y="176.5">getindex in multidimensional.jl:543</text>
+<rect x="114.04" y="150" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="114.04" dx="4" y="161.5">getindex in array.jl:787</text>
+<rect x="117.4" y="150" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="117.4" dx="4" y="161.5">getindex in multidimensional.jl:543</text>
+<rect x="130.82" y="165" width="3.36" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="130.82" dx="4" y="176.5">dot in generic.jl:871</text>
+<rect x="130.82" y="150" width="3.36" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="130.82" dx="4" y="161.5">iterate in tuple.jl:61</text>
+<rect x="154.32" y="180" width="36.92" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="154.32" dx="4" y="191.5">find_loop in loop_update.jl:83</text>
+<rect x="154.32" y="165" width="10.07" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="154.32" dx="4" y="176.5">getindex in tuple.jl:24</text>
+<rect x="171.1" y="165" width="10.07" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="171.1" dx="4" y="176.5">getindex in array.jl:795</text>
+<rect x="171.1" y="150" width="10.07" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="171.1" dx="4" y="161.5">similar in array.jl:360</text>
+<rect x="171.1" y="135" width="10.07" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="171.1" dx="4" y="146.5">Array in boot.jl:405</text>
+<rect x="181.16" y="165" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="181.16" dx="4" y="176.5">findmax in reducedim.jl:817</text>
+<rect x="181.16" y="150" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="181.16" dx="4" y="161.5">#findmax#610 in reducedim.jl:817</text>
+<rect x="181.16" y="135" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="181.16" dx="4" y="146.5">_findmax in array.jl:2121</text>
+<rect x="181.16" y="120" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="181.16" dx="4" y="131.5">!= in float.jl:456</text>
+<rect x="191.23" y="180" width="36.92" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="191.23" dx="4" y="191.5">find_loop in loop_update.jl:84</text>
+<rect x="204.66" y="165" width="20.14" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="204.66" dx="4" y="176.5">getindex in array.jl:795</text>
+<rect x="204.66" y="150" width="20.14" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="204.66" dx="4" y="161.5">similar in array.jl:360</text>
+<rect x="204.66" y="135" width="20.14" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="204.66" dx="4" y="146.5">Array in boot.jl:405</text>
+<rect x="228.15" y="180" width="26.85" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="228.15" dx="4" y="191.5">find_loop in loop_update.jl:87</text>
+<rect x="255" y="180" width="167.81" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="255" dx="4" y="191.5">find_loop in loop_update.jl:90</text>
+<rect x="255" y="165" width="20.14" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
+<text x="255" dx="4" y="176.5">materialize in broadcast.jl:820</text>
+<rect x="345.62" y="165" width="70.48" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="345.62" dx="4" y="176.5">broadcasted in broadcast.jl:1238</text>
+<rect x="345.62" y="150" width="67.12" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
+<text x="345.62" dx="4" y="161.5">broadcasted in broadcast.jl:1240</text>
+<rect x="422.81" y="180" width="10.07" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="422.81" dx="4" y="191.5">find_loop in loop_update.jl:94</text>
+<rect x="432.88" y="180" width="23.49" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="432.88" dx="4" y="191.5">find_loop in loop_update.jl:102</text>
+<rect x="469.79" y="210" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="469.79" dx="4" y="221.5">multi_loop_update! in loop_update.jl:249</text>
+<rect x="469.79" y="195" width="3.36" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="469.79" dx="4" y="206.5">copy in array.jl:352</text>
+<rect x="473.15" y="210" width="463.15" height="15" fill="#00DEE6" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="473.15" dx="4" y="221.5">multi_loop_update! in loop_update.jl:250</text>
+<rect x="473.15" y="195" width="275.21" height="15" fill="#CDB9FF" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="473.15" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:136</text>
+<rect x="473.15" y="180" width="10.07" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="191.5">collect in array.jl:603</text>
+<rect x="473.15" y="165" width="10.07" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="176.5">_collect in array.jl:609</text>
+<rect x="473.15" y="150" width="10.07" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="161.5">_similar_for in array.jl:576</text>
+<rect x="473.15" y="135" width="10.07" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="146.5">similar in abstractarray.jl:628</text>
+<rect x="473.15" y="120" width="10.07" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="131.5">similar in abstractarray.jl:636</text>
+<rect x="473.15" y="105" width="10.07" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="116.5">Array in boot.jl:414</text>
+<rect x="473.15" y="90" width="10.07" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="473.15" dx="4" y="101.5">Array in boot.jl:405</text>
+<rect x="483.22" y="180" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="483.22" dx="4" y="191.5">getindex in array.jl:787</text>
+<rect x="486.58" y="180" width="258.42" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="191.5">* in arraymath.jl:52</text>
+<rect x="486.58" y="165" width="258.42" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="176.5">broadcast_preserving_zero_d in broadcast.jl:809</text>
+<rect x="486.58" y="150" width="258.42" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="161.5">materialize in broadcast.jl:820</text>
+<rect x="486.58" y="135" width="258.42" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="146.5">copy in broadcast.jl:840</text>
+<rect x="486.58" y="120" width="258.42" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="131.5">similar in broadcast.jl:196</text>
+<rect x="486.58" y="105" width="258.42" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="116.5">similar in abstractarray.jl:670</text>
+<rect x="486.58" y="90" width="258.42" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="101.5">similar in abstractarray.jl:671</text>
+<rect x="486.58" y="75" width="258.42" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="86.5">Array in boot.jl:422</text>
+<rect x="486.58" y="60" width="258.42" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="71.5">Array in boot.jl:414</text>
+<rect x="486.58" y="45" width="258.42" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="486.58" dx="4" y="56.5">Array in boot.jl:405</text>
+<rect x="745" y="180" width="3.36" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="745" dx="4" y="191.5">getindex in multidimensional.jl:543</text>
+<rect x="745" y="165" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="745" dx="4" y="176.5">getindex in array.jl:787</text>
+<rect x="748.36" y="195" width="3.36" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="748.36" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:140</text>
+<rect x="748.36" y="180" width="3.36" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="191.5">collect in array.jl:603</text>
+<rect x="748.36" y="165" width="3.36" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="176.5">_collect in array.jl:609</text>
+<rect x="748.36" y="150" width="3.36" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="161.5">_similar_for in array.jl:576</text>
+<rect x="748.36" y="135" width="3.36" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="146.5">similar in abstractarray.jl:628</text>
+<rect x="748.36" y="120" width="3.36" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="131.5">similar in abstractarray.jl:636</text>
+<rect x="748.36" y="105" width="3.36" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="116.5">Array in boot.jl:414</text>
+<rect x="748.36" y="90" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="748.36" dx="4" y="101.5">Array in boot.jl:405</text>
+<rect x="751.71" y="195" width="10.07" height="15" fill="#FF5F82" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="751.71" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:148</text>
+<rect x="751.71" y="180" width="10.07" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="191.5">collect in array.jl:603</text>
+<rect x="751.71" y="165" width="10.07" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="176.5">_collect in array.jl:609</text>
+<rect x="751.71" y="150" width="10.07" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="161.5">_similar_for in array.jl:576</text>
+<rect x="751.71" y="135" width="10.07" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="146.5">similar in abstractarray.jl:628</text>
+<rect x="751.71" y="120" width="10.07" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="131.5">similar in abstractarray.jl:636</text>
+<rect x="751.71" y="105" width="10.07" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="116.5">Array in boot.jl:414</text>
+<rect x="751.71" y="90" width="10.07" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="751.71" dx="4" y="101.5">Array in boot.jl:405</text>
+<rect x="761.78" y="195" width="174.52" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="761.78" dx="4" y="206.5">reflect_spins_on_loop! in loop_update.jl:149</text>
+<rect x="761.78" y="180" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="761.78" dx="4" y="191.5">- in arraymath.jl:38</text>
+<rect x="765.14" y="180" width="20.14" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="191.5">- in arraymath.jl:39</text>
+<rect x="765.14" y="165" width="16.78" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="176.5">broadcast_preserving_zero_d in broadcast.jl:809</text>
+<rect x="765.14" y="150" width="16.78" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="161.5">materialize in broadcast.jl:820</text>
+<rect x="765.14" y="135" width="16.78" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="146.5">copy in broadcast.jl:840</text>
+<rect x="765.14" y="120" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="131.5">copyto! in broadcast.jl:864</text>
+<rect x="765.14" y="105" width="3.36" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="116.5">copyto! in broadcast.jl:908</text>
+<rect x="765.14" y="90" width="3.36" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="101.5">preprocess in broadcast.jl:891</text>
+<rect x="765.14" y="75" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="86.5">preprocess_args in broadcast.jl:894</text>
+<rect x="765.14" y="60" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="71.5">preprocess in broadcast.jl:892</text>
+<rect x="765.14" y="45" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="765.14" dx="4" y="56.5">broadcast_unalias in broadcast.jl:885</text>
+<rect x="768.49" y="120" width="13.42" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="768.49" dx="4" y="131.5">similar in broadcast.jl:196</text>
+<rect x="768.49" y="105" width="13.42" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="768.49" dx="4" y="116.5">similar in abstractarray.jl:670</text>
+<rect x="768.49" y="90" width="13.42" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="768.49" dx="4" y="101.5">similar in abstractarray.jl:671</text>
+<rect x="768.49" y="75" width="13.42" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="768.49" dx="4" y="86.5">Array in boot.jl:422</text>
+<rect x="768.49" y="60" width="13.42" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="768.49" dx="4" y="71.5">Array in boot.jl:414</text>
+<rect x="768.49" y="45" width="13.42" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="768.49" dx="4" y="56.5">Array in boot.jl:405</text>
+<rect x="781.92" y="165" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="176.5">broadcast_preserving_zero_d in broadcast.jl:810</text>
+<rect x="781.92" y="150" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="161.5">axes in broadcast.jl:206</text>
+<rect x="781.92" y="135" width="3.36" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="146.5">_axes in broadcast.jl:208</text>
+<rect x="781.92" y="120" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="131.5">combine_axes in broadcast.jl:473</text>
+<rect x="781.92" y="105" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="116.5">combine_axes in broadcast.jl:474</text>
+<rect x="781.92" y="90" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="101.5">axes in abstractarray.jl:75</text>
+<rect x="781.92" y="75" width="3.36" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="86.5">map in tuple.jl:157</text>
+<rect x="781.92" y="60" width="3.36" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="71.5">OneTo in range.jl:320</text>
+<rect x="781.92" y="45" width="3.36" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="56.5">OneTo in range.jl:311</text>
+<rect x="781.92" y="30" width="3.36" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="781.92" dx="4" y="41.5">max in promotion.jl:409</text>
+<rect x="785.27" y="180" width="6.71" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="191.5">* in operators.jl:529</text>
+<rect x="785.27" y="165" width="6.71" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="176.5">* in arraymath.jl:52</text>
+<rect x="785.27" y="150" width="6.71" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="161.5">broadcast_preserving_zero_d in broadcast.jl:809</text>
+<rect x="785.27" y="135" width="6.71" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="146.5">materialize in broadcast.jl:820</text>
+<rect x="785.27" y="120" width="6.71" height="15" fill="#00DEE6" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="131.5">copy in broadcast.jl:840</text>
+<rect x="785.27" y="105" width="6.71" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="116.5">similar in broadcast.jl:196</text>
+<rect x="785.27" y="90" width="6.71" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="101.5">similar in abstractarray.jl:670</text>
+<rect x="785.27" y="75" width="6.71" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="86.5">similar in abstractarray.jl:671</text>
+<rect x="785.27" y="60" width="6.71" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="71.5">Array in boot.jl:422</text>
+<rect x="785.27" y="45" width="6.71" height="15" fill="#CDB9FF" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="56.5">Array in boot.jl:414</text>
+<rect x="785.27" y="30" width="6.71" height="15" fill="#32B44E" rx="2" data-dinfo="./"/>
+<text x="785.27" dx="4" y="41.5">Array in boot.jl:405</text>
+<rect x="791.99" y="180" width="107.4" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="791.99" dx="4" y="191.5">Tuple in tuple.jl:230</text>
+<rect x="791.99" y="165" width="107.4" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
+<text x="791.99" dx="4" y="176.5">_totuple in tuple.jl:258</text>
+<rect x="791.99" y="150" width="10.07" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="791.99" dx="4" y="161.5">collect in array.jl:605</text>
+<rect x="791.99" y="135" width="10.07" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="791.99" dx="4" y="146.5">_collect_indices in array.jl:621</text>
+<rect x="791.99" y="120" width="3.36" height="15" fill="#FFA49C" rx="2" data-dinfo="./"/>
+<text x="791.99" dx="4" y="131.5">copyto! in array.jl:330</text>
+<rect x="791.99" y="105" width="3.36" height="15" fill="#00E5B2" rx="2" data-dinfo="./"/>
+<text x="791.99" dx="4" y="116.5">copyto! in array.jl:313</text>
+<rect x="795.34" y="120" width="6.71" height="15" fill="#E870DD" rx="2" data-dinfo="./"/>
+<text x="795.34" dx="4" y="131.5">Array in boot.jl:422</text>
+<rect x="795.34" y="105" width="6.71" height="15" fill="#FF5F82" rx="2" data-dinfo="./"/>
+<text x="795.34" dx="4" y="116.5">Array in boot.jl:414</text>
+<rect x="795.34" y="90" width="6.71" height="15" fill="#FFA500" rx="2" data-dinfo="./"/>
+<text x="795.34" dx="4" y="101.5">Array in boot.jl:405</text>
+<rect x="909.45" y="180" width="20.14" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="191.5">normalize in generic.jl:1657</text>
+<rect x="909.45" y="165" width="10.07" height="15" fill="#CDB9FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="176.5">normalize in generic.jl:1657</text>
+<rect x="909.45" y="150" width="6.71" height="15" fill="#E870DD" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="161.5">norm in generic.jl:607</text>
+<rect x="909.45" y="135" width="6.71" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="146.5">norm2 in dense.jl:105</text>
+<rect x="909.45" y="120" width="3.36" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="131.5">generic_norm2 in generic.jl:477</text>
+<rect x="909.45" y="105" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="116.5">normInf in generic.jl:536</text>
+<rect x="909.45" y="90" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="909.45" dx="4" y="101.5">generic_normInf in generic.jl:452</text>
+<rect x="912.81" y="120" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="912.81" dx="4" y="131.5">generic_norm2 in generic.jl:481</text>
+<rect x="919.52" y="165" width="10.07" height="15" fill="#00E5B2" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="919.52" dx="4" y="176.5">normalize in generic.jl:1659</text>
+<rect x="919.52" y="150" width="10.07" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="919.52" dx="4" y="161.5">copy_oftype in LinearAlgebra.jl:347</text>
+<rect x="919.52" y="135" width="10.07" height="15" fill="#A8A200" rx="2" data-dinfo="./"/>
+<text x="919.52" dx="4" y="146.5">copy in array.jl:352</text>
+<rect x="929.59" y="180" width="6.71" height="15" fill="#32B44E" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="929.59" dx="4" y="191.5">dot in matmul.jl:9</text>
+<rect x="932.95" y="165" width="3.36" height="15" fill="#FF5F82" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="932.95" dx="4" y="176.5">dot in blas.jl:330</text>
+<rect x="936.3" y="210" width="20.14" height="15" fill="#FF0000" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="936.3" dx="4" y="221.5">multi_loop_update! in loop_update.jl:251</text>
+<rect x="939.66" y="195" width="6.71" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="939.66" dx="4" y="206.5">compute_dE_loop in array.jl:0</text>
+<rect x="946.37" y="195" width="6.71" height="15" fill="#A8A200" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="946.37" dx="4" y="206.5">compute_dE_loop in loop_update.jl:177</text>
+<rect x="946.37" y="180" width="6.71" height="15" fill="#FF0000" rx="2" data-dinfo="./"/>
+<text x="946.37" dx="4" y="191.5">getindex in multidimensional.jl:543</text>
+<rect x="949.73" y="165" width="3.36" height="15" fill="#9E9E9E" rx="2" data-dinfo="./"/>
+<text x="949.73" dx="4" y="176.5">getindex in array.jl:787</text>
+<rect x="953.08" y="195" width="3.36" height="15" fill="#CDB9FF" rx="2" data-dinfo="/Users/hiroshi/git/lecture/julia/"/>
+<text x="953.08" dx="4" y="206.5">compute_dE_loop in loop_update.jl:189</text>
+<rect x="953.08" y="180" width="3.36" height="15" fill="#1AA2FF" rx="2" data-dinfo="./"/>
+<text x="953.08" dx="4" y="191.5">+ in float.jl:401</text>
+<rect x="959.79" y="285" width="3.36" height="15" fill="#CDB9FF" rx="2" data-dinfo="/Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/LinearAlgebra/src/"/>
+<text x="959.79" dx="4" y="296.5">dot in generic.jl:856</text>
 </g></g>
 <script><![CDATA[
 // Snap.svg 0.3.0
@@ -724,10 +638,10 @@ f+=g+"]",i[b]=f}return Function("val","return Snap.path.toString.call(["+i+"])")
 <script><![CDATA[
 if (typeof require === 'function' && define.amd) {
     require(['ProfileSVG'], function (ProfileSVG) {
-        ProfileSVG.initialize("fig-320a0b6030eb4d1093f6d1c79802ebd6");
+        ProfileSVG.initialize("fig-dbfeb28a44084cafb043350898e425e7");
     });
 } else {
-    ProfileSVG.initialize("fig-320a0b6030eb4d1093f6d1c79802ebd6");
+    ProfileSVG.initialize("fig-dbfeb28a44084cafb043350898e425e7");
 }
 ]]></script>
 </svg>
