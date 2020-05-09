@@ -2,18 +2,18 @@ using MPI
 
 mutable struct ReplicaExchange{T}
     # All temperatures
-    temps::Array{Float64}
+    temps::Vector{Float64}
     num_attemps::UInt64
-    num_accepted::Array{UInt64}
+    num_accepted::Vector{UInt64}
     start_idx::UInt64
     end_idx::UInt64
-    #recv_buffer::Array{T}
-    recv_buffer::Array{Float64}
-    send_buffer::Array{Float64}
+    #recv_buffer::Vector{T}
+    recv_buffer::Vector{Float64}
+    send_buffer::Vector{Float64}
     BufferType::Type
 end
 
-function ReplicaExchange{T}(temps_init::Array{Float64}, start_idx, end_idx, num_spins) where T
+function ReplicaExchange{T}(temps_init::Vector{Float64}, start_idx, end_idx, num_spins) where T
     num_temps = length(temps_init)
     num_temps_local = end_idx - start_idx + 1
     if !all(temps_init[1:num_temps-1] .< temps_init[2:num_temps]) && !all(temps_init[1:num_temps-1] .> temps_init[2:num_temps])
@@ -24,14 +24,14 @@ function ReplicaExchange{T}(temps_init::Array{Float64}, start_idx, end_idx, num_
     end
     ReplicaExchange{T}(copy(temps_init), 0, zeros(UInt64, num_temps_local),
         start_idx, end_idx,
-        #Array{T}(undef, num_spins),
-        collect(reinterpret(Float64, Array{T}(undef, num_spins))),
-        collect(reinterpret(Float64, Array{T}(undef, num_spins))),
+        #Vector{T}(undef, num_spins),
+        collect(reinterpret(Float64, Vector{T}(undef, num_spins))),
+        collect(reinterpret(Float64, Vector{T}(undef, num_spins))),
         Float64
     )
 end
 
-function swap_configs(energy_local::Array{Float64}, config_local::Array{Array{T,1},1}, i, j) where T
+function swap_configs(energy_local::Vector{Float64}, config_local::Vector{Vector{T}}, i, j) where T
     energy_local[i], energy_local[j] = energy_local[j], energy_local[i]
     for idx in 1:length(config_local[i])
         config_local[i][idx], config_local[j][idx] = config_local[j][idx], config_local[i][idx]

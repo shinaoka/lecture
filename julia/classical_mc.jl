@@ -19,7 +19,7 @@ using Profile
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
-    temps = Array{Float64}(undef, 0)
+    temps = Vector{Float64}(undef, 0)
     num_temps = 0
     open(temperature_file) do file
         num_temps = parse(Int64, readline(file))
@@ -51,7 +51,7 @@ end
 
 # Read non-zero elements in the right-upper triangle part of Jij
 function read_Jij(Jij_file::String,num_spins::Int64)
-    Jij = Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}(undef, 0)
+    Jij = Vector{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}(undef, 0)
     open(Jij_file, "r" ) do fp
         
         @assert num_spins == parse(Int64, readline(fp)) "!match num_spins. See 2d.ini and head of Jij.txt"
@@ -111,7 +111,7 @@ function write_spin_config(file_name::String,spins)
 end
          
 
-function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_temps::Int64)
+function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},num_temps::Int64)
     
     mx = zeros(Float64, num_temps)
     my = zeros(Float64, num_temps)
@@ -142,7 +142,7 @@ function compute_magnetization(acc::Accumulator,num_spins::Int64,spins::Array{Ar
  
 end
 
-function latest_spin_direction(acc::Accumulator,spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+function latest_spin_direction(acc::Accumulator,spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},num_spins::Int64,num_temps::Int64)
     
     spins_x = [[spins[i][j][1] for j in 1:num_spins] for i in 1:num_temps]
     spins_y = [[spins[i][j][2] for j in 1:num_spins] for i in 1:num_temps]
@@ -181,8 +181,8 @@ function make_kagome(num_spins)
     return unit_cell_position
 end
 
-function order_parameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},
-                         num_spins::Int64, num_temps::Int64, q::Tuple{Float64,Float64}, unit_cell::Array{Tuple{Float64,Float64}})
+function order_parameter(spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},
+                         num_spins::Int64, num_temps::Int64, q::Tuple{Float64,Float64}, unit_cell::Vector{Tuple{Float64,Float64}})
     
     #unit_cell = make_kagome(num_spins) 
 
@@ -246,7 +246,7 @@ function octopolar_v2(spins,num_spins::Int64,num_temps::Int64)
     return T
 end
 
-function octopolar_orderparameter(spins::Array{Array{Tuple{Float64,Float64,Float64},1},1},num_spins::Int64,num_temps::Int64)
+function octopolar_orderparameter(spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},num_spins::Int64,num_temps::Int64)
     
     op = zeros(num_temps)
      
@@ -436,7 +436,7 @@ function solve(input_file::String, comm)
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
         if sweep > num_therm_sweeps
-            add!(acc_proc, "CPUtime", [Array{Float64}(elpsCPUtime)])
+            add!(acc_proc, "CPUtime", [Vector{Float64}(elpsCPUtime)])
         end
     end        
 

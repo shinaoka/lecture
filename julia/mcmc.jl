@@ -13,14 +13,14 @@ export JModel, SingleSpinFlipUpdater
 struct JModel
     # List of non-zero entries of Jij
     num_spins::Int
-    Jij::Array{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}
+    Jij::Vector{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}
 end
 
-function compute_energy(model::JModel, spins::AbstractArray{IsingSpin})
+function compute_energy(model::JModel, spins::AbstractVector{IsingSpin})
     return -sum([intr[3] * spins[intr[1]] * spins[intr[2]] for intr in model.Jij])
 end
 
-function compute_energy(model::JModel, spins::AbstractArray{HeisenbergSpin})
+function compute_energy(model::JModel, spins::AbstractVector{HeisenbergSpin})
 
     energy = 0.0
 
@@ -62,14 +62,14 @@ end
 
 struct SingleSpinFlipUpdater
     num_spins::Int
-    coord_num::Array{UInt16}
-    connection::Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64},2}
+    coord_num::Vector{UInt16}
+    connection::Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}
 
-    connected_sites::Array{SpinIndex,2}
-    is_NN::Array{Bool,2}
+    connected_sites::Matrix{SpinIndex}
+    is_NN::Matrix{Bool}
 
-    nn_coord_num::Array{UInt16}
-    nn_sites::Array{SpinIndex,2}
+    nn_coord_num::Vector{UInt16}
+    nn_sites::Matrix{SpinIndex}
 end
 
 function SingleSpinFlipUpdater(model::JModel)
@@ -94,10 +94,10 @@ function SingleSpinFlipUpdater(model::JModel)
     end
     max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
-    connection = Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
-    coord_num = Array{UInt16}(undef, num_spins)
-    connected_sites = Array{SpinIndex,2}(undef, (max_coord_num, num_spins))
-    is_NN = Array{Bool,2}(undef, (max_coord_num, num_spins))
+    connection = Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
+    coord_num = Vector{UInt16}(undef, num_spins)
+    connected_sites = Matrix{SpinIndex}(undef, (max_coord_num, num_spins))
+    is_NN = Matrix{Bool}(undef, (max_coord_num, num_spins))
     for ispin = 1:num_spins
         coord_num[ispin] = length(connection_tmp[ispin])
         connection[1:coord_num[ispin], ispin] = collect(connection_tmp[ispin])
@@ -109,7 +109,7 @@ function SingleSpinFlipUpdater(model::JModel)
 
     nn_coord_num = zeros(UInt16, num_spins)
     max_nn_coord_num = maximum([length(nn_connection_tmp[ispin]) for ispin in 1:num_spins])
-    nn_sites = Array{SpinIndex,2}(undef, (max_nn_coord_num, num_spins))
+    nn_sites = Matrix{SpinIndex}(undef, (max_nn_coord_num, num_spins))
     for ispin = 1:num_spins
         nn_coord_num[ispin] = length(nn_connection_tmp[ispin])
         for (ic, val) in enumerate(nn_connection_tmp[ispin])
@@ -122,7 +122,7 @@ function SingleSpinFlipUpdater(model::JModel)
 end
 
 
-function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{IsingSpin})
+function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{IsingSpin})
     dE::Float64 = 0
     for ispin in 1:model.num_spins
         si_old = spins[ispin]
@@ -149,7 +149,7 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
     return dE
 end
 
-function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin})
+function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{HeisenbergSpin})
     dE::Float64 = 0
     num_acc = 0
     for ispin in 1:model.num_spins
@@ -185,7 +185,7 @@ end
 
 
 
-function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractArray{HeisenbergSpin}, xy::Bool=false)
+function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{HeisenbergSpin}, xy::Bool=false)
     dE::Float64 = 0
     sigma_g     = sqrt(beta^-1)
     num_acc = 0
