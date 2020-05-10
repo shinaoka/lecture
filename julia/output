@@ -1,2 +1,17 @@
-2020年 5月 4日 月曜日 23時11分17秒 JST
-2020年 5月 4日 月曜日 23時11分30秒 JST
+Sun May 10 14:20:24 JST 2020
+num of temperatures = 1
+Starting simulation...
+
+<E> <E^2> <C>
+1.0000000000000004e-6  -26.999969436914633 728.9983495943243 0.0
+
+single_spin_flip_acc: [0.407407]
+Acceptant rate of loop update: 
+1.0000000000000004e-6 0.0 0.0
+num of nn_sites of 18th site: 4
+<CPUtime> 
+ rank=0 : [194970.0, 447932.0, 0.0, 141978.0]
+
+Statistics of replica exchange Monte Carlo
+  7.501775 seconds (20.69 M allocations: 1.005 GiB, 6.64% gc time)
+Sun May 10 14:20:39 JST 2020

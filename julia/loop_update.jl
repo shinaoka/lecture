@@ -12,9 +12,9 @@ struct LoopUpdater{T}
 end
 
 function LoopUpdater{T}(num_spins::Int64, max_loop_length::Int64) where T
-    work   = zeros(Int,num_spins)
-    spins_on_loop  = zeros(Int, max_loop_length)
-    new_spins  = Vector{T}(undef, max_loop_length)
+    work          = zeros(Int,num_spins)
+    spins_on_loop = zeros(Int, max_loop_length)
+    new_spins     = Vector{T}(undef, max_loop_length)
     return LoopUpdater{T}(num_spins,work, spins_on_loop, new_spins)
 end
 
@@ -220,7 +220,10 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
     num_accept     = 0
     num_loop_found = 0
  
-
+    # temp vairable for check detailed balance condition(dbc).
+    num_accept_dbc     = 0
+    num_loop_found_dbc = 0
+ 
     for i=1:num_trial
       
         t1_s = time_ns()
@@ -239,6 +242,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             continue
         end
         num_loop_found += 1
+        num_loop_found_dbc += 1
 
         t1_e = time_ns()
         #if verbose
@@ -255,6 +259,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         if temp_r < exp(-beta*dE_loop)
             spins[spins_idx_on_loop[1:loop_length]] = new_spins_on_loop[1:loop_length]
             num_accept += 1
+            num_accept_dbc += 1
         else
             continue
         end
@@ -286,20 +291,16 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             #println("find_loop_inv: $(1/beta) $(t3_e - t3_s)")
         #end
 
-        #println("DEBUG D: ",loop_length)
-
-        #for i in 1:loop_length
-            #sx,sy,sz = spins[spins_idx_on_loop[i]]
-            #println("DEBUG E: ",sx," ",sy," ",sz)
-        #end
-
         dE += dE_loop
         
     end
-
-    #if verbose
-       #println("multi_loop: $(1/beta) $(timing)")
-    #end
+    
+    if verbose
+        println("DEBUG A : $(num_loop_found_dbc/num_trial)")
+        println("DEBUG A': $(num_loop_found/num_trial)")
+        println("DEBUG B : $(num_accept_dbc/num_trial)")
+        println("DEBUG B': $(num_accept/num_trial)")
+    end
     
     #if num_accept != 0
         #println("DEBUG F: ", num_accept)

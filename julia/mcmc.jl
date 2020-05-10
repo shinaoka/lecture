@@ -63,21 +63,13 @@ end
 struct SingleSpinFlipUpdater
     num_spins::Int
     coord_num::Vector{UInt16}
-<<<<<<< HEAD
-    connection::Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64},2}
-=======
     connection::Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}
->>>>>>> 7ad036bf3dc659f13a20b7c3cc0b4db85103eb37
 
     connected_sites::Matrix{SpinIndex}
     is_NN::Matrix{Bool}
 
     nn_coord_num::Vector{UInt16}
-<<<<<<< HEAD
-    nn_sites::Array{SpinIndex,2}
-=======
     nn_sites::Matrix{SpinIndex}
->>>>>>> 7ad036bf3dc659f13a20b7c3cc0b4db85103eb37
 end
 
 function SingleSpinFlipUpdater(model::JModel)
@@ -102,17 +94,10 @@ function SingleSpinFlipUpdater(model::JModel)
     end
     max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
 
-<<<<<<< HEAD
-    connection = Array{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
-    coord_num = Vector{UInt16}(undef, num_spins)
-    connected_sites = Array{SpinIndex,2}(undef, (max_coord_num, num_spins))
-    is_NN = Array{Bool,2}(undef, (max_coord_num, num_spins))
-=======
     connection = Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
     coord_num = Vector{UInt16}(undef, num_spins)
     connected_sites = Matrix{SpinIndex}(undef, (max_coord_num, num_spins))
     is_NN = Matrix{Bool}(undef, (max_coord_num, num_spins))
->>>>>>> 7ad036bf3dc659f13a20b7c3cc0b4db85103eb37
     for ispin = 1:num_spins
         coord_num[ispin] = length(connection_tmp[ispin])
         connection[1:coord_num[ispin], ispin] = collect(connection_tmp[ispin])
@@ -203,8 +188,8 @@ end
 function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{HeisenbergSpin}, xy::Bool=false)
     dE::Float64 = 0
     sigma_g     = sqrt(beta^-1)
-    num_acc = 0
-    coeff_z = xy ? 0.0 : 1.0
+    num_acc     = 0
+    coeff_z     = xy ? 0.0 : 1.0
     for ispin in 1:model.num_spins
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)

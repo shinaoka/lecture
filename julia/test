@@ -4405,3 +4405,95 @@ begin
 └ @ Profile /Users/julia/buildbot/worker/package_macos64/build/usr/share/julia/stdlib/v1.4/Profile/src/Profile.jl:851
 end
 2020年 5月 4日 月曜日 20時14分55秒 JST
+ERROR: LoadError: LoadError: UndefVarError: @add_arg_table! not defined
+Stacktrace:
+ [1] top-level scope
+ [2] include at ./boot.jl:326 [inlined]
+ [3] include_relative(::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /home/kakizawa/lecture/julia/main.jl:8
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8343: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sun May 10 14:19:04 2020
+Results reported at Sun May 10 14:19:18 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      4.47 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: LoadError: UndefVarError: @add_arg_table! not defined
+Stacktrace:
+ [1] top-level scope
+ [2] include at ./boot.jl:326 [inlined]
+ [3] include_relative(::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8344: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Sun May 10 14:20:24 2020
+Results reported at Sun May 10 14:20:43 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.40 sec.
+
+The output (if any) follows:
+
