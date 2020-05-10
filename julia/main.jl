@@ -5,7 +5,7 @@ using MPI
 using ArgParse
 
 s = ArgParseSettings()
-@add_arg_table s begin
+@add_arg_table! s begin
     "input"
         help = "input file"
         required = true

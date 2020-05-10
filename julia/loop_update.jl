@@ -205,7 +205,7 @@ end
 function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
                             updater::SingleSpinFlipUpdater,beta::Float64,
                             max_length::Int,
-                            spins::AbstractArray{HeisenbergSpin},
+                            spins::AbstractVector{HeisenbergSpin},
                             verbose::Bool=false)
     
     # No copy
