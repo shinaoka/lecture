@@ -4267,3 +4267,52 @@ the job to be terminated. The first process to do so was:
 --------------------------------------------------------------------------
 end
 2020年 5月 8日 金曜日 14時55分05秒 JST
+begin
+2020年 5月10日 日曜日 15時05分14秒 JST
+ERROR: LoadError: LoadError: No MPI library found.
+Ensure an MPI implementation is loaded, or set the `JULIA_MPI_PATH` variable.
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] find_lib() at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:19
+ [3] top-level scope at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:25
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] include(::String) at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:1
+ [6] top-level scope at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:35
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] top-level scope at none:2
+ [9] eval at ./boot.jl:331 [inlined]
+ [10] eval(::Expr) at ./client.jl:449
+ [11] top-level scope at ./none:3
+in expression starting at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:25
+in expression starting at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:35
+ERROR: LoadError: LoadError: LoadError: Failed to precompile MPI [da04e1cc-30fd-572f-bb4f-1f8673147195] to /Users/humiyakakizawa/.julia/compiled/v1.4/MPI/nO0XF_tbPtl.ji.
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] compilecache(::Base.PkgId, ::String) at ./loading.jl:1272
+ [3] _require(::Base.PkgId) at ./loading.jl:1029
+ [4] require(::Base.PkgId) at ./loading.jl:927
+ [5] require(::Module, ::Symbol) at ./loading.jl:922
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:6
+ [9] include(::String) at ./client.jl:439
+ [10] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [11] include(::Module, ::String) at ./Base.jl:377
+ [12] exec_options(::Base.JLOptions) at ./client.jl:288
+ [13] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:1
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:6
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[32079,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月10日 日曜日 15時05分24秒 JST
