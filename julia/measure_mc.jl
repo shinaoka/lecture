@@ -1,0 +1,61 @@
+# For unit test measurement function moved from classical_mc.jl.
+
+include("mcmc.jl")
+
+# It is important to keep computational cost O(num_spins)
+function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64)
+       
+    m2_af = 0.0
+    
+    for i in 1:Int(num_spins/3)
+        
+    end    
+
+    return m2_af/num_spins
+end
+
+delta(a,b) = ifelse(a==b,1,0) 
+
+function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)
+
+    T_op = zeros(Float64,27)
+    
+    for ispin in 1:num_spins
+        spin = spins[ispin]
+        idx  = 1
+        for (a,b,c) in Iterators.product(1:3,1:3,1:3)
+            
+            T_op[idx] += spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c)+spin[b]*delta(c,a)+spin[c]*delta(a,b))/5
+          
+            idx += 1
+        end
+
+    end
+
+    return sum(T_op.^2) / (num_spins^2)
+end
+
+function octopolar_v2(spins,num_spins::Int64,num_temps::Int64)
+
+    T = zeros(num_temps)
+
+    for i in 1:num_temps
+        temp = zeros(3^3)
+
+        for j in 1:num_spins
+
+            spin = spins[i][j]
+            index = 1
+
+            for (a,b,c) in Iterators.product(1:3,1:3,1:3)
+                temp[index] +=  spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c) + spin[b]*delta(c,a) + spin[c]*delta(a,b))/5
+                index += 1
+            end
+        end
+        T[i] = sum(temp.^2)
+
+    end
+    return T/(num_spins^2)
+end
+
+

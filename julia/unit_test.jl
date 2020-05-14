@@ -1,33 +1,48 @@
 using Test
 
-include("loop_update_tests.jl")
-include("classical_mc.jl")
+#include("classical_mc.jl")
+include("measure_mc.jl")
 
-using ClassicalMC
+#using ClassicalMC
 
 println("unit test results")
 
-# system parameters
-L = 1
+# define test spin configuration
 num_spins = 1
-num_temps = 1
 
-a1 = 2 .* (1.,0.)
-a2 = 2 .* (cos(pi/3),sin(pi/3))
+function x_model(num_spins)
+    
+    return [fill((1.,0.,0.),num_spins)]
+end
 
-spins = [fill((1.,0.,0.),num_spins) for i in 1:num_temps]
+function random_model(num_spins)    
+    spins = fill((0.,0.,0.),num_spins)
+    for i in 1:num_spins
+        spins[i] = Tuple(normalize(rand(3)))
 
-# make random unit vector spin 
-theta = rand()
-phi   = rand()
-x = sin(theta) * cos(phi)
-y = sin(theta) * sin(phi)
-z = cos(theta)
+    end
+   
+    return [spins]
+end
 
-rand_spins = [fill((x,y,z),num_spins) for i in 1:num_temps]
+function test_measurement(spins::Vector{Vector{HeisenbergSpin}})
+    
+    num_spins = length(spins[1])
 
+    # test m2_af
+
+    # test T2_op
+    T2_op = compute_T2_op(spins[1],num_spins)
+    @test isapprox(T2_op,octopolar_v2(spins,num_spins,1)[1])
+
+end
+
+test_measurement(random_model(5))
+
+"""
 #test for computing physical quantities.
 #@test isapprox(make_kagome(num_spins)[1][1],0.) && isapprox(make_kagome(num_spins)[1][2],0.)
 #@test isapprox(order_parameter(spins,num_spins,num_temps,(0.,0.)),[3.0])
 @test isapprox(octopolar_orderparameter(rand_spins,num_spins,num_temps), octopolar_v2(rand_spins,num_spins,num_temps))
+"""
 
