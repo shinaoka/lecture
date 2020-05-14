@@ -1,4 +1,4 @@
-Sun May 10 14:20:24 JST 2020
+Thu May 14 20:04:00 JST 2020
 num of temperatures = 1
 Starting simulation...
 
@@ -8,10 +8,11 @@ Starting simulation...
 single_spin_flip_acc: [0.407407]
 Acceptant rate of loop update: 
 1.0000000000000004e-6 0.0 0.0
-num of nn_sites of 18th site: 4
 <CPUtime> 
- rank=0 : [194970.0, 447932.0, 0.0, 141978.0]
+ rank=0 : [192971.0, 450930.0, 0.0, 92986.0]
+T2_op
+1.0000000000000004e-6 0.249365524359332
 
 Statistics of replica exchange Monte Carlo
-  7.501775 seconds (20.69 M allocations: 1.005 GiB, 6.64% gc time)
-Sun May 10 14:20:39 JST 2020
+  7.487010 seconds (20.82 M allocations: 1.011 GiB, 6.67% gc time)
+Thu May 14 20:04:15 JST 2020

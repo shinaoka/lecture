@@ -4263,6 +4263,7 @@ Resource usage summary:
 
 The output (if any) follows:
 
+<<<<<<< HEAD
 >>>>>>> kagome
 begin
 2020年 5月 3日 日曜日 20時38分41秒 JST
@@ -4332,6 +4333,44 @@ Stacktrace:
  [10] exec_options(::Base.JLOptions) at ./client.jl:288
  [11] _start() at ./client.jl:484
 in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+=======
+begin
+2020年 5月 8日 金曜日 14時54分57秒 JST
+ERROR: LoadError: LoadError: No MPI library found.
+Ensure an MPI implementation is loaded, or set the `JULIA_MPI_PATH` variable.
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] find_lib() at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:19
+ [3] top-level scope at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:25
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] include(::String) at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:1
+ [6] top-level scope at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:35
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] top-level scope at none:2
+ [9] eval at ./boot.jl:331 [inlined]
+ [10] eval(::Expr) at ./client.jl:449
+ [11] top-level scope at ./none:3
+in expression starting at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:25
+in expression starting at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:35
+ERROR: LoadError: LoadError: LoadError: Failed to precompile MPI [da04e1cc-30fd-572f-bb4f-1f8673147195] to /Users/humiyakakizawa/.julia/compiled/v1.4/MPI/nO0XF_tbPtl.ji.
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] compilecache(::Base.PkgId, ::String) at ./loading.jl:1272
+ [3] _require(::Base.PkgId) at ./loading.jl:1029
+ [4] require(::Base.PkgId) at ./loading.jl:927
+ [5] require(::Module, ::Symbol) at ./loading.jl:922
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:6
+ [9] include(::String) at ./client.jl:439
+ [10] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [11] include(::Module, ::String) at ./Base.jl:377
+ [12] exec_options(::Base.JLOptions) at ./client.jl:288
+ [13] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:1
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:6
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+>>>>>>> 4d6d3ca7e726541b3bda740d97802e021b570e3c
 --------------------------------------------------------------------------
 Primary job  terminated normally, but 1 process returned
 a non-zero exit code. Per user-direction, the job has been aborted.
@@ -4340,6 +4379,7 @@ a non-zero exit code. Per user-direction, the job has been aborted.
 mpirun detected that one or more processes exited with non-zero status, thus causing
 the job to be terminated. The first process to do so was:
 
+<<<<<<< HEAD
   Process name: [[33563,1],0]
   Exit code:    1
 --------------------------------------------------------------------------
@@ -4360,6 +4400,49 @@ Stacktrace:
  [5] exec_options(::Base.JLOptions) at ./client.jl:288
  [6] _start() at ./client.jl:484
 in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+=======
+  Process name: [[61209,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月 8日 金曜日 14時55分05秒 JST
+begin
+2020年 5月10日 日曜日 15時05分14秒 JST
+ERROR: LoadError: LoadError: No MPI library found.
+Ensure an MPI implementation is loaded, or set the `JULIA_MPI_PATH` variable.
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] find_lib() at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:19
+ [3] top-level scope at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:25
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] include(::String) at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:1
+ [6] top-level scope at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:35
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] top-level scope at none:2
+ [9] eval at ./boot.jl:331 [inlined]
+ [10] eval(::Expr) at ./client.jl:449
+ [11] top-level scope at ./none:3
+in expression starting at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/paths.jl:25
+in expression starting at /Users/humiyakakizawa/.julia/packages/MPI/ZfFyE/src/MPI.jl:35
+ERROR: LoadError: LoadError: LoadError: Failed to precompile MPI [da04e1cc-30fd-572f-bb4f-1f8673147195] to /Users/humiyakakizawa/.julia/compiled/v1.4/MPI/nO0XF_tbPtl.ji.
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] compilecache(::Base.PkgId, ::String) at ./loading.jl:1272
+ [3] _require(::Base.PkgId) at ./loading.jl:1029
+ [4] require(::Base.PkgId) at ./loading.jl:927
+ [5] require(::Module, ::Symbol) at ./loading.jl:922
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] include(::String) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [8] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:6
+ [9] include(::String) at ./client.jl:439
+ [10] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [11] include(::Module, ::String) at ./Base.jl:377
+ [12] exec_options(::Base.JLOptions) at ./client.jl:288
+ [13] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:1
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:6
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+>>>>>>> 4d6d3ca7e726541b3bda740d97802e021b570e3c
 --------------------------------------------------------------------------
 Primary job  terminated normally, but 1 process returned
 a non-zero exit code. Per user-direction, the job has been aborted.
@@ -4368,6 +4451,7 @@ a non-zero exit code. Per user-direction, the job has been aborted.
 mpirun detected that one or more processes exited with non-zero status, thus causing
 the job to be terminated. The first process to do so was:
 
+<<<<<<< HEAD
   Process name: [[48639,1],0]
   Exit code:    1
 --------------------------------------------------------------------------
@@ -4494,6 +4578,196 @@ Successfully completed.
 Resource usage summary:
 
     CPU time   :     15.40 sec.
+
+The output (if any) follows:
+
+=======
+  Process name: [[32079,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月10日 日曜日 15時05分24秒 JST
+>>>>>>> 4d6d3ca7e726541b3bda740d97802e021b570e3c
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8417: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu May 14 19:41:20 2020
+Results reported at Thu May 14 19:41:33 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      1.21 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: LoadError: syntax: "<<" is not a unary operator
+Stacktrace:
+ [1] include at ./boot.jl:326 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1038
+ [3] include(::Module, ::String) at ./sysimg.jl:29
+ [4] include(::String) at ./client.jl:403
+ [5] top-level scope at none:0
+ [6] include at ./boot.jl:326 [inlined]
+ [7] include_relative(::Module, ::String) at ./loading.jl:1038
+ [8] include(::Module, ::String) at ./sysimg.jl:29
+ [9] exec_options(::Base.JLOptions) at ./client.jl:267
+ [10] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/classical_mc.jl:376
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:1
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8418: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu May 14 19:53:30 2020
+Results reported at Thu May 14 19:53:53 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     13.81 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: invalid syntax on line: <<<<<<< HEAD
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] parse_ini(::ConfParser.ConfParse) at /home/kakizawa/.julia/packages/ConfParser/40Z2H/src/ConfParser.jl:134
+ [3] parse_conf!(::ConfParser.ConfParse) at /home/kakizawa/.julia/packages/ConfParser/40Z2H/src/ConfParser.jl:71
+ [4] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:161
+ [5] top-level scope at util.jl:156
+ [6] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:21
+ [7] include at ./boot.jl:326 [inlined]
+ [8] include_relative(::Module, ::String) at ./loading.jl:1038
+ [9] include(::Module, ::String) at ./sysimg.jl:29
+ [10] exec_options(::Base.JLOptions) at ./client.jl:267
+ [11] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8419: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu May 14 20:01:10 2020
+Results reported at Thu May 14 20:01:36 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.41 sec.
+
+The output (if any) follows:
+
+ERROR: LoadError: UndefVarError: Flaot64 not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /misc/home/kakizawa/lecture/julia/classical_mc.jl:315
+ [2] top-level scope at util.jl:156
+ [3] top-level scope at /misc/home/kakizawa/lecture/julia/main.jl:21
+ [4] include at ./boot.jl:326 [inlined]
+ [5] include_relative(::Module, ::String) at ./loading.jl:1038
+ [6] include(::Module, ::String) at ./sysimg.jl:29
+ [7] exec_options(::Base.JLOptions) at ./client.jl:267
+ [8] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:20
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8420: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Thu May 14 20:04:00 2020
+Results reported at Thu May 14 20:04:19 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 1
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 1 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :     15.46 sec.
 
 The output (if any) follows:
 
