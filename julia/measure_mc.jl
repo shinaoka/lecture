@@ -35,27 +35,3 @@ function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)
     return sum(T_op.^2) / (num_spins^2)
 end
 
-function octopolar_v2(spins,num_spins::Int64,num_temps::Int64)
-
-    T = zeros(num_temps)
-
-    for i in 1:num_temps
-        temp = zeros(3^3)
-
-        for j in 1:num_spins
-
-            spin = spins[i][j]
-            index = 1
-
-            for (a,b,c) in Iterators.product(1:3,1:3,1:3)
-                temp[index] +=  spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c) + spin[b]*delta(c,a) + spin[c]*delta(a,b))/5
-                index += 1
-            end
-        end
-        T[i] = sum(temp.^2)
-
-    end
-    return T/(num_spins^2)
-end
-
-

@@ -6,6 +6,7 @@ include("mcmc.jl")
 include("accumulator.jl")
 include("replica_exchange.jl")
 include("loop_update.jl")
+include("measure_mc.jl")
 
 using Random
 using ConfParser
@@ -163,104 +164,6 @@ function latest_spin_direction(acc::Accumulator,spins::Vector{Vector{Tuple{Float
     
 end
 
-function make_kagome(num_spins)
-    a1 = 2 .* (1.,0.)
-    a2 = 2 .* (cos(pi/3),sin(pi/3))
-
-    L = Int(sqrt(num_spins/3))
-    unit_cell_position = fill((0.,0.),L^2)
-    index = 1
-
-    # complexity O(L^2~N)
-    for (i,j) in Iterators.product(1:L,1:L)
-
-        unit_cell_position[index] = (i-1) .* a1 .+ (j-1) .* a2 
-        index += 1
-    end 
-    
-    return unit_cell_position
-end
-
-function order_parameter(spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},
-                         num_spins::Int64, num_temps::Int64, q::Tuple{Float64,Float64}, unit_cell::Vector{Tuple{Float64,Float64}})
-    
-    #unit_cell = make_kagome(num_spins) 
-
-    M2_AF = zeros(num_temps) 
-
-    for temp in 1:num_temps
-        gp1 = spins[temp][1:3:num_spins] 
-        gp2 = spins[temp][2:3:num_spins] 
-        gp3 = spins[temp][3:3:num_spins] 
-        
-
-        temp_vec1 = (0.,0.,0.)
-        temp_vec2 = (0.,0.,0.)
-        temp_vec3 = (0.,0.,0.)
-
-        for i in 1:Int(num_spins/3)
-
-            phase_iqr = -im*dot(q,unit_cell[i])
-   
-            temp_vec1 = temp_vec1 .+ gp1[i] .* exp(phase_iqr) 
-            temp_vec2 = temp_vec2 .+ gp2[i] .* exp(phase_iqr) 
-            temp_vec3 = temp_vec3 .+ gp2[i] .* exp(phase_iqr) 
-        end
-
-        M2_AF[temp] = norm(temp_vec1)^2 + norm(temp_vec2)^2 + norm(temp_vec3)^2
-    end
-    
-    return M2_AF
-end
-
-# Kronecker delta
-function delta(i::Int64,j::Int64)
-    if i == j
-        return 1
-    else
-        return 0
-    end
-
-end
-
-function octopolar_v2(spins,num_spins::Int64,num_temps::Int64)
-    
-    T = zeros(num_temps)
-    
-    for i in 1:num_temps
-        temp = zeros(3^3)
-
-        for j in 1:num_spins
- 
-            spin = spins[i][j]
-            index = 1
-
-            for (a,b,c) in Iterators.product(1:3,1:3,1:3)
-                temp[index] +=  spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c) + spin[b]*delta(c,a) + spin[c]*delta(a,b))/5
-                index += 1 
-            end
-        end
-        T[i] = sum(temp.^2)
- 
-    end
-    return T
-end
-
-function octopolar_orderparameter(spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},num_spins::Int64,num_temps::Int64)
-    
-    op = zeros(num_temps)
-     
-    for temp in 1:num_temps
-        
-        for (i,j) in Iterators.product(1:num_spins,1:num_spins)
-
-            op[temp] += dot(spins[temp][i],spins[temp][j])^3 - (3/5)*dot(spins[temp][i],spins[temp][j])
-        end
-
-    end
-    
-    return op
-end
 
 function get_param(type, conf, block, key, default_value)
     if haskey(conf, block, key)
@@ -269,6 +172,7 @@ function get_param(type, conf, block, key, default_value)
         return convert(type, default_value)
     end
 end
+
 
 function solve(input_file::String, comm)
     if !isfile(input_file)
@@ -425,12 +329,15 @@ function solve(input_file::String, comm)
             add!(acc, "E2", energy_local.^2)
             add!(acc, "single_spin_flip_acc", single_spin_flip_acc)
             
-            add!(acc, "loop_found_rate", loop_found_rate)
+            add!(acc, "loop_found_rate" , loop_found_rate)
             add!(acc, "loop_accept_rate", loop_acc_rate)
-
-            #compute_magnetization(acc, num_spins, spins_local, num_temps_local)
-            #add!(acc,"M2_AF",order_parameter(spins_local,num_spins,num_temps_local,(0.,0.),unit_cell))
-            #add!(acc,"op",octopolar_v2(spins_local,num_spins,num_temps_local))
+  
+            # order parameters
+            T2_op = zeros(Flaot64,num_temps_local)
+            for it in 1:num_temps_local
+                T2_op[it] = compute_T2_op(spins_local[it],num_spins)
+            end
+            add!(acc, "T2_op", T2_op)
   
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -451,16 +358,8 @@ function solve(input_file::String, comm)
     single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
     loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
     loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
-    #ss = mean_gather_array(acc, "ss", comm)
-    #Mz2 = mean_gather(acc, "Mz2", comm)
-    #M2 = mean_gather(acc, "M2", comm)
-    #M4 = mean_gather(acc, "M4", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
-    #M1 = mean_gather_array(acc, "M1", comm)
-    #M2 = mean_gather_array(acc, "M2", comm)
-    #M3 = mean_gather_array(acc, "M3", comm)
-    #op = mean_gather(acc, "op", comm)
-    #M2_AF = mean_gather(acc,"M2_AF",comm)
+    T2_op = mean_gather(acc, "T2_op", comm)
     flush(stdout)
     MPI.Barrier(comm)
     if rank == 0
@@ -479,9 +378,8 @@ function solve(input_file::String, comm)
         end
         
         temp_idx = rand(1:num_spins)
-     
-        println("num of nn_sites of $(temp_idx)th site: ",updater.nn_coord_num[temp_idx])
-        
+       
+
         println("<CPUtime> ")
         for (i, t) in enumerate(CPUtime)
             println(" rank=", i-1, " : $t")
@@ -495,6 +393,12 @@ function solve(input_file::String, comm)
              for i in 1:num_temps
                  println(fp,rex.temps[i])
              end
+        end
+
+
+        println("T2_op")
+        for i in 1:num_temps
+            println(rex.temps[i]," ",T2_op[i]) 
         end
 
 
