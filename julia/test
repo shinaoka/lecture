@@ -4952,3 +4952,35 @@ begin
 2020年 5月16日 土曜日 22時16分30秒 JST
 end
 2020年 5月16日 土曜日 22時16分48秒 JST
+begin
+2020年 5月16日 土曜日 23時34分16秒 JST
+end
+2020年 5月16日 土曜日 23時34分34秒 JST
+begin
+2020年 5月16日 土曜日 23時36分00秒 JST
+ERROR: LoadError: UndefVarError: trinagles not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:384
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[9063,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月16日 土曜日 23時36分21秒 JST
+begin
+2020年 5月16日 土曜日 23時37分02秒 JST
+end
+2020年 5月16日 土曜日 23時37分19秒 JST

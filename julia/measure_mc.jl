@@ -34,15 +34,15 @@ function find_triangles(model::JModel, updater::SingleSpinFlipUpdater)
 end
 
 
-# It is important to keep computational cost O(num_spins)
+# It is important to keep computational complexity O(num_spins)
 function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
                        triangles::Array{Tuple{Int64,Int64,Int64},1})
     
     m_af = fill((0.,0.,0.),3)
-    for i_ucell in triangles
+    for itri in triangles
         
         for j in 1:3
-            m_af[j] = m_af[j] .+ spins[i_ucell[j]]
+            m_af[j] = m_af[j] .+ spins[itri[j]]
         end
 
     end
@@ -52,7 +52,7 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
         m2_af += sum(m_af[i].^2)
     end
 
-    return 6*m2_af/(num_spins^2)
+    return m2_af/(3*length(trinangles)^2)
 end
 
 

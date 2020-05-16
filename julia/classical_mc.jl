@@ -379,6 +379,11 @@ function solve(input_file::String, comm)
                println(fp,rex.temps[i])
            end
       end
+     
+      for i in 1:length(triangles)
+          itri = triangles[i]
+          println("$(i)th triangle: $(itri[1]) $(itri[2]) $(itri[3])")
+      end
 
       for i in 1:num_temps
             println("af: $(rex.temps[i]) $(m2_af[i])")
