@@ -4316,3 +4316,31 @@ the job to be terminated. The first process to do so was:
 --------------------------------------------------------------------------
 end
 2020年 5月10日 日曜日 15時05分24秒 JST
+begin
+2020年 5月16日 土曜日 12時46分27秒 JST
+ERROR: LoadError: UndefVarError: Flaot64 not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:336
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[27891,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月16日 土曜日 12時46分59秒 JST
+begin
+2020年 5月16日 土曜日 12時47分52秒 JST
+end
+2020年 5月16日 土曜日 12時48分09秒 JST

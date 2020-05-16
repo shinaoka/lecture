@@ -333,7 +333,7 @@ function solve(input_file::String, comm)
             add!(acc, "loop_accept_rate", loop_acc_rate)
   
             # order parameters
-            T2_op = zeros(Flaot64,num_temps_local)
+            T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
