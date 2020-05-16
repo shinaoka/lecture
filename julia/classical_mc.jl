@@ -256,13 +256,15 @@ function solve(input_file::String, comm)
     if rank == 0
         println("Starting simulation...")
     end
-
   
     # Create LoopUpdater 
     loop_updater = LoopUpdater{HeisenbergSpin}(num_spins, max_loop_length)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
+
+    # Create triangles for computing AF order parameter m2_af.
+    triangles = find_triangles(model,updater)
 
 
     for sweep in 1:num_sweeps
@@ -333,10 +335,13 @@ function solve(input_file::String, comm)
             add!(acc, "loop_accept_rate", loop_acc_rate)
   
             # order parameters
+            m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
+                m2_af[it] = compute_m2_af(spins_local[it],num_spins,triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
+            add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
   
         end
@@ -359,6 +364,7 @@ function solve(input_file::String, comm)
     loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
     loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+    m2_af = mean_gather(acc, "m2_af", comm)
     T2_op = mean_gather(acc, "T2_op", comm)
     flush(stdout)
     MPI.Barrier(comm)
@@ -395,10 +401,9 @@ function solve(input_file::String, comm)
              end
         end
 
-
-        println("T2_op")
         for i in 1:num_temps
-            println(rex.temps[i]," ",T2_op[i]) 
+            println("af: $(rex.temps[i]) $(m2_af[i])")
+            println("op: $(rex.temps[i]) $(T2_op[i])")
         end
 
 

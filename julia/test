@@ -4344,3 +4344,66 @@ begin
 2020年 5月16日 土曜日 12時47分52秒 JST
 end
 2020年 5月16日 土曜日 12時48分09秒 JST
+begin
+2020年 5月16日 土曜日 21時29分31秒 JST
+ERROR: LoadError: UndefVarError: triangle not defined
+Stacktrace:
+ [1] compute_m2_af(::Array{Tuple{Float64,Float64,Float64},1}, ::Int64, ::Array{Tuple{Int64,Int64,Int64},1}) at /Users/humiyakakizawa/Desktop/lecture/julia/measure_mc.jl:43
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:341
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[10911,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月16日 土曜日 21時29分55秒 JST
+begin
+2020年 5月16日 土曜日 21時33分14秒 JST
+end
+2020年 5月16日 土曜日 21時33分31秒 JST
+begin
+2020年 5月16日 土曜日 21時57分32秒 JST
+ERROR: LoadError: MethodError: no method matching +(::Float64, ::Tuple{Float64,Float64,Float64})
+Closest candidates are:
+  +(::Any, ::Any, !Matched::Any, !Matched::Any...) at operators.jl:529
+  +(::Float64, !Matched::Float64) at float.jl:401
+  +(::AbstractFloat, !Matched::Bool) at bool.jl:106
+  ...
+Stacktrace:
+ [1] compute_m2_af(::Array{Tuple{Float64,Float64,Float64},1}, ::Int64, ::Array{Tuple{Int64,Int64,Int64},1}) at /Users/humiyakakizawa/Desktop/lecture/julia/measure_mc.jl:52
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:341
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[11033,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月16日 土曜日 21時57分52秒 JST
+begin
+2020年 5月16日 土曜日 22時02分45秒 JST
+end
+2020年 5月16日 土曜日 22時03分02秒 JST
