@@ -55,6 +55,7 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
     return 6*m2_af/(num_spins^2)
 end
 
+
 delta(a,b) = ifelse(a==b,1,0) 
 
 function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)

@@ -188,8 +188,8 @@ end
 function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{HeisenbergSpin}, xy::Bool=false)
     dE::Float64 = 0
     sigma_g     = sqrt(beta^-1)
-    num_acc = 0
-    coeff_z = xy ? 0.0 : 1.0
+    num_acc     = 0
+    coeff_z     = xy ? 0.0 : 1.0
     for ispin in 1:model.num_spins
         # Compute effective field from the rest of spins
         eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)

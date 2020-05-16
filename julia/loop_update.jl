@@ -12,9 +12,9 @@ struct LoopUpdater{T}
 end
 
 function LoopUpdater{T}(num_spins::Int64, max_loop_length::Int64) where T
-    work   = zeros(Int,num_spins)
-    spins_on_loop  = zeros(Int, max_loop_length)
-    new_spins  = Vector{T}(undef, max_loop_length)
+    work          = zeros(Int,num_spins)
+    spins_on_loop = zeros(Int, max_loop_length)
+    new_spins     = Vector{T}(undef, max_loop_length)
     return LoopUpdater{T}(num_spins,work, spins_on_loop, new_spins)
 end
 
@@ -219,9 +219,14 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
     dE             = 0.
     num_accept     = 0
     num_loop_found = 0
-
+ 
+    # temp vairable for check detailed balance condition(dbc).
+    num_accept_dbc     = 0
+    num_loop_found_dbc = 0
+ 
     for i=1:num_trial
-        
+      
+        t1_s = time_ns()
         first_spin_idx = rand(1:num_spins) 
         candidate_second_spin_idx = zeros(UInt,max_coord_num)
         nn_coord_num = updater.nn_coord_num[first_spin_idx]
@@ -229,7 +234,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             candidate_second_spin_idx[ins] = updater.nn_sites[ins,first_spin_idx]
         end
         second_spin_idx = rand(candidate_second_spin_idx[1:nn_coord_num])
-
+        
         loop_length,sum_boundary_spins = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx,
                                                    second_spin_idx,max_length,work,verbose)
 
@@ -237,7 +242,14 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             continue
         end
         num_loop_found += 1
+        num_loop_found_dbc += 1
 
+        t1_e = time_ns()
+        #if verbose
+            #println("loop_find: $(1/beta) $(t1_e - t1_s)")
+        #end
+  
+        t2_s = time_ns()
         before_flipped_spins = copy(spins[spins_idx_on_loop[1:loop_length]])
         reflect_spins_on_loop!(loop_length,spins,new_spins_on_loop,spins_idx_on_loop,updater,sum_boundary_spins)
         dE_loop = compute_dE_loop(updater,loop_length,spins_idx_on_loop,spins,new_spins_on_loop,work,verbose)
@@ -247,12 +259,19 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         if temp_r < exp(-beta*dE_loop)
             spins[spins_idx_on_loop[1:loop_length]] = new_spins_on_loop[1:loop_length]
             num_accept += 1
+            num_accept_dbc += 1
         else
             continue
         end
         
-        #println("DEBUG A': ",temp_r," ",beta," ",dE_loop)
+        t2_e = time_ns() 
+        #if verbose
+            #println("metropolis_method: $(1/beta) $(t2_e - t2_s)")
+        #end
 
+        #println("DEBUG A': ",temp_r," ",beta," ",dE_loop)
+    
+        t3_s = time_ns()
         # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
         cp_spins_idx_on_loop = copy(spins_idx_on_loop[1:loop_length])
         first_spin_idx_inv   = spins_idx_on_loop[loop_length]
@@ -266,21 +285,22 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
             num_accept     -= 1
             continue
         end
-
-        #println("DEBUG D: ",loop_length)
-
-        #for i in 1:loop_length
-            #sx,sy,sz = spins[spins_idx_on_loop[i]]
-            #println("DEBUG E: ",sx," ",sy," ",sz)
+        
+        t3_e = time_ns()
+        #if verbose
+            #println("find_loop_inv: $(1/beta) $(t3_e - t3_s)")
         #end
 
         dE += dE_loop
         
     end
-
-    #if verbose
-       #println("multi_loop: $(1/beta) $(timing)")
-    #end
+    
+    if verbose
+        println("DEBUG A : $(num_loop_found_dbc/num_trial)")
+        println("DEBUG A': $(num_loop_found/num_trial)")
+        println("DEBUG B : $(num_accept_dbc/num_trial)")
+        println("DEBUG B': $(num_accept/num_trial)")
+    end
     
     #if num_accept != 0
         #println("DEBUG F: ", num_accept)
