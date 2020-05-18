@@ -7,7 +7,6 @@ include("accumulator.jl")
 include("replica_exchange.jl")
 include("loop_update.jl")
 include("measure_mc.jl")
-include("mk_input.jl")
 
 using Random
 using ConfParser
@@ -78,6 +77,29 @@ function read_Jij(Jij_file::String,num_spins::Int64)
     end
     return Jij
 end
+
+
+function read_upward_triangles(file_name::String,num_spins::Int64)
+   
+    L = Int(sqrt(num_spins/3))
+    utris = fill((0,0,0),L^2)
+
+    open(file_name,"r") do fp
+
+        @assert L^2 == parse(Int64, readline(fp)) "!match num_upward_triangles. See 2d.ini and head of utriangles.txt "
+
+        for i in 1:L^2
+            str = split(readline(fp))
+            s1 = parse(Int64, str[1])
+            s2 = parse(Int64, str[2])
+            s3 = parse(Int64, str[3])
+            utris[i] = (s1,s2,s3)
+        end
+    end
+
+    return utris
+end
+
 
 function read_spin_config(file_name::String,num_spins::Int64)
 
@@ -243,8 +265,9 @@ function solve(input_file::String, comm)
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
 
-    # Create triangles for computing AF order parameter m2_af.
-    upward_triangles = find_upward_triangles(num_spins)
+    # Create upward triangles for computing AF order parameter m2_af.
+    utriangles_file = retrieve(conf, "model", "utriangles")
+    upward_triangles = read_upward_triangles(utriangles_file,num_spins)
 
 
     for sweep in 1:num_sweeps
