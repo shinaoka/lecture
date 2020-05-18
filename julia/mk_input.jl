@@ -36,7 +36,22 @@ end
 # Output temperatures.
 input_temperatures(num_temps,min_T,max_T)
 
+# 
 
+function find_upward_triangles(num_spins::Int64)
+    
+    L = Int(sqrt(num_spins/3))
+    u_tris = fill((0,0,0), L^2)
+    idx = 1
+    for i in 1:L^2
+        u_tris[i] = (idx,idx+1,idx+2)
+        idx += 3
+    end
+  
+    return u_tris
+end
+
+println(find_upward_triangles(12))
 # some following functions generate input_Jij's argument array of tuple.
 
 function mk_kagome(L::Int64)
@@ -66,10 +81,7 @@ function compute_distance(L::Int64,p1,p2)
 
     candidate_distance = []
     for (i,j) in Iterators.product(1:3,1:3)
-        tempi = L*(i-2)
-        tempj = L*(j-2)
-
-        lattice_vec = tempi .* a1 .+ tempj .* a2
+        lattice_vec = L * (i-2) .* a1 .+ L * (j-2) .* a2
         cp_p2 = p2 .+ lattice_vec
         push!(candidate_distance, norm(p1.-cp_p2))
     end

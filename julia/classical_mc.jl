@@ -7,6 +7,7 @@ include("accumulator.jl")
 include("replica_exchange.jl")
 include("loop_update.jl")
 include("measure_mc.jl")
+include("mk_input.jl")
 
 using Random
 using ConfParser
@@ -243,7 +244,7 @@ function solve(input_file::String, comm)
     single_spin_flip_acc = zeros(Float64, num_temps_local)
 
     # Create triangles for computing AF order parameter m2_af.
-    triangles = find_triangles(model,updater)
+    upward_triangles = find_upward_triangles(num_spins)
 
 
     for sweep in 1:num_sweeps
@@ -317,7 +318,7 @@ function solve(input_file::String, comm)
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                m2_af[it] = compute_m2_af(spins_local[it],num_spins,triangles)
+                m2_af[it] = compute_m2_af(spins_local[it],num_spins,upward_triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
             add!(acc, "m2_af", m2_af)
@@ -380,8 +381,8 @@ function solve(input_file::String, comm)
            end
       end
      
-      for i in 1:length(triangles)
-          itri = triangles[i]
+      for i in 1:length(upward_triangles)
+          itri = upward_triangles[i]
           println("$(i)th triangle: $(itri[1]) $(itri[2]) $(itri[3])")
       end
 
