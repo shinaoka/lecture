@@ -2,38 +2,6 @@
 
 include("mcmc.jl")
 
-function find_triangles(model::JModel, updater::SingleSpinFlipUpdater)
-    #=
-    Find all triangles
-    =#
-    num_spins = updater.num_spins
-
-    # Creat a set of nn sites for each site
-    nn_sites = [Set{Int}() for i in 1:num_spins]
-    for isite=1:num_spins
-        for ins=1:updater.coord_num[isite]
-            if updater.connection[ins,isite][5] == 1
-                push!(nn_sites[isite], updater.connection[ins,isite][1])
-            end
-        end
-    end
-
-    triangles = Set{Tuple{Int,Int,Int}}()
-    for (i, j, Jx, Jy, Jz, is_nn) in model.Jij
-        if is_nn != 1
-            continue
-        end
-        common_nn = intersect(nn_sites[i], nn_sites[j])
-        @assert length(common_nn) <= 1
-        if length(common_nn) != 0
-            t_sites = sort([i, j, pop!(common_nn)])
-            push!(triangles, Tuple(t_sites))
-        end
-    end
-    return collect(triangles)
-end
-
-
 # It is important to keep computational complexity O(num_spins)
 function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
                        triangles::Array{Tuple{Int64,Int64,Int64},1})
