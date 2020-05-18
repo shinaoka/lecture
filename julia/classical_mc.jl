@@ -352,7 +352,7 @@ function solve(input_file::String, comm)
       println()
       println("<E> <E^2> <C>")
       for i in 1:num_temps
-          println(rex.temps[i], "  ", E[i], " ", E2[i], " ", ((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)
+          println("sh: $(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
       end
       println()
       

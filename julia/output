@@ -1,17 +1,17 @@
-2020年 5月18日 月曜日 21時37分16秒 JST
+2020年 5月18日 月曜日 21時46分55秒 JST
 [(1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12)]
 num_spins: 27
 num of temperatures = 1
 Starting simulation...
 
 <E> <E^2> <C>
-1.0000000000000004e-6  -26.999969436914633 728.9983495943243 0.0
+sh: 1.0000000000000004e-6 -26.999969436914633 728.9983495943243 0.0
 
 single_spin_flip_acc: [0.4074074074074074]
 Acceptant rate of loop update: 
 1.0000000000000004e-6 0.0 0.0
 <CPUtime> 
- rank=0 : [175812.0, 368913.0, 2.0, 15581.0]
+ rank=0 : [164780.0, 362484.0, 2.0, 14107.0]
 1th triangle: 1 2 3
 2th triangle: 4 5 6
 3th triangle: 7 8 9
@@ -25,5 +25,5 @@ af: 1.0000000000000004e-6 0.00011880597873774588
 op: 1.0000000000000004e-6 0.249365524359332
 
 Statistics of replica exchange Monte Carlo
-  7.656761 seconds (20.26 M allocations: 1000.165 MiB, 6.35% gc time)
-2020年 5月18日 月曜日 21時37分37秒 JST
+  6.948918 seconds (20.27 M allocations: 1000.745 MiB, 6.83% gc time)
+2020年 5月18日 月曜日 21時47分13秒 JST
