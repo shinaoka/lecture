@@ -4992,3 +4992,279 @@ begin
 2020年 5月18日 月曜日 21時46分55秒 JST
 end
 2020年 5月18日 月曜日 21時47分13秒 JST
+Sender: LSF System <lavaadmin@sakura05.local>
+Subject: Job 8492: <test> Done
+
+Job <test> was submitted from host <sakura01.local> by user <kakizawa>.
+Job was executed on host(s) <24*sakura05.local>, in queue <normal>, as user <kakizawa>.
+</home/kakizawa> was used as the home directory.
+</home/kakizawa/lecture/julia> was used as the working directory.
+Started at Mon May 18 21:54:41 2020
+Results reported at Mon May 18 21:54:57 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -n 24
+#BSUB -o test
+#BSUB -J test
+
+export MPIRUN="/usr/share/lava/1.0/linux2.6-glibc2.12-x86_64/bin/intelmpi-mpirun"
+
+date > output
+$MPIRUN -np 24 julia main.jl 2d.ini >> output
+date >> output
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :    174.30 sec.
+
+The output (if any) follows:
+
+ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: ERROR: ERROR: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: LoadError: LoadError: ERROR: LoadError: LoadError: UndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not defined
+Stacktrace:UndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not defined
+Stacktrace:UndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not defined
+ [1] UndefVarError: @add_arg_table! not defined
+Stacktrace:UndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not defined
+ [1] 
+Stacktrace:UndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not definedUndefVarError: @add_arg_table! not defined
+Stacktrace:
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+Stacktrace:UndefVarError: @add_arg_table! not defined
+ [1] 
+Stacktrace:UndefVarError: @add_arg_table! not defined
+Stacktrace:top-level scope
+ [2] 
+Stacktrace:
+ [1] 
+Stacktrace:
+Stacktrace:
+ [1] 
+ [1] top-level scope
+ [2] 
+ [1] 
+ [1] 
+Stacktrace:
+Stacktrace:
+Stacktrace:
+ [1] 
+Stacktrace:
+Stacktrace:
+ [1] 
+Stacktrace:
+ [1] 
+ [1] top-level scope
+ [2] 
+ [1] top-level scope
+ [2] 
+ [1] 
+Stacktrace:
+ [1] 
+ [1] 
+Stacktrace:
+ [1] 
+UndefVarError: @add_arg_table! not defined [1] top-level scope
+ [2] 
+ [1] include at ./boot.jl:326 [inlined]
+ [3] top-level scope
+ [2] top-level scope
+ [2] UndefVarError: @add_arg_table! not definedtop-level scope
+ [2] top-level scope
+ [2] include at ./boot.jl:326 [inlined]
+
+ [3]  [1] top-level scope
+ [2] 
+ [1] top-level scope
+ [2] top-level scope
+ [2] top-level scope
+ [2] top-level scope
+ [2] include at ./boot.jl:326 [inlined]
+ [3] top-level scope
+ [2] top-level scope
+ [2] include_relative(top-level scope
+ [2] top-level scope
+ [2] top-level scope
+ [2] include at ./boot.jl:326 [inlined]
+ [3] 
+Stacktrace:top-level scope
+ [2] ::include_relative(include at ./boot.jl:326 [inlined]
+ [3] 
+Stacktrace:include at ./boot.jl:326 [inlined]
+ [3] include at ./boot.jl:326 [inlined]
+ [3] ::top-level scopeinclude at ./boot.jl:326 [inlined]
+
+ [3]  [2] include at ./boot.jl:326 [inlined]
+ [3] top-level scope
+ [2] include_relative(include at ./boot.jl:326 [inlined]
+
+ [3]  [1] include at ./boot.jl:326 [inlined]
+ [3] includeinclude at ./boot.jl:326 [inlined]
+ at ./boot.jl:326 [inlined]
+ [3]  [3] ::include_relative(
+ [1] include at ./boot.jl:326 [inlined]
+ [3] include_relative(::include at ./boot.jl:326 [inlined]
+ [3] include at ./boot.jl:326 [inlined]
+ [3] include at ./boot.jl:326 [inlined]
+ [3] include at ./boot.jl:326 [inlined]
+ [3] includeinclude_relative at ./boot.jl:326 [inlined]
+( [3] include_relative(include_relative(::include_relative(include at ./boot.jl:326 [inlined]
+ [3] include_relative(::::::include_relative::(include_relative(include_relative(include at ./boot.jl:326 [inlined]
+ [3] ::top-level scope
+ [2] include_relative(include at ./boot.jl:326 [inlined]
+ [3] ::::::top-level scope
+ [2] include_relative(::include_relative(include_relative(include_relative(Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.include_relativeJLOptions() at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+::::::include_relative(::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+::include_relative(::include_relative(::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+include at ./boot.jl:326 [inlined]
+ [3] include at ./boot.jl:326 [inlined]
+ [3] Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+include_relative(Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+include_relative(Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+::Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+Module, ::String) at ./loading.jl:1038
+ [4] include(::Module, ::String) at ./sysimg.jl:29
+ [5] exec_options(::Base.JLOptions) at ./client.jl:267
+ [6] _start() at ./client.jl:436
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
+in expression starting at /misc/home/kakizawa/lecture/julia/main.jl:8
