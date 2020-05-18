@@ -83,7 +83,7 @@ function test_m2_af()
    
     triangles = [(1,2,3),(4,5,6)]
     m2_af = compute_m2_af(spins[1],num_spins,triangles)
-    @test isapprox(m2_af,2.0)
+    @test isapprox(m2_af,1.0)
 
 end
 
