@@ -38,20 +38,22 @@ input_temperatures(num_temps,min_T,max_T)
 
 # 
 
-function find_upward_triangles(num_spins::Int64)
+function mk_upward_triangles(file_name::String,L::Int64)
     
-    L = Int(sqrt(num_spins/3))
-    u_tris = fill((0,0,0), L^2)
-    idx = 1
-    for i in 1:L^2
-        u_tris[i] = (idx,idx+1,idx+2)
-        idx += 3
+    open(file_name,"w") do fp 
+        println(fp,L^2)
+        idx = 1
+        for i in 1:L^2
+            println(fp,idx," ",idx+1," ",idx+2)
+            idx += 3
+        end
     end
   
-    return u_tris
 end
 
-println(find_upward_triangles(12))
+mk_upward_triangles("utriangles.txt",L)
+
+
 # some following functions generate input_Jij's argument array of tuple.
 
 function mk_kagome(L::Int64)
