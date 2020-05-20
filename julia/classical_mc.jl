@@ -235,13 +235,15 @@ function solve(input_file::String, comm)
     if rank == 0
         println("Starting simulation...")
     end
-
   
     # Create LoopUpdater 
     loop_updater = LoopUpdater{HeisenbergSpin}(num_spins, max_loop_length)
 
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
+
+    # Create triangles for computing AF order parameter m2_af.
+    triangles = find_triangles(model,updater)
 
 
     for sweep in 1:num_sweeps
@@ -312,71 +314,80 @@ function solve(input_file::String, comm)
             add!(acc, "loop_accept_rate", loop_acc_rate)
   
             # order parameters
+            m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
+                m2_af[it] = compute_m2_af(spins_local[it],num_spins,triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
+            add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
+
+      end
+      push!(elpsCPUtime, CPUtime_us() - ts_start)
+
+      if sweep > num_therm_sweeps
+          add!(acc_proc, "CPUtime", [Vector{Float64}(elpsCPUtime)])
+      end
+  end        
+
+  #for it in 1:num_temps_local
+      #dE,num_accept = multi_loop_update!(loop_num_trial,loop_num_reference_sites,updater,1/rex.temps[it+start_idx-1],triangles,max_loop_length,spins_local[it],rank==0)
+  #end
   
-        end
-        push!(elpsCPUtime, CPUtime_us() - ts_start)
 
-        if sweep > num_therm_sweeps
-            add!(acc_proc, "CPUtime", [Vector{Float64}(elpsCPUtime)])
-        end
-    end        
-
-    #for it in 1:num_temps_local
-        #dE,num_accept = multi_loop_update!(loop_num_trial,loop_num_reference_sites,updater,1/rex.temps[it+start_idx-1],triangles,max_loop_length,spins_local[it],rank==0)
-    #end
-    
-
-    # Output results
-    E = mean_gather(acc, "E", comm)
-    E2 = mean_gather(acc, "E2", comm)
-    single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
-    loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
-    loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
-    CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
-    T2_op = mean_gather(acc, "T2_op", comm)
-    flush(stdout)
-    MPI.Barrier(comm)
-    if rank == 0
-        println()
-        println("<E> <E^2> <C>")
-        for i in 1:num_temps
-            println(rex.temps[i], "  ", E[i], " ", E2[i], " ", ((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)
-        end
-        println()
-        
-        println("single_spin_flip_acc: ", single_spin_flip_acc)
+  # Output results
+  E = mean_gather(acc, "E", comm)
+  E2 = mean_gather(acc, "E2", comm)
+  single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
+  loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
+  loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
+  CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+  m2_af = mean_gather(acc, "m2_af", comm)
+  T2_op = mean_gather(acc, "T2_op", comm)
+  flush(stdout)
+  MPI.Barrier(comm)
+  if rank == 0
+      println()
+      println("<E> <E^2> <C>")
+      for i in 1:num_temps
+          println(rex.temps[i], "  ", E[i], " ", E2[i], " ", ((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)
+      end
+      println()
       
-        println("Acceptant rate of loop update: ")
-        for i in 1:num_temps
-            println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
-        end
-        
-        temp_idx = rand(1:num_spins)
-       
+      println("single_spin_flip_acc: ", single_spin_flip_acc)
+    
+      println("Acceptant rate of loop update: ")
+      for i in 1:num_temps
+          println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
+      end
+      
+      temp_idx = rand(1:num_spins)
+     
 
-        println("<CPUtime> ")
-        for (i, t) in enumerate(CPUtime)
-            println(" rank=", i-1, " : $t")
-        end
-   
-        #write_spin_config("spin_config.txt",spins_local[1])
-       
-        # overwrite initial temperature distribution.        
-        open("temperatures.txt","w") do fp
-             println(fp,num_temps)
-             for i in 1:num_temps
-                 println(fp,rex.temps[i])
-             end
-        end
+      println("<CPUtime> ")
+      for (i, t) in enumerate(CPUtime)
+          println(" rank=", i-1, " : $t")
+      end
+ 
+      #write_spin_config("spin_config.txt",spins_local[1])
+     
+      # overwrite initial temperature distribution.        
+      open("temperatures.txt","w") do fp
+           println(fp,num_temps)
+           for i in 1:num_temps
+               println(fp,rex.temps[i])
+           end
+      end
+     
+      for i in 1:length(triangles)
+          itri = triangles[i]
+          println("$(i)th triangle: $(itri[1]) $(itri[2]) $(itri[3])")
+      end
 
-        println("T2_op")
-        for i in 1:num_temps
-            println(rex.temps[i]," ",T2_op[i]) 
+      for i in 1:num_temps
+            println("af: $(rex.temps[i]) $(m2_af[i])")
+            println("op: $(rex.temps[i]) $(T2_op[i])")
         end
 
 
