@@ -18,25 +18,6 @@ tempJ2 = -0.0
 J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
-#parameters for temepratures.
-num_temps = 1
-min_T = 1e-6
-max_T = min_T
-
-function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
-    logT = LinRange(log(min_T), log(max_T), num_temps)
-    open("temperatures.txt", "w") do fp
-       println(fp, num_temps)
-       for i in logT
-          println(fp, exp(i))
-       end
-     end
-end
-
-# Output temperatures.
-input_temperatures(num_temps,min_T,max_T)
-
-# 
 
 function mk_upward_triangles(file_name::String,L::Int64)
     
@@ -53,8 +34,6 @@ end
 
 mk_upward_triangles("utriangles.txt",L)
 
-
-# some following functions generate input_Jij's argument array of tuple.
 
 function mk_kagome(L::Int64)
     
