@@ -4984,3 +4984,65 @@ begin
 2020年 5月16日 土曜日 23時37分02秒 JST
 end
 2020年 5月16日 土曜日 23時37分19秒 JST
+begin
+2020年 5月18日 月曜日 21時37分16秒 JST
+end
+2020年 5月18日 月曜日 21時37分37秒 JST
+begin
+2020年 5月18日 月曜日 21時46分55秒 JST
+end
+2020年 5月18日 月曜日 21時47分13秒 JST
+begin
+2020年 5月18日 月曜日 22時12分48秒 JST
+ERROR: LoadError: UndefVarError: find_upward_triangles not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:269
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[64867,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月18日 月曜日 22時13分08秒 JST
+begin
+2020年 5月18日 月曜日 22時13分42秒 JST
+ERROR: LoadError: MethodError: no method matching read_upward_triangles(::Int64)
+Closest candidates are:
+  read_upward_triangles(!Matched::String, !Matched::Int64) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:84
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:269
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[65194,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月18日 月曜日 22時13分58秒 JST
+begin
+2020年 5月18日 月曜日 22時19分00秒 JST
+end
+2020年 5月18日 月曜日 22時19分17秒 JST

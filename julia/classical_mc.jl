@@ -78,6 +78,29 @@ function read_Jij(Jij_file::String,num_spins::Int64)
     return Jij
 end
 
+
+function read_upward_triangles(file_name::String,num_spins::Int64)
+   
+    L = Int(sqrt(num_spins/3))
+    utris = fill((0,0,0),L^2)
+
+    open(file_name,"r") do fp
+
+        @assert L^2 == parse(Int64, readline(fp)) "!match num_upward_triangles. See 2d.ini and head of utriangles.txt "
+
+        for i in 1:L^2
+            str = split(readline(fp))
+            s1 = parse(Int64, str[1])
+            s2 = parse(Int64, str[2])
+            s3 = parse(Int64, str[3])
+            utris[i] = (s1,s2,s3)
+        end
+    end
+
+    return utris
+end
+
+
 function read_spin_config(file_name::String,num_spins::Int64)
 
     spins = fill((0.,0.,0.),num_spins)
@@ -242,8 +265,9 @@ function solve(input_file::String, comm)
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
 
-    # Create triangles for computing AF order parameter m2_af.
-    triangles = find_triangles(model,updater)
+    # Create upward triangles for computing AF order parameter m2_af.
+    utriangles_file = retrieve(conf, "model", "utriangles")
+    upward_triangles = read_upward_triangles(utriangles_file,num_spins)
 
 
     for sweep in 1:num_sweeps
@@ -317,7 +341,7 @@ function solve(input_file::String, comm)
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                m2_af[it] = compute_m2_af(spins_local[it],num_spins,triangles)
+                m2_af[it] = compute_m2_af(spins_local[it],num_spins,upward_triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
             add!(acc, "m2_af", m2_af)
@@ -351,7 +375,7 @@ function solve(input_file::String, comm)
       println()
       println("<E> <E^2> <C>")
       for i in 1:num_temps
-          println(rex.temps[i], "  ", E[i], " ", E2[i], " ", ((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)
+          println("sh: $(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
       end
       println()
       
@@ -370,7 +394,7 @@ function solve(input_file::String, comm)
           println(" rank=", i-1, " : $t")
       end
  
-      #write_spin_config("spin_config.txt",spins_local[1])
+      write_spin_config("spin_config.txt",spins_local[1])
      
       # overwrite initial temperature distribution.        
       open("temperatures.txt","w") do fp
@@ -380,8 +404,8 @@ function solve(input_file::String, comm)
            end
       end
      
-      for i in 1:length(triangles)
-          itri = triangles[i]
+      for i in 1:length(upward_triangles)
+          itri = upward_triangles[i]
           println("$(i)th triangle: $(itri[1]) $(itri[2]) $(itri[3])")
       end
 
