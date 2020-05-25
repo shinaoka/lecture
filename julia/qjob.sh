@@ -7,7 +7,9 @@
 #QSUB -place pack
 #QSUB -over false
 #PBS -l walltime=0:30:00
-#PBS -N srvo3
+#PBS -N kagome
+#PBS -o output
+#PBS -e test
 cd $PBS_O_WORKDIR
 
 . /etc/profile.d/modules.sh

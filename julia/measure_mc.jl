@@ -19,7 +19,7 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
         m2_af += sum(m_af[i].^2)
     end
 
-    return m2_af/(3*length(triangles)^2)
+    return 6*m2_af/(num_spins^2)
 end
 
 

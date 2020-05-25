@@ -393,9 +393,10 @@ function solve(input_file::String, comm)
       for (i, t) in enumerate(CPUtime)
           println(" rank=", i-1, " : $t")
       end
- 
+    
+      """
       write_spin_config("spin_config.txt",spins_local[1])
-     
+          
       # overwrite initial temperature distribution.        
       open("temperatures.txt","w") do fp
            println(fp,num_temps)
@@ -412,8 +413,8 @@ function solve(input_file::String, comm)
       for i in 1:num_temps
             println("af: $(rex.temps[i]) $(m2_af[i])")
             println("op: $(rex.temps[i]) $(T2_op[i])")
-        end
-
+      end
+      """    
 
     end
     flush(stdout)
