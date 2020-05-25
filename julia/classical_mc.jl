@@ -394,7 +394,7 @@ function solve(input_file::String, comm)
           println(" rank=", i-1, " : $t")
       end
     
-      """
+      
       write_spin_config("spin_config.txt",spins_local[1])
           
       # overwrite initial temperature distribution.        
@@ -414,7 +414,7 @@ function solve(input_file::String, comm)
             println("af: $(rex.temps[i]) $(m2_af[i])")
             println("op: $(rex.temps[i]) $(T2_op[i])")
       end
-      """    
+      
 
     end
     flush(stdout)

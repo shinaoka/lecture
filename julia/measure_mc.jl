@@ -1,5 +1,5 @@
 # For unit test measurement function moved from classical_mc.jl.
-
+include("mcmc.jl")
 
 # It is important to keep computational complexity O(num_spins)
 function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
@@ -19,7 +19,7 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
         m2_af += sum(m_af[i].^2)
     end
 
-    return 6*m2_af/(num_spins^2)
+    return m2_af/(3*length(triangles)^2)
 end
 
 
