@@ -14,7 +14,7 @@ len2 = 2*sin(pi/3)
 # parameter for Interaction.
 SSInteraction = Type3dVector
 tempJ1 = -1.
-tempJ2 = -0.0
+tempJ2 = -0.02
 J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
 
