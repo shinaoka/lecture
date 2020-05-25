@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 3
+L = 192
 num_spins = 3*L^2
 
 # lattice vectors
@@ -17,22 +17,6 @@ tempJ1 = -1.
 tempJ2 = -0.0
 J1 = (tempJ1,tempJ1,tempJ1)
 J2 = (tempJ2,tempJ2,tempJ2)
-
-
-function mk_upward_triangles(file_name::String,L::Int64)
-    
-    open(file_name,"w") do fp 
-        println(fp,L^2)
-        idx = 1
-        for i in 1:L^2
-            println(fp,idx," ",idx+1," ",idx+2)
-            idx += 3
-        end
-    end
-  
-end
-
-mk_upward_triangles("utriangles.txt",L)
 
 
 function mk_kagome(L::Int64)
@@ -117,4 +101,6 @@ end
 
 # output Jij
 println("num_spins: ",num_spins)
+ts = time_ns()
 input_Jij(num_spins,mk_interaction(L,J1,J2,len1,len2))
+println("elapsed time $(time_ns()- ts)")

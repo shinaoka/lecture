@@ -1,0 +1,30 @@
+<<<<<<< HEAD
+=======
+2020年 5月22日 金曜日 13時28分37秒 JST
+num of temperatures = 1
+Starting simulation...
+
+<E> <E^2> <C>
+sh: 1.0000000000000004e-6 53.999894054523715 2915.9885578997855 0.0
+
+single_spin_flip_acc: [0.7407407407407407]
+Acceptant rate of loop update: 
+1.0000000000000004e-6 0.0 0.0
+<CPUtime> 
+ rank=0 : [260861.0, 544475.0, 4.0, 22244.0]
+1th triangle: 1 2 3
+2th triangle: 4 5 6
+3th triangle: 7 8 9
+4th triangle: 10 11 12
+5th triangle: 13 14 15
+6th triangle: 16 17 18
+7th triangle: 19 20 21
+8th triangle: 22 23 24
+9th triangle: 25 26 27
+af: 1.0000000000000004e-6 1.9999946737042713
+op: 1.0000000000000004e-6 0.3999933816027172
+
+Statistics of replica exchange Monte Carlo
+ 12.407061 seconds (21.18 M allocations: 1.020 GiB, 7.51% gc time)
+2020年 5月22日 金曜日 13時29分10秒 JST
+>>>>>>> f6587ba6368f15f446795bdafcd64c78d926cae3
