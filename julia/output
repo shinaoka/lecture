@@ -1,19 +1,15 @@
-2020年 5月31日 日曜日 02時17分40秒 JST
-num of temperatures = 1
-Starting simulation...
+Tue May 26 21:28:47 JST 2020
+mpijob CMD : mpirun -wdir /home/k0156/k015603/kagome/J2_-2e-2/L192 julia main.jl 2d.ini
 
-<E> <E^2> <C>
-sh: 1.0000000000000004e-6 55.079891355753745 3033.794431761636 0.0
+Intel MPI Placement option
+--------------------------
+I_MPI_PIN_DOMAIN=omp
 
-single_spin_flip_acc: [0.7407407407407407]
-Acceptant rate of loop update: 
-1.0000000000000004e-6 0.0 0.0
-<CPUtime> 
- rank=0 : [179941.0, 367395.0, 3.0, 13972.0]
-ll: 1.0000000000000004e-6 0.0
-af: 1.0000000000000004e-6 0.9999973365183573
-op: 1.0000000000000004e-6 0.39999339876746615
+Node   MPI
+------------
+r2i1n0 24
+r2i1n1 24
+r2i1n2 24
+r2i1n3 24
+r2i1n4 24
 
-Statistics of replica exchange Monte Carlo
-  7.457013 seconds (21.64 M allocations: 1.042 GiB, 6.49% gc time)
-2020年 5月31日 日曜日 02時17分57秒 JST
