@@ -1,5 +1,4 @@
 # For unit test measurement function moved from classical_mc.jl.
-
 include("mcmc.jl")
 include("loop_update.jl")
 

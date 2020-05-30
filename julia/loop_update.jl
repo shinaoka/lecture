@@ -295,13 +295,7 @@ function multi_loop_update!(loop_updater::LoopUpdater, num_trial::Int64,
         
     end
     
-    if verbose
-        println("DEBUG A : $(num_loop_found_dbc/num_trial)")
-        println("DEBUG A': $(num_loop_found/num_trial)")
-        println("DEBUG B : $(num_accept_dbc/num_trial)")
-        println("DEBUG B': $(num_accept/num_trial)")
-    end
-    
+
     #if num_accept != 0
         #println("DEBUG F: ", num_accept)
     #end
