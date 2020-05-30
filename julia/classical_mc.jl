@@ -344,7 +344,7 @@ function solve(input_file::String, comm)
                                                                updater,
                                                                loop_updater,
                                                                max_loop_length,
-                                                               work,verbose)
+                                                               false)
             end
             add!(acc,"loop_length",measured_loop_length)
 
@@ -379,6 +379,7 @@ function solve(input_file::String, comm)
   loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
   loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
   CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+  ave_loop_length = mean_gather(acc,"loop_length",comm)
   m2_af = mean_gather(acc, "m2_af", comm)
   T2_op = mean_gather(acc, "T2_op", comm)
   flush(stdout)
@@ -415,12 +416,15 @@ function solve(input_file::String, comm)
                println(fp,rex.temps[i])
            end
       end
-     
+       
+      for i in 1:num_temps
+          println("ll: $(rex.temps[i]) $(ave_loop_length[i])")
+      end
 
       for i in 1:num_temps
             println("af: $(rex.temps[i]) $(m2_af[i])")
             println("op: $(rex.temps[i]) $(T2_op[i])")
-        end
+      end
 
 
     end

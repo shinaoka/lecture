@@ -5050,3 +5050,106 @@ begin
 2020年 5月22日 金曜日 13時28分37秒 JST
 end
 2020年 5月22日 金曜日 13時29分10秒 JST
+begin
+2020年 5月30日 土曜日 19時57分02秒 JST
+ERROR: LoadError: UndefVarError: work not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:343
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[55523,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月30日 土曜日 19時57分23秒 JST
+begin
+2020年 5月30日 土曜日 20時00分01秒 JST
+ERROR: LoadError: LoadError: syntax: incomplete: "module" at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1 requires end
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+ [2] include(::String) at ./client.jl:439
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:1
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[55368,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月30日 土曜日 20時00分05秒 JST
+begin
+2020年 5月30日 土曜日 20時00分39秒 JST
+ERROR: LoadError: UndefVarError: verbose not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:343
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[55297,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月30日 土曜日 20時00分59秒 JST
+begin
+2020年 5月30日 土曜日 20時02分50秒 JST
+ERROR: LoadError: MethodError: no method matching compute_loop_length(::Array{Tuple{Float64,Float64,Float64},1}, ::SingleSpinFlipUpdater, ::Main.ClassicalMC.LoopUpdater{Tuple{Float64,Float64,Float64}}, ::Int64)
+Closest candidates are:
+  compute_loop_length(::Array{Tuple{Float64,Float64,Float64},1}, ::SingleSpinFlipUpdater, ::Main.ClassicalMC.LoopUpdater, ::Any, !Matched::Any) at /Users/humiyakakizawa/Desktop/lecture/julia/measure_mc.jl:55
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:343
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[55359,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 5月30日 土曜日 20時03分10秒 JST
+begin
+2020年 5月30日 土曜日 20時04分49秒 JST
+end
+2020年 5月30日 土曜日 20時05分07秒 JST
