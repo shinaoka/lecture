@@ -336,16 +336,28 @@ function solve(input_file::String, comm)
             
             add!(acc, "loop_found_rate" , loop_found_rate)
             add!(acc, "loop_accept_rate", loop_acc_rate)
-  
-            # order parameters
+          
+            # loop length,candidate order parameter
+            measured_loop_length = zeros(Int64,num_temps_local)
+            for it in 1:num_temps_local 
+                measured_loop_length[it] = compute_loop_length(spins_local[it],
+                                                               updater,
+                                                               loop_updater,
+                                                               max_loop_length,
+                                                               false)
+            end
+            add!(acc,"loop_length",measured_loop_length)
+
+            # magnetic order parameters
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                m2_af[it] = compute_m2_af(spins_local[it],num_spins,upward_triangles)
+                m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
+
 
       end
       push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -367,6 +379,7 @@ function solve(input_file::String, comm)
   loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
   loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
   CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+  ave_loop_length = mean_gather(acc,"loop_length",comm)
   m2_af = mean_gather(acc, "m2_af", comm)
   T2_op = mean_gather(acc, "T2_op", comm)
   flush(stdout)
@@ -393,9 +406,10 @@ function solve(input_file::String, comm)
       for (i, t) in enumerate(CPUtime)
           println(" rank=", i-1, " : $t")
       end
- 
-      #write_spin_config("spin_config.txt",spins_local[1])
-     
+    
+      
+      write_spin_config("spin_config.txt",spins_local[1])
+          
       # overwrite initial temperature distribution.        
       open("temperatures.txt","w") do fp
            println(fp,num_temps)
@@ -403,16 +417,15 @@ function solve(input_file::String, comm)
                println(fp,rex.temps[i])
            end
       end
-     
-      for i in 1:length(upward_triangles)
-          itri = upward_triangles[i]
-          println("$(i)th triangle: $(itri[1]) $(itri[2]) $(itri[3])")
+       
+      for i in 1:num_temps
+          println("ll: $(rex.temps[i]) $(ave_loop_length[i])")
       end
 
       for i in 1:num_temps
             println("af: $(rex.temps[i]) $(m2_af[i])")
             println("op: $(rex.temps[i]) $(T2_op[i])")
-        end
+      end
 
 
     end

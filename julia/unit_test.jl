@@ -1,6 +1,7 @@
 using Test
 
 include("measure_mc.jl")
+include("loop_update_tests.jl")
 
 println("unit test results")
 
@@ -76,19 +77,19 @@ function order_parameter(spins::Vector{Vector{Tuple{Float64,Float64,Float64}}},
 end
 
 
-function test_m2_af()
+function test_compute_m2_af()
     
     num_spins = 6
     spins = x_model(num_spins) 
    
     triangles = [(1,2,3),(4,5,6)]
-    m2_af = compute_m2_af(spins[1],num_spins,triangles)
+    m2_af = compute_m2_af(spins[1],triangles)
     @test isapprox(m2_af,1.0)
 
 end
 
 
-function test_T2_op(spins::Vector{Vector{HeisenbergSpin}})
+function test_compute_T2_op(spins::Vector{Vector{HeisenbergSpin}})
     
     num_spins = length(spins[1])
     T2_op = compute_T2_op(spins[1],num_spins)
@@ -96,6 +97,7 @@ function test_T2_op(spins::Vector{Vector{HeisenbergSpin}})
 
 end
 
-test_m2_af()
-test_T2_op(x_model(6))
+
+test_compute_m2_af()
+test_compute_T2_op(x_model(6))
 
