@@ -66,9 +66,15 @@ function compute_loop_length(spins::Vector{HeisenbergSpin},
     end
     second_spin_idx = rand(candidate_second_spin_idx[1:nn_coord_num])
 
+    loop_length = 0
     loop_length,sum_boundary_spins = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx,
                                                    second_spin_idx,max_loop_length,work,verbose)  
 
-    return loop_length
+    if mod(loop_length,2) == 0
+        return loop_length
+    else
+        return 0
+    end
+
 end
 

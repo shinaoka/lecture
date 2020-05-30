@@ -98,45 +98,6 @@ function test_compute_T2_op(spins::Vector{Vector{HeisenbergSpin}})
 end
 
 
-function test_compute_loop_length(model::JModel)
-    
-    u = SingleSpinFlipUpdater(model)
-    num_spins = model.num_spins
-    max_coord_num = maximum(updater.coord_num)
-
-    max_loop_length = 1000
-    lu = LoopUpdate(num_spins,max_loop_length)
-    work = lu.work
-    spins_idx_on_loop = lu.spin_on_loop
-    new_spins_on_loop = lu.new_spins
-
-    spins = fill((0.,0.,0.),num_spins)
-    for i in 1:num_spins
-        theta  = 10*rand(Random.GLOBAL_RNG)
-        spins[i] = (cos(theta),sin(theta),0.)
-    end
-
-    first_spin_idx = rand(1:num_spins)
-    candidate_second_spin_idx = zeros(UInt,max_coord_num)
-    for ins in 1:u.nn_coord_num[first_spin_idx]
-        candidate_second_spin_idx[ins] = u.nn_sites[ins,first_spin_idx]
-    end
-    second_spin_idx = rand(candidate_second_spin_idx[1:u.nn_coord_num[first_spin_idx]])
-    
-    sum_boundary_spins = MVector(0.,0.,0.)
-
-    target_loop_length,sum_boundary_spins = find_loop(spins,spins_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true, false)
-
-    test_loop_length = compute_loop_length(spins,u,lu,max_loop_length,verbose)
-
-    @test target_loop_length == test_loop_length
-
-end
-
-
 test_compute_m2_af()
 test_compute_T2_op(x_model(6))
 
-Random.seed!(10)
-model = ring_plus_one_model()
-test_compute_loop_length(model)
