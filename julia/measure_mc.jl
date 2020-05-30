@@ -1,9 +1,10 @@
 # For unit test measurement function moved from classical_mc.jl.
 
 include("mcmc.jl")
+include("loop_update.jl")
 
 # It is important to keep computational complexity O(num_spins)
-function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
+function compute_m2_af(spins::Vector{HeisenbergSpin},
                        triangles::Array{Tuple{Int64,Int64,Int64},1})
     
     m_af = fill((0.,0.,0.),3)
@@ -20,7 +21,7 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},num_spins::Int64,
         m2_af += sum(m_af[i].^2)
     end
 
-    return 6*m2_af/(num_spins^2)
+    return m2_af/(3*length(triangles)^2)
 end
 
 
@@ -43,5 +44,32 @@ function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)
     end
 
     return sum(T_op.^2) / (num_spins^2)
+end
+
+
+function compute_loop_length(spins::Vector{HeisenbergSpin},
+                             updater::SingleSpinFlipUpdater,
+                             loop_updater::LoopUpdater,
+                             max_loop_length,verbose)
+     
+    work = loop_updater.work
+    spins_idx_on_loop = loop_updater.spins_on_loop
+    new_spins_on_loop = loop_updater.new_spins
+
+    num_spins = updater.num_spins
+    max_coord_num = maximum(updater.coord_num)
+
+    first_spin_idx = rand(1:num_spins)
+    candidate_second_spin_idx = zeros(UInt,max_coord_num)
+    nn_coord_num = updater.nn_coord_num[first_spin_idx]
+    for ins in 1:nn_coord_num
+        candidate_second_spin_idx[ins] = updater.nn_sites[ins,first_spin_idx]
+    end
+    second_spin_idx = rand(candidate_second_spin_idx[1:nn_coord_num])
+
+    loop_length,sum_boundary_spins = find_loop(spins,spins_idx_on_loop,updater,first_spin_idx,
+                                                   second_spin_idx,max_loop_length,work,verbose)  
+
+    return loop_length
 end
 

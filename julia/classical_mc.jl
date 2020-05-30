@@ -336,16 +336,28 @@ function solve(input_file::String, comm)
             
             add!(acc, "loop_found_rate" , loop_found_rate)
             add!(acc, "loop_accept_rate", loop_acc_rate)
-  
-            # order parameters
+          
+            # loop length,candidate order parameter
+            measured_loop_length = zeros(Int64,num_temps_local)
+            for it in 1:num_temps_local 
+                measured_loop_length[it] = compute_loop_length(spins_local[it],
+                                                               updater,
+                                                               loop_updater,
+                                                               max_loop_length,
+                                                               work,verbose)
+            end
+            add!(acc,"loop_length",measured_loop_length)
+
+            # magnetic order parameters
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                m2_af[it] = compute_m2_af(spins_local[it],num_spins,upward_triangles)
+                m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
+
 
       end
       push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -404,10 +416,6 @@ function solve(input_file::String, comm)
            end
       end
      
-      for i in 1:length(upward_triangles)
-          itri = upward_triangles[i]
-          println("$(i)th triangle: $(itri[1]) $(itri[2]) $(itri[3])")
-      end
 
       for i in 1:num_temps
             println("af: $(rex.temps[i]) $(m2_af[i])")
