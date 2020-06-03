@@ -239,6 +239,14 @@ function solve(input_file::String, comm)
 
     # Init spins
     spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
+    for itemp in 1:num_temps_local
+        theta = 0.
+        for ispin in 1:num_spins
+            spins_local[itemp][ispin] = (cos(theta),sin(theta),0.)
+            theta += 2pi/3
+        end
+    end
+
     
     # Optional init spin configuration.
     is_read_spin_config     = get_param(Bool, conf, "simulation", "read_spin_config", false)
@@ -284,7 +292,7 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         
         for it in 1:num_temps_local
-            dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it], is_xy)
+            dE, acc_rate = potts_update(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it])
             energy_local[it] += dE
             single_spin_flip_acc[it] = acc_rate
         end

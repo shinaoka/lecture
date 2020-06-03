@@ -217,4 +217,33 @@ function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JMo
     return dE, num_acc/model.num_spins
 end
 
+function potts_update(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{HeisenbergSpin})
+    dE::Float64 = 0
+    num_acc     = 0
+    potts_dof   = [0.,2pi/3,4pi/3]
+    for ispin in 1:model.num_spins
+        # Compute effective field from the rest of spins
+        eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
+        for ic in 1:updater.coord_num[ispin]
+            c = updater.connection[ic, ispin]
+            eff_h = eff_h .+ (c[2]*spins[c[1]][1], c[3]*spins[c[1]][2], c[4]*spins[c[1]][3])
+        end
 
+        # Propose a new spin direction :
+        theta  = rand(potts_dof)
+        si_new = (cos(theta),sin(theta),0.)
+
+        # Flip spin
+        dE_prop = -dot(si_new .- spins[ispin], eff_h)
+        if rand(Random.GLOBAL_RNG) < exp(-beta*dE_prop)
+            spins[ispin] = si_new
+            dE += dE_prop
+            num_acc += 1
+        end
+
+        # Over relaxation.
+        spins[ispin] = (2*dot(eff_h, spins[ispin])/(norm(eff_h)^2)) .* eff_h .- spins[ispin]
+    end
+
+    return dE, num_acc/model.num_spins
+end

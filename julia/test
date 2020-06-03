@@ -3864,3 +3864,31 @@ begin
 2020年 6月 2日 火曜日 04時44分03秒 JST
 end
 2020年 6月 2日 火曜日 04時44分22秒 JST
+begin
+2020年 6月 3日 水曜日 14時54分35秒 JST
+ERROR: LoadError: UndefVarError: num_tmeps not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:242
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[42607,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 6月 3日 水曜日 14時55分03秒 JST
+begin
+2020年 6月 3日 水曜日 14時56分10秒 JST
+end
+2020年 6月 3日 水曜日 14時56分32秒 JST
