@@ -53,7 +53,6 @@ function compute_loop_length(spins::Vector{HeisenbergSpin},
      
     work = loop_updater.work
     spins_idx_on_loop = loop_updater.spins_on_loop
-    new_spins_on_loop = loop_updater.new_spins
 
     num_spins = updater.num_spins
     max_coord_num = maximum(updater.coord_num)
