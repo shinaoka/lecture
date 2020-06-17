@@ -34,9 +34,7 @@ function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)
         spin = spins[ispin]
         idx  = 1
         for (a,b,c) in Iterators.product(1:3,1:3,1:3)
-            
             T_op[idx] += spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c)+spin[b]*delta(c,a)+spin[c]*delta(a,b))/5
-          
             idx += 1
         end
 
