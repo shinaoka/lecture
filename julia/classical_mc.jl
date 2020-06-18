@@ -346,7 +346,11 @@ function solve(input_file::String, comm)
                                                                max_loop_length,
                                                                false)
             end
-            add!(acc,"loop_length",measured_loop_length)
+ 
+            if !in(0,measured_loop_length)
+                add!(acc,"loop_length",measured_loop_length)
+            end
+
 
             # magnetic order parameters
             m2_af = zeros(Float64,num_temps_local)

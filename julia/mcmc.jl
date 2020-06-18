@@ -216,3 +216,5 @@ function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JMo
 
     return dE, num_acc/model.num_spins
 end
+
+

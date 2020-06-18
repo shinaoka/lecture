@@ -1,4 +1,6 @@
 # For unit test measurement function moved from classical_mc.jl.
+using FFTW
+using LsqFit
 include("mcmc.jl")
 include("loop_update.jl")
 
@@ -34,9 +36,7 @@ function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)
         spin = spins[ispin]
         idx  = 1
         for (a,b,c) in Iterators.product(1:3,1:3,1:3)
-            
             T_op[idx] += spin[a]*spin[b]*spin[c] - (spin[a]*delta(b,c)+spin[b]*delta(c,a)+spin[c]*delta(a,b))/5
-          
             idx += 1
         end
 
@@ -53,7 +53,6 @@ function compute_loop_length(spins::Vector{HeisenbergSpin},
      
     work = loop_updater.work
     spins_idx_on_loop = loop_updater.spins_on_loop
-    new_spins_on_loop = loop_updater.new_spins
 
     num_spins = updater.num_spins
     max_coord_num = maximum(updater.coord_num)
@@ -75,5 +74,30 @@ function compute_loop_length(spins::Vector{HeisenbergSpin},
         return 0
     end
 
+end
+
+
+function compute_1dcorr(spins::Vector{IsingSpin})
+    
+    num_spins = length(spins)
+    spins_q = fft(spins)
+    corr_q  = spins_q .* conj(spins_q)
+    
+    return real(ifft(corr_q)) / num_spins
+end
+
+
+function compute_corr(spins::Vector{HeisenbergSpin})
+
+
+end
+
+
+function compute_corr_length(corr,rdata,param_init)
+  
+    model(t,p) = p[1]*exp.(-t/p[2])
+    fit = curve_fit(model,rdata,corr,param_init)
+    
+    return fit.param[2]
 end
 

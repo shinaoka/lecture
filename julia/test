@@ -4508,4 +4508,38 @@ begin
 2020年 5月31日 日曜日 02時17分40秒 JST
 end
 2020年 5月31日 日曜日 02時17分57秒 JST
+<<<<<<< HEAD
 >>>>>>> a5361494bc2d8ede3c9cefa84bac3d5697d3b05f
+=======
+begin
+2020年 6月 2日 火曜日 04時42分05秒 JST
+ERROR: LoadError: KeyError: key "loop_length" not found
+Stacktrace:
+ [1] getindex at ./dict.jl:477 [inlined]
+ [2] mean(::Main.ClassicalMC.Accumulator, ::String) at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:26
+ [3] mean_gather(::Main.ClassicalMC.Accumulator, ::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/accumulator.jl:31
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Desktop/lecture/julia/classical_mc.jl:386
+ [5] macro expansion at ./util.jl:175 [inlined]
+ [6] top-level scope at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:21
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Desktop/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45075,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 6月 2日 火曜日 04時42分27秒 JST
+begin
+2020年 6月 2日 火曜日 04時44分03秒 JST
+end
+2020年 6月 2日 火曜日 04時44分22秒 JST
+>>>>>>> c42054cfcabb8e45cfbfe37d804b8ae632fb6722
