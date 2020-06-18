@@ -98,6 +98,55 @@ function test_compute_T2_op(spins::Vector{Vector{HeisenbergSpin}})
 end
 
 
+function test_compute_1dcorr(spins::Vector{IsingSpin})
+   
+    num_spins = length(spins)
+
+    corr_rough = zeros(Float64,num_spins) 
+    for i in 1:num_spins
+        for j in 1:num_spins
+            if num_spins < i+j < 2*num_spins
+                corr_rough[j] += spins[i]*spins[mod(i+j,num_spins)]
+                continue
+            elseif i+j == 2*num_spins
+                corr_rough[num_spins] += spins[num_spins]^2
+                continue
+            end
+        corr_rough[j] += spins[i]*spins[i+j]
+        end
+    end
+    prepend!(corr_rough,corr_rough[end])
+    pop!(corr_rough)
+    corr_rough /= num_spins
+
+    corr_wfft  = compute_1dcorr(spins) 
+  
+    #println("rough: ",corr_rough)
+    #println("wfft: ",corr_wfft)
+  
+    @test all(isapprox.(corr_rough,corr_wfft))
+ 
+    rdata = [(i-1) for i in 1:num_spins]
+    param_init = [0.5,0.5]
+    corr_length_wfft  = compute_corr_length(corr_wfft ,rdata,param_init)
+    corr_length_rough = compute_corr_length(corr_rough,rdata,param_init)
+
+    println(corr_length_wfft)
+    println(corr_length_rough)
+  
+    @test isapprox(corr_length_wfft,corr_length_rough)
+
+end
+
+
+function test_compute_corr(spins::Vector{Vector{HeisenbergSpin}})
+  
+end 
+    
+
 test_compute_m2_af()
 test_compute_T2_op(x_model(6))
 
+num_spins = 100
+test_ising_spins = [rand(Int8.([-1,1])) for i in 1:num_spins]
+test_compute_1dcorr(test_ising_spins)

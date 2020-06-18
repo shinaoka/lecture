@@ -1,4 +1,6 @@
 # For unit test measurement function moved from classical_mc.jl.
+using FFTW
+using LsqFit
 include("mcmc.jl")
 include("loop_update.jl")
 
@@ -72,5 +74,30 @@ function compute_loop_length(spins::Vector{HeisenbergSpin},
         return 0
     end
 
+end
+
+
+function compute_1dcorr(spins::Vector{IsingSpin})
+    
+    num_spins = length(spins)
+    spins_q = fft(spins)
+    corr_q  = spins_q .* conj(spins_q)
+    
+    return real(ifft(corr_q)) / num_spins
+end
+
+
+function compute_corr(spins::Vector{HeisenbergSpin})
+
+
+end
+
+
+function compute_corr_length(corr,rdata,param_init)
+  
+    model(t,p) = p[1]*exp.(-t/p[2])
+    fit = curve_fit(model,rdata,corr,param_init)
+    
+    return fit.param[2]
 end
 
