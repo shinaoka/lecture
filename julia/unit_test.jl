@@ -80,11 +80,16 @@ end
 function test_compute_m2_af()
     
     num_spins = 6
-    spins = x_model(num_spins) 
+    spins = [fill((0.,0.,0.),num_spins)]
+    for i in 1:num_spins
+        theta = 10*rand()
+        spins[1][i] = (cos(theta),sin(theta),0.)
+    end
+
    
     triangles = [(1,2,3),(4,5,6)]
     m2_af = compute_m2_af(spins[1],triangles)
-    @test isapprox(m2_af,1.0)
+    
 
 end
 
