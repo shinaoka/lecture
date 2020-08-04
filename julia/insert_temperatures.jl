@@ -29,8 +29,7 @@ function insert_temps(num_insert,begin_insert_idx,end_insert_idx,file_name)
     temps = read_temps(file_name)
     num_temps = length(temps)
 
-    @assert begin_insert_idx < end_insert_idx 
-    @assert 1 <= begin_insert_idx < num_temps && end_insert_idx <= num_temps
+    @assert 1 <= begin_insert_idx < end_insert_idx <= num_temps
 
     inserted_temps= Vector{Float64}(undef, 0)
 

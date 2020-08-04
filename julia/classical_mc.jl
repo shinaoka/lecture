@@ -444,8 +444,11 @@ function solve(input_file::String, comm)
           println(" rank=", i-1, " : $t")
       end
     
-      
-      write_spin_config("spin_config.txt",spins_local[1])
+
+      for itemp in 1:num_temps
+          write_spin_config("spin_configs/spin_config$(itemp).txt",spins_local[itemp]) 
+      end
+
           
       # overwrite initial temperature distribution.        
       open("temperatures.txt","w") do fp
