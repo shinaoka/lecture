@@ -483,13 +483,6 @@ function solve(input_file::String, comm)
           end
       end
       
-      # Create reference table of temperatures.
-      open("ref_temperatures.txt","w") do fp
-          for i in 1:num_temps
-              println(fp, i, " ", rex.temps[i])
-          end
-      end
-
 
     end
     flush(stdout)
