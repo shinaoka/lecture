@@ -1,6 +1,6 @@
 #parameters for temepratures.
 num_temps = 1
-min_T = 1e-6
+min_T = 1e-2
 max_T = min_T
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)

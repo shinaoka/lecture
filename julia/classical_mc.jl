@@ -38,6 +38,7 @@ function read_temps(temperature_file::String)
     return temps
 end
 
+
 # Distribute temperature over MPI processes
 function distribute_temps(rank, num_temps, num_proc)
     num_temps_local = fill(trunc(Int, num_temps/num_proc), (num_proc,))
@@ -114,6 +115,9 @@ function read_spin_config(file_name::String,num_spins::Int64)
             sx = parse(Float64, str[1])
             sy = parse(Float64, str[2])
             sz = parse(Float64, str[3])
+            
+            @assert isapprox(sx^2+sy^2+sz^2, 1.0)
+
             spins[i] = (sx,sy,sz)
         end
     end
@@ -241,14 +245,17 @@ function solve(input_file::String, comm)
     spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
     
     # Optional init spin configuration.
-    is_read_spin_config     = get_param(Bool, conf, "simulation", "read_spin_config", false)
+    is_read_spin_config = get_param(Bool, conf, "simulation", "read_spin_config", false)
     if is_read_spin_config
         spin_config_file = retrieve(conf, "model", "spin_config")
         spins_local = fill(read_spin_config(spin_config_file,num_spins),num_temps_local)
     end
 
-    energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
+    # Create upward triangles for computing AF order parameter m2_af.
+    utriangles_file = retrieve(conf, "model", "utriangles")
+    upward_triangles = read_upward_triangles(utriangles_file,num_spins)
 
+    energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
     # Replica exchange
     rex = ReplicaExchange{HeisenbergSpin}(temps, start_idx, end_idx, num_spins)
     temps = 0
@@ -269,6 +276,20 @@ function solve(input_file::String, comm)
     utriangles_file = retrieve(conf, "model", "utriangles")
     upward_triangles = read_upward_triangles(utriangles_file,num_spins)
 
+    # Non-equilibrium relaxation method.
+    is_non_eq_relax = get_param(Bool, conf, "simulation", "non_eq_relax", false)
+    if is_non_eq_relax
+        init_non_eq_state_file = retrieve(conf,"model","init_non_eq_state")
+        spins_local = fill(read_spin_config(init_non_eq_state_file,num_spins),num_temps_local)
+        # compute order parameter at an initial time.
+        op_time_evo = [[] for it in 1:num_temps_local]
+        for it in 1:num_temps_local
+            push!(op_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
+            #push!(op_time_evo[it],compute_T2_op(spins_local[it],num_spins))
+        end
+ 
+        println("DEBUG A: ", op_time_evo[1])
+    end
 
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
@@ -339,6 +360,7 @@ function solve(input_file::String, comm)
           
             # loop length,candidate order parameter
             measured_loop_length = zeros(Int64,num_temps_local)
+            """
             for it in 1:num_temps_local 
                 measured_loop_length[it] = compute_loop_length(spins_local[it],
                                                                updater,
@@ -350,7 +372,8 @@ function solve(input_file::String, comm)
             if !in(0,measured_loop_length)
                 add!(acc,"loop_length",measured_loop_length)
             end
-
+            """
+            add!(acc,"loop_length",measured_loop_length)
 
             # magnetic order parameters
             m2_af = zeros(Float64,num_temps_local)
@@ -362,6 +385,16 @@ function solve(input_file::String, comm)
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
 
+            # non-equilibrium relaxation method.
+            if is_non_eq_relax
+                for it in 1:num_temps_local
+                    temp_op = compute_m2_af(spins_local[it],upward_triangles)
+                    push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
+
+                    #temp_op = compute_T2_op(spins_local[it],num_spins)
+                    #push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
+                end
+            end
 
       end
       push!(elpsCPUtime, CPUtime_us() - ts_start)
@@ -429,6 +462,32 @@ function solve(input_file::String, comm)
       for i in 1:num_temps
             println("af: $(rex.temps[i]) $(m2_af[i])")
             println("op: $(rex.temps[i]) $(T2_op[i])")
+      end
+
+      # Output time evolution of order parameter.
+      if is_non_eq_relax
+          for itemp in 1:num_temps
+              open("op_time_evo_$(itemp).dat","w") do fp  
+
+                  for itime in 1:length(op_time_evo[itemp])
+                      println(fp, itime, " ", op_time_evo[itemp][itime])
+                  end  
+              end
+          end
+
+          # Create reference table of temperatures.
+          open("ref_temperatures.txt","w") do fp
+              for i in 1:num_temps
+                  println(fp, i, " ", rex.temps[i])
+              end
+          end
+      end
+      
+      # Create reference table of temperatures.
+      open("ref_temperatures.txt","w") do fp
+          for i in 1:num_temps
+              println(fp, i, " ", rex.temps[i])
+          end
       end
 
 

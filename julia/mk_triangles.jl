@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 3
+L = 16
 
 function mk_upward_triangles(file_name::String,L::Int64)
     

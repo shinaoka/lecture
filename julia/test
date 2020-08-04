@@ -4542,4 +4542,163 @@ begin
 2020年 6月 2日 火曜日 04時44分03秒 JST
 end
 2020年 6月 2日 火曜日 04時44分22秒 JST
+<<<<<<< HEAD
 >>>>>>> c42054cfcabb8e45cfbfe37d804b8ae632fb6722
+=======
+begin
+2020年 7月28日 火曜日 15時40分28秒 JST
+ERROR: LoadError: UndefVarError: itimes not defined
+Stacktrace:
+ [1] (::Main.ClassicalMC.var"#57#64"{Int64})(::IOStream) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:459
+ [2] open(::Main.ClassicalMC.var"#57#64"{Int64}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [3] open at ./io.jl:296 [inlined]
+ [4] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:456
+ [5] macro expansion at ./util.jl:175 [inlined]
+ [6] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [7] include(::Module, ::String) at ./Base.jl:377
+ [8] exec_options(::Base.JLOptions) at ./client.jl:288
+ [9] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[22380,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 7月28日 火曜日 15時41分10秒 JST
+begin
+2020年 7月28日 火曜日 15時43分08秒 JST
+end
+2020年 7月28日 火曜日 15時43分41秒 JST
+begin
+2020年 7月31日 金曜日 09時27分21秒 JST
+end
+2020年 7月31日 金曜日 09時27分54秒 JST
+begin
+2020年 7月31日 金曜日 09時37分03秒 JST
+end
+2020年 7月31日 金曜日 09時38分02秒 JST
+begin
+2020年 7月31日 金曜日 10時19分18秒 JST
+end
+2020年 7月31日 金曜日 10時19分56秒 JST
+begin
+2020年 8月 3日 月曜日 13時51分28秒 JST
+end
+2020年 8月 3日 月曜日 13時52分07秒 JST
+begin
+2020年 8月 3日 月曜日 13時55分20秒 JST
+end
+2020年 8月 3日 月曜日 13時55分53秒 JST
+begin
+2020年 8月 3日 月曜日 13時57分45秒 JST
+end
+2020年 8月 3日 月曜日 13時58分19秒 JST
+begin
+2020年 8月 3日 月曜日 14時00分54秒 JST
+end
+2020年 8月 3日 月曜日 14時01分30秒 JST
+begin
+2020年 8月 3日 月曜日 14時04分54秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+jl_deserialize_value at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:2242
+jl_deserialize_value_array at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:1606
+jl_uncompress_ast at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:2654
+jl_compile_linfo at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:1192
+emit_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:3323
+emit_expr at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:4139
+emit_ssaval_assign at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:3851
+emit_stmtpos at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:0 [inlined]
+emit_function at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:6671
+jl_compile_linfo at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:1257
+emit_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:3323
+emit_expr at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:4139
+emit_ssaval_assign at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:3851
+emit_stmtpos at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:0 [inlined]
+emit_function at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:6671
+jl_compile_linfo at /Users/julia/buildbot/worker/package_macos64/build/src/codegen.cpp:1257
+jl_compile_method_internal at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1889
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2153 [inlined]
+jl_apply_generic at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2322
+macro expansion at ./util.jl:175 [inlined]
+top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:808
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+exec_options at ./client.jl:288
+_start at ./client.jl:484
+jfptr__start_2076.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+true_main at /usr/local/bin/julia (unknown line)
+main at /usr/local/bin/julia (unknown line)
+unknown function (ip: 0x0)
+Allocations: 44589334 (Pool: 44578386; Big: 10948); GC: 46
+LLVM ERROR: starting new .cfi frame before finishing the previous one
+end
+2020年 8月 3日 月曜日 14時05分23秒 JST
+begin
+2020年 8月 3日 月曜日 14時07分32秒 JST
+ERROR: LoadError: AssertionError: !match num_spins. See 2d.ini and head of spin_config.txt 
+Stacktrace:
+ [1] (::Main.ClassicalMC.var"#48#49"{Int64,Array{Tuple{Float64,Float64,Float64},1}})(::IOStream) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:110
+ [2] open(::Main.ClassicalMC.var"#48#49"{Int64,Array{Tuple{Float64,Float64,Float64},1}}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [3] open at ./io.jl:296 [inlined]
+ [4] read_spin_config at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:108 [inlined]
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:279
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[25978,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月 3日 月曜日 14時08分06秒 JST
+begin
+2020年 8月 3日 月曜日 14時10分42秒 JST
+end
+2020年 8月 3日 月曜日 14時11分16秒 JST
+begin
+2020年 8月 3日 月曜日 14時14分26秒 JST
+end
+2020年 8月 3日 月曜日 14時15分07秒 JST
+begin
+2020年 8月 3日 月曜日 14時24分18秒 JST
+end
+2020年 8月 3日 月曜日 14時25分23秒 JST
+begin
+2020年 8月 3日 月曜日 15時13分12秒 JST
+end
+2020年 8月 3日 月曜日 15時13分51秒 JST
+begin
+2020年 8月 3日 月曜日 15時23分08秒 JST
+end
+2020年 8月 3日 月曜日 15時23分43秒 JST
+begin
+2020年 8月 3日 月曜日 15時30分12秒 JST
+end
+2020年 8月 3日 月曜日 15時30分48秒 JST
+begin
+2020年 8月 3日 月曜日 15時38分22秒 JST
+end
+2020年 8月 3日 月曜日 15時39分05秒 JST
+>>>>>>> 967762f022a25c64ded387afef9b335622552e86
