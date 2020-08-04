@@ -6,9 +6,16 @@ function write_init_non_eq_state(L)
 
         println(fp,num_spins)
         for i in 1:num_spins
-            println(fp, i, " ", cos(2i*pi/3), " ", sin(2i*pi/3), " " , 0.0)
+        
+            """
+            theta = 10*rand()
+            phi   = 10*rand()
+            site  = (sin(theta)cos(phi),sin(theta)sin(phi),cos(theta))
+            """
+            site = (1.,0.,0.)
+            println(fp,i," ",site[1]," ",site[2]," ",site[3])
         end
     end
 end
 
-write_init_non_eq_state(48)
+write_init_non_eq_state(16)

@@ -38,6 +38,7 @@ function read_temps(temperature_file::String)
     return temps
 end
 
+
 # Distribute temperature over MPI processes
 function distribute_temps(rank, num_temps, num_proc)
     num_temps_local = fill(trunc(Int, num_temps/num_proc), (num_proc,))
@@ -114,6 +115,9 @@ function read_spin_config(file_name::String,num_spins::Int64)
             sx = parse(Float64, str[1])
             sy = parse(Float64, str[2])
             sz = parse(Float64, str[3])
+            
+            @assert isapprox(sx^2+sy^2+sz^2, 1.0)
+
             spins[i] = (sx,sy,sz)
         end
     end
