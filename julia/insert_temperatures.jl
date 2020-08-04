@@ -1,4 +1,3 @@
-include("mk_temperatures.jl")
 num_insert = 100
 begin_idx  = 1
 end_idx    = 2
@@ -30,7 +29,7 @@ function insert_temps(num_insert,begin_insert_idx,end_insert_idx,file_name)
     temps = read_temps(file_name)
     num_temps = length(temps)
 
-    @assert begin_insert_idx < end_insert_idx
+    @assert begin_insert_idx < end_insert_idx 
     @assert 1 <= begin_insert_idx < num_temps && end_insert_idx <= num_temps
 
     inserted_temps= Vector{Float64}(undef, 0)
@@ -46,7 +45,7 @@ function insert_temps(num_insert,begin_insert_idx,end_insert_idx,file_name)
         push!(inserted_temps,temp)
     end
 
-    for idx in end_insert_idx:num_temps
+    for idx in end_insert_idx+1:num_temps
         push!(inserted_temps,temps[idx])
     end
 
