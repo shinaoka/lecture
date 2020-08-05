@@ -4104,3 +4104,128 @@ begin
 2020年 8月 4日 火曜日 19時51分56秒 JST
 end
 2020年 8月 4日 火曜日 19時52分41秒 JST
+begin
+2020年 8月 5日 水曜日 15時11分51秒 JST
+
+signal (15): Terminated: 15
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/mcmc.jl:3
+jl_ast_flag_inferred at /Users/julia/buildbot/worker/package_macos64/build/src/dump.c:2698
+jl_rettype_inferred at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:254
+inf_for_methodinstance at ./compiler/utilities.jl:122 [inlined]
+inf_for_methodinstance at ./compiler/utilities.jl:122 [inlined]
+typeinf_edge at ./compiler/typeinfer.jl:459
+abstract_call_method at ./compiler/abstractinterpretation.jl:404
+abstract_call_gf_by_type at ./compiler/abstractinterpretation.jl:101
+abstract_call_known at ./compiler/abstractinterpretation.jl:873
+abstract_call at ./compiler/abstractinterpretation.jl:895
+abstract_call at ./compiler/abstractinterpretation.jl:880
+abstract_eval at ./compiler/abstractinterpretation.jl:974
+typeinf_local at ./compiler/abstractinterpretation.jl:1227
+typeinf_nocycle at ./compiler/abstractinterpretation.jl:1283
+typeinf at ./compiler/typeinfer.jl:12
+typeinf_ext at ./compiler/typeinfer.jl:574
+typeinf_ext at ./compiler/typeinfer.jl:605
+jfptr_typeinf_ext_1.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+jl_type_infer at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:213
+jl_compile_method_internal at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:1887
+_jl_invoke at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2153 [inlined]
+jl_apply_generic at /Users/julia/buildbot/worker/package_macos64/build/src/gf.c:2322
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+call_require at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:399 [inlined]
+eval_import_path at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:436
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:656
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+include at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:1
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+do_call at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:369
+eval_body at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:0
+jl_interpret_toplevel_thunk at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:911
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:814
+jl_eval_module_expr at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:181
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:640
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./client.jl:439
+jl_apply at /Users/julia/buildbot/worker/package_macos64/build/src/./julia.h:1692 [inlined]
+do_call at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:369
+eval_body at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:0
+jl_interpret_toplevel_thunk at /Users/julia/buildbot/worker/package_macos64/build/src/interpreter.c:911
+jl_toplevel_eval_flex at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:814
+jl_parse_eval_all at /Users/julia/buildbot/worker/package_macos64/build/src/ast.c:872
+jl_load at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:872 [inlined]
+jl_load_ at /Users/julia/buildbot/worker/package_macos64/build/src/toplevel.c:879
+include at ./Base.jl:377
+exec_options at ./client.jl:288
+_start at ./client.jl:484
+jfptr__start_2076.clone_1 at /Applications/Julia-1.4.app/Contents/Resources/julia/lib/julia/sys.dylib (unknown line)
+true_main at /usr/local/bin/julia (unknown line)
+main at /usr/local/bin/julia (unknown line)
+unknown function (ip: 0x0)
+Allocations: 2502 (Pool: 2493; Big: 9); GC: 0
+end
+2020年 8月 5日 水曜日 15時11分56秒 JST
+begin
+2020年 8月 5日 水曜日 15時12分26秒 JST
+ERROR: LoadError: AssertionError: !match num_spins. See 2d.ini and head of spin_config.txt 
+Stacktrace:
+ [1] (::Main.ClassicalMC.var"#48#49"{Int64,Array{Tuple{Float64,Float64,Float64},1}})(::IOStream) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:111
+ [2] open(::Main.ClassicalMC.var"#48#49"{Int64,Array{Tuple{Float64,Float64,Float64},1}}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [3] open at ./io.jl:296 [inlined]
+ [4] read_spin_config at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:109 [inlined]
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:283
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[40350,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月 5日 水曜日 15時12分53秒 JST
+begin
+2020年 8月 5日 水曜日 15時18分17秒 JST
+ERROR: LoadError: AssertionError: isapprox(sx ^ 2 + sy ^ 2 + sz ^ 2, 1.0)
+Stacktrace:
+ [1] (::Main.ClassicalMC.var"#48#49"{Int64,Array{Tuple{Float64,Float64,Float64},1}})(::IOStream) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:119
+ [2] open(::Main.ClassicalMC.var"#48#49"{Int64,Array{Tuple{Float64,Float64,Float64},1}}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [3] open at ./io.jl:296 [inlined]
+ [4] read_spin_config at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:109 [inlined]
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:283
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[40928,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月 5日 水曜日 15時18分43秒 JST
+begin
+2020年 8月 5日 水曜日 15時20分12秒 JST
+end
+2020年 8月 5日 水曜日 15時20分38秒 JST
