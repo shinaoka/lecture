@@ -444,8 +444,11 @@ function solve(input_file::String, comm)
           println(" rank=", i-1, " : $t")
       end
     
-      
-      write_spin_config("spin_config.txt",spins_local[1])
+
+      for itemp in 1:num_temps
+          write_spin_config("spin_configs/spin_config$(itemp).txt",spins_local[itemp]) 
+      end
+
           
       # overwrite initial temperature distribution.        
       open("temperatures.txt","w") do fp
@@ -456,12 +459,12 @@ function solve(input_file::String, comm)
       end
        
       for i in 1:num_temps
-          println("ll: $(rex.temps[i]) $(ave_loop_length[i])")
+          #println("ll: $(rex.temps[i]) $(ave_loop_length[i])")
       end
 
       for i in 1:num_temps
-            println("af: $(rex.temps[i]) $(m2_af[i])")
-            println("op: $(rex.temps[i]) $(T2_op[i])")
+          println("af: $(rex.temps[i]) $(m2_af[i])")
+          println("op: $(rex.temps[i]) $(T2_op[i])")
       end
 
       # Output time evolution of order parameter.

@@ -4744,4 +4744,47 @@ begin
 2020年 8月 4日 火曜日 12時52分53秒 JST
 end
 2020年 8月 4日 火曜日 12時53分31秒 JST
+<<<<<<< HEAD
 >>>>>>> 0560655013d37bbd4e8d001649079d935a8db5c5
+=======
+begin
+2020年 8月 4日 火曜日 16時22分31秒 JST
+end
+2020年 8月 4日 火曜日 16時27分08秒 JST
+begin
+2020年 8月 4日 火曜日 16時46分39秒 JST
+ERROR: LoadError: SystemError: opening file "spin_configs/spin_config1.txt": No such file or directory
+Stacktrace:
+ [1] systemerror(::String, ::Int32; extrainfo::Nothing) at ./error.jl:168
+ [2] #systemerror#50 at ./error.jl:167 [inlined]
+ [3] systemerror at ./error.jl:167 [inlined]
+ [4] open(::String; read::Nothing, write::Nothing, create::Nothing, truncate::Bool, append::Nothing) at ./iostream.jl:254
+ [5] open(::String, ::String) at ./iostream.jl:310
+ [6] open(::Main.ClassicalMC.var"#50#51"{Array{Tuple{Float64,Float64,Float64},1},Int64}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:296
+ [7] open at ./io.jl:296 [inlined]
+ [8] write_spin_config(::String, ::Array{Tuple{Float64,Float64,Float64},1}) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:131
+ [9] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:449
+ [10] macro expansion at ./util.jl:175 [inlined]
+ [11] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [12] include(::Module, ::String) at ./Base.jl:377
+ [13] exec_options(::Base.JLOptions) at ./client.jl:288
+ [14] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[63051,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月 4日 火曜日 16時47分12秒 JST
+begin
+2020年 8月 4日 火曜日 16時56分55秒 JST
+end
+2020年 8月 4日 火曜日 16時57分33秒 JST
+>>>>>>> 7aa8b437f593ab8fd0ce3b495d3b2ca7a46e2775
