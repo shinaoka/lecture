@@ -278,17 +278,22 @@ function solve(input_file::String, comm)
 
     # Non-equilibrium relaxation method.
     is_non_eq_relax = get_param(Bool, conf, "simulation", "non_eq_relax", false)
+    ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
     if is_non_eq_relax
         init_non_eq_state_file = retrieve(conf,"model","init_non_eq_state")
         spins_local = fill(read_spin_config(init_non_eq_state_file,num_spins),num_temps_local)
         # compute order parameter at an initial time.
         op_time_evo = [[] for it in 1:num_temps_local]
         for it in 1:num_temps_local
-            push!(op_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
-            #push!(op_time_evo[it],compute_T2_op(spins_local[it],num_spins))
+            #push!(op_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
+            push!(op_time_evo[it],compute_T2_op(spins_local[it],num_spins))
         end
  
         println("DEBUG A: ", op_time_evo[1])
+ 
+        # Turn off the replica exchange and loop update.
+        ex_rex         = false 
+        loop_num_trial = 0
     end
 
     for sweep in 1:num_sweeps
@@ -305,7 +310,9 @@ function solve(input_file::String, comm)
         ts_start = CPUtime_us()
         
         for it in 1:num_temps_local
+            
             dE, acc_rate = gaussian_move(updater, 1/rex.temps[it+start_idx-1], model, spins_local[it], is_xy)
+            
             energy_local[it] += dE
             single_spin_flip_acc[it] = acc_rate
         end
@@ -322,7 +329,7 @@ function solve(input_file::String, comm)
          
         # Replica exchange
         ts_start = CPUtime_us()
-        if mod(sweep, ex_interval) == 0
+        if mod(sweep, ex_interval) == 0 && ex_rex == true
             perform!(rex, spins_local, energy_local, comm)
         end
         if opt_temps_dist
@@ -388,11 +395,11 @@ function solve(input_file::String, comm)
             # non-equilibrium relaxation method.
             if is_non_eq_relax
                 for it in 1:num_temps_local
-                    temp_op = compute_m2_af(spins_local[it],upward_triangles)
-                    push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
-
-                    #temp_op = compute_T2_op(spins_local[it],num_spins)
+                    #temp_op = compute_m2_af(spins_local[it],upward_triangles)
                     #push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
+
+                    temp_op = compute_T2_op(spins_local[it],num_spins)
+                    push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
                 end
             end
 
@@ -421,6 +428,11 @@ function solve(input_file::String, comm)
   T2_op = mean_gather(acc, "T2_op", comm)
   flush(stdout)
   MPI.Barrier(comm)
+
+  for it in 1:num_temps_local
+      write_spin_config("spin_configs/spin_config$(it).txt",spins_local[it])
+  end
+
   if rank == 0
       println()
       println("<E> <E^2> <C>")
@@ -445,12 +457,7 @@ function solve(input_file::String, comm)
       end
     
 
-      for itemp in 1:num_temps
-          write_spin_config("spin_configs/spin_config$(itemp).txt",spins_local[itemp]) 
-      end
-
-          
-      # overwrite initial temperature distribution.        
+      # update initial temperature distribution.        
       open("temperatures.txt","w") do fp
            println(fp,num_temps)
            for i in 1:num_temps

@@ -1,5 +1,5 @@
 
-L = 3
+L = 96
 
 function write_init_non_eq_state(L)
      

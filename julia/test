@@ -4229,3 +4229,91 @@ begin
 2020年 8月 5日 水曜日 15時20分12秒 JST
 end
 2020年 8月 5日 水曜日 15時20分38秒 JST
+begin
+2020年 8月 5日 水曜日 16時14分15秒 JST
+end
+2020年 8月 5日 水曜日 16時14分39秒 JST
+begin
+2020年 8月 5日 水曜日 16時17分36秒 JST
+end
+2020年 8月 5日 水曜日 16時18分32秒 JST
+begin
+2020年 8月 5日 水曜日 16時26分21秒 JST
+ERROR: LoadError: AssertionError: !match num_spins. See 2d.ini and head of Jij.txt
+Stacktrace:
+ [1] (::Main.ClassicalMC.var"#44#45"{Int64,Array{Tuple{UInt32,UInt32,Float64,Float64,Float64,Int64},1}})(::IOStream) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:59
+ [2] open(::Main.ClassicalMC.var"#44#45"{Int64,Array{Tuple{UInt32,UInt32,Float64,Float64,Float64,Int64},1}}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [3] open at ./io.jl:296 [inlined]
+ [4] read_Jij at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:57 [inlined]
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:228
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[37157,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月 5日 水曜日 16時26分53秒 JST
+begin
+2020年 8月 5日 水曜日 16時34分14秒 JST
+end
+2020年 8月 5日 水曜日 16時35分25秒 JST
+begin
+2020年 8月 5日 水曜日 16時38分08秒 JST
+end
+2020年 8月 5日 水曜日 16時46分51秒 JST
+begin
+2020年 8月 5日 水曜日 16時54分51秒 JST
+end
+2020年 8月 5日 水曜日 17時03分02秒 JST
+begin
+2020年 8月 5日 水曜日 17時06分11秒 JST
+end
+2020年 8月 5日 水曜日 17時07分29秒 JST
+begin
+2020年 8月 5日 水曜日 17時16分04秒 JST
+end
+2020年 8月 5日 水曜日 17時17分29秒 JST
+begin
+2020年 8月 5日 水曜日 17時55分21秒 JST
+ERROR: LoadError: AssertionError: !match num_spins. See 2d.ini and head of Jij.txt
+Stacktrace:
+ [1] (::Main.ClassicalMC.var"#44#45"{Int64,Array{Tuple{UInt32,UInt32,Float64,Float64,Float64,Int64},1}})(::IOStream) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:59
+ [2] open(::Main.ClassicalMC.var"#44#45"{Int64,Array{Tuple{UInt32,UInt32,Float64,Float64,Float64,Int64},1}}, ::String, ::Vararg{String,N} where N; kwargs::Base.Iterators.Pairs{Union{},Union{},Tuple{},NamedTuple{(),Tuple{}}}) at ./io.jl:298
+ [3] open at ./io.jl:296 [inlined]
+ [4] read_Jij at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:57 [inlined]
+ [5] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:228
+ [6] macro expansion at ./util.jl:175 [inlined]
+ [7] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [8] include(::Module, ::String) at ./Base.jl:377
+ [9] exec_options(::Base.JLOptions) at ./client.jl:288
+ [10] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[35159,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月 5日 水曜日 17時56分10秒 JST
+begin
+2020年 8月 5日 水曜日 18時22分24秒 JST
+end
+2020年 8月 5日 水曜日 18時40分21秒 JST

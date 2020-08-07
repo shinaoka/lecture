@@ -1,20 +1,124 @@
-2020年 8月 5日 水曜日 15時20分12秒 JST
+2020年 8月 5日 水曜日 18時22分24秒 JST
 num of temperatures = 1
 Starting simulation...
-DEBUG A: Any[1.0]
+DEBUG A: Any[0.24999999999990266]
+Done 2008 sweeps
+Done 4181 sweeps
+Done 6354 sweeps
+Done 8459 sweeps
+Done 10207 sweeps
+Done 11112 sweeps
+Done 12001 sweeps
+Done 12899 sweeps
+Done 13825 sweeps
+Done 14745 sweeps
+Done 15676 sweeps
+Done 16254 sweeps
+Done 17123 sweeps
+Done 17942 sweeps
+Done 18817 sweeps
+Done 19761 sweeps
+Done 20706 sweeps
+Done 21668 sweeps
+Done 22617 sweeps
+Done 23582 sweeps
+Done 24542 sweeps
+Done 25372 sweeps
+Done 26207 sweeps
+Done 27008 sweeps
+Done 27923 sweeps
+Done 28817 sweeps
+Done 29788 sweeps
+Done 30776 sweeps
+Done 31768 sweeps
+Done 32780 sweeps
+Done 33790 sweeps
+Done 34794 sweeps
+Done 35779 sweeps
+Done 36739 sweeps
+Done 37702 sweeps
+Done 38573 sweeps
+Done 39141 sweeps
+Done 39894 sweeps
+Done 40646 sweeps
+Done 41534 sweeps
+Done 42479 sweeps
+Done 43462 sweeps
+Done 44473 sweeps
+Done 45433 sweeps
+Done 46401 sweeps
+Done 47396 sweeps
+Done 48401 sweeps
+Done 49358 sweeps
+Done 50254 sweeps
+Done 51182 sweeps
+Done 52127 sweeps
+Done 53018 sweeps
+Done 53960 sweeps
+Done 54919 sweeps
+Done 55722 sweeps
+Done 56585 sweeps
+Done 57407 sweeps
+Done 58329 sweeps
+Done 59244 sweeps
+Done 60179 sweeps
+Done 61119 sweeps
+Done 62052 sweeps
+Done 62960 sweeps
+Done 63822 sweeps
+Done 64749 sweeps
+Done 65690 sweeps
+Done 66608 sweeps
+Done 67540 sweeps
+Done 68431 sweeps
+Done 69168 sweeps
+Done 70082 sweeps
+Done 71037 sweeps
+Done 71922 sweeps
+Done 72833 sweeps
+Done 73731 sweeps
+Done 74651 sweeps
+Done 75553 sweeps
+Done 76399 sweeps
+Done 77302 sweeps
+Done 78201 sweeps
+Done 79144 sweeps
+Done 80092 sweeps
+Done 81038 sweeps
+Done 81924 sweeps
+Done 82880 sweeps
+Done 83825 sweeps
+Done 84731 sweeps
+Done 85662 sweeps
+Done 86618 sweeps
+Done 87560 sweeps
+Done 88466 sweeps
+Done 89291 sweeps
+Done 89966 sweeps
+Done 90830 sweeps
+Done 91698 sweeps
+Done 92613 sweeps
+Done 93501 sweeps
+Done 94410 sweeps
+Done 95331 sweeps
+Done 96226 sweeps
+Done 97181 sweeps
+Done 98071 sweeps
+Done 98947 sweeps
+Done 99818 sweeps
 
 <E> <E^2> <C>
-sh: 0.010000000000000005 -27.291354530232812 744.8210088685776 1.102508784630049
+sh: 0.05 -26766.91789483986 7.164679729076537e8 1.1475485456348566
 
-single_spin_flip_acc: [0.4211781148518125]
+single_spin_flip_acc: [0.43349202627172656]
 Acceptant rate of loop update: 
-0.010000000000000005 0.10099889012208657 0.0
+0.05 0.0 0.0
 <CPUtime> 
- rank=0 : [4.417777777777777, 0.9344444444444444, 78.61555555555556, 83.66777777777777]
-ll: 0.010000000000000005 0.0
-af: 0.010000000000000005 0.9566126445306995
-op: 0.010000000000000005 0.21103651269240561
+ rank=0 : [3980.3176333333336, 1.1749444444444443, 1.8549333333333333, 5871.384755555556]
+ll: 0.05 0.0
+af: 0.05 0.4798230006455923
+op: 0.05 0.013050796462400874
 
 Statistics of replica exchange Monte Carlo
-  9.637085 seconds (23.29 M allocations: 1.151 GiB, 5.77% gc time)
-2020年 8月 5日 水曜日 15時20分38秒 JST
+1055.079616 seconds (1.36 G allocations: 41.193 GiB, 0.53% gc time)
+2020年 8月 5日 水曜日 18時40分21秒 JST
