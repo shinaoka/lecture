@@ -430,7 +430,7 @@ function solve(input_file::String, comm)
   MPI.Barrier(comm)
 
   for it in 1:num_temps_local
-      write_spin_config("spin_configs/spin_config$(it).txt",spins_local[it])
+      write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
   end
 
   if rank == 0
