@@ -1,4 +1,4 @@
-num_insert = 100
+num_insert = 10
 begin_idx  = 1
 end_idx    = 2
 file_name  = "temperatures.txt"
