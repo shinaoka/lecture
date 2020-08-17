@@ -3,9 +3,12 @@ OUTPUT := output$(SEED)
 
 all: $(OUTPUT)
 
-$(OUTPUT): temperatures.txt Jij.txt utriangles.txt test 2d.ini
-	@sh local_job.sh
+$(OUTPUT): temperatures.txt Jij.txt utriangles.txt 2d_$(SEED).ini
+	@sh local_job.sh $(SEED)
 
 %.txt: mk_%.jl
 	@julia $< 
+
+2d_$(SEED).ini: 2d.ini
+	@cp 2d.ini 2d_$(SEED).ini
 
