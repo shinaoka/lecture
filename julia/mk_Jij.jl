@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 96
+L = 3
 num_spins = 3*L^2
 
 # lattice vectors
