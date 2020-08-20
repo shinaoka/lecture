@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 3
+L = 96
 num_spins = 3*L^2
 
 # lattice vectors
@@ -100,7 +100,7 @@ function input_Jij(num_spins::Int64,interaction::Array{Any,1})
 end
 
 # output Jij
-println("num_spins: ",num_spins)
-ts = time_ns()
-input_Jij(num_spins,mk_interaction(L,J1,J2,len1,len2))
-println("elapsed time $(time_ns()- ts)")
+
+@time input_Jij(num_spins,mk_interaction(L,J1,J2,len1,len2))
+
+
