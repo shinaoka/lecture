@@ -1,7 +1,7 @@
 #parameters for temepratures.
-num_temps = 1
-min_T = 1e-2
-max_T = min_T
+num_temps = 5
+min_T = 5e-2
+max_T = 1e-1
 
 function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
     logT = LinRange(log(min_T), log(max_T), num_temps)
