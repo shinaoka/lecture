@@ -285,8 +285,7 @@ function solve(input_file::String, comm)
         # compute order parameter at an initial time.
         op_time_evo = [[] for it in 1:num_temps_local]
         for it in 1:num_temps_local
-            #push!(op_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
-            push!(op_time_evo[it],compute_T2_op(spins_local[it],num_spins))
+            push!(op_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
         end
  
         println("DEBUG A: ", op_time_evo[1])
@@ -395,10 +394,7 @@ function solve(input_file::String, comm)
             # non-equilibrium relaxation method.
             if is_non_eq_relax
                 for it in 1:num_temps_local
-                    #temp_op = compute_m2_af(spins_local[it],upward_triangles)
-                    #push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
-
-                    temp_op = compute_T2_op(spins_local[it],num_spins)
+                    temp_op = compute_m2_af(spins_local[it],upward_triangles)
                     push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
                 end
             end
