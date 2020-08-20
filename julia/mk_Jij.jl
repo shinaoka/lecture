@@ -1,128 +1,94 @@
-using LinearAlgebra
+L = 2
+J1 = -1.
+J1 = (J1,J1,J1)
+J2 = 0.
+J2 = (J2,J2,J2)
+flag1 = 1
+flag2 = 0
 
-# prameters for system.
-L = 3
-num_spins = 3*L^2
-
-# lattice vectors
-Type3dVector = Tuple{Float64,Float64,Float64}
-
-# length betweeen 1st&2nd nearest neightbor sites.
-len1 = 2*cos(pi/3)
-len2 = 2*sin(pi/3)
-
-# parameter for Interaction.
-SSInteraction = Type3dVector
-tempJ1 = -1.
-tempJ2 = -0.02
-J1 = (tempJ1,tempJ1,tempJ1)
-J2 = (tempJ2,tempJ2,tempJ2)
-
-<<<<<<< HEAD:julia/mk_input.jl
-#parameters for temepratures.
-num_temps = 24
-min_T = 1e-6
-max_T = 1.0
-
-function input_temperatures(num_temps::Int64,min_T::Float64,max_T::Float64)
-    logT = LinRange(log(min_T), log(max_T), num_temps)
-    open("temperatures.txt", "w") do fp
-       println(fp, num_temps)
-       for i in logT
-          println(fp, exp(i))
-       end
-     end
-end
-
-# Output temperatures.
-input_temperatures(num_temps,min_T,max_T)
-
-# 
-
-function mk_upward_triangles(file_name::String,L::Int64)
-    
-    open(file_name,"w") do fp 
-        println(fp,L^2)
-        idx = 1
-        for i in 1:L^2
-            println(fp,idx," ",idx+1," ",idx+2)
-            idx += 3
-        end
-    end
-  
-end
-
-mk_upward_triangles("utriangles.txt",L)
-
-
-# some following functions generate input_Jij's argument array of tuple.
-=======
->>>>>>> a5361494bc2d8ede3c9cefa84bac3d5697d3b05f:julia/mk_Jij.jl
-
-function mk_kagome(L::Int64)
-    
-    a1 = (2.,0.)
-    a2 = (2cos(pi/3),2sin(pi/3))
-    index = 1
+function mk_kagome_v2(L)
+   
     kagome = Dict()
+    idx = 1
+    L = 2L    
+
     for (i,j) in Iterators.product(1:L,1:L)
-        A = (i-1) .* a1 .+ (j-1) .* a2
-        B = A .+ a1./2
-        C = A .+ a2./2
-        get!(kagome,index  ,A)
-        get!(kagome,index+1,B)
-        get!(kagome,index+2,C)
-        index += 3
+        mod_site = mod.((i,j),L)
+        if mod(mod_site[1],2) == 0 && mod(mod_site[2],2) == 1
+            continue
+        end
+        get!(kagome,mod_site,idx)
+        idx += 1
     end
-
+    
     return kagome
-
 end
 
-function compute_distance(L::Int64,p1,p2)
-    
-    a1 = (2.,0.)
-    a2 = (2cos(pi/3),2sin(pi/3))
 
-    candidate_distance = []
-    for (i,j) in Iterators.product(1:3,1:3)
-        lattice_vec = L * (i-2) .* a1 .+ L * (j-2) .* a2
-        cp_p2 = p2 .+ lattice_vec
-        push!(candidate_distance, norm(p1.-cp_p2))
-    end
+function mk_Jij_kagome_nn(L,J1_x,J1_y,J1_z,flag1)
 
-    return minimum(candidate_distance)
-    
-end
+    kagome = mk_kagome_v2(L)
+    Jij = []
+   
+    L = 2L
+    for key in keys(kagome) 
 
-function mk_interaction(L::Int64,J1::SSInteraction,J2::SSInteraction,len1::Float64,len2::Float64)
-    interaction = []
-    kagome = mk_kagome(L)
-    
-    
-    for (site1,site2) in Iterators.product(keys(kagome),keys(kagome))
-        
-        if site1 < site2
+        for (dx,dy) in Iterators.product(0:1,0:1)
+            if dx == dy == 0
+                continue
+            end
+            
+            nn_mod_site = mod.((key .+ (dx,dy)),L)
+
+            if in(nn_mod_site, keys(kagome))
+                site_i = kagome[key]
+                site_j = kagome[nn_mod_site]
                 
-            distance = compute_distance(L,kagome[site1],kagome[site2])
-    
-            # make 1st nearest neighbor interaction.    
-            # last element 1 is sign that this interaction is J1  
-            if isapprox(len1,distance)
-                push!(interaction, (site1,site2,J1[1],J1[2],J1[3],1))
-            
-            # make 2nd nearest neighbor interaction.    
-            # last element 0 is sign that this interaction is J2  
-            elseif isapprox(len2,distance)
-                push!(interaction, (site1,site2,J2[1],J2[2],J2[3],0))
-            
+                if site_i > site_j
+                    site_i,site_j = site_j,site_i 
+                end
+
+                push!(Jij,(site_i,site_j,J1_x,J1_y,J1_z,flag1))
             end
         end
     end
-    
-    return sort!(interaction)
 
+    return sort(Jij)
 end
+    
+
+function mk_Jij_kagome_nnn(L,J1,flag1,J2,flag2)
+
+    kagome = mk_kagome_v2(L)
+    Jij = mk_Jij_kagome_nn(L,J1[1],J1[2],J1[3],flag1)
+
+    L = 2L
+    
+    for key in keys(kagome)
+
+        for (dx,dy) in Iterators.product(-2:2,-2:2)
+      
+            if (dx,dy) == (1,2) || (dx,dy) == (2,1) || (dx,dy) == (1,-1)
+
+                nn_mod_site = mod.((key .+ (dx,dy)),L)
+
+                if in(nn_mod_site, keys(kagome))
+                    site_i = kagome[key]
+                    site_j = kagome[nn_mod_site]
+
+                    if site_i > site_j
+                        site_i,site_j = site_j,site_i
+                    end
+                    #println(site_i," ",site_j)
+
+                    push!(Jij,(site_i,site_j,J2[1],J2[2],J2[3],flag2))
+                end
+            end
+        end
+    end
+    return sort(Jij)
+end
+
 
 function input_Jij(num_spins::Int64,interaction::Array{Any,1})
 
@@ -130,17 +96,16 @@ function input_Jij(num_spins::Int64,interaction::Array{Any,1})
 
         println(fp,num_spins)
         println(fp,length(interaction))
-        
+
         for intr in interaction
             println(fp,intr[1]," ",intr[2]," ",intr[3]," ",intr[4]," ",intr[5]," ",intr[6])
         end
-        
+
     end
-    
+
 end
 
-# output Jij
-println("num_spins: ",num_spins)
-ts = time_ns()
-input_Jij(num_spins,mk_interaction(L,J1,J2,len1,len2))
-println("elapsed time $(time_ns()- ts)")
+Jij_kagome_nnn = mk_Jij_kagome_nnn(L,J1,flag1,J2,flag2)
+@time input_Jij(3L^2,Jij_kagome_nnn)
+
+

@@ -410,7 +410,7 @@ function solve(input_file::String, comm)
   #for it in 1:num_temps_local
       #dE,num_accept = multi_loop_update!(loop_num_trial,loop_num_reference_sites,updater,1/rex.temps[it+start_idx-1],triangles,max_loop_length,spins_local[it],rank==0)
   #end
-  
+ 
 
   # Output results
   E = mean_gather(acc, "E", comm)
@@ -428,6 +428,18 @@ function solve(input_file::String, comm)
   for it in 1:num_temps_local
       write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
   end
+
+  # Output time evolution of order parameter.
+  if is_non_eq_relax
+      for itemp in 1:num_temps_local
+          open("op_time_evo_$(itemp+start_idx-1).dat","w") do fp
+               for itime in 1:length(op_time_evo[itemp])
+                   println(fp, itime, " ", op_time_evo[itemp][itime])
+               end
+          end
+      end
+  end
+
 
   if rank == 0
       println()
@@ -470,25 +482,6 @@ function solve(input_file::String, comm)
           println("op: $(rex.temps[i]) $(T2_op[i])")
       end
 
-      # Output time evolution of order parameter.
-      if is_non_eq_relax
-          for itemp in 1:num_temps
-              open("op_time_evo_$(itemp).dat","w") do fp  
-
-                  for itime in 1:length(op_time_evo[itemp])
-                      println(fp, itime, " ", op_time_evo[itemp][itime])
-                  end  
-              end
-          end
-
-          # Create reference table of temperatures.
-          open("ref_temperatures.txt","w") do fp
-              for i in 1:num_temps
-                  println(fp, i, " ", rex.temps[i])
-              end
-          end
-      end
-      
 
     end
     flush(stdout)
