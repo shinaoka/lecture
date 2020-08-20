@@ -1,7 +1,8 @@
-num_insert = 10
-begin_idx  = 1
-end_idx    = 2
-file_name  = "temperatures.txt"
+num_insert  = 10
+start_temps = 2e-2
+end_temps   = 3e-2
+input_file  = "temperatures.txt"
+output_file = "temperatures.txt"
 
 # Read a list of temperatures
 function read_temps(temperature_file::String)
@@ -24,38 +25,25 @@ function read_temps(temperature_file::String)
 end
 
 
-function insert_temps(num_insert,begin_insert_idx,end_insert_idx,file_name)
+function insert_temps(num_insert,start_temps,end_temps,input_file,output_file)
     
-    temps = read_temps(file_name)
-    num_temps = length(temps)
+    delta_T = (end_temps - start_temps) / num_insert
+    insert_temps = [(start_temps + j*delta_T) for j in 1:num_insert]
 
-    @assert 1 <= begin_insert_idx < end_insert_idx <= num_temps
-
-    inserted_temps= Vector{Float64}(undef, 0)
-
-    for idx in 1:begin_insert_idx
-        push!(inserted_temps,temps[idx])
-    end
+    original_temps = read_temps(input_file)
     
-    delta_T = (temps[end_insert_idx] - temps[begin_insert_idx]) / num_insert
+    target_temps = union(original_temps, insert_temps)
+    sort!(target_temps)
 
-    for insert_idx in 1:num_insert
-        temp = temps[begin_insert_idx] + insert_idx*delta_T
-        push!(inserted_temps,temp)
-    end
-
-    for idx in end_insert_idx+1:num_temps
-        push!(inserted_temps,temps[idx])
-    end
-
-    num_temps = length(inserted_temps)
-    open(file_name,"w") do fp
+    open(output_file,"w") do fp
+        num_temps    = length(target_temps)
         println(fp,num_temps)
         for idx in 1:num_temps
-            println(fp,inserted_temps[idx])
+            println(fp,target_temps[idx])
         end
     end
 
 end
 
-insert_temps(num_insert,begin_idx,end_idx,file_name)
+
+insert_temps(num_insert,start_temps,end_temps,input_file,output_file)

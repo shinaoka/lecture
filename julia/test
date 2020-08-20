@@ -2151,4 +2151,71 @@ end
 >>>>>>> f84f753fafc7e4b183b62993bbf5fc7ecc228d53
 =======
 2020年 8月17日 月曜日 17時56分53秒 JST
+<<<<<<< HEAD
 >>>>>>> dc834636832cfbe52273b30abbe8b5afcdee3f2f
+=======
+begin
+2020年 8月18日 火曜日 15時04分53秒 JST
+end
+2020年 8月18日 火曜日 15時05分32秒 JST
+begin
+2020年 8月19日 水曜日 09時15分46秒 JST
+ERROR: LoadError: Temperatures must be given either in ascending order or in descending order!
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] read_temps(::String) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:35
+ [3] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:214
+ [4] macro expansion at ./util.jl:175 [inlined]
+ [5] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] exec_options(::Base.JLOptions) at ./client.jl:288
+ [8] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[40147,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月19日 水曜日 09時16分16秒 JST
+begin
+2020年 8月19日 水曜日 09時18分47秒 JST
+ERROR: LoadError: Temperatures must be given either in ascending order or in descending order!
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] read_temps(::String) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:35
+ [3] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:214
+ [4] macro expansion at ./util.jl:175 [inlined]
+ [5] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [6] include(::Module, ::String) at ./Base.jl:377
+ [7] exec_options(::Base.JLOptions) at ./client.jl:288
+ [8] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[40577,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 8月19日 水曜日 09時19分22秒 JST
+begin
+2020年 8月19日 水曜日 09時25分09秒 JST
+end
+2020年 8月19日 水曜日 09時25分50秒 JST
+begin
+2020年 8月19日 水曜日 09時33分30秒 JST
+end
+2020年 8月19日 水曜日 09時34分13秒 JST
+>>>>>>> 0ce000102453f365220ce07d0845b7eb2b34225a
