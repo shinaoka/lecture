@@ -1,7 +1,7 @@
 using LinearAlgebra
 
 # prameters for system.
-L = 1000
+L = 500
 
 function mk_upward_triangles(L,file_name)
 

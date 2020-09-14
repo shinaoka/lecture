@@ -280,19 +280,26 @@ function solve(input_file::String, comm)
     is_non_eq_relax = get_param(Bool, conf, "simulation", "non_eq_relax", false)
     ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
     if is_non_eq_relax
-        init_non_eq_state_file = retrieve(conf,"model","init_non_eq_state")
-        spins_local = fill(read_spin_config(init_non_eq_state_file,num_spins),num_temps_local)
-        # compute order parameter at an initial time.
-        op_time_evo = [[] for it in 1:num_temps_local]
+        init_spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
+
+        correlation_func = [[] for i in 1:num_temps_local]
         for it in 1:num_temps_local
-            push!(op_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
+            tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
+            println("s0s0: ",tmp/num_spins)
+            push!(correlation_func[it],tmp / num_spins)
+        
         end
- 
-        println("DEBUG A: ", op_time_evo[1])
+
+        
+        # compute order parameter at an initial time.
+        maf_time_evo = [[] for it in 1:num_temps_local]
+        for it in 1:num_temps_local
+            push!(maf_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
+        end
+        
  
         # Turn off the replica exchange and loop update.
         ex_rex         = false 
-        loop_num_trial = 0
     end
 
     for sweep in 1:num_sweeps
@@ -385,8 +392,8 @@ function solve(input_file::String, comm)
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
-                T2_op[it] = compute_T2_op(spins_local[it],num_spins)
+                #m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
+                #T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
@@ -394,9 +401,24 @@ function solve(input_file::String, comm)
             # non-equilibrium relaxation method.
             if is_non_eq_relax
                 for it in 1:num_temps_local
-                    temp_op = compute_m2_af(spins_local[it],upward_triangles)
-                    push!(op_time_evo[it],op_time_evo[it][1]*temp_op)
+
+                    tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
+                    push!(correlation_func[it],tmp/num_spins)
+ 
+
+                    if mod(sweep, 100) == 0
+                        #println(sweep, "th: ", tmp/num_spins)
+                    end
+  
                 end
+
+                """ 
+                for it in 1:num_temps_local
+                    temp_maf = compute_m2_af(spins_local[it],upward_triangles)
+                    push!(maf_time_evo[it],maf_time_evo[it][1]*temp_maf)
+                end 
+                """
+                
             end
 
       end
@@ -425,17 +447,24 @@ function solve(input_file::String, comm)
   flush(stdout)
   MPI.Barrier(comm)
 
+  
   for it in 1:num_temps_local
-      write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
+      #write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
   end
+  
 
   # Output time evolution of order parameter.
   if is_non_eq_relax
       for itemp in 1:num_temps_local
-          open("op_time_evo_$(itemp+start_idx-1).dat","w") do fp
-               for itime in 1:length(op_time_evo[itemp])
-                   println(fp, itime, " ", op_time_evo[itemp][itime])
+          open("Gt_$(itemp+start_idx-1).dat","w") do fp
+               for itime in 1:length(correlation_func[itemp])
+                   println(fp, itime, " ", correlation_func[itemp][itime])
                end
+          end
+          open("maf_$(itemp+start_idx-1).dat","w") do fp
+               #for itime in 1:length(maf_time_evo[itemp])
+                   #println(fp, itime, " ", maf_time_evo[itemp][itime])
+               #end
           end
       end
   end
