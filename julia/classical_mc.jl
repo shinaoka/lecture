@@ -204,6 +204,11 @@ function solve(input_file::String, comm)
     ex_interval      = parse(Int64, retrieve(conf, "simulation", "ex_interval"))
     seed             = parse(Int64, retrieve(conf, "simulation", "seed"))
     opt_temps_dist   = get_param(Bool,       conf, "simulation", "opt_temps_dist", true)
+    min_attemps_update_temps_dist  = get_param(Int64,  conf, "simulation", "min_attemps_update_temps_dist", 100)
+
+    if opt_temps_dist && 5*min_attemps_update_temps_dist*ex_interval > num_therm_sweeps/2
+        error("num_therm_sweeps is too small for optimizing temps_dist!")
+    end
 
     # For loop updates
     loop_num_trial  = parse(Int64, retrieve(conf, "loop_update", "num_trial"))
@@ -339,7 +344,7 @@ function solve(input_file::String, comm)
             perform!(rex, spins_local, energy_local, comm)
         end
         if opt_temps_dist
-            if sweep <= Int(num_therm_sweeps/2) && rex.num_attemps >= 100
+            if sweep <= Int(num_therm_sweeps/2) && rex.num_attemps >= min_attemps_update_temps_dist
                 update_temps_dist!(rex,comm)
             end
         end
@@ -392,8 +397,8 @@ function solve(input_file::String, comm)
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                #m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
-                #T2_op[it] = compute_T2_op(spins_local[it],num_spins)
+                m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
+                T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
