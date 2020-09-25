@@ -216,6 +216,7 @@ function solve(input_file::String, comm)
 
     # Create single-spin flip updater
     model = JModel(num_spins, Jij)
+    updater = SingleSpinFlipUpdater(model)
 
 
 end
