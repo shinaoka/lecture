@@ -285,7 +285,9 @@ function solve(input_file::String, comm)
     is_non_eq_relax = get_param(Bool, conf, "simulation", "non_eq_relax", false)
     ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
     if is_non_eq_relax
-        init_spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
+        init_non_eq_state = retrieve(conf, "model", "init_non_eq_state")
+        spins_local = fill(read_spin_config(init_non_eq_state,num_spins),num_temps_local)
+        init_spins_local = fill(read_spin_config(init_non_eq_state,num_spins),num_temps_local)
 
         correlation_func = [[] for i in 1:num_temps_local]
         for it in 1:num_temps_local
@@ -294,7 +296,6 @@ function solve(input_file::String, comm)
             push!(correlation_func[it],tmp / num_spins)
         
         end
-
         
         # compute order parameter at an initial time.
         maf_time_evo = [[] for it in 1:num_temps_local]
@@ -302,7 +303,6 @@ function solve(input_file::String, comm)
             push!(maf_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
         end
         
- 
         # Turn off the replica exchange and loop update.
         ex_rex         = false 
     end
