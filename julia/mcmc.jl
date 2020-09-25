@@ -79,43 +79,50 @@ function SingleSpinFlipUpdater(model::JModel)
     coord_num = zeros(Int, num_spins)
 
     # Figure out which spins each spin is connected to
-    connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}() for _ in 1:num_spins]
-    nn_connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64}}() for _ in 1:num_spins]
     num_Jij = size(Jij, 1)
+    coord_num = zeros(UInt16, num_spins)
+    nn_coord_num = zeros(UInt16, num_spins)
     for i_pair = 1:num_Jij
         i, j = Jij[i_pair][1:2]
         is_nn = Jij[i_pair][6] != 0
-        push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
-        push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
+        coord_num[i] += 1
+        coord_num[j] += 1
         if is_nn
-            push!(nn_connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
-            push!(nn_connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
+            nn_coord_num[i] += 1
+            nn_coord_num[j] += 1
         end
     end
-    max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
+    max_coord_num = maximum(coord_num)
+    max_nn_coord_num = maximum(nn_coord_num)
 
     connection = Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
-    coord_num = Vector{UInt16}(undef, num_spins)
     connected_sites = Matrix{SpinIndex}(undef, (max_coord_num, num_spins))
+    nn_sites = Matrix{SpinIndex}(undef, (max_nn_coord_num, num_spins))
     is_NN = Matrix{Bool}(undef, (max_coord_num, num_spins))
-    for ispin = 1:num_spins
-        coord_num[ispin] = length(connection_tmp[ispin])
-        connection[1:coord_num[ispin], ispin] = collect(connection_tmp[ispin])
-        for (ic, val) in enumerate(connection_tmp[ispin])
-            connected_sites[ic, ispin] = val[1]
-            is_NN[ic, ispin] = (val[5] != 0)
+    coord_idx = fill(1, num_spins)
+    nn_coord_idx = fill(1, num_spins)
+    for i_pair = 1:num_Jij
+        i, j = Jij[i_pair][1:2]
+        is_nn = Jij[i_pair][6] != 0
+        c = (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6])
+        connection[coord_idx[i], i] = c
+        connection[coord_idx[j], j] = c
+        connected_sites[coord_idx[i], i] = j
+        connected_sites[coord_idx[j], j] = i
+        is_NN[coord_idx[i], i] = is_nn
+        is_NN[coord_idx[j], j] = is_nn
+        coord_idx[i] += 1
+        coord_idx[j] += 1
+        if is_nn
+            nn_sites[nn_coord_idx[i], i] = j
+            nn_sites[nn_coord_idx[j], j] = i
+            nn_coord_idx[i] += 1
+            nn_coord_idx[j] += 1
         end
     end
 
-    nn_coord_num = zeros(UInt16, num_spins)
-    max_nn_coord_num = maximum([length(nn_connection_tmp[ispin]) for ispin in 1:num_spins])
-    nn_sites = Matrix{SpinIndex}(undef, (max_nn_coord_num, num_spins))
-    for ispin = 1:num_spins
-        nn_coord_num[ispin] = length(nn_connection_tmp[ispin])
-        for (ic, val) in enumerate(nn_connection_tmp[ispin])
-            nn_sites[ic, ispin] = val[1]
-        end
-    end
+    @assert all(nn_coord_idx .- 1 == nn_coord_num)
+    @assert all(coord_idx .- 1 == coord_num)
 
     return SingleSpinFlipUpdater(num_spins, coord_num, connection, connected_sites, is_NN,
         nn_coord_num, nn_sites)
