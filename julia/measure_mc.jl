@@ -1,6 +1,5 @@
 # For unit test measurement function moved from classical_mc.jl.
 using FFTW
-using LsqFit
 include("mcmc.jl")
 include("loop_update.jl")
 
