@@ -1,5 +1,5 @@
 
-L = 12
+L = 3
 
 function write_init_non_eq_state(L,u_triangle_file,output_file)
 

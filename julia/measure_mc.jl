@@ -1,6 +1,5 @@
 # For unit test measurement function moved from classical_mc.jl.
 using FFTW
-using LsqFit
 include("mcmc.jl")
 include("loop_update.jl")
 
@@ -23,6 +22,26 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},
     end
 
     return m2_af/(3*length(triangles)^2)
+end
+
+
+# vector spin chirality defined as sum of outer product of spins in unit triangular with counterclockwise rotation.
+function compute_vector_chirality(spins::Vector{HeisenbergSpin},
+                                  triangles::Array{Tuple{Int64,Int64,Int64},1})
+
+    vc = 0.0
+    num_spins = length(spins)
+    num_triangles = length(triangles)
+    @assert num_spins == 3num_triangles
+    for i in triangles
+        s = collect.([spins[i[j]] for j in 1:3])
+        for j in 1:3
+            vc += cross(s[j],s[ifelse(j==3,1,j+1)])[3]
+        end
+    end
+
+    return vc            
+       
 end
 
 

@@ -2570,3 +2570,32 @@ begin
 2020年 9月12日 土曜日 14時26分08秒 JST
 end
 2020年 9月12日 土曜日 14時36分24秒 JST
+begin
+2020年 10月 8日 木曜日 16時56分47秒 JST
+ERROR: LoadError: num_therm_sweeps is too small for optimizing temps_dist!
+Stacktrace:
+ [1] error(::String) at ./error.jl:33
+ [2] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:210
+ [3] macro expansion at ./util.jl:175 [inlined]
+ [4] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [5] include(::Module, ::String) at ./Base.jl:377
+ [6] exec_options(::Base.JLOptions) at ./client.jl:288
+ [7] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[49773,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月 8日 木曜日 16時57分14秒 JST
+begin
+2020年 10月 8日 木曜日 17時01分45秒 JST
+end
+2020年 10月 8日 木曜日 17時02分14秒 JST

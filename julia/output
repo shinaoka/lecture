@@ -1,73 +1,20 @@
-2020年 9月12日 土曜日 14時26分08秒 JST
+2020年 10月 8日 木曜日 17時01分45秒 JST
 num of temperatures = 1
 Starting simulation...
-s0s0: 1.0
-Done 28 sweeps
-Done 64 sweeps
-Done 100 sweeps
-Done 131 sweeps
-Done 163 sweeps
-Done 190 sweeps
-Done 221 sweeps
-Done 249 sweeps
-Done 287 sweeps
-Done 321 sweeps
-Done 359 sweeps
-Done 398 sweeps
-Done 434 sweeps
-Done 475 sweeps
-Done 511 sweeps
-Done 553 sweeps
-Done 595 sweeps
-Done 632 sweeps
-Done 673 sweeps
-Done 711 sweeps
-Done 753 sweeps
-Done 785 sweeps
-Done 806 sweeps
-Done 844 sweeps
-Done 883 sweeps
-Done 908 sweeps
-Done 947 sweeps
-Done 987 sweeps
-Done 1022 sweeps
-Done 1060 sweeps
-Done 1099 sweeps
-Done 1132 sweeps
-Done 1172 sweeps
-Done 1208 sweeps
-Done 1248 sweeps
-Done 1288 sweeps
-Done 1324 sweeps
-Done 1363 sweeps
-Done 1401 sweeps
-Done 1439 sweeps
-Done 1479 sweeps
-Done 1514 sweeps
-Done 1554 sweeps
-Done 1594 sweeps
-Done 1629 sweeps
-Done 1669 sweeps
-Done 1705 sweeps
-Done 1744 sweeps
-Done 1783 sweeps
-Done 1819 sweeps
-Done 1859 sweeps
-Done 1899 sweeps
-Done 1935 sweeps
-Done 1969 sweeps
 
 <E> <E^2> <C>
-sh: 0.05 -713998.8312322723 5.233427238728674e11 7.225809531635448e6
+sh: 0.05 -26.233786177305376 688.2843060490784 1.078057074070144
 
-single_spin_flip_acc: [0.43587430466666777]
+single_spin_flip_acc: [0.4326714359490512]
 Acceptant rate of loop update: 
 0.05 0.0 0.0
 <CPUtime> 
- rank=0 : [100722.8324162081, 1.2371185592796399, 2.1000500250125063, 155312.6828414207]
-af: 0.05 0.0
-op: 0.05 0.0
+ rank=0 : [4.405277777777778, 0.6995555555555556, 0.8307222222222223, 38.93561111111111]
+af: 0.05 0.7899448717605865
+op: 0.05 0.11207957251612535
+Ferro_vc: 0.05 -0.16577599773623317
+AF_vc: 0.05 0.0018020849022862746
 
 Statistics of replica exchange Monte Carlo
-590.908762 seconds (8.38 G allocations: 196.283 GiB, 6.86% gc time)
-2020年 9月12日 土曜日 14時36分24秒 JST
+ 10.098161 seconds (29.16 M allocations: 1.728 GiB, 8.32% gc time)
+2020年 10月 8日 木曜日 17時02分14秒 JST

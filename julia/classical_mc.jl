@@ -1,6 +1,6 @@
 module ClassicalMC
 
-export solve,get_param,read_temps,read_Jij,read_spin_config
+export solve,get_param,read_temps,read_Jij,read_spin_config,read_triangles
 
 include("mcmc.jl")
 include("accumulator.jl")
@@ -80,25 +80,25 @@ function read_Jij(Jij_file::String,num_spins::Int64)
 end
 
 
-function read_upward_triangles(file_name::String,num_spins::Int64)
+function read_triangles(file_name::String,num_spins::Int64)
    
     L = Int(sqrt(num_spins/3))
-    utris = fill((0,0,0),L^2)
+    triangles = fill((0,0,0),L^2)
 
     open(file_name,"r") do fp
 
-        @assert L^2 == parse(Int64, readline(fp)) "!match num_upward_triangles. See 2d.ini and head of utriangles.txt "
+        @assert L^2 == parse(Int64, readline(fp)) "!match number of triangles. See 2d.ini and head of utriangles.txt and dtriangles.txt!"
 
         for i in 1:L^2
             str = split(readline(fp))
             s1 = parse(Int64, str[1])
             s2 = parse(Int64, str[2])
             s3 = parse(Int64, str[3])
-            utris[i] = (s1,s2,s3)
+            triangles[i] = (s1,s2,s3)
         end
     end
 
-    return utris
+    return triangles
 end
 
 
@@ -256,10 +256,13 @@ function solve(input_file::String, comm)
         spins_local = fill(read_spin_config(spin_config_file,num_spins),num_temps_local)
     end
 
-    # Create upward triangles for computing AF order parameter m2_af.
-    utriangles_file = retrieve(conf, "model", "utriangles")
-    upward_triangles = read_upward_triangles(utriangles_file,num_spins)
+    # Create upward and downward triangles for computing order parameters.
+    utriangles_file    = retrieve(conf, "model", "utriangles")
+    upward_triangles   = read_triangles(utriangles_file,num_spins)
+    dtriangles_file    = retrieve(conf, "model", "dtriangles")
+    downward_triangles = read_triangles(dtriangles_file,num_spins)
 
+    energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
     # Replica exchange
     rex = ReplicaExchange{HeisenbergSpin}(temps, start_idx, end_idx, num_spins)
@@ -277,9 +280,6 @@ function solve(input_file::String, comm)
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
 
-    # Create upward triangles for computing AF order parameter m2_af.
-    utriangles_file = retrieve(conf, "model", "utriangles")
-    upward_triangles = read_upward_triangles(utriangles_file,num_spins)
 
     # Non-equilibrium relaxation method.
     is_non_eq_relax = get_param(Bool, conf, "simulation", "non_eq_relax", false)
@@ -403,6 +403,16 @@ function solve(input_file::String, comm)
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
 
+            # ferro and anti-ferro vector spin chirality
+            fvc  = zeros(Float64,num_temps_local)
+            afvc = zeros(Float64,num_temps_local)
+            for it in 1:num_temps_local
+              fvc[it]  = compute_vector_chirality(spins_local[it],upward_triangles) + compute_vector_chirality(spins_local[it],downward_triangles)
+              afvc[it] = compute_vector_chirality(spins_local[it],upward_triangles) - compute_vector_chirality(spins_local[it],downward_triangles)
+            end
+            add!(acc,"Ferro_vc",fvc)
+            add!(acc,"AF_vc",afvc)
+
             # non-equilibrium relaxation method.
             if is_non_eq_relax
                 for it in 1:num_temps_local
@@ -449,6 +459,8 @@ function solve(input_file::String, comm)
   ave_loop_length = mean_gather(acc,"loop_length",comm)
   m2_af = mean_gather(acc, "m2_af", comm)
   T2_op = mean_gather(acc, "T2_op", comm)
+  Ferro_vc = mean_gather(acc, "Ferro_vc", comm)
+  AF_vc    = mean_gather(acc, "AF_vc"   , comm)
   flush(stdout)
   MPI.Barrier(comm)
 
@@ -514,6 +526,8 @@ function solve(input_file::String, comm)
       for i in 1:num_temps
           println("af: $(rex.temps[i]) $(m2_af[i])")
           println("op: $(rex.temps[i]) $(T2_op[i])")
+          println("Ferro_vc: $(rex.temps[i]) $(Ferro_vc[i])")
+          println("AF_vc: $(rex.temps[i]) $(AF_vc[i])")
       end
 
 

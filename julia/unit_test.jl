@@ -19,6 +19,79 @@ function random_model(num_spins)
     return [spins]
 end
 
+
+function read_spin_config(file_name::String,num_spins::Int64)
+
+    spins = fill((0.,0.,0.),num_spins)
+
+    open(file_name,"r") do fp
+
+        @assert num_spins == parse(Int64, readline(fp)) "!match num_spins. See 2d.ini and head of spin_config.txt "
+
+        for i in 1:num_spins
+            str = split(readline(fp))
+            sx = parse(Float64, str[1])
+            sy = parse(Float64, str[2])
+            sz = parse(Float64, str[3])
+            
+            @assert isapprox(sx^2+sy^2+sz^2, 1.0)
+
+            spins[i] = (sx,sy,sz)
+        end
+    end
+
+    return spins
+end
+
+
+function read_triangles(file_name::String,num_spins::Int64)
+   
+    L = Int(sqrt(num_spins/3))
+    triangles = fill((0,0,0),L^2)
+
+    open(file_name,"r") do fp
+
+        @assert L^2 == parse(Int64, readline(fp)) "!match number of triangles. See 2d.ini and head of utriangles.txt and dtriangles.txt!"
+
+        for i in 1:L^2
+            str = split(readline(fp))
+            s1 = parse(Int64, str[1])
+            s2 = parse(Int64, str[2])
+            s3 = parse(Int64, str[3])
+            triangles[i] = (s1,s2,s3)
+        end
+    end
+
+    return triangles
+end
+
+
+function test_compute_vector_chirality()
+
+    num_spins = 27
+    q0 = read_spin_config("init_non_eq_state.txt",num_spins)
+
+    utriangles = read_triangles("utriangles.txt",num_spins)
+    dtriangles = read_triangles("dtriangles.txt",num_spins)
+
+    num_utriangles = length(utriangles)
+    num_dtriangles = length(dtriangles)
+    @assert num_utriangles == num_dtriangles
+
+    ferro_vc = compute_vector_chirality(q0,utriangles) + compute_vector_chirality(q0,dtriangles)
+    af_vc    = compute_vector_chirality(q0,utriangles) - compute_vector_chirality(q0,dtriangles)
+ 
+    #q=0 state generally show Ferro chirality and in this case with plus sign.
+    q0_ferro = (num_utriangles+num_dtriangles) * (3*sqrt(3)/2)
+    q0_af    = 0
+    @test isapprox(ferro_vc,q0_ferro) 
+    @test isapprox(af_vc,q0_af)
+
+end
+
+test_compute_vector_chirality()
+
+
 # octopolar_v2 and order_parameter are former implementations measuring order parameters.
 function octopolar_v2(spins,num_spins::Int64,num_temps::Int64)
 
@@ -144,9 +217,6 @@ function test_compute_1dcorr(spins::Vector{IsingSpin})
 end
 
 
-function test_compute_corr(spins::Vector{Vector{HeisenbergSpin}})
-  
-end 
     
 
 test_compute_m2_af()
@@ -154,4 +224,4 @@ test_compute_T2_op(x_model(6))
 
 num_spins = 100
 test_ising_spins = [rand(Int8.([-1,1])) for i in 1:num_spins]
-test_compute_1dcorr(test_ising_spins)
+#test_compute_1dcorr(test_ising_spins)
