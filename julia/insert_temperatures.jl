@@ -27,9 +27,7 @@ end
 
 function insert_temps(num_insert,start_temps,end_temps,input_file,output_file)
     
-    delta_T = (end_temps - start_temps) / num_insert
-    insert_temps = [(start_temps + j*delta_T) for j in 1:num_insert]
-
+    insert_temps = LinRange(start_temps,end_temps,num_insert)
     original_temps = read_temps(input_file)
     
     target_temps = union(original_temps, insert_temps)
