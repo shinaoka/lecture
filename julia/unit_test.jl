@@ -79,14 +79,18 @@ function test_compute_vector_chirality()
     @assert num_utriangles == num_dtriangles
 
     ferro_vc = compute_vector_chirality(q0,utriangles) + compute_vector_chirality(q0,dtriangles)
+    ferro_vc = ferro_vc^2
     af_vc    = compute_vector_chirality(q0,utriangles) - compute_vector_chirality(q0,dtriangles)
  
     #q=0 state generally show Ferro chirality and in this case with plus sign.
-    q0_ferro = (num_utriangles+num_dtriangles) * (3*sqrt(3)/2)
+    q0_ferro = (num_utriangles+num_dtriangles) * (3*sqrt(3)/2) / num_spins
+    q0_ferro = q0_ferro^2
     q0_af    = 0
     @test isapprox(ferro_vc,q0_ferro) 
     @test isapprox(af_vc,q0_af)
-
+ 
+    println("Ferro: ",ferro_vc)
+    println("AF: ",af_vc)
 end
 
 test_compute_vector_chirality()

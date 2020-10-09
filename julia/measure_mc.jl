@@ -41,7 +41,7 @@ function compute_vector_chirality(spins::Vector{HeisenbergSpin},
         end
     end
 
-    return vc / (num_spins^2)
+    return vc / num_spins
 end
 
 

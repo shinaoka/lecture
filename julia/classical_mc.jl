@@ -407,11 +407,13 @@ function solve(input_file::String, comm)
             fvc  = zeros(Float64,num_temps_local)
             afvc = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-              fvc[it]  = compute_vector_chirality(spins_local[it],upward_triangles) + compute_vector_chirality(spins_local[it],downward_triangles)
-              afvc[it] = compute_vector_chirality(spins_local[it],upward_triangles) - compute_vector_chirality(spins_local[it],downward_triangles)
+                fvc[it]  = compute_vector_chirality(spins_local[it],upward_triangles) + compute_vector_chirality(spins_local[it],downward_triangles)
+                fvc[it]  = fvc[it]^2
+                afvc[it] = compute_vector_chirality(spins_local[it],upward_triangles) - compute_vector_chirality(spins_local[it],downward_triangles)
+                afvc[it] = afvc[it]^2
             end
-            add!(acc,"Ferro_vc",fvc)
-            add!(acc,"AF_vc",afvc)
+            add!(acc,"Ferro_vc",fvc/3)
+            add!(acc,"AF_vc",afvc/3)
 
             # non-equilibrium relaxation method.
             if is_non_eq_relax
@@ -419,7 +421,6 @@ function solve(input_file::String, comm)
 
                     tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
                     push!(correlation_func[it],tmp/num_spins)
- 
 
                     if mod(sweep, 100) == 0
                         #println(sweep, "th: ", tmp/num_spins)
