@@ -295,10 +295,10 @@ function solve(input_file::String, comm)
             spins_local      = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
             init_spins_local = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
         end
+
         correlation_func = [[] for i in 1:num_temps_local]
         for it in 1:num_temps_local
             tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
-            println("s0s0: ",tmp/num_spins)
             push!(correlation_func[it],tmp / num_spins)
         
         end

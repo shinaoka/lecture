@@ -39,7 +39,9 @@ function compute_vector_chirality(spins::Vector{HeisenbergSpin},
         #s = [collect(spins[i[j]]) for j in 1:3]
         #s = [spins[i[j]] for j in 1:3]
         for j in 1:3
-            vc += cross(spins[i[j]],spins[i[ifelse(j==3,1,j+1)]])[3]
+            s1 = spins[i[j]]
+            s2 = spins[i[ifelse(j==3,1,j+1)]]
+            vc += s1[1]s2[2] - s1[2]s2[1]
             #vc += cross(s[j],s[ifelse(j==3,1,j+1)])[3]
         end
     end
