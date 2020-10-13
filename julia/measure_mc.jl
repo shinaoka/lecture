@@ -48,6 +48,29 @@ function compute_vector_chirality(spins::Vector{HeisenbergSpin},
 end
 
 
+function compute_ferro_vector_chirality(spins,utriangles,dtriangles)
+
+    @assert length(utriangles) == length(dtriangles)
+    fvc = compute_vector_chirality(spins,utriangles) + compute_vector_chirality(spins,dtriangles)
+    fvc ^= 2
+
+    return fvc / 3 # vector spin chirality of q=0 state is 3,larger than that of all other states.
+
+end
+
+
+function compute_af_vector_chirality(spins,utriangles,dtriangles)
+
+    @assert length(utriangles) == length(dtriangles)
+    fvc = compute_vector_chirality(spins,utriangles) - compute_vector_chirality(spins,dtriangles)
+    fvc ^= 2
+
+    return fvc / 3 # vector spin chirality of √3×√3 state is 3,larger than that of all other states.
+
+end
+
+delta(a,b) = ifelse(a==b,1,0) 
+
 delta(a,b) = ifelse(a==b,1,0) 
 
 function compute_T2_op(spins::Vector{HeisenbergSpin},num_spins::Int64)

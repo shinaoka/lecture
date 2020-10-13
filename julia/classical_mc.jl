@@ -295,14 +295,29 @@ function solve(input_file::String, comm)
             spins_local      = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
             init_spins_local = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
         end
+
+        # initial value of Ferro and AF vector spin chirality.
+        init_fvc   = zeros(Float64,num_temps_local)
+        init_afvc  = zeros(Float64,num_temps_local)
+        for it in 1:num_temps_local
+            init_fvc[it]  = compute_ferro_vector_chirality(init_spins_local[it],upward_triangles,downward_triangles) 
+            init_afvc[it]  = compute_af_vector_chirality(init_spins_local[it],upward_triangles,downward_triangles) 
+        end
+
         correlation_func = [[] for i in 1:num_temps_local]
+        fvc_correlation  = [[] for i in 1:num_temps_local]
+        afvc_correlation = [[] for i in 1:num_temps_local]
         for it in 1:num_temps_local
             tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
-            println("s0s0: ",tmp/num_spins)
             push!(correlation_func[it],tmp / num_spins)
         
+            temp_fvc = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            push!(fvc_correlation[it],init_fvc[it]*temp_fvc)
+
+            temp_afvc = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            push!(afvc_correlation[it],init_afvc[it]*temp_afvc)
         end
-        
+
         # compute order parameter at an initial time.
         maf_time_evo = [[] for it in 1:num_temps_local]
         for it in 1:num_temps_local
@@ -413,13 +428,11 @@ function solve(input_file::String, comm)
             fvc  = zeros(Float64,num_temps_local)
             afvc = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                fvc[it]  = compute_vector_chirality(spins_local[it],upward_triangles) + compute_vector_chirality(spins_local[it],downward_triangles)
-                fvc[it]  = fvc[it]^2
-                afvc[it] = compute_vector_chirality(spins_local[it],upward_triangles) - compute_vector_chirality(spins_local[it],downward_triangles)
-                afvc[it] = afvc[it]^2
+                fvc[it]  = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles)
+                afvc[it] = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
             end
-            add!(acc,"Ferro_vc",fvc/3)
-            add!(acc,"AF_vc",afvc/3)
+            add!(acc,"Ferro_vc",fvc)
+            add!(acc,"AF_vc",afvc)
 
             # non-equilibrium relaxation method.
             if isq0 == true || issqrt3 == true
@@ -427,6 +440,9 @@ function solve(input_file::String, comm)
 
                     tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
                     push!(correlation_func[it],tmp/num_spins)
+
+                    push!(fvc_correlation[it],init_fvc[it]*fvc[it])
+                    push!(afvc_correlation[it],init_afvc[it]*afvc[it])
 
                     if mod(sweep, 100) == 0
                         #println(sweep, "th: ", tmp/num_spins)
@@ -480,16 +496,31 @@ function solve(input_file::String, comm)
   # Output time evolution of order parameter.
   if isq0 == true || issqrt3 == true
       for itemp in 1:num_temps_local
+
           open("Gt_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(correlation_func[itemp])
                    println(fp, itime, " ", correlation_func[itemp][itime])
                end
           end
+
           open("maf_$(itemp+start_idx-1).dat","w") do fp
                #for itime in 1:length(maf_time_evo[itemp])
                    #println(fp, itime, " ", maf_time_evo[itemp][itime])
                #end
           end
+
+          open("fvc_$(itemp+start_idx-1).dat","w") do fp
+               for itime in 1:length(fvc_correlation[itemp])
+                   println(fp, itime, " ", fvc_correlation[itemp][itime])
+               end
+          end
+
+          open("afvc_$(itemp+start_idx-1).dat","w") do fp
+               for itime in 1:length(afvc_correlation[itemp])
+                   println(fp, itime, " ", afvc_correlation[itemp][itime])
+               end
+          end
+
       end
   end
 
