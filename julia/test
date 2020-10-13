@@ -2599,3 +2599,43 @@ begin
 2020年 10月 8日 木曜日 17時01分45秒 JST
 end
 2020年 10月 8日 木曜日 17時02分14秒 JST
+begin
+2020年 10月13日 火曜日 11時45分00秒 JST
+ERROR: LoadError: UndefVarError: is_non_eq_relax not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:425
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[33965,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月13日 火曜日 11時45分30秒 JST
+begin
+2020年 10月13日 火曜日 11時46分59秒 JST
+end
+2020年 10月13日 火曜日 11時47分24秒 JST
+begin
+2020年 10月13日 火曜日 11時50分58秒 JST
+end
+2020年 10月13日 火曜日 11時51分21秒 JST
+begin
+2020年 10月13日 火曜日 11時52分20秒 JST
+end
+2020年 10月13日 火曜日 11時52分48秒 JST
+begin
+2020年 10月13日 火曜日 11時55分48秒 JST
+end
+2020年 10月13日 火曜日 11時56分19秒 JST

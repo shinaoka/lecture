@@ -282,13 +282,19 @@ function solve(input_file::String, comm)
 
 
     # Non-equilibrium relaxation method.
-    is_non_eq_relax = get_param(Bool, conf, "simulation", "non_eq_relax", false)
+    isq0    = get_param(Bool, conf, "simulation", "isq0"   , false)
+    issqrt3 = get_param(Bool, conf, "simulation", "issqrt3", false)
     ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
-    if is_non_eq_relax
-        init_non_eq_state = retrieve(conf, "model", "init_non_eq_state")
-        spins_local = fill(read_spin_config(init_non_eq_state,num_spins),num_temps_local)
-        init_spins_local = fill(read_spin_config(init_non_eq_state,num_spins),num_temps_local)
+    if isq0 == true || issqrt3 == true
+        q0 = retrieve(conf, "model", "init_q0_state")
+        spins_local      = fill(read_spin_config(q0,num_spins),num_temps_local)
+        init_spins_local = fill(read_spin_config(q0,num_spins),num_temps_local)
 
+        if issqrt3 == true
+            sqrt3 = retrieve(conf, "model", "init_sqrt3_state")
+            spins_local      = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
+            init_spins_local = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
+        end
         correlation_func = [[] for i in 1:num_temps_local]
         for it in 1:num_temps_local
             tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
@@ -416,7 +422,7 @@ function solve(input_file::String, comm)
             add!(acc,"AF_vc",afvc/3)
 
             # non-equilibrium relaxation method.
-            if is_non_eq_relax
+            if isq0 == true || issqrt3 == true
                 for it in 1:num_temps_local
 
                     tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
@@ -472,7 +478,7 @@ function solve(input_file::String, comm)
   
 
   # Output time evolution of order parameter.
-  if is_non_eq_relax
+  if isq0 == true || issqrt3 == true
       for itemp in 1:num_temps_local
           open("Gt_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(correlation_func[itemp])
