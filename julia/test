@@ -2643,3 +2643,32 @@ begin
 2020年 10月13日 火曜日 15時37分05秒 JST
 end
 2020年 10月13日 火曜日 15時37分38秒 JST
+begin
+2020年 10月13日 火曜日 15時47分49秒 JST
+ERROR: LoadError: LoadError: syntax: "<<" is not a unary operator
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:299
+ [2] include(::String) at ./client.jl:439
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:1
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:299
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[62888,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月13日 火曜日 15時47分55秒 JST
+begin
+2020年 10月13日 火曜日 15時51分18秒 JST
+end
+2020年 10月13日 火曜日 15時51分42秒 JST

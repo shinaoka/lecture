@@ -35,11 +35,10 @@ function compute_vector_chirality(spins::Vector{HeisenbergSpin},
     @assert num_spins == 3num_triangles
     spins = collect.(spins)
     for i in triangles
-        #s = collect.([spins[i[j]] for j in 1:3])
-        #s = [collect(spins[i[j]]) for j in 1:3]
-        #s = [spins[i[j]] for j in 1:3]
         for j in 1:3
-            vc += cross(spins[i[j]],spins[i[ifelse(j==3,1,j+1)]])[3]
+            s1 = spins[i[j]]
+            s2 = spins[i[ifelse(j==3,1,j+1)]]
+            vc += s1[1]s2[2] - s1[2]s2[1]
             #vc += cross(s[j],s[ifelse(j==3,1,j+1)])[3]
         end
     end
@@ -69,7 +68,6 @@ function compute_af_vector_chirality(spins,utriangles,dtriangles)
 
 end
 
-delta(a,b) = ifelse(a==b,1,0) 
 
 delta(a,b) = ifelse(a==b,1,0) 
 

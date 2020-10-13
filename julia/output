@@ -1,4 +1,4 @@
-2020年 10月13日 火曜日 15時37分05秒 JST
+2020年 10月13日 火曜日 15時51分18秒 JST
 Using XY spins
 num of temperatures = 1
 Starting simulation...
@@ -10,12 +10,12 @@ single_spin_flip_acc: [0.6324943728258653]
 Acceptant rate of loop update: 
 0.05 0.0 0.0
 <CPUtime> 
- rank=0 : [8.25, 1.0666666666666667, 1.3888888888888888, 764.4]
+ rank=0 : [5.0777777777777775, 0.8777777777777778, 0.9, 717.9444444444445]
 af: 0.05 0.003965442700813438
 op: 0.05 0.16843357977225537
 Ferro_vc: 0.05 6.058551678898972e-5
 AF_vc: 0.05 0.9413253099082529
 
 Statistics of replica exchange Monte Carlo
- 17.164780 seconds (22.00 M allocations: 1.062 GiB, 4.90% gc time)
-2020年 10月13日 火曜日 15時37分38秒 JST
+ 10.170552 seconds (21.98 M allocations: 1.061 GiB, 6.86% gc time)
+2020年 10月13日 火曜日 15時51分42秒 JST
