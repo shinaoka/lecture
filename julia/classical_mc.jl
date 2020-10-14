@@ -287,13 +287,14 @@ function solve(input_file::String, comm)
     ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
     if isq0 == true || issqrt3 == true
 
-        @assert num_therm_sweeps == 0 
 
         if rank == 0
             if isq0 == true
                 println("Starting from q=0 state")
+                issqrt3 = false
             elseif issqrt3 == true
                 println("Starting from √3×√3 state")
+                isq0 = false
             end
         end
 
@@ -335,8 +336,9 @@ function solve(input_file::String, comm)
             push!(maf_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
         end
         
-        # Turn off the replica exchange and loop update.
-        ex_rex         = false 
+        # Turn off the replica exchange and change num_therm_sweeps to 0.
+        ex_rex           = false 
+        num_therm_sweeps = 0
     end
 
     for sweep in 1:num_sweeps
