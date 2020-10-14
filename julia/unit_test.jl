@@ -66,10 +66,11 @@ function read_triangles(file_name::String,num_spins::Int64)
 end
 
 
-function test_compute_vector_chirality()
+function test_compute_vector_chirality(L)
 
-    num_spins = 27
+    num_spins = 3L^2
     q0 = read_spin_config("q0.txt",num_spins)
+    sqrt3 = read_spin_config("sqrt3.txt",num_spins)
 
     utriangles = read_triangles("utriangles.txt",num_spins)
     dtriangles = read_triangles("dtriangles.txt",num_spins)
@@ -81,18 +82,22 @@ function test_compute_vector_chirality()
     ferro_vc = compute_ferro_vector_chirality(q0,utriangles,dtriangles)
     af_vc    = compute_af_vector_chirality(q0,utriangles,dtriangles)
  
-    #q=0 state generally show Ferro chirality and in this case with plus sign.
     q0_ferro = (num_utriangles+num_dtriangles) * (3*sqrt(3)/2) / num_spins
     q0_ferro = q0_ferro^2 / 3
     q0_af    = 0
     @test isapprox(ferro_vc,q0_ferro) 
     @test isapprox(af_vc,q0_af)
  
-    println("Ferro: ",ferro_vc)
-    println("AF: ",af_vc)
+    ferro_vc = compute_ferro_vector_chirality(sqrt3,utriangles,dtriangles)
+    af_vc    = compute_af_vector_chirality(sqrt3,utriangles,dtriangles)
+    sqrt3_ferro = 0
+    sqrt3_af   = (num_utriangles+num_dtriangles) * (3*sqrt(3)/2) / num_spins
+    sqrt3_af = sqrt3_af^2 / 3
+    @test isapprox(ferro_vc,sqrt3_ferro) 
+    @test isapprox(af_vc,sqrt_af)
 end
-
-test_compute_vector_chirality()
+L = 3
+test_compute_vector_chirality(L)
 
 
 # octopolar_v2 and order_parameter are former implementations measuring order parameters.
