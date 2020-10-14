@@ -289,6 +289,14 @@ function solve(input_file::String, comm)
 
         @assert num_therm_sweeps == 0 
 
+        if rank == 0
+            if isq0 == true
+                println("Starting from q=0 state")
+            elseif issqrt3 == true
+                println("Starting from √3×√3 state")
+            end
+        end
+
         q0 = retrieve(conf, "model", "init_q0_state")
         spins_local      = fill(read_spin_config(q0,num_spins),num_temps_local)
         init_spins_local = fill(read_spin_config(q0,num_spins),num_temps_local)
