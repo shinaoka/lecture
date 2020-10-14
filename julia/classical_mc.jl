@@ -286,6 +286,9 @@ function solve(input_file::String, comm)
     issqrt3 = get_param(Bool, conf, "simulation", "issqrt3", false)
     ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
     if isq0 == true || issqrt3 == true
+
+        @assert num_therm_sweeps == 0 
+
         q0 = retrieve(conf, "model", "init_q0_state")
         spins_local      = fill(read_spin_config(q0,num_spins),num_temps_local)
         init_spins_local = fill(read_spin_config(q0,num_spins),num_temps_local)
