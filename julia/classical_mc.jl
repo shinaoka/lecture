@@ -102,6 +102,27 @@ function read_triangles(file_name::String,num_spins::Int64)
 end
 
 
+function mk_kagome(L)
+
+    kagome = Dict()
+    idx = 1
+    L = 2L
+
+    for (i,j) in Iterators.product(1:L,1:L)
+        mod_site = mod.((i,j),L)
+        if mod(mod_site[1],2) == 0 && mod(mod_site[2],2) == 1
+            continue
+        end
+
+        kagome[idx] = copy.(mod_site)
+        idx += 1
+    end
+
+    return kagome
+end
+
+
+
 function read_spin_config(file_name::String,num_spins::Int64)
 
     spins = fill((0.,0.,0.),num_spins)
@@ -261,6 +282,11 @@ function solve(input_file::String, comm)
     upward_triangles   = read_triangles(utriangles_file,num_spins)
     dtriangles_file    = retrieve(conf, "model", "dtriangles")
     downward_triangles = read_triangles(dtriangles_file,num_spins)
+
+    # preoaration for computation of magnetic order parameter mq
+    kagome = mk_kagome(Int(sqrt(num_spins/3)))
+    qvec   = [(0.0,0.0),(4π/3,4π/3)]
+
 
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
@@ -437,6 +463,16 @@ function solve(input_file::String, comm)
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
 
+            mq_q0 = zeros(Float64,num_temps_local)
+            mq_sqrt3 = zeros(Float64,num_temps_local)
+            for it in 1:num_temps_local
+                mq_q0[it]  = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
+                mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
+            end
+            add!(acc,"mq0",mq_q0)
+            add!(acc,"mq√3",mq_sqrt3)
+
+
             # ferro and anti-ferro vector spin chirality
             fvc  = zeros(Float64,num_temps_local)
             afvc = zeros(Float64,num_temps_local)
@@ -495,6 +531,8 @@ function solve(input_file::String, comm)
   ave_loop_length = mean_gather(acc,"loop_length",comm)
   m2_af = mean_gather(acc, "m2_af", comm)
   T2_op = mean_gather(acc, "T2_op", comm)
+  mq_q0 = mean_gather(acc, "mq0", comm)
+  mq_sqrt3 = mean_gather(acc, "mq√3", comm)
   Ferro_vc = mean_gather(acc, "Ferro_vc", comm)
   AF_vc    = mean_gather(acc, "AF_vc"   , comm)
   flush(stdout)
@@ -579,6 +617,8 @@ function solve(input_file::String, comm)
           println("op: $(rex.temps[i]) $(T2_op[i])")
           println("Ferro_vc: $(rex.temps[i]) $(Ferro_vc[i])")
           println("AF_vc: $(rex.temps[i]) $(AF_vc[i])")
+          println("mq0: $(rex.temps[i]) $(mq_q0[i])")
+          println("mq√3: $(rex.temps[i]) $(mq_sqrt3[i])")
       end
 
 

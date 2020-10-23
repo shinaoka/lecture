@@ -1,7 +1,7 @@
 #parameters for system
 L = 3
 J1 = -1.
-J2 = -0.05
+J2 = 0.05
 J1 = (J1,J1,J1)
 J2 = (J2,J2,J2)
 flag1 = 1
@@ -25,6 +25,37 @@ function mk_kagome(L)
     
     return kagome
 end
+
+
+function mk_kagome2(L,output_file)
+
+    kagome = Dict()
+    idx = 1
+    L = 2L
+
+    for (i,j) in Iterators.product(1:L,1:L)
+        mod_site = mod.((i,j,0),L)
+        if mod(mod_site[1],2) == 0 && mod(mod_site[2],2) == 1
+            continue
+        end
+
+        kagome[idx] = copy.(mod_site)
+        idx += 1
+    end
+
+    open(output_file,"w") do fp 
+        num_sites = length(keys(kagome))
+        println(fp,num_sites)
+        for i in 1:num_sites
+            site = kagome[i]
+            println(fp,i," ",site[1]," ",site[2]," ",site[3])
+        end
+    end
+
+    return kagome
+end
+
+mk_kagome2(L,"kagome.txt")
 
 
 function mk_triangles(L)

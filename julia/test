@@ -2672,3 +2672,156 @@ begin
 2020年 10月13日 火曜日 15時51分18秒 JST
 end
 2020年 10月13日 火曜日 15時51分42秒 JST
+begin
+2020年 10月23日 金曜日 13時38分19秒 JST
+ERROR: LoadError: UndefVarError: qvec not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:468
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45119,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月23日 金曜日 13時39分03秒 JST
+begin
+2020年 10月23日 金曜日 13時43分32秒 JST
+ERROR: LoadError: UndefVarError: qvecs not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:467
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45426,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月23日 金曜日 13時44分12秒 JST
+begin
+2020年 10月23日 金曜日 13時45分25秒 JST
+ERROR: LoadError: UndefVarError: i not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:468
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45708,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月23日 金曜日 13時46分08秒 JST
+begin
+2020年 10月23日 金曜日 13時47分32秒 JST
+ERROR: LoadError: UndefVarError: utriangles not defined
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:468
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45614,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月23日 金曜日 13時48分06秒 JST
+begin
+2020年 10月23日 金曜日 13時49分06秒 JST
+ERROR: LoadError: MethodError: no method matching setindex!(::Tuple{Float64,Float64}, ::Float64, ::Int64)
+Stacktrace:
+ [1] solve(::String, ::MPI.Comm) at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:468
+ [2] macro expansion at ./util.jl:175 [inlined]
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:21
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:20
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45973,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月23日 金曜日 13時49分49秒 JST
+begin
+2020年 10月23日 金曜日 14時00分53秒 JST
+ERROR: LoadError: LoadError: syntax: extra token "√" after end of expression
+Stacktrace:
+ [1] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:467
+ [2] include(::String) at ./client.jl:439
+ [3] top-level scope at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:1
+ [4] include(::Module, ::String) at ./Base.jl:377
+ [5] exec_options(::Base.JLOptions) at ./client.jl:288
+ [6] _start() at ./client.jl:484
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/classical_mc.jl:467
+in expression starting at /Users/humiyakakizawa/Dropbox/My Mac (humiyanoMacBook-Air.local)/Desktop/kagome/lecture/julia/main.jl:1
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[45841,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+end
+2020年 10月23日 金曜日 14時00分58秒 JST
+begin
+2020年 10月23日 金曜日 14時04分14秒 JST
+end
+2020年 10月23日 金曜日 14時04分44秒 JST
+begin
+2020年 10月23日 金曜日 14時07分30秒 JST
+end
+2020年 10月23日 金曜日 14時07分55秒 JST

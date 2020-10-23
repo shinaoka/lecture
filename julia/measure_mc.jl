@@ -25,6 +25,29 @@ function compute_m2_af(spins::Vector{HeisenbergSpin},
 end
 
 
+function compute_mq(q,kagome,spins,triangles)
+
+    @assert length(keys(kagome)) == length(spins)
+
+    sq = fill((0.0+0im,0.0+0im,0.0+0im),3)
+    for i in triangles
+        for j in 1:3
+            idx = i[j]
+            R = kagome[idx]
+            sq[j] = sq[j] .+ spins[idx].*exp((q⋅R)*im)
+        end
+    end
+
+    ss = 0.
+
+    for i in 1:3
+        ss += sq[i] ⋅ sq[i]
+    end
+
+    return real(ss)/(3*length(triangles)^2)
+end
+
+
 # vector spin chirality defined as sum of outer product of spins in unit triangular with counterclockwise rotation.
 function compute_vector_chirality(spins::Vector{HeisenbergSpin},
                                   triangles::Array{Tuple{Int64,Int64,Int64},1})
