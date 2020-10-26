@@ -617,8 +617,8 @@ function solve(input_file::String, comm)
           println("op: $(rex.temps[i]) $(T2_op[i])")
           println("Ferro_vc: $(rex.temps[i]) $(Ferro_vc[i])")
           println("AF_vc: $(rex.temps[i]) $(AF_vc[i])")
-          println("mq0: $(rex.temps[i]) $(mq_q0[i])")
-          println("mq√3: $(rex.temps[i]) $(mq_sqrt3[i])")
+          println("mq_q0: $(rex.temps[i]) $(mq_q0[i])")
+          println("mq_sqrt3: $(rex.temps[i]) $(mq_sqrt3[i])")
       end
 
 
