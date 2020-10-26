@@ -465,7 +465,7 @@ function solve(input_file::String, comm)
             """
             add!(acc,"loop_length",measured_loop_length)
 
-            # magnetic order parameters
+            # square and fourth power of magnetic and chirality order parameters
             m2_af = zeros(Float64,num_temps_local)
             T2_op = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
@@ -474,6 +474,8 @@ function solve(input_file::String, comm)
             end
             add!(acc, "m2_af", m2_af)
             add!(acc, "T2_op", T2_op)
+            add!(acc, "m4_af", m2_af.^2)
+            add!(acc, "T4_op", T2_op.^2)
 
             mq_q0 = zeros(Float64,num_temps_local)
             mq_sqrt3 = zeros(Float64,num_temps_local)
@@ -481,8 +483,10 @@ function solve(input_file::String, comm)
                 mq_q0[it]  = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
                 mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
             end
-            add!(acc,"mq0",mq_q0)
-            add!(acc,"mq√3",mq_sqrt3)
+            add!(acc,"m2q0",mq_q0)
+            add!(acc,"m2q√3",mq_sqrt3)
+            add!(acc,"m4q0",mq_q0.^2)
+            add!(acc,"m4q√3",mq_sqrt3.^2)
 
 
             # ferro and anti-ferro vector spin chirality
@@ -492,8 +496,10 @@ function solve(input_file::String, comm)
                 fvc[it]  = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles)
                 afvc[it] = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
             end
-            add!(acc,"Ferro_vc",fvc)
-            add!(acc,"AF_vc",afvc)
+            add!(acc,"Ferro_vc2",fvc)
+            add!(acc,"AF_vc2",afvc)
+            add!(acc,"Ferro_vc4",fvc.^2)
+            add!(acc,"AF_vc4",afvc.^2)
 
             # non-equilibrium relaxation method.
             if isq0 == true || issqrt3 == true
@@ -545,10 +551,19 @@ function solve(input_file::String, comm)
   ave_loop_length = mean_gather(acc,"loop_length",comm)
   m2_af = mean_gather(acc, "m2_af", comm)
   T2_op = mean_gather(acc, "T2_op", comm)
-  mq_q0 = mean_gather(acc, "mq0", comm)
-  mq_sqrt3 = mean_gather(acc, "mq√3", comm)
-  Ferro_vc = mean_gather(acc, "Ferro_vc", comm)
-  AF_vc    = mean_gather(acc, "AF_vc"   , comm)
+  m2q_q0 = mean_gather(acc, "m2q0", comm)
+  m2q_sqrt3 = mean_gather(acc, "m2q√3", comm)
+  Ferro_vc2 = mean_gather(acc, "Ferro_vc2", comm)
+  AF_vc2    = mean_gather(acc, "AF_vc2"   , comm)
+  m4_af = mean_gather(acc, "m4_af", comm)
+  T4_op = mean_gather(acc, "T4_op", comm)
+  m4q_q0 = mean_gather(acc, "m4q0", comm)
+  m4q_sqrt3 = mean_gather(acc, "m4q√3", comm)
+  Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
+  AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
+  flush(stdout)
+  MPI.Barrier(comm)
+
   flush(stdout)
   MPI.Barrier(comm)
 
@@ -638,12 +653,18 @@ function solve(input_file::String, comm)
       end
 
       for i in 1:num_temps
-          println("af: $(rex.temps[i]) $(m2_af[i])")
-          println("op: $(rex.temps[i]) $(T2_op[i])")
-          println("Ferro_vc: $(rex.temps[i]) $(Ferro_vc[i])")
-          println("AF_vc: $(rex.temps[i]) $(AF_vc[i])")
-          println("mq_q0: $(rex.temps[i]) $(mq_q0[i])")
-          println("mq_sqrt3: $(rex.temps[i]) $(mq_sqrt3[i])")
+          println("af2: $(rex.temps[i]) $(m2_af[i])")
+          println("op2: $(rex.temps[i]) $(T2_op[i])")
+          println("Ferro_vc2: $(rex.temps[i]) $(Ferro_vc2[i])")
+          println("AF_vc2: $(rex.temps[i]) $(AF_vc2[i])")
+          println("m2q0: $(rex.temps[i]) $(m2q_q0[i])")
+          println("m2q√3: $(rex.temps[i]) $(m2q_sqrt3[i])")
+          println("af4: $(rex.temps[i]) $(m4_af[i])")
+          println("op4: $(rex.temps[i]) $(T4_op[i])")
+          println("Ferro_vc4: $(rex.temps[i]) $(Ferro_vc4[i])")
+          println("AF_vc4: $(rex.temps[i]) $(AF_vc4[i])")
+          println("m4q0: $(rex.temps[i]) $(m4q_q0[i])")
+          println("m4q√3: $(rex.temps[i]) $(m4q_sqrt3[i])")
       end
 
 
