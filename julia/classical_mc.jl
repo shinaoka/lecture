@@ -335,16 +335,22 @@ function solve(input_file::String, comm)
         end
 
         # initial value of Ferro and AF vector spin chirality.
-        init_fvc   = zeros(Float64,num_temps_local)
-        init_afvc  = zeros(Float64,num_temps_local)
+        init_fvc       = zeros(Float64,num_temps_local)
+        init_afvc      = zeros(Float64,num_temps_local)
+        init_mq_q0     = zeros(Float64,num_temps_local)
+        init_mq_sqrt3  = zeros(Float64,num_temps_local)
         for it in 1:num_temps_local
             init_fvc[it]  = compute_ferro_vector_chirality(init_spins_local[it],upward_triangles,downward_triangles) 
             init_afvc[it]  = compute_af_vector_chirality(init_spins_local[it],upward_triangles,downward_triangles) 
+            init_mq_q0[it]    = compute_mq((0.,0.),kagome,init_spins_local[it],upward_triangles)
+            init_mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,init_spins_local[it],upward_triangles)
         end
 
-        correlation_func = [[] for i in 1:num_temps_local]
-        fvc_correlation  = [[] for i in 1:num_temps_local]
-        afvc_correlation = [[] for i in 1:num_temps_local]
+        correlation_func     = [[] for i in 1:num_temps_local]
+        fvc_correlation      = [[] for i in 1:num_temps_local]
+        afvc_correlation     = [[] for i in 1:num_temps_local]
+        mq_q0_correlation    = [[] for i in 1:num_temps_local]
+        mq_sqrt3_correlation = [[] for i in 1:num_temps_local]
         for it in 1:num_temps_local
             tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
             push!(correlation_func[it],tmp / num_spins)
@@ -354,9 +360,14 @@ function solve(input_file::String, comm)
 
             temp_afvc = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
             push!(afvc_correlation[it],init_afvc[it]*temp_afvc)
+
+            temp_mq_q0    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
+            temp_mq_sqrt3 = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
+            push!(mq_q0_correlation[it],init_mq_q0[it]*temp_mq_q0)
+            push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*temp_mq_sqrt3)
         end
 
-        # compute order parameter at an initial time.
+
         maf_time_evo = [[] for it in 1:num_temps_local]
         for it in 1:num_temps_local
             push!(maf_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
@@ -493,6 +504,8 @@ function solve(input_file::String, comm)
                     push!(fvc_correlation[it],init_fvc[it]*fvc[it])
                     push!(afvc_correlation[it],init_afvc[it]*afvc[it])
 
+                    push!(mq_q0_correlation[it],init_mq_q0[it]*mq_q0[it])
+                    push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*mq_sqrt3[it])
                     if mod(sweep, 100) == 0
                         #println(sweep, "th: ", tmp/num_spins)
                     end
@@ -572,6 +585,17 @@ function solve(input_file::String, comm)
                end
           end
 
+          open("mq_q0_$(itemp+start_idx-1).dat","w") do fp
+               for itime in 1:length(mq_q0_correlation[itemp])
+                   println(fp, itime, " ", mq_q0_correlation[itemp][itime])
+               end
+          end
+
+          open("mq_sqrt3_$(itemp+start_idx-1).dat","w") do fp
+               for itime in 1:length(mq_sqrt3_correlation[itemp])
+                   println(fp, itime, " ", mq_sqrt3_correlation[itemp][itime])
+               end
+          end
       end
   end
 
