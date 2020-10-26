@@ -345,6 +345,7 @@ function solve(input_file::String, comm)
             init_mq_q0[it]    = compute_mq((0.,0.),kagome,init_spins_local[it],upward_triangles)
             init_mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,init_spins_local[it],upward_triangles)
         end
+        init_mq_sqrt3 .*= 2 #max value of order parameter for √3×√3 is 0.5
 
         correlation_func     = [[] for i in 1:num_temps_local]
         fvc_correlation      = [[] for i in 1:num_temps_local]
@@ -364,7 +365,7 @@ function solve(input_file::String, comm)
             temp_mq_q0    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
             temp_mq_sqrt3 = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
             push!(mq_q0_correlation[it],init_mq_q0[it]*temp_mq_q0)
-            push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*temp_mq_sqrt3)
+            push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*2temp_mq_sqrt3)
         end
 
 
@@ -505,7 +506,7 @@ function solve(input_file::String, comm)
                     push!(afvc_correlation[it],init_afvc[it]*afvc[it])
 
                     push!(mq_q0_correlation[it],init_mq_q0[it]*mq_q0[it])
-                    push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*mq_sqrt3[it])
+                    push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*2mq_sqrt3[it])
                     if mod(sweep, 100) == 0
                         #println(sweep, "th: ", tmp/num_spins)
                     end
