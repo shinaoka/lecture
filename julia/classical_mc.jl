@@ -658,13 +658,13 @@ function solve(input_file::String, comm)
           println("Ferro_vc2: $(rex.temps[i]) $(Ferro_vc2[i])")
           println("AF_vc2: $(rex.temps[i]) $(AF_vc2[i])")
           println("m2q0: $(rex.temps[i]) $(m2q_q0[i])")
-          println("m2q√3: $(rex.temps[i]) $(m2q_sqrt3[i])")
+          println("m2_sqrt3: $(rex.temps[i]) $(m2q_sqrt3[i])")
           println("af4: $(rex.temps[i]) $(m4_af[i])")
           println("op4: $(rex.temps[i]) $(T4_op[i])")
           println("Ferro_vc4: $(rex.temps[i]) $(Ferro_vc4[i])")
           println("AF_vc4: $(rex.temps[i]) $(AF_vc4[i])")
           println("m4q0: $(rex.temps[i]) $(m4q_q0[i])")
-          println("m4q√3: $(rex.temps[i]) $(m4q_sqrt3[i])")
+          println("m4_sqrt3: $(rex.temps[i]) $(m4q_sqrt3[i])")
       end
 
 
