@@ -83,7 +83,7 @@ function mk_kagome2(L)
 end
 
 
-function test_compute_mq(L)
+function test_compute_m(L)
 
     num_spins = 3L^2
     q0    = read_spin_config("q0.txt",num_spins)
@@ -108,9 +108,14 @@ function test_compute_mq(L)
     @test maximum(mq_q0) ≈ 1.0
     @test maximum(mq_sqrt3) ≈ 0.5
 
+    m_120degrees_q0    = compute_m_120degrees(q0)
+    m_120degrees_sqrt3 = compute_m_120degrees(sqrt3)
+
+    @test m_120degrees_q0 ≈ m_120degrees_sqrt3 ≈ 1.0
+
 end
 L = 3
-test_compute_mq(L)
+test_compute_m(L)
 
 
 function test_compute_vector_chirality(L)

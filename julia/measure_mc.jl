@@ -48,6 +48,13 @@ function compute_mq(q,kagome,spins,triangles)
 end
 
 
+function compute_m_120degrees(spins)
+    cos_sum = sum((cos(3*atan(x[2], x[1])) for x in spins))
+    sin_sum = sum((sin(3*atan(x[2], x[1])) for x in spins))
+    (cos_sum^2 + sin_sum^2)/length(spins)^2
+end
+
+
 # vector spin chirality defined as sum of outer product of spins in unit triangular with counterclockwise rotation.
 function compute_vector_chirality(spins::Vector{HeisenbergSpin},
                                   triangles::Array{Tuple{Int64,Int64,Int64},1})

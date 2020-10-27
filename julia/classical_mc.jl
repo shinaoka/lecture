@@ -285,7 +285,7 @@ function solve(input_file::String, comm)
 
     # preoaration for computation of magnetic order parameter mq
     kagome = mk_kagome(Int(sqrt(num_spins/3)))
-    qvec   = [(0.0,0.0),(4π/3,4π/3)]
+    qs   = [(0.0,0.0),(4π/3,4π/3)]
 
 
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
@@ -477,16 +477,20 @@ function solve(input_file::String, comm)
             add!(acc, "m4_af", m2_af.^2)
             add!(acc, "T4_op", T2_op.^2)
 
-            mq_q0 = zeros(Float64,num_temps_local)
-            mq_sqrt3 = zeros(Float64,num_temps_local)
+            mq_q0     = zeros(Float64,num_temps_local)
+            mq_sqrt3  = zeros(Float64,num_temps_local)
+            m_120degs = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                mq_q0[it]  = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
+                mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
                 mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
+                m_120degs[it]= compute_m_120degrees(spins_local[it])
             end
             add!(acc,"m2q0",mq_q0)
             add!(acc,"m2q√3",mq_sqrt3)
+            add!(acc,"m120degs",m_120degs)
             add!(acc,"m4q0",mq_q0.^2)
             add!(acc,"m4q√3",mq_sqrt3.^2)
+            add!(acc,"m120degs4",m_120degs.^2)
 
 
             # ferro and anti-ferro vector spin chirality
@@ -553,12 +557,14 @@ function solve(input_file::String, comm)
   T2_op = mean_gather(acc, "T2_op", comm)
   m2q_q0 = mean_gather(acc, "m2q0", comm)
   m2q_sqrt3 = mean_gather(acc, "m2q√3", comm)
+  m120degs = mean_gather(acc, "m120degs", comm)
   Ferro_vc2 = mean_gather(acc, "Ferro_vc2", comm)
   AF_vc2    = mean_gather(acc, "AF_vc2"   , comm)
   m4_af = mean_gather(acc, "m4_af", comm)
   T4_op = mean_gather(acc, "T4_op", comm)
   m4q_q0 = mean_gather(acc, "m4q0", comm)
   m4q_sqrt3 = mean_gather(acc, "m4q√3", comm)
+  m120degs4 = mean_gather(acc, "m120degs4", comm)
   Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
   AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
   flush(stdout)
@@ -631,8 +637,6 @@ function solve(input_file::String, comm)
           println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
       end
       
-      temp_idx = rand(1:num_spins)
-     
 
       println("<CPUtime> ")
       for (i, t) in enumerate(CPUtime)
@@ -659,12 +663,14 @@ function solve(input_file::String, comm)
           println("AF_vc2: $(rex.temps[i]) $(AF_vc2[i])")
           println("m2q0: $(rex.temps[i]) $(m2q_q0[i])")
           println("m2_sqrt3: $(rex.temps[i]) $(m2q_sqrt3[i])")
+          println("m120degs: $(rex.temps[i]) $(m120degs[i])")
           println("af4: $(rex.temps[i]) $(m4_af[i])")
           println("op4: $(rex.temps[i]) $(T4_op[i])")
           println("Ferro_vc4: $(rex.temps[i]) $(Ferro_vc4[i])")
           println("AF_vc4: $(rex.temps[i]) $(AF_vc4[i])")
           println("m4q0: $(rex.temps[i]) $(m4q_q0[i])")
           println("m4_sqrt3: $(rex.temps[i]) $(m4q_sqrt3[i])")
+          println("m120degs4: $(rex.temps[i]) $(m120degs4[i])")
       end
 
 
