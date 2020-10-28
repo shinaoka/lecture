@@ -480,10 +480,15 @@ function solve(input_file::String, comm)
             mq_q0     = zeros(Float64,num_temps_local)
             mq_sqrt3  = zeros(Float64,num_temps_local)
             m_120degs = zeros(Float64,num_temps_local)
+            ss      = fill(zeros(Float64,3,num_spins),num_temps_local)
             for it in 1:num_temps_local
                 mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
                 mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
                 m_120degs[it]= compute_m_120degrees(spins_local[it])
+                for is in 1:num_spins, j in 1:3
+                    temp_idx = upward_triangles[1][j]
+                    ss[it][j,is] = spins_local[it][is]⋅spins_local[it][temp_idx]
+                end
             end
             add!(acc,"m2q0",mq_q0)
             add!(acc,"m2q√3",mq_sqrt3)
@@ -491,6 +496,7 @@ function solve(input_file::String, comm)
             add!(acc,"m4q0",mq_q0.^2)
             add!(acc,"m4q√3",mq_sqrt3.^2)
             add!(acc,"m120degs4",m_120degs.^2)
+            add!(acc,"ss",ss)
 
 
             # ferro and anti-ferro vector spin chirality
@@ -567,6 +573,7 @@ function solve(input_file::String, comm)
   m120degs4 = mean_gather(acc, "m120degs4", comm)
   Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
   AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
+  ss    = mean_gather_array(acc, "ss" , comm)
   flush(stdout)
   MPI.Barrier(comm)
 
@@ -578,6 +585,14 @@ function solve(input_file::String, comm)
       #write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
   end
   
+
+  for it in 1:num_temps_local
+      fid = h5open("ss/ss$(it+start_idx-1).h5","w")
+      for j in 1:3
+          fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
+      end
+  end
+
 
   # Output time evolution of order parameter.
   if isq0 == true || issqrt3 == true
