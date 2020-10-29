@@ -47,15 +47,32 @@ function compute_mq(q,kagome,spins,triangles)
     return real(ss)/(3*length(triangles)^2)
 end
 
+function compute_m_120degrees(q, spins)
+    for ispin in eachindex(spins)
 
-function compute_m_120degrees(spins)
-    cos_sum = sum((cos(3*atan(x[2], x[1])) for x in spins))
-    sin_sum = sum((sin(3*atan(x[2], x[1])) for x in spins))
-    (cos_sum^2 + sin_sum^2)/length(spins)^2
+    end
+
+    sq = fill((0.0+0im,0.0+0im,0.0+0im),3)
+    for i in triangles
+        for j in 1:3
+            idx = i[j]
+            R = kagome[idx]
+            sq[j] = sq[j] .+ spins[idx].*exp((q⋅R)*im)
+        end
+    end
+
+    ss = 0.
+
+    for i in 1:3
+        ss += sq[i] ⋅ sq[i]
+    end
+
+    return real(ss)/(3*length(triangles)^2)
 end
 
 
 # vector spin chirality defined as sum of outer product of spins in unit triangular with counterclockwise rotation.
+#=
 function compute_vector_chirality(spins::Vector{HeisenbergSpin},
                                   triangles::Array{Tuple{Int64,Int64,Int64},1})
 
@@ -73,6 +90,28 @@ function compute_vector_chirality(spins::Vector{HeisenbergSpin},
         end
     end
 
+    return vc / num_spins
+end
+=#
+
+function mycross(s1, s2)
+    s1[1]s2[2] - s1[2]s2[1]
+end
+
+function compute_vector_chirality(spins::AbstractArray{Float64,2},
+                                  triangles::Vector{Tuple{Int64,Int64,Int64}})
+
+    vc = 0.0
+    num_spins = size(spins)[2]
+    num_triangles = length(triangles)
+    @assert num_spins == 3num_triangles
+    for i in triangles
+        for j in 1:3
+            s1 = view(spins, :, i[j])
+            s2 = view(spins, :, i[ifelse(j==3,1,j+1)])
+            vc += mycross(s1, s2)
+        end
+    end
     return vc / num_spins
 end
 
