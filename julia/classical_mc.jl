@@ -586,14 +586,6 @@ function solve(input_file::String, comm)
   end
   
 
-  for it in 1:num_temps_local
-      fid = h5open("ss/ss$(it+start_idx-1).h5","w")
-      for j in 1:3
-          fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
-      end
-  end
-
-
   # Output time evolution of order parameter.
   if isq0 == true || issqrt3 == true
       for itemp in 1:num_temps_local
@@ -687,6 +679,14 @@ function solve(input_file::String, comm)
           println("m4_sqrt3: $(rex.temps[i]) $(m4q_sqrt3[i])")
           println("m120degs4: $(rex.temps[i]) $(m120degs4[i])")
       end
+
+      for it in 1:num_temps_local
+          fid = h5open("ss/ss$(it+start_idx-1).h5","w")
+          for j in 1:3
+              fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
+          end
+      end
+
 
 
     end
