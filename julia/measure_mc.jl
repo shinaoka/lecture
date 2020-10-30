@@ -47,28 +47,12 @@ function compute_mq(q,kagome,spins,triangles)
     return real(ss)/(3*length(triangles)^2)
 end
 
-function compute_m_120degrees(q, spins)
-    for ispin in eachindex(spins)
-
-    end
-
-    sq = fill((0.0+0im,0.0+0im,0.0+0im),3)
-    for i in triangles
-        for j in 1:3
-            idx = i[j]
-            R = kagome[idx]
-            sq[j] = sq[j] .+ spins[idx].*exp((q⋅R)*im)
-        end
-    end
-
-    ss = 0.
-
-    for i in 1:3
-        ss += sq[i] ⋅ sq[i]
-    end
-
-    return real(ss)/(3*length(triangles)^2)
+function compute_m_120degrees(spins)
+    cos_sum = sum((cos(3*atan(x[2], x[1])) for x in spins))
+    sin_sum = sum((sin(3*atan(x[2], x[1])) for x in spins))
+    (cos_sum^2 + sin_sum^2)/length(spins)^2
 end
+
 
 
 # vector spin chirality defined as sum of outer product of spins in unit triangular with counterclockwise rotation.
