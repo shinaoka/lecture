@@ -7,14 +7,68 @@ const SpinIndex = UInt32
 
 const IsingSpin = Int8
 const HeisenbergSpin = Tuple{Float64,Float64,Float64}
+const UniqueJijIdx = UInt8
 
 export JModel, SingleSpinFlipUpdater
+
+struct UniqueJij
+    Jxyz::SVector{3,Float64}
+    flag_nn::UInt8
+end
 
 struct JModel
     # List of non-zero entries of Jij
     num_spins::Int
-    Jij::Vector{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}
+    unique_Jij::Vector{UniqueJij}
+    Jij::Vector{Tuple{SpinIndex,SpinIndex,UInt8}}
 end
+
+
+# Read non-zero elements in the right-upper triangle part of Jij
+function JModel(Jij_file::String, num_spins::Int64)
+    unique_Jij = UniqueJij[]
+    Jij = Tuple{SpinIndex,SpinIndex,UInt8}[]
+    open(Jij_file, "r" ) do fp
+        @assert num_spins == parse(Int64, readline(fp)) "!match num_spins. See 2d.ini and head of Jij.txt"
+
+        num_unique_Jij = parse(Int, readline(fp))
+        for i in 1:num_unique_Jij
+            str     = split(readline(fp))
+            i_read  = parse(Float64,  str[1])
+            val_x   = parse(Float64,  str[2])
+            val_y   = parse(Float64,  str[3])
+            val_z   = parse(Float64,  str[4])
+            flag_nn = parse(UInt8,    str[5])
+            if i_read != i
+                error("Invalid input for unique Jij!")
+            end
+            Jxy = SVector{3,Float64}(val_x, val_y, val_z)
+            push!(unique_Jij, UniqueJij(Jxy, flag_nn))
+        end
+
+        num_Jij_elems = parse(Int64, readline(fp))
+        resize!(Jij, num_Jij_elems)
+        for ielem in 1:num_Jij_elems
+            str      = split(readline(fp))
+            i        = parse(SpinIndex, str[1])
+            j        = parse(SpinIndex, str[2])
+            uJij_idx = parse(UInt8,     str[3])
+            if i >= j
+                error("Only right-upper triangle part must be given.")
+            end
+            if i > num_spins || i <= 0  || j > num_spins || j <= 0
+                error("i or j is out of the range [1, num_spins].")
+            end
+            if uJij_idx > num_unique_Jij
+                error("Invalid index for unique Jij!")
+            end
+            Jij[ielem] = (i, j, uJij_idx)
+        end
+    end
+
+    return JModel(num_spins, unique_Jij, Jij)
+end
+
 
 function compute_energy(model::JModel, spins::AbstractVector{IsingSpin})
     return -sum([intr[3] * spins[intr[1]] * spins[intr[2]] for intr in model.Jij])
@@ -34,8 +88,9 @@ function compute_energy(model::JModel, spins::AbstractVector{HeisenbergSpin})
     for intr in model.Jij
         spin1 = spins[intr[1]]
         spin2 = spins[intr[2]]
+        uj_idx = intr[3]
         for j in 1:3
-            energy += intr[j+2] * spin1[j] * spin2[j]
+            energy += model.unique_Jij[uj_idx].Jxyz[j] * spin1[j] * spin2[j]
         end
     end
     
@@ -62,14 +117,19 @@ end
 
 struct SingleSpinFlipUpdater
     num_spins::Int
+    unique_Jij::Vector{UniqueJij}
     coord_num::Vector{UInt16}
-    connection::Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}
-
-    connected_sites::Matrix{SpinIndex}
-    is_NN::Matrix{Bool}
-
+    connection::Matrix{Tuple{SpinIndex,UInt8}}
     nn_coord_num::Vector{UInt16}
     nn_sites::Matrix{SpinIndex}
+end
+
+function get_J(updater, ispin, icoord)
+    jspin, uidx = updater.connection[icoord, ispin]
+    return jspin,
+     updater.unique_Jij[uidx].Jxyz[1],
+     updater.unique_Jij[uidx].Jxyz[2],
+     updater.unique_Jij[uidx].Jxyz[3]
 end
 
 function SingleSpinFlipUpdater(model::JModel)
@@ -78,47 +138,43 @@ function SingleSpinFlipUpdater(model::JModel)
 
     coord_num = zeros(Int, num_spins)
 
-    # Figure out which spins each spin is connected to
-    connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}() for _ in 1:num_spins]
-    nn_connection_tmp = [Set{Tuple{SpinIndex,Float64,Float64,Float64}}() for _ in 1:num_spins]
-    num_Jij = size(Jij, 1)
-    for i_pair = 1:num_Jij
-        i, j = Jij[i_pair][1:2]
-        is_nn = Jij[i_pair][6] != 0
-        push!(connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
-        push!(connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5],Jij[i_pair][6]))
-        if is_nn
-            push!(nn_connection_tmp[i], (j, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
-            push!(nn_connection_tmp[j], (i, Jij[i_pair][3], Jij[i_pair][4], Jij[i_pair][5]))
-        end
-    end
-    max_coord_num = maximum([length(connection_tmp[ispin]) for ispin in 1:num_spins])
-
-    connection = Matrix{Tuple{SpinIndex,Float64,Float64,Float64,Int64}}(undef, max_coord_num, num_spins)
-    coord_num = Vector{UInt16}(undef, num_spins)
-    connected_sites = Matrix{SpinIndex}(undef, (max_coord_num, num_spins))
-    is_NN = Matrix{Bool}(undef, (max_coord_num, num_spins))
-    for ispin = 1:num_spins
-        coord_num[ispin] = length(connection_tmp[ispin])
-        connection[1:coord_num[ispin], ispin] = collect(connection_tmp[ispin])
-        for (ic, val) in enumerate(connection_tmp[ispin])
-            connected_sites[ic, ispin] = val[1]
-            is_NN[ic, ispin] = (val[5] != 0)
-        end
-    end
-
+    # Compute coord_num
+    coord_num = zeros(UInt16, num_spins)
     nn_coord_num = zeros(UInt16, num_spins)
-    max_nn_coord_num = maximum([length(nn_connection_tmp[ispin]) for ispin in 1:num_spins])
-    nn_sites = Matrix{SpinIndex}(undef, (max_nn_coord_num, num_spins))
-    for ispin = 1:num_spins
-        nn_coord_num[ispin] = length(nn_connection_tmp[ispin])
-        for (ic, val) in enumerate(nn_connection_tmp[ispin])
-            nn_sites[ic, ispin] = val[1]
+    for i_pair in eachindex(model.Jij)
+        Jij_pair = Jij[i_pair]
+        i, j = Jij_pair[1:2]
+        coord_num[i] += 1
+        coord_num[j] += 1
+        if model.unique_Jij[Jij_pair[3]].flag_nn == 1
+            nn_coord_num[i] += 1
+            nn_coord_num[j] += 1
+        end
+    end
+    max_coord_num = maximum(coord_num)
+    max_nn_coord_num = maximum(nn_coord_num)
+
+    # (idx of connected site, index of unique Jij, is_nn)
+    connection = Matrix{Tuple{SpinIndex,UInt8}}(undef, max_coord_num, num_spins)
+    coord_idx = ones(UInt16, num_spins)
+    nn_coord_idx = ones(UInt16, num_spins)
+    nn_sites = fill(typemax(SpinIndex), (max_nn_coord_num, num_spins))
+    for i_pair in eachindex(model.Jij)
+        Jij_pair = Jij[i_pair]
+        i, j = Jij_pair[1:2]
+        connection[coord_idx[i], i] = (j, Jij_pair[3])
+        connection[coord_idx[j], j] = (i, Jij_pair[3])
+        coord_idx[i] += 1
+        coord_idx[j] += 1
+        if model.unique_Jij[Jij_pair[3]].flag_nn == 1
+            nn_sites[nn_coord_idx[i], i] = j
+            nn_sites[nn_coord_idx[j], j] = i
+            nn_coord_idx[i] += 1
+            nn_coord_idx[j] += 1
         end
     end
 
-    return SingleSpinFlipUpdater(num_spins, coord_num, connection, connected_sites, is_NN,
-        nn_coord_num, nn_sites)
+    return SingleSpinFlipUpdater(num_spins, model.unique_Jij, coord_num, connection, nn_coord_num, nn_sites)
 end
 
 
@@ -129,8 +185,8 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
         # Compute effective field from the rest of spins
         eff_h::Float64 = 0.0
         for ic in 1:updater.coord_num[ispin]
-            c = updater.connection[ic, ispin]
-            eff_h += c[2] * spins[c[1]]
+            jsite, Jx, Jy, Jz = get_J(updater, ispin, ic)
+            eff_h += Jz * spins[jsite]
         end
 
         # Flip spin
@@ -149,22 +205,26 @@ function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel,
     return dE
 end
 
+function effective_field(spins::AbstractVector{HeisenbergSpin}, updater, ispin)
+    eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
+    for ic in 1:updater.coord_num[ispin]
+        c = updater.connection[ic, ispin]
+        jsite, Jx, Jy, Jz = get_J(updater, ispin, ic)
+        jspin = spins[jsite]
+        eff_h = eff_h .+ (Jx*jspin[1], Jy*jspin[2], Jz*jspin[3])
+    end
+    eff_h
+end
+
 function one_sweep(updater::SingleSpinFlipUpdater, beta::Float64, model::JModel, spins::AbstractVector{HeisenbergSpin})
     dE::Float64 = 0
     num_acc = 0
     for ispin in 1:model.num_spins
-
         # Compute effective field from the rest of spins
-        eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
-        for ic in 1:updater.coord_num[ispin]
-            c = updater.connection[ic, ispin]
-            eff_h = eff_h .+ (c[2]*spins[c[1]][1], c[3]*spins[c[1]][2], c[4]*spins[c[1]][3])
-        end
-
+        eff_h = effective_field(spins, updater, ispin)
 
         # Propose a new spin state
         si_new = propose_unifo()
-
          
         # Flip spin
         dE_prop = -dot(si_new .- spins[ispin], eff_h)
@@ -192,11 +252,7 @@ function gaussian_move(updater::SingleSpinFlipUpdater, beta::Float64, model::JMo
     coeff_z     = xy ? 0.0 : 1.0
     for ispin in 1:model.num_spins
         # Compute effective field from the rest of spins
-        eff_h::HeisenbergSpin = (0.0, 0.0, 0.0)
-        for ic in 1:updater.coord_num[ispin]
-            c = updater.connection[ic, ispin]
-            eff_h = eff_h .+ (c[2]*spins[c[1]][1], c[3]*spins[c[1]][2], c[4]*spins[c[1]][3])
-        end
+        eff_h = effective_field(spins, updater, ispin)
 
         # Propose a new spin direction : Gaussian trial move 
         si_new = spins[ispin] .+ sigma_g .* (randn(Random.GLOBAL_RNG), randn(Random.GLOBAL_RNG), coeff_z*randn(Random.GLOBAL_RNG))

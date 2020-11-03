@@ -82,6 +82,52 @@ function mk_kagome2(L)
     return kagome
 end
 
+function test_JModel()
+    # Make Jij.txt
+    # Three spins on a chain with nearest neighbobor (J1) and
+    # next nearest neighbobor (J2) interactions with an open boundary condition
+    J1, J2 = 1.0, -0.1
+    num_spins = 3
+    J1_idx, J2_idx = 1, 2
+    num_unique_Jij = 2
+    fname = "Jij_test_JModel.ini"
+    open(fname, "w") do f
+        println(f, num_spins)
+        println(f, num_unique_Jij)
+        println(f, "1  $(J1) $(J1) $(J1) 1")
+        println(f, "2  $(J2) $(J2) $(J2) 0")
+        println(f, 3)
+        println(f, "1 2 $(J1_idx)")
+        println(f, "2 3 $(J1_idx)")
+        println(f, "1 3 $(J2_idx)")
+    end
+
+    model = JModel(fname, num_spins)
+
+    @assert model.num_spins == num_spins
+    @assert length(model.unique_Jij) == num_unique_Jij
+    @assert length(model.Jij) == 3
+    @assert model.unique_Jij[1].Jxyz == SVector(J1, J1, J1)
+    @assert model.unique_Jij[1].flag_nn == 1
+    @assert model.unique_Jij[2].Jxyz == SVector(J2, J2, J2)
+    @assert model.unique_Jij[2].flag_nn == 0
+
+    updater = SingleSpinFlipUpdater(model)
+    @assert updater.coord_num == [2, 2, 2]
+    @assert updater.nn_coord_num == [1, 2, 1]
+    @assert updater.nn_sites[:,1] == [2, typemax(SpinIndex)]
+    @assert updater.nn_sites[:,2] == [1, 3]
+    @assert updater.nn_sites[:,3] == [2, typemax(SpinIndex)]
+
+    spins = [propose_unifo() for _ in 1:num_spins]
+    eff_h = effective_field(spins, updater, 1)
+    for s in 1:3
+       eff_h_ref = J1*spins[2][s] + J2*spins[3][s]
+       @assert eff_h[s] ≈ eff_h_ref
+    end
+end
+test_JModel()
+
 
 function test_compute_m(L)
 

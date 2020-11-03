@@ -240,7 +240,7 @@ sqrt3 = mk_sqrt3(L)
 write_spins(sqrt3,"sqrt3.txt")
 
 
-function mk_Jij_kagome_nn(L,J1_x,J1_y,J1_z,flag1)
+function mk_Jij_kagome_nn(L)
 
     kagome = mk_kagome(L)
     Jij = []
@@ -263,7 +263,7 @@ function mk_Jij_kagome_nn(L,J1_x,J1_y,J1_z,flag1)
                     site_i,site_j = site_j,site_i 
                 end
 
-                push!(Jij,(site_i,site_j,J1_x,J1_y,J1_z,flag1))
+                push!(Jij,(site_i,site_j,1))
             end
         end
     end
@@ -272,10 +272,9 @@ function mk_Jij_kagome_nn(L,J1_x,J1_y,J1_z,flag1)
 end
     
 
-function mk_Jij_kagome_nnn(L,J1,flag1,J2,flag2)
-
+function mk_Jij_kagome_nnn(L)
     kagome = mk_kagome(L)
-    Jij = mk_Jij_kagome_nn(L,J1[1],J1[2],J1[3],flag1)
+    Jij = mk_Jij_kagome_nn(L)
 
     L = 2L
     
@@ -294,9 +293,7 @@ function mk_Jij_kagome_nnn(L,J1,flag1,J2,flag2)
                     if site_i > site_j
                         site_i,site_j = site_j,site_i
                     end
-                    #println(site_i," ",site_j)
-
-                    push!(Jij,(site_i,site_j,J2[1],J2[2],J2[3],flag2))
+                    push!(Jij,(site_i, site_j, 2))
                 end
             end
         end
@@ -308,19 +305,20 @@ end
 function input_Jij(num_spins::Int64,interaction::Array{Any,1})
 
     open("Jij.txt", "w") do fp
-
         println(fp,num_spins)
+        println(fp, 2) # J1, J2
+        println(fp, "1 $(J1[1]) $(J1[2]) $(J1[3]) 1") # J1
+        println(fp, "2 $(J2[1]) $(J2[2]) $(J2[3]) 0") # J2
         println(fp,length(interaction))
-
         for intr in interaction
-            println(fp,intr[1]," ",intr[2]," ",intr[3]," ",intr[4]," ",intr[5]," ",intr[6])
+            println(fp,intr[1]," ",intr[2]," ",intr[3])
         end
 
     end
 
 end
 
-Jij_kagome_nnn = mk_Jij_kagome_nnn(L,J1,flag1,J2,flag2)
+Jij_kagome_nnn = mk_Jij_kagome_nnn(L)
 @time input_Jij(3L^2,Jij_kagome_nnn)
 
 

@@ -52,7 +52,8 @@ function distribute_temps(rank, num_temps, num_proc)
 end
 
 # Read non-zero elements in the right-upper triangle part of Jij
-function read_Jij(Jij_file::String,num_spins::Int64)
+"""
+function read_Jij(Jij_file::String, num_spins::Int64)
     Jij = Vector{Tuple{SpinIndex,SpinIndex,Float64,Float64,Float64,Int64}}(undef, 0)
     open(Jij_file, "r" ) do fp
         
@@ -78,6 +79,7 @@ function read_Jij(Jij_file::String,num_spins::Int64)
     end
     return Jij
 end
+"""
 
 
 function read_triangles(file_name::String,num_spins::Int64)
@@ -251,10 +253,9 @@ function solve(input_file::String, comm)
     num_temps_local = end_idx - start_idx + 1
 
     # Read non-zero elements in the right-upper triangle part of Jij
-    Jij = read_Jij(Jij_file, num_spins)
+    model = JModel(Jij_file, num_spins)
 
     # Create single-spin flip updater
-    model = JModel(num_spins, Jij)
     updater = SingleSpinFlipUpdater(model)
 
     # Init random number generator
