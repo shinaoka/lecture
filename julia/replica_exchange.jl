@@ -181,14 +181,14 @@ function perform!(rex::ReplicaExchange, config_local::Array{Array{T,1},1}, energ
     #end
 end
 
-function print_stat(rex::ReplicaExchange, comm)
+function print_stat(rex::ReplicaExchange, comm, outf=stdout)
     rank = MPI.Comm_rank(comm)
     num_accepted = MPI.Gather(rex.num_accepted, 0, comm)
     if MPI.Comm_rank(comm) == 0
-        println("")
-        println("Statistics of replica exchange Monte Carlo")
+        println(outf, "")
+        println(outf, "Statistics of replica exchange Monte Carlo")
         for it in 1:length(rex.temps)-1
-            println("itemp ", it, " <=> ", it+1, " acceptance_rate= ", num_accepted[it]/rex.num_attemps)
+            println(outf, "itemp ", it, " <=> ", it+1, " acceptance_rate= ", num_accepted[it]/rex.num_attemps)
         end
     end
 end
