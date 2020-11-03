@@ -322,12 +322,14 @@ function solve(input_file::String, comm)
         if ex_rex
             error("Do not use replica exchange MC with neq!")
         end
-        if num_therm_sweeps
+        if num_therm_sweeps > 0
             error("Please set num_therm_sweeps to 0 for neq!")
         end
         for it in 1:num_temps_local
             convert_spins_to_array!(spins_local[it], spins_array[it])
         end
+
+        init_spins_local = [copy(s) for s in spins_local]
 
         # initial value of Ferro and AF vector spin chirality.
         init_fvc       = zeros(Float64,num_temps_local)
@@ -335,8 +337,8 @@ function solve(input_file::String, comm)
         init_mq_q0     = zeros(Float64,num_temps_local)
         init_mq_sqrt3  = zeros(Float64,num_temps_local)
         for it in 1:num_temps_local
-            init_fvc[it]  = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
-            init_afvc[it]  = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            init_fvc[it]  = compute_ferro_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
+            init_afvc[it]  = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
             init_mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
             init_mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
         end
@@ -351,10 +353,10 @@ function solve(input_file::String, comm)
             tmp = sum([dot(spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
             push!(correlation_func[it],tmp / num_spins)
         
-            temp_fvc = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            temp_fvc = compute_ferro_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
             push!(fvc_correlation[it],init_fvc[it]*temp_fvc)
 
-            temp_afvc = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            temp_afvc = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
             push!(afvc_correlation[it],init_afvc[it]*temp_afvc)
 
             temp_mq_q0    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
