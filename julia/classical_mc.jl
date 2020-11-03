@@ -229,6 +229,9 @@ function solve(input_file::String, comm)
     opt_temps_dist   = get_param(Bool,       conf, "simulation", "opt_temps_dist", true)
     min_attemps_update_temps_dist  = get_param(Int64,  conf, "simulation", "min_attemps_update_temps_dist", 100)
 
+    # Non-equilibrium relaxation method.
+    use_neq = get_param(Bool, conf, "simulation", "neq", false)
+
     if opt_temps_dist && 5*min_attemps_update_temps_dist*ex_interval > num_therm_sweeps/2
         error("num_therm_sweeps is too small for optimizing temps_dist!")
     end
@@ -269,10 +272,16 @@ function solve(input_file::String, comm)
 
 
     # Init spins
-    spins_local = [fill((1.,0.,0.),num_spins) for i in 1:num_temps_local]
+    spins_local = [fill((1.,0.,0.),num_spins) for _ in 1:num_temps_local]
+
+    # Work arrays
+    spins_array = [zeros(Float64, 3, num_spins) for _ in 1:num_temps_local]
     
     # Optional init spin configuration.
     is_read_spin_config = get_param(Bool, conf, "simulation", "read_spin_config", false)
+    if use_neq && !is_read_spin_config
+        error("Set read_spin_config for neq!")
+    end
     if is_read_spin_config
         spin_config_file = retrieve(conf, "model", "spin_config")
         spins_local = fill(read_spin_config(spin_config_file,num_spins),num_temps_local)
@@ -307,32 +316,19 @@ function solve(input_file::String, comm)
     # For measuring acceptance rates
     single_spin_flip_acc = zeros(Float64, num_temps_local)
 
+    # Replica exchange
+    ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
 
     # Non-equilibrium relaxation method.
-    isq0    = get_param(Bool, conf, "simulation", "isq0"   , false)
-    issqrt3 = get_param(Bool, conf, "simulation", "issqrt3", false)
-    ex_rex = get_param(Bool, conf, "simulation", "ex_rex", false)
-    if isq0 == true || issqrt3 == true
-
-
-        if rank == 0
-            if isq0 == true
-                println("Starting from q=0 state")
-                issqrt3 = false
-            elseif issqrt3 == true
-                println("Starting from √3×√3 state")
-                isq0 = false
-            end
+    if use_neq
+        if ex_rex
+            error("Do not use replica exchange MC with neq!")
         end
-
-        q0 = retrieve(conf, "model", "init_q0_state")
-        spins_local      = fill(read_spin_config(q0,num_spins),num_temps_local)
-        init_spins_local = fill(read_spin_config(q0,num_spins),num_temps_local)
-
-        if issqrt3 == true
-            sqrt3 = retrieve(conf, "model", "init_sqrt3_state")
-            spins_local      = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
-            init_spins_local = fill(read_spin_config(sqrt3,num_spins),num_temps_local)
+        if num_therm_sweeps
+            error("Please set num_therm_sweeps to 0 for neq!")
+        end
+        for it in 1:num_temps_local
+            convert_spins_to_array!(spins_local[it], spins_array[it])
         end
 
         # initial value of Ferro and AF vector spin chirality.
@@ -341,20 +337,20 @@ function solve(input_file::String, comm)
         init_mq_q0     = zeros(Float64,num_temps_local)
         init_mq_sqrt3  = zeros(Float64,num_temps_local)
         for it in 1:num_temps_local
-            init_fvc[it]  = compute_ferro_vector_chirality(init_spins_local[it],upward_triangles,downward_triangles) 
-            init_afvc[it]  = compute_af_vector_chirality(init_spins_local[it],upward_triangles,downward_triangles) 
-            init_mq_q0[it]    = compute_mq((0.,0.),kagome,init_spins_local[it],upward_triangles)
-            init_mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,init_spins_local[it],upward_triangles)
+            init_fvc[it]  = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            init_afvc[it]  = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+            init_mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
+            init_mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
         end
         init_mq_sqrt3 .*= 2 #max value of order parameter for √3×√3 is 0.5
 
-        correlation_func     = [[] for i in 1:num_temps_local]
-        fvc_correlation      = [[] for i in 1:num_temps_local]
-        afvc_correlation     = [[] for i in 1:num_temps_local]
-        mq_q0_correlation    = [[] for i in 1:num_temps_local]
-        mq_sqrt3_correlation = [[] for i in 1:num_temps_local]
+        correlation_func     = [Float64[] for _ in 1:num_temps_local]
+        fvc_correlation      = [Float64[] for _ in 1:num_temps_local]
+        afvc_correlation     = [Float64[] for _ in 1:num_temps_local]
+        mq_q0_correlation    = [Float64[] for _ in 1:num_temps_local]
+        mq_sqrt3_correlation = [Float64[] for _ in 1:num_temps_local]
         for it in 1:num_temps_local
-            tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
+            tmp = sum([dot(spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
             push!(correlation_func[it],tmp / num_spins)
         
             temp_fvc = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
@@ -369,16 +365,12 @@ function solve(input_file::String, comm)
             push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*2temp_mq_sqrt3)
         end
 
-
         maf_time_evo = [[] for it in 1:num_temps_local]
         for it in 1:num_temps_local
             push!(maf_time_evo[it],compute_m2_af(spins_local[it],upward_triangles))
         end
-        
-        # Turn off the replica exchange and change num_therm_sweeps to 0.
-        ex_rex           = false 
-        num_therm_sweeps = 0
     end
+
 
     for sweep in 1:num_sweeps
         # Output roughtly every 10 sececonds
@@ -439,15 +431,13 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
-        spins_array = fill(0.0,num_spins,num_temps_local)
-
         # Measurement
         ts_start = CPUtime_us()
         if sweep >= num_therm_sweeps && mod(sweep, meas_interval) == 0
             
-            #spins_array = fill(0.0,num_spins,num_temps_local)
+            # Convert spin config to arrays
             for it in 1:num_temps_local
-                spins_array[it] = convert_spins_to_array(spins_local[it])
+                convert_spins_to_array!(spins_local[it], spins_array[it])
             end
 
             add!(acc, "E", energy_local)
@@ -512,8 +502,8 @@ function solve(input_file::String, comm)
             fvc  = zeros(Float64,num_temps_local)
             afvc = zeros(Float64,num_temps_local)
             for it in 1:num_temps_local
-                fvc[it]  = compute_ferro_vector_chirality(spins_local[it],upward_triangles,downward_triangles)
-                afvc[it] = compute_af_vector_chirality(spins_local[it],upward_triangles,downward_triangles) 
+                fvc[it]  = compute_ferro_vector_chirality(spins_array[it],upward_triangles,downward_triangles)
+                afvc[it] = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
             end
             add!(acc,"Ferro_vc2",fvc)
             add!(acc,"AF_vc2",afvc)
@@ -521,7 +511,7 @@ function solve(input_file::String, comm)
             add!(acc,"AF_vc4",afvc.^2)
 
             # non-equilibrium relaxation method.
-            if isq0 == true || issqrt3 == true
+            if use_neq
                 for it in 1:num_temps_local
 
                     tmp = sum([dot(init_spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
@@ -546,162 +536,156 @@ function solve(input_file::String, comm)
                 """
                 
             end
+        end
+        push!(elpsCPUtime, CPUtime_us() - ts_start)
 
-      end
-      push!(elpsCPUtime, CPUtime_us() - ts_start)
+        if sweep > num_therm_sweeps
+            add!(acc_proc, "CPUtime", [Vector{Float64}(elpsCPUtime)])
+        end
+    end        
 
-      if sweep > num_therm_sweeps
-          add!(acc_proc, "CPUtime", [Vector{Float64}(elpsCPUtime)])
-      end
-  end        
-
-  #for it in 1:num_temps_local
+    #for it in 1:num_temps_local
       #dE,num_accept = multi_loop_update!(loop_num_trial,loop_num_reference_sites,updater,1/rex.temps[it+start_idx-1],triangles,max_loop_length,spins_local[it],rank==0)
-  #end
+    #end
  
+    # Output results
+    E = mean_gather(acc, "E", comm)
+    E2 = mean_gather(acc, "E2", comm)
+    single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
+    loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
+    loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
+    CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
+    ave_loop_length = mean_gather(acc,"loop_length",comm)
+    m2_af = mean_gather(acc, "m2_af", comm)
+    T2_op = mean_gather(acc, "T2_op", comm)
+    m2q_q0 = mean_gather(acc, "m2q0", comm)
+    m2q_sqrt3 = mean_gather(acc, "m2q√3", comm)
+    m120degs = mean_gather(acc, "m120degs", comm)
+    Ferro_vc2 = mean_gather(acc, "Ferro_vc2", comm)
+    AF_vc2    = mean_gather(acc, "AF_vc2"   , comm)
+    m4_af = mean_gather(acc, "m4_af", comm)
+    T4_op = mean_gather(acc, "T4_op", comm)
+    m4q_q0 = mean_gather(acc, "m4q0", comm)
+    m4q_sqrt3 = mean_gather(acc, "m4q√3", comm)
+    m120degs4 = mean_gather(acc, "m120degs4", comm)
+    Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
+    AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
+    ss    = mean_gather_array(acc, "ss" , comm)
+    flush(stdout)
+    MPI.Barrier(comm)
 
-  # Output results
-  E = mean_gather(acc, "E", comm)
-  E2 = mean_gather(acc, "E2", comm)
-  single_spin_flip_acc = mean_gather(acc, "single_spin_flip_acc", comm)
-  loop_found_rate = mean_gather(acc,"loop_found_rate", comm)
-  loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
-  CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
-  ave_loop_length = mean_gather(acc,"loop_length",comm)
-  m2_af = mean_gather(acc, "m2_af", comm)
-  T2_op = mean_gather(acc, "T2_op", comm)
-  m2q_q0 = mean_gather(acc, "m2q0", comm)
-  m2q_sqrt3 = mean_gather(acc, "m2q√3", comm)
-  m120degs = mean_gather(acc, "m120degs", comm)
-  Ferro_vc2 = mean_gather(acc, "Ferro_vc2", comm)
-  AF_vc2    = mean_gather(acc, "AF_vc2"   , comm)
-  m4_af = mean_gather(acc, "m4_af", comm)
-  T4_op = mean_gather(acc, "T4_op", comm)
-  m4q_q0 = mean_gather(acc, "m4q0", comm)
-  m4q_sqrt3 = mean_gather(acc, "m4q√3", comm)
-  m120degs4 = mean_gather(acc, "m120degs4", comm)
-  Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
-  AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
-  ss    = mean_gather_array(acc, "ss" , comm)
-  flush(stdout)
-  MPI.Barrier(comm)
-
-  flush(stdout)
-  MPI.Barrier(comm)
-
+    flush(stdout)
+    MPI.Barrier(comm)
   
-  for it in 1:num_temps_local
-      #write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
-  end
+    for it in 1:num_temps_local
+        #write_spin_config("spin_configs/spin_config$(it+start_idx-1).txt",spins_local[it])
+    end
   
 
-  # Output time evolution of order parameter.
-  if isq0 == true || issqrt3 == true
-      for itemp in 1:num_temps_local
+    # Output time evolution of order parameter.
+    if use_neq
+        for itemp in 1:num_temps_local
 
-          open("Gt_$(itemp+start_idx-1).dat","w") do fp
+            open("Gt_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(correlation_func[itemp])
                    println(fp, itime, " ", correlation_func[itemp][itime])
                end
-          end
+            end
 
-          open("maf_$(itemp+start_idx-1).dat","w") do fp
+            open("maf_$(itemp+start_idx-1).dat","w") do fp
                #for itime in 1:length(maf_time_evo[itemp])
                    #println(fp, itime, " ", maf_time_evo[itemp][itime])
                #end
-          end
+            end
 
-          open("fvc_$(itemp+start_idx-1).dat","w") do fp
+            open("fvc_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(fvc_correlation[itemp])
                    println(fp, itime, " ", fvc_correlation[itemp][itime])
                end
-          end
+            end
 
-          open("afvc_$(itemp+start_idx-1).dat","w") do fp
+            open("afvc_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(afvc_correlation[itemp])
                    println(fp, itime, " ", afvc_correlation[itemp][itime])
                end
-          end
+            end
 
-          open("mq_q0_$(itemp+start_idx-1).dat","w") do fp
-               for itime in 1:length(mq_q0_correlation[itemp])
+            open("mq_q0_$(itemp+start_idx-1).dat","w") do fp
+                for itime in 1:length(mq_q0_correlation[itemp])
                    println(fp, itime, " ", mq_q0_correlation[itemp][itime])
-               end
-          end
+                end
+            end
 
-          open("mq_sqrt3_$(itemp+start_idx-1).dat","w") do fp
-               for itime in 1:length(mq_sqrt3_correlation[itemp])
+            open("mq_sqrt3_$(itemp+start_idx-1).dat","w") do fp
+                for itime in 1:length(mq_sqrt3_correlation[itemp])
                    println(fp, itime, " ", mq_sqrt3_correlation[itemp][itime])
-               end
-          end
-      end
-  end
+                end
+            end
+        end
+    end
 
-
-  if rank == 0
-      println()
-      println("<E> <E^2> <C>")
-      for i in 1:num_temps
-          println("sh: $(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
-      end
-      println()
+    if rank == 0
+        prefix = ""
+        println()
+        open(prefix*"E.txt", "w") do f
+            println(f, "#<E> <E^2> <C>")
+            for i in 1:num_temps
+                println(f, "$(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
+                println("$(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
+            end
+        end
       
-      println("single_spin_flip_acc: ", single_spin_flip_acc)
+        println("single_spin_flip_acc: ", single_spin_flip_acc)
+        println("Acceptant rate of loop update: ")
+        for i in 1:num_temps
+            println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
+        end
+
+        println("<CPUtime> ")
+        for (i, t) in enumerate(CPUtime)
+            println(" rank=", i-1, " : $t")
+        end
     
-      println("Acceptant rate of loop update: ")
-      for i in 1:num_temps
-          println(rex.temps[i], " ", loop_found_rate[i], " ", loop_accept_rate[i])
-      end
-      
+        # update initial temperature distribution.        
+        open(prefix*"temperatures.txt","w") do fp
+             println(fp,num_temps)
+             for i in 1:num_temps
+                 println(fp,rex.temps[i])
+             end
+        end
+     
+        for i in 1:num_temps
+            println("af2: $(rex.temps[i]) $(m2_af[i])")
+            println("op2: $(rex.temps[i]) $(T2_op[i])")
+            println("Ferro_vc2: $(rex.temps[i]) $(Ferro_vc2[i])")
+            println("AF_vc2: $(rex.temps[i]) $(AF_vc2[i])")
+            println("m2q0: $(rex.temps[i]) $(m2q_q0[i])")
+            println("m2_sqrt3: $(rex.temps[i]) $(m2q_sqrt3[i])")
+            println("m120degs: $(rex.temps[i]) $(m120degs[i])")
+            println("af4: $(rex.temps[i]) $(m4_af[i])")
+            println("op4: $(rex.temps[i]) $(T4_op[i])")
+            println("Ferro_vc4: $(rex.temps[i]) $(Ferro_vc4[i])")
+            println("AF_vc4: $(rex.temps[i]) $(AF_vc4[i])")
+            println("m4q0: $(rex.temps[i]) $(m4q_q0[i])")
+            println("m4_sqrt3: $(rex.temps[i]) $(m4q_sqrt3[i])")
+            println("m120degs4: $(rex.temps[i]) $(m120degs4[i])")
+        end
 
-      println("<CPUtime> ")
-      for (i, t) in enumerate(CPUtime)
-          println(" rank=", i-1, " : $t")
-      end
-    
-
-      # update initial temperature distribution.        
-      open("temperatures.txt","w") do fp
-           println(fp,num_temps)
-           for i in 1:num_temps
-               println(fp,rex.temps[i])
-           end
-      end
-       
-      for i in 1:num_temps
-          #println("ll: $(rex.temps[i]) $(ave_loop_length[i])")
-      end
-
-      for i in 1:num_temps
-          println("af2: $(rex.temps[i]) $(m2_af[i])")
-          println("op2: $(rex.temps[i]) $(T2_op[i])")
-          println("Ferro_vc2: $(rex.temps[i]) $(Ferro_vc2[i])")
-          println("AF_vc2: $(rex.temps[i]) $(AF_vc2[i])")
-          println("m2q0: $(rex.temps[i]) $(m2q_q0[i])")
-          println("m2_sqrt3: $(rex.temps[i]) $(m2q_sqrt3[i])")
-          println("m120degs: $(rex.temps[i]) $(m120degs[i])")
-          println("af4: $(rex.temps[i]) $(m4_af[i])")
-          println("op4: $(rex.temps[i]) $(T4_op[i])")
-          println("Ferro_vc4: $(rex.temps[i]) $(Ferro_vc4[i])")
-          println("AF_vc4: $(rex.temps[i]) $(AF_vc4[i])")
-          println("m4q0: $(rex.temps[i]) $(m4q_q0[i])")
-          println("m4_sqrt3: $(rex.temps[i]) $(m4q_sqrt3[i])")
-          println("m120degs4: $(rex.temps[i]) $(m120degs4[i])")
-      end
-
-      for it in 1:num_temps_local
-          fid = h5open("ss/ss$(it+start_idx-1).h5","w")
-          for j in 1:3
-              fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
-          end
-      end
-
-
-
+        for it in 1:num_temps_local
+            fid = h5open("ss$(it+start_idx-1).h5","w")
+            for j in 1:3
+                fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
+            end
+        end
     end
     flush(stdout)
     MPI.Barrier(comm)
 
+    #obs = ["af", "op"]
+    #for o in obs
+        #o * "_2", o * "_4"
+    #end
+#
     # Stat of Replica Exchange MC
     print_stat(rex, comm)
 end
