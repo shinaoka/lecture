@@ -589,37 +589,37 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     if use_neq
         for itemp in 1:num_temps_local
 
-            open("Gt_$(itemp+start_idx-1).dat","w") do fp
+            open(prefix*"Gt_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(correlation_func[itemp])
                    println(fp, itime, " ", correlation_func[itemp][itime])
                end
             end
 
-            open("maf_$(itemp+start_idx-1).dat","w") do fp
+            open(prefix*"maf_$(itemp+start_idx-1).dat","w") do fp
                #for itime in 1:length(maf_time_evo[itemp])
                    #println(fp, itime, " ", maf_time_evo[itemp][itime])
                #end
             end
 
-            open("fvc_$(itemp+start_idx-1).dat","w") do fp
+            open(prefix*"fvc_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(fvc_correlation[itemp])
                    println(fp, itime, " ", fvc_correlation[itemp][itime])
                end
             end
 
-            open("afvc_$(itemp+start_idx-1).dat","w") do fp
+            open(prefix*"afvc_$(itemp+start_idx-1).dat","w") do fp
                for itime in 1:length(afvc_correlation[itemp])
                    println(fp, itime, " ", afvc_correlation[itemp][itime])
                end
             end
 
-            open("mq_q0_$(itemp+start_idx-1).dat","w") do fp
+            open(prefix*"mq_q0_$(itemp+start_idx-1).dat","w") do fp
                 for itime in 1:length(mq_q0_correlation[itemp])
                    println(fp, itime, " ", mq_q0_correlation[itemp][itime])
                 end
             end
 
-            open("mq_sqrt3_$(itemp+start_idx-1).dat","w") do fp
+            open(prefix*"mq_sqrt3_$(itemp+start_idx-1).dat","w") do fp
                 for itime in 1:length(mq_sqrt3_correlation[itemp])
                    println(fp, itime, " ", mq_sqrt3_correlation[itemp][itime])
                 end
@@ -674,7 +674,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
         end
 
         for it in 1:num_temps_local
-            fid = h5open("ss$(it+start_idx-1).h5","w")
+            fid = h5open(prefix*"ss$(it+start_idx-1).h5","w")
             for j in 1:3
                 fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
             end
