@@ -438,9 +438,17 @@ function solve(input_file::String, comm)
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
 
+        spins_array = fill(0.0,num_spins,num_temps_local)
+
         # Measurement
         ts_start = CPUtime_us()
         if sweep >= num_therm_sweeps && mod(sweep, meas_interval) == 0
+            
+            #spins_array = fill(0.0,num_spins,num_temps_local)
+            for it in 1:num_temps_local
+                spins_array[it] = convert_spins_to_array(spins_local[it])
+            end
+
             add!(acc, "E", energy_local)
             add!(acc, "E2", energy_local.^2)
             add!(acc, "single_spin_flip_acc", single_spin_flip_acc)

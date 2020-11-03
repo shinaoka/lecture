@@ -3,6 +3,16 @@ using FFTW
 include("mcmc.jl")
 include("loop_update.jl")
 
+#For more efficient memory access, convert Vector to two-dimensional Array.
+function convert_spins_to_array(spins::Vector{HeisenbergSpin})
+    N = length(spins)
+    spins_array = Array{Float64,2}(undef, 3, N)
+    for i in 1:N, j=1:3
+        spins_array[j,i] = spins[i][j]
+    end
+    spins_array
+end
+
 # It is important to keep computational complexity O(num_spins)
 function compute_m2_af(spins::Vector{HeisenbergSpin},
                        triangles::Array{Tuple{Int64,Int64,Int64},1})
