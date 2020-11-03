@@ -105,7 +105,6 @@ end
 
 
 function mk_kagome(L)
-
     kagome = Dict()
     idx = 1
     L = 2L
@@ -119,8 +118,7 @@ function mk_kagome(L)
         kagome[idx] = copy.(mod_site)
         idx += 1
     end
-
-    return kagome
+    [kagome[i] for i in 1:length(keys(kagome))]
 end
 
 
@@ -434,7 +432,6 @@ function solve(input_file::String, comm)
         # Measurement
         ts_start = CPUtime_us()
         if sweep >= num_therm_sweeps && mod(sweep, meas_interval) == 0
-            
             # Convert spin config to arrays
             for it in 1:num_temps_local
                 convert_spins_to_array!(spins_local[it], spins_array[it])
@@ -484,10 +481,10 @@ function solve(input_file::String, comm)
                 mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
                 mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
                 m_120degs[it]= compute_m_120degrees(spins_local[it])
-                for is in 1:num_spins, j in 1:3
-                    temp_idx = upward_triangles[1][j]
-                    ss[it][j,is] = spins_local[it][is]⋅spins_local[it][temp_idx]
-                end
+                #for is in 1:num_spins, j in 1:3
+                    #temp_idx = upward_triangles[1][j]
+                    #ss[it][j,is] = spins_local[it][is]⋅spins_local[it][temp_idx]
+                #end
             end
             add!(acc,"m2q0",mq_q0)
             add!(acc,"m2q√3",mq_sqrt3)
@@ -496,7 +493,6 @@ function solve(input_file::String, comm)
             add!(acc,"m4q√3",mq_sqrt3.^2)
             add!(acc,"m120degs4",m_120degs.^2)
             add!(acc,"ss",ss)
-
 
             # ferro and anti-ferro vector spin chirality
             fvc  = zeros(Float64,num_temps_local)
@@ -534,7 +530,6 @@ function solve(input_file::String, comm)
                     push!(maf_time_evo[it],maf_time_evo[it][1]*temp_maf)
                 end 
                 """
-                
             end
         end
         push!(elpsCPUtime, CPUtime_us() - ts_start)
