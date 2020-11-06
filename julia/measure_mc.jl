@@ -112,11 +112,30 @@ function compute_vector_chirality(spins::AbstractArray{Float64,2},
     return vc / num_spins
 end
 
+function compute_all_vector_chiralities(spins::AbstractArray{Float64,2},
+                                  triangles::Vector{Tuple{Int64,Int64,Int64}})
+    num_spins = size(spins)[2]
+    num_triangles = length(triangles)
+    vc = zeros(Float64, num_triangles)
+    @assert num_spins == 3num_triangles
+    for it in eachindex(triangles)
+        i = triangles[it]
+        for j in 1:3
+            s1 = view(spins, :, i[j])
+            s2 = view(spins, :, i[ifelse(j==3,1,j+1)])
+            vc[it] += mycross(s1, s2)
+        end
+    end
+    vc
+end
+
 function compute_vector_chiralities(spins::AbstractArray{Float64,2}, utriangles, dtriangles)
     @assert length(utriangles) == length(dtriangles)
-    uc = compute_vector_chirality(spins, utriangles)
-    dc = compute_vector_chirality(spins, dtriangles)
-    (uc+dc)^2/3, (uc-dc)^2/3, uc[1] * [uc; dc]
+    num_spins = size(spins)[2]
+    uc_all = compute_all_vector_chiralities(spins, utriangles)
+    dc_all = compute_all_vector_chiralities(spins, dtriangles)
+    uc, dc = sum(uc_all)/num_spins, sum(dc_all)/num_spins
+    (uc+dc)^2/3, (uc-dc)^2/3, uc_all[1] * [uc_all; dc_all]
 end
 
 function compute_ferro_vector_chirality(spins::AbstractArray{Float64,2}, utriangles, dtriangles)

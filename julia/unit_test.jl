@@ -207,8 +207,8 @@ function test_compute_vector_chirality(L)
     
     ferro_vc2, af_vc2, vc_corr = compute_vector_chiralities(sqrt3_new,utriangles,dtriangles)
 
-    @test ferro_vc ≈ ferro_vc2
-    @test af_vc ≈ af_vc2
+    @test isapprox(ferro_vc, ferro_vc2, rtol=0.0, atol=1e-8)
+    @test isapprox(af_vc, af_vc2, rtol=0.0, atol=1e-8)
 end
 L = 3
 test_compute_vector_chirality(L)
