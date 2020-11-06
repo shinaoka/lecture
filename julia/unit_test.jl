@@ -204,6 +204,11 @@ function test_compute_vector_chirality(L)
     sqrt3_af = sqrt3_af^2 / 3
     #@test isapprox(ferro_vc,sqrt3_ferro) 
     @test isapprox(af_vc,sqrt3_af)
+    
+    ferro_vc2, af_vc2, vc_corr = compute_vector_chiralities(sqrt3_new,utriangles,dtriangles)
+
+    @test ferro_vc ≈ ferro_vc2
+    @test af_vc ≈ af_vc2
 end
 L = 3
 test_compute_vector_chirality(L)

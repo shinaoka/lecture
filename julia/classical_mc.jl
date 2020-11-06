@@ -359,11 +359,9 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             tmp = sum([dot(spins_local[it][i],spins_local[it][i]) for i in 1:num_spins])
             push!(correlation_func[it],tmp / num_spins)
         
-            temp_fvc = compute_ferro_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
-            push!(fvc_correlation[it],init_fvc[it]*temp_fvc)
-
-            temp_afvc = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
-            push!(afvc_correlation[it],init_afvc[it]*temp_afvc)
+            temp_fvc, temp_afvc, vc_corr = compute_vector_chiralities(spins_array[it],upward_triangles,downward_triangles) 
+            push!(fvc_correlation[it], init_fvc[it]*temp_fvc)
+            push!(afvc_correlation[it], init_afvc[it]*temp_afvc)
 
             temp_mq_q0    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
             temp_mq_sqrt3 = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
@@ -484,7 +482,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             mq_q0     = zeros(Float64,num_temps_local)
             mq_sqrt3  = zeros(Float64,num_temps_local)
             m_120degs = zeros(Float64,num_temps_local)
-            ss      = fill(zeros(Float64,3,num_spins),num_temps_local)
+            ss      = [zeros(Float64,3,num_spins) for _ in 1:num_temps_local]
             for it in 1:num_temps_local
                 mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
                 mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
@@ -505,14 +503,16 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             # ferro and anti-ferro vector spin chirality
             fvc  = zeros(Float64,num_temps_local)
             afvc = zeros(Float64,num_temps_local)
+            vc_corrs = Vector{Float64}[]
             for it in 1:num_temps_local
-                fvc[it]  = compute_ferro_vector_chirality(spins_array[it],upward_triangles,downward_triangles)
-                afvc[it] = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
+                fvc[it], afvc[it], vc_corr = compute_vector_chiralities(spins_array[it],upward_triangles,downward_triangles)
+                push!(vc_corrs, vc_corr)
             end
             add!(acc,"Ferro_vc2",fvc)
             add!(acc,"AF_vc2",afvc)
             add!(acc,"Ferro_vc4",fvc.^2)
             add!(acc,"AF_vc4",afvc.^2)
+            add!(acc,"vc_corr", vc_corrs)
 
             # non-equilibrium relaxation method.
             if use_neq
@@ -574,6 +574,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
     AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
     ss    = mean_gather_array(acc, "ss" , comm)
+    vc_corr = mean_gather_array(acc, "vc_corr" , comm)
     flush(stdout)
     MPI.Barrier(comm)
 
@@ -673,11 +674,15 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             println(outf, "m120degs4: $(rex.temps[i]) $(m120degs4[i])")
         end
 
-        for it in 1:num_temps_local
-            fid = h5open(prefix*"ss$(it+start_idx-1).h5","w")
-            for j in 1:3
-                fid["$(it+start_idx-1)th_temps/ss$(j)"] = ss[it][j,:]
-            end
+        println(size(ss))
+        println(size(ss[1]))
+        h5open(prefix*"corr.h5", "w") do fid
+            # ss is an array of arrays of shape (3, num_spins).
+            # We "reshape" it into an array of shape (3, num_spins, num_temps).
+            #tmp = cat(ss[:,:,CartesianIndex()]..., dims=3)
+            #println(size(tmp))
+            fid["ss"] = cat(ss[:,:,CartesianIndex()]..., dims=3)
+            fid["vc"] = cat(vc_corr[:,CartesianIndex()]..., dims=2)
         end
     end
     flush(stdout)
