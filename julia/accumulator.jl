@@ -27,6 +27,14 @@ function mean(acc::Accumulator, name::String)
 end
 
 function mean_gather(acc::Accumulator, name::String, comm)
+    if typeof(acc.data[name]) <: Array
+        return mean_gather_array(acc, name, comm)
+    else
+        return mean_gather_scalar(acc, name, comm)
+    end
+end
+
+function mean_gather_scalar(acc::Accumulator, name::String, comm)
     counts = convert(Array{Cint}, MPI.Allgather(acc.num_temps, comm))
     results_local = mean(acc, name)
     return MPI.Gatherv(results_local, counts, 0, comm)
@@ -66,3 +74,23 @@ function mean_gather_array(acc::Accumulator, name::String, comm)
     return result
 end
 
+function to_array(xs::Vector{Array{T,N}}) where {T, N}
+    size_elem = size(xs[1])
+    cat((reshape(x, (size_elem...,1)) for x in xs)..., dims=ndims(xs[1])+1)
+end
+
+function to_array(x::Vector{T}) where {T <: Number}
+    return x
+end
+
+function save_to_hdf5!(acc, h5file, comm)
+    rank = MPI.Comm_rank(comm)
+    for name in keys(acc.data)
+        mean_data = mean_gather(acc, name, comm)
+        if rank == 0
+            g = g_create(h5file, name)
+            #println("Writing $(name)...")
+            g["mean"] = to_array(mean_data)
+        end
+    end
+end

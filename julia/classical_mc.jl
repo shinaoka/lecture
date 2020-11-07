@@ -699,6 +699,17 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     flush(stdout)
     MPI.Barrier(comm)
 
+    fid = nothing
+    if rank == 0
+        fid = h5open(prefix*"out.h5" , "w")
+        fid["temperatures"] = temps
+    end
+    save_to_hdf5!(acc, fid, comm)
+    if rank == 0
+        close(fid)
+    end
+
+    """
     obs_names = String[]
     for base_name in ["m_af", "T_op", "mq0", "msqrt", "m120degs", "Ferro_vc", "AF_vc"]
         push!(obs_names, base_name*"_2")
@@ -710,6 +721,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
         fid["temperatures"] = temps
     end
     save_result(fid, acc, comm, obs_names)
+    """
 
     # Stat of Replica Exchange MC
     print_stat(rex, comm, outf)
