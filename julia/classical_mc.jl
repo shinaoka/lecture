@@ -200,6 +200,26 @@ function get_param(type, conf, block, key, default_value)
     end
 end
 
+function save_result(filename, temps, acc, comm, res_names...)
+    res = Vector{Float64}[]
+    for r in res_names
+        push!(res, mean_gather(acc, "m_af_2", comm))
+    end
+    rank = MPI.Comm_rank(comm)
+    if rank > 0
+        return
+    end
+    open(filename, "w") do f
+        for itemp in eachindex(temps)
+            print(f, "$(temps[itemp]) ")
+            for r in res
+                print(f, "$(r[itemp]) ")
+            end
+            println(f)
+        end
+    end
+end
+
 
 function solve(input_file::String, comm, prefix, seed_shift)
     open(prefix*"out", "w") do outf
@@ -474,10 +494,10 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
                 m2_af[it] = compute_m2_af(spins_local[it],upward_triangles)
                 T2_op[it] = compute_T2_op(spins_local[it],num_spins)
             end
-            add!(acc, "m2_af", m2_af)
-            add!(acc, "T2_op", T2_op)
-            add!(acc, "m4_af", m2_af.^2)
-            add!(acc, "T4_op", T2_op.^2)
+            add!(acc, "m_af_2", m2_af)
+            add!(acc, "T_op_2", T2_op)
+            add!(acc, "m_af_4", m2_af.^2)
+            add!(acc, "T_op_4", T2_op.^2)
 
             mq_q0     = zeros(Float64,num_temps_local)
             mq_sqrt3  = zeros(Float64,num_temps_local)
@@ -492,12 +512,12 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
                     #ss[it][j,is] = spins_local[it][is]⋅spins_local[it][temp_idx]
                 #end
             end
-            add!(acc,"m2q0",mq_q0)
-            add!(acc,"m2q√3",mq_sqrt3)
-            add!(acc,"m120degs",m_120degs)
-            add!(acc,"m4q0",mq_q0.^2)
-            add!(acc,"m4q√3",mq_sqrt3.^2)
-            add!(acc,"m120degs4",m_120degs.^2)
+            add!(acc,"mq0_2",mq_q0)
+            add!(acc,"msqrt_2",mq_sqrt3)
+            add!(acc,"m120degs_2",m_120degs)
+            add!(acc,"mq0_4",mq_q0.^2)
+            add!(acc,"msqrt_4",mq_sqrt3.^2)
+            add!(acc,"m120degs_4",m_120degs.^2)
             add!(acc,"ss",ss)
 
             # ferro and anti-ferro vector spin chirality
@@ -508,10 +528,10 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
                 fvc[it], afvc[it], vc_corr = compute_vector_chiralities(spins_array[it],upward_triangles,downward_triangles)
                 push!(vc_corrs, vc_corr)
             end
-            add!(acc,"Ferro_vc2",fvc)
-            add!(acc,"AF_vc2",afvc)
-            add!(acc,"Ferro_vc4",fvc.^2)
-            add!(acc,"AF_vc4",afvc.^2)
+            add!(acc,"Ferro_vc_2",fvc)
+            add!(acc,"AF_vc_2",afvc)
+            add!(acc,"Ferro_vc_4",fvc.^2)
+            add!(acc,"AF_vc_4", afvc.^2)
             add!(acc,"vc_corr", vc_corrs)
 
             # non-equilibrium relaxation method.
@@ -559,20 +579,20 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     loop_accept_rate = mean_gather(acc,"loop_accept_rate", comm)
     CPUtime = mean_gather_array(acc_proc, "CPUtime", comm)
     ave_loop_length = mean_gather(acc,"loop_length",comm)
-    m2_af = mean_gather(acc, "m2_af", comm)
-    T2_op = mean_gather(acc, "T2_op", comm)
-    m2q_q0 = mean_gather(acc, "m2q0", comm)
-    m2q_sqrt3 = mean_gather(acc, "m2q√3", comm)
-    m120degs = mean_gather(acc, "m120degs", comm)
-    Ferro_vc2 = mean_gather(acc, "Ferro_vc2", comm)
-    AF_vc2    = mean_gather(acc, "AF_vc2"   , comm)
-    m4_af = mean_gather(acc, "m4_af", comm)
-    T4_op = mean_gather(acc, "T4_op", comm)
-    m4q_q0 = mean_gather(acc, "m4q0", comm)
-    m4q_sqrt3 = mean_gather(acc, "m4q√3", comm)
-    m120degs4 = mean_gather(acc, "m120degs4", comm)
-    Ferro_vc4 = mean_gather(acc, "Ferro_vc4", comm)
-    AF_vc4    = mean_gather(acc, "AF_vc4"   , comm)
+    m2_af = mean_gather(acc, "m_af_2", comm)
+    T2_op = mean_gather(acc, "T_op_2", comm)
+    m2q_q0 = mean_gather(acc, "mq0_2", comm)
+    m2q_sqrt3 = mean_gather(acc, "msqrt_2", comm)
+    m120degs = mean_gather(acc, "m120degs_2", comm)
+    Ferro_vc2 = mean_gather(acc, "Ferro_vc_2", comm)
+    AF_vc2    = mean_gather(acc, "AF_vc_2"   , comm)
+    m4_af = mean_gather(acc, "m_af_4", comm)
+    T4_op = mean_gather(acc, "T_op_4", comm)
+    m4q_q0 = mean_gather(acc, "mq0_4", comm)
+    m4q_sqrt3 = mean_gather(acc, "msqrt_4", comm)
+    m120degs4 = mean_gather(acc, "m120degs_4", comm)
+    Ferro_vc4 = mean_gather(acc, "Ferro_vc_4", comm)
+    AF_vc4    = mean_gather(acc, "AF_vc_4"   , comm)
     ss    = mean_gather_array(acc, "ss" , comm)
     vc_corr = mean_gather_array(acc, "vc_corr" , comm)
     flush(stdout)
@@ -688,11 +708,11 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     flush(stdout)
     MPI.Barrier(comm)
 
-    #obs = ["af", "op"]
-    #for o in obs
-        #o * "_2", o * "_4"
-    #end
-#
+    save_m(name) = save_result(prefix*name*".dat", rex.temps, acc, comm, name*"_2", name*"_4")
+    for name in ["m_af", "T_op", "mq0", "msqrt", "m120degs", "Ferro_vc", "AF_vc" ]
+        save_m(name)
+    end
+
     # Stat of Replica Exchange MC
     print_stat(rex, comm, outf)
 end
