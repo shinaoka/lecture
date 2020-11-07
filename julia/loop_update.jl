@@ -175,8 +175,11 @@ function compute_dE_loop(updater::SingleSpinFlipUpdater,
         ispin = spin_idx_on_loop[isp_loop]
         si_old = spins[ispin]
         for ic in 1:updater.coord_num[ispin]
-            c = updater.connection[ic, ispin]
-            jspin, Jx, Jy, Jz = c
+            jspin, uji_idx = updater.connection[ic, ispin]
+            Jx, Jy, Jz = updater.unique_Jij[uji_idx].Jxyz
+            #println("debug")
+            #jspin, Jx, Jy, Jz = c
+            #println("DEBUGB")
 
             si_old = spins[ispin]
             sj_old = spins[jspin]

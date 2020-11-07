@@ -8,27 +8,34 @@ using StaticArrays
 
 include("loop_update.jl")
  
+function add_Jij!(unique_Jij, Jij, i, j, Jx, Jy, Jz, flag_nn)
+    push!(unique_Jij,
+        UniqueJij(SVector{3,Float64}(Jx, Jy, Jz), flag_nn))
+    push!(Jij, (SpinIndex(i), SpinIndex(j), length(unique_Jij)))
+end
+
 function ring_plus_one_model()
     # 1D system of 4 spins with a periodic boundary condition.
     num_spins = 5
     loop_length = 4
-
+    unique_Jij = UniqueJij[]
     Jij = []
     for ispin=1:loop_length-1
-        push!(Jij, (SpinIndex(ispin), SpinIndex(ispin+1), 0.1, 0.5, 1.,1))
+        add_Jij!(unique_Jij, Jij, ispin, ispin+1, 0.1, 0.5, 1.,1)
     end
-    push!(Jij, (SpinIndex(1), SpinIndex(loop_length), 0.1, 0.5, 1.,1))
-    push!(Jij, (SpinIndex(1), SpinIndex(num_spins), 0.2, 0.5, 100.,1))
-    model = JModel(num_spins, Jij)
+    add_Jij!(unique_Jij, Jij, 1, loop_length, 0.1, 0.5, 1.,1)
+    add_Jij!(unique_Jij, Jij, 1, num_spins, 0.2, 0.5, 100.,1)
+    model = JModel(num_spins, unique_Jij, Jij)
     return model
 end
 
 
 function all_to_all_model(num_spins)
+    unique_Jij = UniqueJij[]
     Jij = []
     for ispin=1:num_spins
         for jspin=ispin+1:num_spins
-            push!(Jij, (SpinIndex(ispin), SpinIndex(jspin), rand(), rand(), rand(),1))
+            add_Jij!(unique_Jij, Jij, ispin, jspin, rand(), rand(), rand(),1)
         end
     end
     model = JModel(num_spins, Jij)
@@ -71,6 +78,7 @@ function test_find_loop(model::JModel)
     end
 
     loop_length,sum_boundary_spins = find_loop(spins,spin_idx_on_loop,u,first_spin_idx,second_spin_idx, max_loop_length, work, true, false)
+    @assert loop_length > 0
     @assert all(work .== 0)
 
     # for check detailed balance condition satisfied,test if find_loop() could find inverse loop.
