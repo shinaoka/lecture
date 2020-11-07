@@ -200,23 +200,14 @@ function get_param(type, conf, block, key, default_value)
     end
 end
 
-function save_result(filename, temps, acc, comm, res_names...)
-    res = Vector{Float64}[]
-    for r in res_names
-        push!(res, mean_gather(acc, "m_af_2", comm))
-    end
+function save_result(h5file, acc, comm, res_names)
     rank = MPI.Comm_rank(comm)
-    if rank > 0
-        return
-    end
-    open(filename, "w") do f
-        for itemp in eachindex(temps)
-            print(f, "$(temps[itemp]) ")
-            for r in res
-                print(f, "$(r[itemp]) ")
-            end
-            println(f)
+    for r in res_names
+        data = mean_gather(acc, r, comm)
+        if rank > 0
+            continue
         end
+        h5file["obs/"*r] = data
     end
 end
 
@@ -708,10 +699,17 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     flush(stdout)
     MPI.Barrier(comm)
 
-    save_m(name) = save_result(prefix*name*".dat", rex.temps, acc, comm, name*"_2", name*"_4")
-    for name in ["m_af", "T_op", "mq0", "msqrt", "m120degs", "Ferro_vc", "AF_vc" ]
-        save_m(name)
+    obs_names = String[]
+    for base_name in ["m_af", "T_op", "mq0", "msqrt", "m120degs", "Ferro_vc", "AF_vc"]
+        push!(obs_names, base_name*"_2")
+        push!(obs_names, base_name*"_4")
     end
+    fid = nothing
+    if rank == 0
+        fid = h5open(prefix*"out.h5" , "w")
+        fid["temperatures"] = temps
+    end
+    save_result(fid, acc, comm, obs_names)
 
     # Stat of Replica Exchange MC
     print_stat(rex, comm, outf)
