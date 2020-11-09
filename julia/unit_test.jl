@@ -153,6 +153,17 @@ function test_compute_m(L)
 
     @test maximum(mq_q0) ≈ 1.0
     @test maximum(mq_sqrt3) ≈ 0.5
+    
+    num_triangles_sisj = 1
+    sisj = compute_sisj(num_triangles_sisj, q0, utriangles)
+    for it1 in 1:length(utriangles), isub1 in 1:3
+        ispin1 = utriangles[it1][isub1]
+        for it2 in 1:num_triangles_sisj, isub2 in 1:3
+            ispin2 = utriangles[it2][isub2]
+            @assert dot(q0[ispin1], q0[ispin2]) ≈ ifelse(isub1 == isub2, 1.0, -0.5)
+            @assert sisj[ispin1, isub2, it2] ≈ ifelse(isub1 == isub2, 1.0, -0.5)
+        end
+    end
 
     #m_120degrees_q0    = compute_m_120degrees(q0)
     #m_120degrees_sqrt3 = compute_m_120degrees(sqrt3)
