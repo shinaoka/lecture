@@ -244,6 +244,9 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     opt_temps_dist   = get_param(Bool,       conf, "simulation", "opt_temps_dist", true)
     min_attemps_update_temps_dist  = get_param(Int64,  conf, "simulation", "min_attemps_update_temps_dist", 100)
 
+    # Si Sj
+    num_src_triangles_sisj = get_param(Int64, conf, "simulation", "num_src_triangles_sisj", 1)
+
     # Non-equilibrium relaxation method.
     use_neq = get_param(Bool, conf, "simulation", "neq", false)
 
@@ -493,11 +496,13 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             mq_q0     = zeros(Float64,num_temps_local)
             mq_sqrt3  = zeros(Float64,num_temps_local)
             m_120degs = zeros(Float64,num_temps_local)
-            ss      = [zeros(Float64,3,num_spins) for _ in 1:num_temps_local]
+            ss        = [zeros(Float64,3,num_spins) for _ in 1:num_temps_local]
+            sisj      = Vector{Array{Float64,3}}(undef, num_temps_local)
             for it in 1:num_temps_local
                 mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
                 mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
                 m_120degs[it]= compute_m_120degrees(spins_local[it])
+                sisj[it] = compute_sisj(num_src_triangles_sisj, spins_local[it], upward_triangles)
                 #for is in 1:num_spins, j in 1:3
                     #temp_idx = upward_triangles[1][j]
                     #ss[it][j,is] = spins_local[it][is]⋅spins_local[it][temp_idx]
@@ -510,6 +515,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             add!(acc,"msqrt_4",mq_sqrt3.^2)
             add!(acc,"m120degs_4",m_120degs.^2)
             add!(acc,"ss",ss)
+            add!(acc,"sisj", sisj)
 
             # ferro and anti-ferro vector spin chirality
             fvc  = zeros(Float64,num_temps_local)
@@ -685,8 +691,6 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             println(outf, "m120degs4: $(rex.temps[i]) $(m120degs4[i])")
         end
 
-        println(size(ss))
-        println(size(ss[1]))
         h5open(prefix*"corr.h5", "w") do fid
             # ss is an array of arrays of shape (3, num_spins).
             # We "reshape" it into an array of shape (3, num_spins, num_temps).

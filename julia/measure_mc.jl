@@ -41,7 +41,6 @@ end
 
 
 function compute_mq(q,kagome,spins,triangles)
-
     @assert length(keys(kagome)) == length(spins)
 
     sq = fill((0.0+0im,0.0+0im,0.0+0im),3)
@@ -69,6 +68,18 @@ function compute_m_120degrees(spins)
 end
 
 
+function compute_sisj(num_triangles, spins, triangles)
+    num_spins = length(spins)
+    sisj = Array{Float64,3}(undef, num_spins, 3, num_triangles)
+    for it in 1:num_triangles
+        for isublatt in 1:3
+            for ispin in 1:num_spins
+               sisj[ispin,isublatt,it] = dot(spins[ispin], spins[triangles[it][isublatt]])
+            end
+        end
+    end
+    sisj
+end
 
 # vector spin chirality defined as sum of outer product of spins in unit triangular with counterclockwise rotation.
 #=
