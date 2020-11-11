@@ -65,7 +65,7 @@ function mk_triangles(L)
     downward_triangles = []
     
     for key in keys(kagome)
-        
+        @assert all(0 .<= key .<= L-1)
         usite1 = mod.(key .+ (1,0),L)
         usite2 = mod.(key .+ (1,1),L)
         dsite1 = mod.(key .+ (-1,0),L)
