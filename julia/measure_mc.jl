@@ -48,7 +48,7 @@ function compute_mq(q,kagome,spins,triangles)
         for j in 1:3
             idx = i[j]
             R = kagome[idx]
-            sq[j] = sq[j] .+ spins[idx].*exp((q⋅R)*im)
+            sq[j] = sq[j] .+ spins[idx].*exp(2π*(q⋅R)*im)
         end
     end
 

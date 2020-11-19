@@ -313,7 +313,8 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
 
     # preoaration for computation of magnetic order parameter mq
     kagome = mk_kagome(Int(sqrt(num_spins/3)))
-    qs   = [(0.0,0.0),(4π/3,4π/3)]
+    site_pos = [kagome[i] ./ 2 for i in 1:num_spins]
+    qs   = [(0.0,0.0),(π/3,π/3)]
 
 
     energy_local = [compute_energy(model, spins_local[it]) for it in 1:num_temps_local]
@@ -359,8 +360,8 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
         for it in 1:num_temps_local
             init_fvc[it]  = compute_ferro_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
             init_afvc[it]  = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
-            init_mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
-            init_mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
+            init_mq_q0[it]    = compute_mq((0.,0.),site_pos,spins_local[it],upward_triangles)
+            init_mq_sqrt3[it] = compute_mq((1/3,1/3),site_pos,spins_local[it],upward_triangles)
         end
         init_mq_sqrt3 .*= 2 #max value of order parameter for √3×√3 is 0.5
 
@@ -377,8 +378,8 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             push!(fvc_correlation[it], init_fvc[it]*temp_fvc)
             push!(afvc_correlation[it], init_afvc[it]*temp_afvc)
 
-            temp_mq_q0    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
-            temp_mq_sqrt3 = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
+            temp_mq_q0    = compute_mq((0.,0.),site_pos,spins_local[it],upward_triangles)
+            temp_mq_sqrt3 = compute_mq((1/3,1/3),site_pos,spins_local[it],upward_triangles)
             push!(mq_q0_correlation[it],init_mq_q0[it]*temp_mq_q0)
             push!(mq_sqrt3_correlation[it],init_mq_sqrt3[it]*2temp_mq_sqrt3)
         end
@@ -499,8 +500,8 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             ss        = [zeros(Float64,3,num_spins) for _ in 1:num_temps_local]
             sisj      = Vector{Array{Float64,3}}(undef, num_temps_local)
             for it in 1:num_temps_local
-                mq_q0[it]    = compute_mq((0.,0.),kagome,spins_local[it],upward_triangles)
-                mq_sqrt3[it] = compute_mq((4π/3,4π/3),kagome,spins_local[it],upward_triangles)
+                mq_q0[it]    = compute_mq((0.,0.),site_pos,spins_local[it],upward_triangles)
+                mq_sqrt3[it] = compute_mq((1/3,1/3),site_pos,spins_local[it],upward_triangles)
                 m_120degs[it]= compute_m_120degrees(spins_local[it])
                 sisj[it] = compute_sisj(num_src_triangles_sisj, spins_local[it], upward_triangles)
                 #for is in 1:num_spins, j in 1:3
