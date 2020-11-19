@@ -113,7 +113,7 @@ write_triangles(d,"dtriangles.txt")
 function mk_q0(L)
 
     num_spins = 3L^2
-    spins = fill((0.,0.,0),num_spins)
+    spins = fill((0.,0.,0.),num_spins)
     
     utriangles = mk_triangles(L)[1]
     for i in utriangles

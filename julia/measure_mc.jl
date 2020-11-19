@@ -124,7 +124,7 @@ function compute_vector_chirality(spins::AbstractArray{Float64,2},
 end
 
 function compute_all_vector_chiralities(spins::AbstractArray{Float64,2},
-                                  triangles::Vector{Tuple{Int64,Int64,Int64}})
+                                  triangles)
     num_spins = size(spins)[2]
     num_triangles = length(triangles)
     vc = zeros(Float64, num_triangles)
