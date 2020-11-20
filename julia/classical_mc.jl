@@ -245,7 +245,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     min_attemps_update_temps_dist  = get_param(Int64,  conf, "simulation", "min_attemps_update_temps_dist", 100)
 
     # Si Sj
-    num_src_triangles_sisj = get_param(Int64, conf, "simulation", "num_src_triangles_sisj", 1)
+    num_src_triangles_sisj = get_param(Int64, conf, "simulation", "num_src_triangles_sisj", 5)
 
     # Non-equilibrium relaxation method.
     use_neq = get_param(Bool, conf, "simulation", "neq", false)
@@ -649,7 +649,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
     if rank == 0
         println(outf)
         open(prefix*"E.txt", "w") do f
-            println(f, "#<E> <E^2> <C>")
+            println(f, "#T <E> <E^2> <C>")
             for i in 1:num_temps
                 println(f, "$(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
                 println(outf, "$(rex.temps[i]) $(E[i]) $(E2[i]) $(((E2[i]  - E[i]^2) / (rex.temps[i]^2)) / num_spins)")
