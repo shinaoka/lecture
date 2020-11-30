@@ -363,6 +363,7 @@ function solve_(input_file::String, comm, prefix, seed_shift, outf)
             init_afvc[it]  = compute_af_vector_chirality(spins_array[it],upward_triangles,downward_triangles) 
             init_mq_q0[it]    = compute_mq((0.,0.),site_pos,spins_local[it],upward_triangles)
             init_mq_sqrt3[it] = compute_mq((1/3,1/3),site_pos,spins_local[it],upward_triangles)
+            init_m_120degs[it]= compute_m_120degrees(spins_local[it])
         end
         init_mq_sqrt3 .*= 2 #max value of order parameter for √3×√3 is 0.5
 
