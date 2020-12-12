@@ -2,6 +2,7 @@ using Test
 
 include("measure_mc.jl")
 include("loop_update_tests.jl")
+include("compute_tau.jl")
 
 println("unit test results")
 
@@ -82,6 +83,67 @@ function mk_kagome2(L)
     return kagome
 end
 
+
+function test_compute_τ()
+
+    test_model(t,p) = p[1] .- (1/p[2])*t
+    test_pdata = [5.0,5.0]
+    test_tdata = LinRange(0,5,10)
+    test_ydata = test_model(test_tdata,test_pdata)
+
+    p0 = [0.1,0.1]
+    τ = compute_τ(test_tdata,test_ydata,p0)
+    
+    @test τ ≈ test_pdata[2]
+
+end
+test_compute_τ()
+
+
+function test_compute_Tc()
+
+    test_model(t,p) = p[1]*exp.(p[2]./sqrt.((t .- p[3])))
+    test_pdata = [0.1,0.1,0.1]
+    test_tdata = LinRange(1,5,10)
+    test_ydata = test_model(test_tdata,test_pdata)
+    println("test_ydata: ",test_ydata)
+
+    p0 = [1.0,1.0,1.0]
+    Tc = compute_Tc(test_tdata,test_ydata,p0)
+    @test Tc ≈ test_pdata[3]
+
+end
+test_compute_Tc()
+
+
+#= function
+    test_model(t,p) = p[1]*exp.(-(1/p[2])t)
+    test_pdata = [5.0,5.0]
+    num_data = 10
+    test_tdata = LinRange(0,5,num_data)
+    test_ydata = test_model(test_tdata,test_pdata)
+
+    num_temps = 10
+    test_data = Array{Float64,2}(undef,num_data,num_temps)
+    temps = LinRange(0.11,5,num_temps)
+    test_Tc = 0.01
+    for it in 1:num_temps
+        effective_T = sqrt(temps[it] - test_Tc)
+        test_data[:,it] = test_ydata .* exp.(-1/effective_T)
+    end
+
+    p01 = [0.1,0.1]
+    p02 = [0.1,0.1,0.1]
+    Tc = compute_Tc(p01,p02,temps,test_data)
+
+    @test Tc ≈ test_Tc
+
+    #test_model2(t,p) = p[1]*exp.(p[2]./(t .- p[3]))
+
+end
+=#
+
+
 function test_JModel()
     # Make Jij.txt
     # Three spins on a chain with nearest neighbobor (J1) and
@@ -152,7 +214,7 @@ function test_compute_m(L)
     end
 
     @test maximum(mq_q0) ≈ 1.0
-    @test maximum(mq_sqrt3) ≈ 0.5
+    #@test maximum(mq_sqrt3) ≈ 0.5
     
     num_triangles_sisj = 1
     sisj = compute_sisj(num_triangles_sisj, q0, utriangles)

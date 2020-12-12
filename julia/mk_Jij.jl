@@ -1,7 +1,7 @@
 #parameters for system
 L = 3
 J1 = -1.
-J2 = 0.05
+J2 = 0.1
 J1 = (J1,J1,J1)
 J2 = (J2,J2,J2)
 flag1 = 1
